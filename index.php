@@ -11,8 +11,8 @@
 		
 		<link href="css/front.css" rel="stylesheet"/> 
 		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
-		<link href="css/front_huge_mob.css" media="screen and (min-width: 500px) and (max-width: 699px)" rel="stylesheet"/>
-		<link href="css/front_medium_mob.css" media="screen and (min-width: 360px) and (max-width: 499px)" rel="stylesheet"/>
+		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>
+		<link href="css/front_medium_mob.css" media="screen and (min-width: 320px) and (max-width: 479px)" rel="stylesheet"/>
 		<link href="css/front_small_mob.css" media="screen and (max-width: 260px)" rel="stylesheet"/>
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 		
@@ -28,7 +28,7 @@
 			
 			<div class="auth_box">
 				     
-				    <img class="auth_box_img" src="/img/huge_auth_image.jpg"></img>
+				    <img class="auth_box_img" src="/img/huge_auth_image_2.jpg"></img>
 					
                     <form class="auth_box_form">
 						<h1 class="auth_box_form_h1">Введите логин и пароль</h1>

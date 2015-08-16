@@ -7,6 +7,7 @@ html, body {
 	height:100%;
 	font: 14pt/12pt "RobotoRegular", sans-serif;
 	min-width:200px;
+	background:#f1f1f1;
 }
 
 
@@ -130,6 +131,9 @@ html, body {
   /* line-height: 150%; */
   border-radius: 3px 3px 0 0;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  padding: 15px;
+  font-weight:normal;
 }
 
 .auth_box_form {
@@ -138,7 +142,6 @@ html, body {
   width:100%;
   max-width: 360px; 
   margin:0px auto;
-  margin-top:-2px;
   z-index:10;
   position:relative;
   padding-bottom: 40px;
@@ -146,11 +149,6 @@ html, body {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
-}
-.auth_box_form_h1 {
-  box-sizing: border-box;
-  padding: 16px;
-  font-weight:normal;
 }
 
 .auth_box_form_input {
