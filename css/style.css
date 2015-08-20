@@ -11,18 +11,24 @@
 } 
 
 html, body{
-    min-height:100%;
+    height:100%;
+	background:#f1f1f1;
 } 
 
 .wrapper{
     max-width:1024px;
 	margin:0 auto;
+	height:100%;
 }
 
 .header_line{
 	background:#5677fc;
 	color:white;
-	height:55px;
+	height:54px;
+	width:100%;
+	max-width:1024px;
+	border-bottom:1px solid #4e6be3;
+	position:fixed;
 }
  
 .header_line__content{
@@ -49,5 +55,11 @@ html, body{
 	width:18px;
 	float:left;
 	background:white;
+}
+
+.content_box{
+	width:100%;
+	background:white;
+	height:100%;
 }
 
