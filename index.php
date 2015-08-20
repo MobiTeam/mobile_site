@@ -5,15 +5,15 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta charset="UTF-8">
+				
+		<title>Мобильное приложение Югорского Государственного Университета</title>
 		
-		
-		<title>Мобильное ЮГУ</title>
-		
-		<link href="css/front.css" rel="stylesheet"/> 
+		<link href="css/style.css" rel="stylesheet" />
+		<!-- <link href="css/front.css" rel="stylesheet"/> 
 		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
 		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>
 		<link href="css/front_medium_mob.css" media="screen and (min-width: 320px) and (max-width: 479px)" rel="stylesheet"/>
-		<link href="css/front_small_mob.css" media="screen and (max-width: 260px)" rel="stylesheet"/>
+		<link href="css/front_small_mob.css" media="screen and (max-width: 260px)" rel="stylesheet"/> -->
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 		
 	</head>
@@ -23,10 +23,19 @@
 		<div class="wrapper">
 		    
 			<div class="header_line">
-				<span class="header_line_logo"></span>CISU Mobile
+				<div class="header_line__content">
+					
+					<div class="header_line__content_button">
+					
+					</div>
+					
+					<span class="header_line__content_title">Главное меню</span>
+				
+				</div>
+				<div class="header_line__helper"></div>
 			</div>
 			
-			<div class="auth_box">
+			<!--<div class="auth_box">
 				     
 				    <img class="auth_box_img" src="/img/huge_auth_image_2.jpg"></img>
 					
@@ -34,10 +43,11 @@
 						<h1 class="auth_box_form_h1">Введите логин и пароль</h1>
 						<input class="auth_box_form_input" placeholder="Логин" type="text" required="">
 						<input class="auth_box_form_input" placeholder="Пароль" type="password" required="">
+						
 					</form> 
 					<div style="clear:both">
 					</div>
-			</div> 
+			</div>--> 
 			
 			<div class="content_box">
 				
