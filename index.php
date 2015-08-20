@@ -22,17 +22,17 @@
 		
 		<div class="wrapper">
 		    
-			<div class="header_line">
+			<div class="header_line" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
-					
-					<div class="header_line__content_button">
-					
+					<div class="header_line__helper">
+						<div class="header_line__content_button">
+						
+						</div>
+						
+						<span class="header_line__content_title">Главное меню</span>
 					</div>
-					
-					<span class="header_line__content_title">Главное меню</span>
-				
 				</div>
-				<div class="header_line__helper"></div>
+				
 			</div>
 			
 			<!--<div class="auth_box">
