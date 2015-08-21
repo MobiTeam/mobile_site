@@ -44,245 +44,45 @@
 				
 			</div>
 			
+					
 			<div class="previos_info shadow">
 			
 				<div class="previos_info_circle">
-				  
-				
 				</div>
 				
 				<span class="previous_info_fullname">Петроченко Владислав Юрьевич</span><br>
 				<span class="previous_info_group">1521б</span>
 			</div>
 			
-			<!--<div class="auth_box">
-				     
-				    <img class="auth_box_img" src="/img/huge_auth_image_2.jpg"></img>
-					
-                    <form class="auth_box_form">
-						<h1 class="auth_box_form_h1">Введите логин и пароль</h1>
-						<input class="auth_box_form_input" placeholder="Логин" type="text" required="">
-						<input class="auth_box_form_input" placeholder="Пароль" type="password" required="">
-						
-					</form> 
-					<div style="clear:both">
-					</div>
-			</div>--> 
-			
 			<div class="content_box">
 				
-				<!--<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/bee/bee36286ec69c66e952e3100082bbcd6.JPG" />
+				<div class="content_box_itemwrapper">
+					<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_name_item">	
+						  Расписание
+						</div>
+					</div>
 					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
+					<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_name_item"> 
+						  Новости
+						</div>
+					</div>
 					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/956/956698fb57fabd88976517689b468e0a.jpg" />
+					<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_name_item">	
+						  Персональная инф.
+						</div>
+					</div>
 					
-					<span class="content_box_item_title">Гранты Президента</span>
+					<div class="content_box_menuitem contr_shadow">
+					    <div class="content_box_name_item">	
+						  Сообщения
+						</div>
+					</div>
 					
-					<span class="content_box_item_introtext">Абитуриенты Югорского государственного университета, поступившие
-					на бюджетную или коммерческую основы, 
-					могут стать обладателями гранта. Финансирование предоставляется претендентам проявившим склонность к 
-					техническому и гуманитарному творчеству, изобретательству.
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/a81/a81437724f8576c054d9250e9c043565.jpg" />
-					
-					<span class="content_box_item_title">Сотрудники ЮГУ заняли второе место в соревнованиях по стритболу</span>
-					
-					<span class="content_box_item_introtext">Сборная команда ЮГУ приняла участие в соревнованиях по стритболу 
-					в рамках праздника «Сибирское здоровье».
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/51e/51ed0ad66697827f13be654fa6cc7c1b.jpg" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/bee/bee36286ec69c66e952e3100082bbcd6.JPG" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/956/956698fb57fabd88976517689b468e0a.jpg" />
-					
-					<span class="content_box_item_title">Гранты Президента</span>
-					
-					<span class="content_box_item_introtext">Абитуриенты Югорского государственного университета, поступившие
-					на бюджетную или коммерческую основы, 
-					могут стать обладателями гранта. Финансирование предоставляется претендентам проявившим склонность к 
-					техническому и гуманитарному творчеству, изобретательству.
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/a81/a81437724f8576c054d9250e9c043565.jpg" />
-					
-					<span class="content_box_item_title">Сотрудники ЮГУ заняли второе место в соревнованиях по стритболу</span>
-					
-					<span class="content_box_item_introtext">Сборная команда ЮГУ приняла участие в соревнованиях по стритболу 
-					в рамках праздника «Сибирское здоровье».
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/51e/51ed0ad66697827f13be654fa6cc7c1b.jpg" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/bee/bee36286ec69c66e952e3100082bbcd6.JPG" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/956/956698fb57fabd88976517689b468e0a.jpg" />
-					
-					<span class="content_box_item_title">Гранты Президента</span>
-					
-					<span class="content_box_item_introtext">Абитуриенты Югорского государственного университета, поступившие
-					на бюджетную или коммерческую основы, 
-					могут стать обладателями гранта. Финансирование предоставляется претендентам проявившим склонность к 
-					техническому и гуманитарному творчеству, изобретательству.
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/a81/a81437724f8576c054d9250e9c043565.jpg" />
-					
-					<span class="content_box_item_title">Сотрудники ЮГУ заняли второе место в соревнованиях по стритболу</span>
-					
-					<span class="content_box_item_introtext">Сборная команда ЮГУ приняла участие в соревнованиях по стритболу 
-					в рамках праздника «Сибирское здоровье».
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/51e/51ed0ad66697827f13be654fa6cc7c1b.jpg" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-			    <div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/bee/bee36286ec69c66e952e3100082bbcd6.JPG" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/956/956698fb57fabd88976517689b468e0a.jpg" />
-					
-					<span class="content_box_item_title">Гранты Президента</span>
-					
-					<span class="content_box_item_introtext">Абитуриенты Югорского государственного университета, поступившие
-					на бюджетную или коммерческую основы, 
-					могут стать обладателями гранта. Финансирование предоставляется претендентам проявившим склонность к 
-					техническому и гуманитарному творчеству, изобретательству.
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/a81/a81437724f8576c054d9250e9c043565.jpg" />
-					
-					<span class="content_box_item_title">Сотрудники ЮГУ заняли второе место в соревнованиях по стритболу</span>
-					
-					<span class="content_box_item_introtext">Сборная команда ЮГУ приняла участие в соревнованиях по стритболу 
-					в рамках праздника «Сибирское здоровье».
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/51e/51ed0ad66697827f13be654fa6cc7c1b.jpg" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-
-                <div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/bee/bee36286ec69c66e952e3100082bbcd6.JPG" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/956/956698fb57fabd88976517689b468e0a.jpg" />
-					
-					<span class="content_box_item_title">Гранты Президента</span>
-					
-					<span class="content_box_item_introtext">Абитуриенты Югорского государственного университета, поступившие
-					на бюджетную или коммерческую основы, 
-					могут стать обладателями гранта. Финансирование предоставляется претендентам проявившим склонность к 
-					техническому и гуманитарному творчеству, изобретательству.
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/a81/a81437724f8576c054d9250e9c043565.jpg" />
-					
-					<span class="content_box_item_title">Сотрудники ЮГУ заняли второе место в соревнованиях по стритболу</span>
-					
-					<span class="content_box_item_introtext">Сборная команда ЮГУ приняла участие в соревнованиях по стритболу 
-					в рамках праздника «Сибирское здоровье».
-					</span>
-				</div>
-				
-				<div class="content_box_item">
-				    <img class="content_box_item_img" src="http://www.ugrasu.ru/upload/iblock/51e/51ed0ad66697827f13be654fa6cc7c1b.jpg" />
-					
-					<span class="content_box_item_title">ЮГУ расширяет связи с Германией</span>
-					
-					<span class="content_box_item_introtext">В Ханты-Мансийске завершилась работа 
-					Международного молодежного форума «Маршрут дружбы»
-					</span>
-				</div>		-->		
-			
-				
-				<div style="clear:both">
+					<div style="clear:both">
+					</div>
 				</div>
 			</div>
 		    
