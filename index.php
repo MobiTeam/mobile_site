@@ -22,7 +22,7 @@
 		
 		<div class="wrapper">
 		    
-			<div class="header_line" unselectable="on" onselectstart="return false;">
+			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
 					<div class="header_line__helper">
 						<div class="header_line__content_button">
@@ -33,6 +33,17 @@
 					</div>
 				</div>
 				
+			</div>
+			
+			<div class="previos_info shadow">
+			
+				<div class="previos_info_circle">
+				  
+				
+				</div>
+				
+				<span class="previous_info_fullname">Петроченко Владислав Юрьевич</span><br>
+				<span class="previous_info_group">1521б</span>
 			</div>
 			
 			<!--<div class="auth_box">

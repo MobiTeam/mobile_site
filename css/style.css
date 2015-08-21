@@ -10,13 +10,19 @@
   margin: 0;  
 } 
 
-*{
+.unselected {
   -moz-user-select: none;
   -o-user-select:none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
    user-select: none;
+}
+
+.shadow{
+   -webkit-box-shadow: 0 10px 6px -6px rgba(50, 50, 50, 0.3);
+       -moz-box-shadow: 0 10px 6px -6px rgba(50, 50, 50, 0.3);
+            box-shadow: 0 10px 6px -6px rgba(50, 50, 50, 0.3);
 }
 
 html, body{
@@ -26,9 +32,10 @@ html, body{
 
 .wrapper{
     max-width:1024px;
+	min-width:240px;
 	margin:0 auto;
 	height:100%;
-	
+	/* overflow-x:hidden; */
 }
 
 .header_line{
@@ -37,6 +44,7 @@ html, body{
 	height:54px;
 	width:100%;
 	max-width:1024px;
+	min-width:240px;
 	border-bottom:1px solid #4e6be3;
 	position:fixed;
 }
@@ -67,3 +75,27 @@ html, body{
 	height:100%;
 }
 
+.previos_info{
+	width:100%;
+	box-sizing:padding-box;
+	max-width:1024px;
+	position:fixed;
+	height:auto;
+	top:55px;
+	background:white;
+	color:#2c45aa;
+	padding:18px 0px;
+	text-align:center;
+}
+
+.previos_info_circle{
+	height:130px;
+	width:130px;
+	background:#5677fc;
+	background-image:url('../img/student_hat.jpg');
+	background-repeat:no-repeat;
+	background-position:center center;
+	border-radius:65px;
+	margin:0 auto;
+	margin-bottom:5px;
+} 
