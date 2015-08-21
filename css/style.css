@@ -50,7 +50,9 @@ html, body{
 }
  
 .header_line__content{
-	padding-left:19px;
+	padding:0px 13px 0px 19px;
+	width:100%;
+	box-sizing:border-box;
 	display:table;
 } 
 
@@ -61,12 +63,32 @@ html, body{
 }
 
 .header_line__content_button{
-	height:14px;
-	margin-top:3px;
+	height:12px;
+	margin-top:5px;
 	margin-right:14px;
 	width:18px;
 	float:left;
-	background:white;
+	background:url('../img/menu_button.png');
+	background-repeat:no-repeat;
+}
+
+.header_line_content_search, .header_line_content_settings{
+	float:right;
+	margin:2px 6px;
+}
+
+.header_line_content_settings{
+	width:14px;
+	height:14px;
+	background:url('../img/settings_icon.png');
+	background-repeat:no-repeat;
+}
+
+.header_line_content_search{
+    width:18px;
+	height:18px;
+	background:url('../img/search_icon.png');
+	background-repeat:no-repeat;
 }
 
 .content_box{

@@ -30,6 +30,15 @@
 						</div>
 						
 						<span class="header_line__content_title">Главное меню</span>
+						
+						<div class="header_line_content_settings">
+						  
+						</div>
+						
+						<div class="header_line_content_search">
+						  
+						</div>
+						
 					</div>
 				</div>
 				
