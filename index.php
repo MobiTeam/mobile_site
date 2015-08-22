@@ -58,24 +58,36 @@
 				
 				<div class="content_box_itemwrapper">
 					<div class="content_box_menuitem contr_shadow">
+					    
+						<img src="/img/calendar_icon.png" />
+					    
 						<div class="content_box_name_item">	
 						  Расписание
 						</div>
 					</div>
 					
 					<div class="content_box_menuitem contr_shadow">
+					
+					    <img src="/img/news_icon.png" />
+					
 						<div class="content_box_name_item"> 
 						  Новости
 						</div>
 					</div>
 					
 					<div class="content_box_menuitem contr_shadow">
+					    
+						<img src="/img/pers_icon.png" />
+					
 						<div class="content_box_name_item">	
 						  Персональная инф.
 						</div>
 					</div>
 					
 					<div class="content_box_menuitem contr_shadow">
+					    
+						<img src="/img/message_icon.png" />
+					   
 					    <div class="content_box_name_item">	
 						  Сообщения
 						</div>
