@@ -9,6 +9,7 @@
 		<title>Мобильное приложение Югорского Государственного Университета</title>
 		
 		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/large_icons.css" rel="stylesheet" />
 		<!-- <link href="css/front.css" rel="stylesheet"/> 
 		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
 		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>

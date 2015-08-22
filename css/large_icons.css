@@ -1,0 +1,21 @@
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .header_line__content_button { 
+	   background-image: url('../img/menu_button@2x.png');
+	   background-size: 50%; 
+   }
+   
+   .header_line_content_search { 
+	   background-image: url('../img/search_icon@2x.png');
+	   background-size: 50%; 
+   }
+   
+   .header_line_content_settings{
+       background-image: url('../img/settings_icon@2x.png');
+	   background-size: 50%; 
+	}
+	
+	.previos_info_circle{
+	   background-image: url('../img/student_hat@2x.jpg');
+	   background-size: 85%; 
+	}
+}
