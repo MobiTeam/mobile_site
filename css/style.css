@@ -124,14 +124,14 @@ html, body{
 }
 
 .authorisation_box{
-	padding-top:79px;
+	padding-top:86px;
 	width:100%;
 	max-width:400px;
 	margin:0 auto;
 }
 
 .authorisation_box_form{
-	margin:27px 10px;
+	margin:33px 10px 0px;
 }
 
 .authorisation_box_logo{
@@ -145,15 +145,32 @@ html, body{
 	width:80%;
 	display:block;
 	max-width:300px;
-	height:40px;
+	height:38px;
 	margin:15px auto;
 	padding:0px 10px;
 	
 }
 
+.authorisation_box_passtext{
+	display:inline-block;
+	font-size:14px;
+	padding-left:25px;
+	padding-right:10px;
+	font-family: "RobotoRegular", sans-serif;
+	color:grey;
+	font-style:italic;
+}
+
 .authorisation_box_submit, .authorisation_box_button{
 	width:180px;
-	height:38px;
+	height:36px;
+	display:block;
+	margin:15px auto;
+	font-family: "RobotoRegular", sans-serif;
+}
+
+.authorisation_box_submit{
+	margin-top:0px;
 }
 
 .authorisation_box_submit{
@@ -161,9 +178,17 @@ html, body{
 	color:white;
 }
 
+.authorisation_box_submit:active{
+	background:#3266d5;
+}
+
 .authorisation_box_button{
 	background:white;
 	color:#1e88e5;
+}
+
+.authorisation_box_button:active{
+	background:#dbdbdb;
 }
 
 .previos_info{
