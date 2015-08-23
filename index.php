@@ -67,7 +67,7 @@
 			<div class="content_box">
 				
 				<div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
-					<div class="content_box_menuitem contr_shadow">
+					<!--<div class="content_box_menuitem contr_shadow">
 					    
 						<img src="/img/calendar_icon.png" />
 					    
@@ -104,7 +104,7 @@
 					</div>
 					
 					<div style="clear:both">
-					</div>
+					</div>-->
 				</div>
 			</div>
 		    

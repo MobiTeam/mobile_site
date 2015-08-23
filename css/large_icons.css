@@ -16,6 +16,13 @@
 	
 	.previos_info_circle{
 	   background-image: url('../img/student_hat@2x.jpg');
-	   background-size: 85%; 
+	   background-size: 110px 82px;
 	}
+	
+	.loading{
+		background: url('../img/pre_animation@2x.gif') no-repeat center center,
+					/* url('../img/preloader_2.jpg') no-repeat bottom center, */
+					#058ae6;
+		background-size: 64px 64px;
+}
 }
