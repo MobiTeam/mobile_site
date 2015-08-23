@@ -11,6 +11,7 @@
 		<link href="css/style.css" rel="stylesheet" />
 		<link href="css/large_icons.css" rel="stylesheet" />
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
+		<link href="css/large_phone.css" media="screen and (max-width: 736px)" rel="stylesheet"/> 
 		<!-- <link href="css/front.css" rel="stylesheet"/> 
 		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
 		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>
@@ -22,7 +23,7 @@
 	
 	<body>
 		
-		<div class="wrapper">
+		<div class="wrapper loading">
 		    
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
@@ -37,9 +38,9 @@
 						  
 						</div>
 						
-						<!--<div class="header_line_content_search">
+						<div class="header_line_content_search">
 						  
-						</div>-->
+						</div>
 						
 					</div>
 				</div>

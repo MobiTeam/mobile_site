@@ -7,5 +7,8 @@ $(window).load(function(){
 });
 
 $(document).ready(function(){
-	
+	/* setTimeout(function(){
+		$('.wrapper').removeClass('loading');
+	}, 1500); */
+	$('.wrapper').removeClass('loading');
 })
