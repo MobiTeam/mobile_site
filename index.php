@@ -52,7 +52,7 @@
 			
 			<div class="content_box">
 				
-				<!--<div class="authorisation_box">
+				<div class="authorisation_box">
 				
 					<div class="authorisation_box_logo">
 					</div>
@@ -65,9 +65,9 @@
 					    <input class="authorisation_box_button contr_shadow" type="button" value="Пропустить" >
 					</form> 
 				
-				</div>-->
+				</div>
 				
-				
+				<!--
 					<div class="previos_info shadow">
 			
 						<div class="previos_info_circle">
@@ -124,7 +124,7 @@
 					<div style="clear:both">
 					</div>
 				</div>
-			</div>
+			</div>-->
 		    
 		</div> 
 		

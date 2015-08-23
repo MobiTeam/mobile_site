@@ -75,7 +75,6 @@ html, body{
 	border-bottom:1px solid #4e6be3;
 	position:fixed;
 	z-index:999;
-	top: 0;
 }
  
 .header_line__content{
@@ -125,7 +124,7 @@ html, body{
 }
 
 .authorisation_box{
-	padding-top:54px;
+	padding-top:79px;
 	width:100%;
 	max-width:400px;
 	margin:0 auto;
@@ -201,7 +200,6 @@ html, body{
 	background:#f1f1f1;
 	min-height:100%;
 	box-sizing:border-box;
-	margin-top:25px;
 }
 
 .content_box_menuitem{
@@ -242,4 +240,5 @@ html, body{
 .content_box_itemwrapper{
 	text-align:center;
 	font-family:"RobotoRegular", sans-serif; 
+	margin:20px;
 }
