@@ -36,9 +36,9 @@
 						  
 						</div>
 						
-						<div class="header_line_content_search">
+						<!--<div class="header_line_content_search">
 						  
-						</div>
+						</div>-->
 						
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 			
 			<div class="content_box">
 				
-				<div class="content_box_itemwrapper">
+				<div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 					<div class="content_box_menuitem contr_shadow">
 					    
 						<img src="/img/calendar_icon.png" />

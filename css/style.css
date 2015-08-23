@@ -145,6 +145,18 @@ html, body{
 	position:relative;
 }
 
+.content_box_menuitem img {
+	opacity:0.85;
+}
+
+.content_box_menuitem:active img{
+    opacity:1;
+}
+
+.content_box_menuitem:active .content_box_name_item{
+  	background-color:#4966d7;
+}
+
 .content_box_name_item{
 	background:#5677fc;
 	color:white;
