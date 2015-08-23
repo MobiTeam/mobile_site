@@ -114,6 +114,11 @@ html, body{
 	font-family: "RobotoRegular", sans-serif;
 }
 
+.previous_info_text{
+	display:inline-block;
+	text-align:center;
+}
+
 .previos_info_circle{
 	height:130px;
 	width:130px;

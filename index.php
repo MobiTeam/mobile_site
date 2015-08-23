@@ -10,11 +10,12 @@
 		
 		<link href="css/style.css" rel="stylesheet" />
 		<link href="css/large_icons.css" rel="stylesheet" />
+		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
 		<!-- <link href="css/front.css" rel="stylesheet"/> 
 		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
 		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>
 		<link href="css/front_medium_mob.css" media="screen and (min-width: 320px) and (max-width: 479px)" rel="stylesheet"/>
-		<link href="css/front_small_mob.css" media="screen and (max-width: 260px)" rel="stylesheet"/> -->
+		-->
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 		
 	</head>
@@ -51,8 +52,15 @@
 				<div class="previos_info_circle">
 				</div>
 				
-				<span class="previous_info_fullname">Петроченко Владислав Юрьевич</span><br>
-				<span class="previous_info_group">1521б</span>
+				<span class="previous_info_text">
+				
+					<span class="previous_info_fullname">Петроченко Владислав Юрьевич<span><br>
+					<span class="previous_info_group">1521б</span>
+				
+				</span>
+				
+				
+				<div style="clear:both;"></div>
 			</div>
 			
 			<div class="content_box">
