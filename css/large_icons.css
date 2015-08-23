@@ -1,17 +1,17 @@
 @media (-webkit-min-device-pixel-ratio: 2) {
   .header_line__content_button { 
 	   background-image: url('../img/menu_button@2x.png');
-	   background-size: 50%; 
+	   background-size: 24px 24px;
    }
    
    .header_line_content_search { 
 	   background-image: url('../img/search_icon@2x.png');
-	   background-size: 50%; 
+	   background-size: 24px 24px;
    }
    
    .header_line_content_settings{
        background-image: url('../img/settings_icon@2x.png');
-	   background-size: 50%; 
+	   background-size: 24px 24px;
 	}
 	
 	.previos_info_circle{
@@ -24,5 +24,10 @@
 					/* url('../img/preloader_2.jpg') no-repeat bottom center, */
 					#058ae6;
 		background-size: 64px 64px;
-}
+	}
+	
+	.authorisation_box_logo{
+		background:url('../img/ugrasu_logo@2x.png') no-repeat;
+		background-size:cover;
+	}
 }

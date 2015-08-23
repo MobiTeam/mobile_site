@@ -75,6 +75,7 @@ html, body{
 	border-bottom:1px solid #4e6be3;
 	position:fixed;
 	z-index:999;
+	top: 0;
 }
  
 .header_line__content{
@@ -120,7 +121,50 @@ html, body{
 }
 
 .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active{
-	background-color:#4966d7;
+	background-color:#3266d5;
+}
+
+.authorisation_box{
+	padding-top:54px;
+	width:100%;
+	max-width:400px;
+	margin:0 auto;
+}
+
+.authorisation_box_form{
+	margin:27px 10px;
+}
+
+.authorisation_box_logo{
+	background:url('../img/ugrasu_logo.png') no-repeat;
+	height:120px;
+	width:122px;
+	margin:0 auto;
+}
+
+.authorisation_box_input{
+	width:80%;
+	display:block;
+	max-width:300px;
+	height:40px;
+	margin:15px auto;
+	padding:0px 10px;
+	
+}
+
+.authorisation_box_submit, .authorisation_box_button{
+	width:180px;
+	height:38px;
+}
+
+.authorisation_box_submit{
+	background:#5677fc;
+	color:white;
+}
+
+.authorisation_box_button{
+	background:white;
+	color:#1e88e5;
 }
 
 .previos_info{
@@ -180,7 +224,7 @@ html, body{
 }
 
 .content_box_menuitem:active .content_box_name_item{
-  	background-color:#4966d7;
+  	background-color:#3266d5;
 }
 
 .content_box_name_item{

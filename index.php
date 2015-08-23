@@ -23,7 +23,7 @@
 	
 	<body>
 		
-		<div class="wrapper loading">
+		<div class="wrapper">
 		    
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
@@ -48,26 +48,44 @@
 			</div>
 			
 					
-			<div class="previos_info shadow">
 			
-				<div class="previos_info_circle">
-				</div>
-				
-				<span class="previous_info_text">
-				
-					<span class="previous_info_fullname">Петроченко Владислав Юрьевич<span><br>
-					<span class="previous_info_group">1521б</span>
-				
-				</span>
-				
-				
-				<div style="clear:both;"></div>
-			</div>
 			
 			<div class="content_box">
 				
-				<div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
-					<!--<div class="content_box_menuitem contr_shadow">
+				<!--<div class="authorisation_box">
+				
+					<div class="authorisation_box_logo">
+					</div>
+					
+					 <form class="authorisation_box_form">
+						<input class="authorisation_box_input contr_shadow" placeholder="Логин" type="text" required="">
+						<input class="authorisation_box_input contr_shadow" placeholder="Пароль" type="password" required="">
+						<br>
+						<input class="authorisation_box_submit contr_shadow" type="submit" value="Войти" >
+					    <input class="authorisation_box_button contr_shadow" type="button" value="Пропустить" >
+					</form> 
+				
+				</div>-->
+				
+				
+					<div class="previos_info shadow">
+			
+						<div class="previos_info_circle">
+						</div>
+						
+						<span class="previous_info_text">
+						
+							<span class="previous_info_fullname">Петроченко Владислав Юрьевич<span><br>
+							<span class="previous_info_group">1521б</span>
+						
+						</span>
+						
+						
+						<div style="clear:both;"></div>
+					</div>
+				
+				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
+					<div class="content_box_menuitem contr_shadow">
 					    
 						<img src="/img/calendar_icon.png" />
 					    
@@ -104,7 +122,7 @@
 					</div>
 					
 					<div style="clear:both">
-					</div>-->
+					</div>
 				</div>
 			</div>
 		    
