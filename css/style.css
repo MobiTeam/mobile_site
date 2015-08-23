@@ -44,6 +44,27 @@ html, body{
 	background:#f1f1f1;
 }
 
+/* .loading:before{
+	content:'Загрузка...';
+	display:block;
+	margin:0 auto;
+	width:85px;
+	color:white;
+	padding-top:6px;
+	opacity:0.9;
+	font-family: "RobotoRegular", sans-serif;
+} */
+
+.loading{
+	background: url('../img/pre_animation.gif') no-repeat center center,
+				/* url('../img/preloader_2.jpg') no-repeat bottom center, */
+				#058ae6;
+}
+
+.loading div{
+	display:none;
+}
+
 .header_line{
 	background:#5677fc;
 	color:white;
