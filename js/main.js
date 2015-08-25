@@ -21,6 +21,13 @@ $(document).ready(function(){
 		
 	})
 	
+	$('.header_line_addition_menu_item').click(function(){
+		$('.header_line_addition_menu_item').each(function(){
+			$(this).removeClass('current_item');
+		});
+		$(this).addClass('current_item');
+	});
+	
 	
 })
 
