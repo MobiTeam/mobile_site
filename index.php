@@ -58,8 +58,8 @@
 					</div>
 					
 					 <form class="authorisation_box_form">
-						<input class="authorisation_box_input contr_shadow" placeholder="Логин" type="text" required="">
-						<input class="authorisation_box_input contr_shadow" placeholder="Пароль" type="password" required="">
+						<input class="authorisation_box_input logininp contr_shadow" name="login" placeholder="Логин" type="text" required="">
+						<input class="authorisation_box_input passinp contr_shadow" name="password" placeholder="Пароль" type="password" required="">
 						
 						<span class="authorisation_box_passtext">Сохранить пароль?</span><input type="checkbox" name="save_password" value="1"><br>
 						
