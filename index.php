@@ -34,7 +34,7 @@
 						
 						</div>
 						
-						<span class="header_line__content_title">Главное меню</span>
+						<span class="header_line__content_title"></span>
 						
 						<div class="header_line_content_settings">
 						  

@@ -111,6 +111,7 @@ html, body{
 	background:url('../img/settings_icon.png');
 	background-repeat:no-repeat;
 	background-position:center center;
+	display:none;
 }
 
 .header_line_content_search{
@@ -118,6 +119,7 @@ html, body{
 	background:url('../img/search_icon.png');
 	background-repeat:no-repeat;
 	background-position:center center;
+	display:none;
 }
 
 .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active{

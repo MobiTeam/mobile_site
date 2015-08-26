@@ -1,3 +1,27 @@
+var stringNames = [
+	"Авторизация",
+	"Главное меню",
+	"Настройки",
+	"Новости",
+	"Персональная информация",
+	"Расписание",
+	"Сообщения"
+]
+
+var toolBar = {
+		
+	setTitle : function(nameTitle){
+		$('.header_line__content_title').html(nameTitle);	
+	}	
+		
+	/* changeLeftIcon : function(){
+		
+		
+	}	 */
+	
+	
+}
+
 $(window).load(function(){
 	
 	/* $('.content_box').masonry({
@@ -10,6 +34,8 @@ $(window).load(function(){
 });
 
 $(document).ready(function(){
+	
+	toolBar.setTitle(stringNames[0]);
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
