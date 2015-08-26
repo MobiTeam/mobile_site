@@ -1,3 +1,27 @@
+var stringNames = [
+	"Авторизация",
+	"Главное меню",
+	"Настройки",
+	"Новости",
+	"Персональная информация",
+	"Расписание",
+	"Сообщения"
+]
+
+var toolBar = {
+		
+	setTitle : function(nameTitle){
+		$('.header_line__content_title').html(nameTitle);	
+	}	
+		
+	/* changeLeftIcon : function(){
+		
+		
+	}	 */
+	
+	
+}
+
 $(window).load(function(){
 	
 	/* $('.content_box').masonry({
@@ -10,6 +34,8 @@ $(window).load(function(){
 });
 
 $(document).ready(function(){
+	
+	toolBar.setTitle(stringNames[0]);
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
@@ -54,6 +80,28 @@ function tagInput(className){
 }
 
 function tryAutorisate(userData){
-	var response = '';
-	console.log(userData);
+
+	opBl();
+	$.ajax({
+		type: 'POST',
+		url: 'mobile_reciever.php',
+		data: userData,
+		success: function(responseTxt){
+			console.log(responseTxt);
+		},
+		error: function(){
+			alert('Ошибка подключения к серверу. Проверьте наличие интернет соединения.');	
+		},
+		complete: function(){
+			clBl();
+		}
+	})
+}
+
+function opBl(){
+	$('.overlay').css('display', 'block');
+}
+
+function clBl(){
+	$('.overlay').css('display', 'none');
 }
