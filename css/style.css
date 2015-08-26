@@ -299,6 +299,17 @@ html, body{
 	margin:20px;
 }
 
+.overlay{
+    display:none;
+	width:100%;
+	z-index:10000;
+	max-width:1024px;
+	height:100%;
+	opacity:0.2;
+	background:url('../img/pre_animation.gif') no-repeat center center,
+	           black;
+	position:absolute;
+}
 .news_box{
 	padding:112px 10px 0px 10px;
 }
@@ -319,5 +330,4 @@ html, body{
 
 .news_box_item_text{
 }
-
 
