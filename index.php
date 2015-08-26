@@ -50,7 +50,7 @@
 							<div class="header_line_addition_menu_item">Объявления</div>
 							<div class="header_line_addition_menu_item">Анонсы</div>
 						</div>
-					</div>	
+					</div>
 					
 				</div>
 				

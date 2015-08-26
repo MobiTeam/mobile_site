@@ -26,7 +26,7 @@ $(document).ready(function(){
 			$(this).removeClass('current_item');
 		});
 		$(this).addClass('current_item');
-	});
+	}); 
 	
 	
 })
