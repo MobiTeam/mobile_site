@@ -152,6 +152,7 @@ html, body{
 
 .header_line_addition_wrapper{
 	background:#5677fc;
+	display:none;
 }
 
 .header_line_addition_menu{
@@ -169,6 +170,7 @@ html, body{
 	width:100%;
 	max-width:400px;
 	margin:0 auto;
+	display:none;
 }
 
 .authorisation_box_form{
@@ -341,6 +343,7 @@ html, body{
 }
 .news_box{
 	padding:112px 10px 0px 10px;
+	display:none;
 }
 
 .news_box_item{

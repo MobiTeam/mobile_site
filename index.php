@@ -12,11 +12,6 @@
 		<link href="css/large_icons.css" rel="stylesheet" />
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
 		<link href="css/large_phone.css" media="screen and (max-width: 736px)" rel="stylesheet"/> 
-		<!-- <link href="css/front.css" rel="stylesheet"/> 
-		<link href="css/front_laptop.css" media="screen and (min-width: 700px)" rel="stylesheet"/> 
-		<link href="css/front_huge_mob.css" media="screen and (min-width:480px) and (max-width: 699px)" rel="stylesheet"/>
-		<link href="css/front_medium_mob.css" media="screen and (min-width: 320px) and (max-width: 479px)" rel="stylesheet"/>
-		-->
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 		
 	</head>
@@ -33,7 +28,7 @@
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
 					<div class="header_line__helper">
-						<div class="header_line__content_button arr_button">
+						<div class="header_line__content_button">
 						
 						</div>
 						
@@ -49,24 +44,21 @@
 						
 					</div>
 					
-					<!--<div class="header_line_addition_wrapper">
+					<div class="header_line_addition_wrapper">
 						<div class="header_line_addition_menu">
 							<div class="header_line_addition_menu_item current_item">Новости</div>
 							<div class="header_line_addition_menu_item">Объявления</div>
 							<div class="header_line_addition_menu_item">Анонсы</div>
 						</div>
-					</div>-->	
+					</div>	
 					
 				</div>
 				
 			</div>
 			
-					
-			
-			
 			<div class="content_box">
 				
-				<!--<div class="news_box">
+				<div class="news_box">
 					
 					<div class="news_box_item contr_shadow">
 						
@@ -81,7 +73,7 @@
 						<div style="clear:both"></div>
 					</div>
 				 
-				</div>-->
+				</div>
 				
 				<div class="authorisation_box">
 				
