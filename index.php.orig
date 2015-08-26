@@ -24,10 +24,14 @@
 	<body>
 		
 		<div class="wrapper">
-		 
+<<<<<<< HEAD
+		
 		<div class="pre_loader">
 			Югорский Государственный <br>Университет
 		</div>
+=======
+		 
+>>>>>>> 4117fb926f80536d9353c4bb278f7b8a68b783f8
 		<div class="overlay"></div>
 		 
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
@@ -163,9 +167,13 @@
 		    
 		</div> 
 		
+<<<<<<< HEAD
 		<!--<div class="tooltip">
 				
 		</div>-->
+=======
+		
+>>>>>>> 4117fb926f80536d9353c4bb278f7b8a68b783f8
 		
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/main.js"></script>
