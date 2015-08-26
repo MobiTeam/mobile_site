@@ -267,3 +267,15 @@ html, body{
 	font-family:"RobotoRegular", sans-serif; 
 	margin:20px;
 }
+
+.overlay{
+    display:none;
+	width:100%;
+	z-index:10000;
+	max-width:1024px;
+	height:100%;
+	opacity:0.2;
+	background:url('../img/pre_animation.gif') no-repeat center center,
+	           black;
+	position:absolute;
+}

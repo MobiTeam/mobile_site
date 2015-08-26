@@ -24,7 +24,9 @@
 	<body>
 		
 		<div class="wrapper">
-		    
+		 
+		<div class="overlay"></div>
+		 
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
 					<div class="header_line__helper">
@@ -130,6 +132,8 @@
 			</div>-->
 		    
 		</div> 
+		
+		
 		
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/main.js"></script>

@@ -47,6 +47,28 @@ function tagInput(className){
 }
 
 function tryAutorisate(userData){
-	var response = '';
-	console.log(userData);
+
+	opBl();
+	$.ajax({
+		type: 'POST',
+		url: 'mobile_reciever.php',
+		data: userData,
+		success: function(responseTxt){
+			console.log(responseTxt);
+		},
+		error: function(){
+			alert('Ошибка подключения к серверу. Проверьте наличие интернет соединения.');	
+		},
+		complete: function(){
+			clBl();
+		}
+	})
+}
+
+function opBl(){
+	$('.overlay').css('display', 'block');
+}
+
+function clBl(){
+	$('.overlay').css('display', 'none');
 }
