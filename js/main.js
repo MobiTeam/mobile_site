@@ -8,22 +8,62 @@ var stringNames = [
 	"Сообщения"
 ]
 
+var messages = [
+	"Вы точно хотите уйти из приложения?"
+]
+
 var toolBar = {
-		
-	setTitle : function(nameTitle){
-		$('.header_line__content_title').html(nameTitle);	
-	}	
-		
-	/* changeLeftIcon : function(){
-		
-		
-	}	 */
 	
+	$button:$('.header_line__content_button'),
+	$title:$('.header_line__content_title'),
+	
+	setTitle : function(nameTitle){
+		this.$title.html(nameTitle);	
+	},
+		
+		
+	displayArrIcon : function(){
+		this.$button.removeClass('menu_button');
+		this.$button.addClass('arr_button');
+	},
+	
+	displayMenuIcon : function(){
+		this.$button.removeClass('arr_button');
+		this.$button.addClass('menu_button');
+	}
+	
+}
+
+var contentZone = {
+	
+	$auth:$('.authorisation_box'),
+	$menu:$('.main_menu'),
+	$settings:$('.header_line_content_settings'),
+	
+	showAuth:function(dur){
+		this.$auth.fadeIn(dur);
+		location.hash = '#auth';
+	},
+	
+	hideAuth:function(dur){
+		this.$auth.fadeOut(dur);
+	},
+	
+	showMenu:function(dur){
+		this.$menu.fadeIn(dur);
+		this.$settings.fadeIn();
+		location.hash = '#menu';
+	},
+	
+	hideMenu:function(dur){
+		this.$menu.fadeOut(dur);
+	}
 	
 }
 
 $(window).load(function(){
 	
+	hideLoader();
 	/* $('.content_box').masonry({
 		itemSelector: '.content_box_menuitem',
 	}); */
@@ -41,9 +81,19 @@ $(document).ready(function(){
 		
 		event.preventDefault();
 				
-		if(validateForm()){
+		/* if(validateForm()){
 			tryAutorisate($(this).serialize());
-		} 
+		}  */
+		
+		if(true){
+				
+			toolBar.setTitle(stringNames[1]);	
+			toolBar.displayMenuIcon();
+			contentZone.hideAuth(300);
+			contentZone.showMenu(300);
+			
+			
+		}
 		
 	})
 	
@@ -98,10 +148,25 @@ function tryAutorisate(userData){
 	})
 }
 
+function showTooltip(toolText){
+	
+	$tooltip = $('.tooltip');
+	$tooltip.fadeIn(200);
+	$tooltip.html(toolText);
+	setTimeout(function(){
+		$tooltip.fadeOut(200);
+	}, 1000);
+	
+}
+
 function opBl(){
 	$('.overlay').css('display', 'block');
 }
 
 function clBl(){
 	$('.overlay').css('display', 'none');
+}
+
+function hideLoader(){
+	$('.pre_loader').fadeOut(200);
 }

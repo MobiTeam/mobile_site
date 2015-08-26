@@ -24,13 +24,16 @@
 	<body>
 		
 		<div class="wrapper">
-		 
+		
+		<div class="pre_loader">
+			Югорский Государственный <br>Университет
+		</div>
 		<div class="overlay"></div>
 		 
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
 					<div class="header_line__helper">
-						<div class="header_line__content_button">
+						<div class="header_line__content_button arr_button">
 						
 						</div>
 						
@@ -98,7 +101,7 @@
 				
 				</div>
 				
-				<!--
+				  <div class="main_menu">
 					<div class="previos_info shadow">
 			
 						<div class="previos_info_circle">
@@ -116,50 +119,53 @@
 					</div>
 				
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
-					<div class="content_box_menuitem contr_shadow">
-					    
-						<img src="/img/calendar_icon.png" />
-					    
-						<div class="content_box_name_item">	
-						  Расписание
+						<div class="content_box_menuitem contr_shadow">
+							
+							<img src="/img/calendar_icon.png" />
+							
+							<div class="content_box_name_item">	
+							  Расписание
+							</div>
+						</div>
+						
+						<div class="content_box_menuitem contr_shadow">
+						
+							<img src="/img/news_icon.png" />
+						
+							<div class="content_box_name_item"> 
+							  Новости
+							</div>
+						</div>
+						
+						<div class="content_box_menuitem contr_shadow">
+							
+							<img src="/img/pers_icon.png" />
+						
+							<div class="content_box_name_item">	
+							  Персональная инф.
+							</div>
+						</div>
+						
+						<div class="content_box_menuitem contr_shadow">
+							
+							<img src="/img/message_icon.png" />
+						   
+							<div class="content_box_name_item">	
+							  Сообщения
+							</div>
+						</div>
+						
+						<div style="clear:both">
 						</div>
 					</div>
-					
-					<div class="content_box_menuitem contr_shadow">
-					
-					    <img src="/img/news_icon.png" />
-					
-						<div class="content_box_name_item"> 
-						  Новости
-						</div>
-					</div>
-					
-					<div class="content_box_menuitem contr_shadow">
-					    
-						<img src="/img/pers_icon.png" />
-					
-						<div class="content_box_name_item">	
-						  Персональная инф.
-						</div>
-					</div>
-					
-					<div class="content_box_menuitem contr_shadow">
-					    
-						<img src="/img/message_icon.png" />
-					   
-					    <div class="content_box_name_item">	
-						  Сообщения
-						</div>
-					</div>
-					
-					<div style="clear:both">
-					</div>
-				</div>-->
+				  </div>	
 			</div>
 		    
 		</div> 
 		
-		
+		<!--<div class="tooltip">
+				
+		</div>-->
 		
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/main.js"></script>

@@ -1,8 +1,14 @@
 @media (-webkit-min-device-pixel-ratio: 2) {
-  .header_line__content_button { 
+  .menu_button { 
 	   background-image: url('../img/menu_button@2x.png');
 	   background-size: 24px 24px;
    }
+   
+   .arr_button { 
+	   background-image: url('../img/backicon@2x.png');
+	   background-size: 24px 24px;
+   }
+   
    
    .header_line_content_search { 
 	   background-image: url('../img/search_icon@2x.png');

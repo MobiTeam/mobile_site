@@ -95,7 +95,16 @@ html, body{
 	width:48px;
 	margin-right:2px;
 	float:left;
+}
+
+.menu_button{
 	background:url('../img/menu_button.png');
+	background-position:60% center;
+	background-repeat:no-repeat;
+}
+
+.arr_button{
+	background:url('../img/backicon.png');
 	background-position:60% center;
 	background-repeat:no-repeat;
 }
@@ -297,7 +306,25 @@ html, body{
 .content_box_itemwrapper{
 	text-align:center;
 	font-family:"RobotoRegular", sans-serif; 
-	margin:20px;
+	margin:8px;
+	margin-top:20px;
+}
+
+.pre_loader{
+	width:100%;
+	z-index:10000;
+	max-width:1024px;
+	height:100%;
+	position:fixed;
+	background: url('../img/pre_animation.gif') no-repeat center 60%,
+				/* url('../img/preloader_2.jpg') no-repeat bottom center, */
+				#058ae6;
+	font-size:26px;
+	font-family:"RobotoMedium", sans-serif; 
+	color:rgba(255,255,255,0.85);
+	padding-top:50px;
+	text-align:center;
+	box-sizing:border-box;
 }
 
 .overlay{
@@ -309,7 +336,8 @@ html, body{
 	opacity:0.2;
 	background:url('../img/pre_animation.gif') no-repeat center center,
 	           black;
-	position:absolute;
+	position:fixed;
+	
 }
 .news_box{
 	padding:112px 10px 0px 10px;
@@ -332,3 +360,25 @@ html, body{
 .news_box_item_text{
 }
 
+.tooltip{
+	bottom:20px;
+	position:fixed;
+	margin:0 auto;
+	display:block;
+	width:200px;
+	z-index:20000;
+	background:rgba(0,0,0,0.75);
+	color:white;
+	border-radius:3px;
+	font-size:14px;
+	padding:5px;
+	font-family:"RobotoMedium", sans-serif; 
+	text-align:center;
+	left:50%;
+	box-sizing:border-box;
+	margin-left:-100px;
+}
+
+.main_menu{
+	display:none;
+}
