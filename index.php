@@ -46,13 +46,13 @@
 						
 					</div>
 					
-					<div class="header_line_addition_wrapper">
+					<!--<div class="header_line_addition_wrapper">
 						<div class="header_line_addition_menu">
 							<div class="header_line_addition_menu_item current_item">Новости</div>
 							<div class="header_line_addition_menu_item">Объявления</div>
 							<div class="header_line_addition_menu_item">Анонсы</div>
 						</div>
-					</div>	
+					</div>-->	
 					
 				</div>
 				
@@ -63,7 +63,7 @@
 			
 			<div class="content_box">
 				
-				<div class="news_box">
+				<!--<div class="news_box">
 					
 					<div class="news_box_item contr_shadow">
 						
@@ -78,9 +78,9 @@
 						<div style="clear:both"></div>
 					</div>
 				 
-				</div>
+				</div>-->
 				
-				<!--<div class="authorisation_box">
+				<div class="authorisation_box">
 				
 					<div class="authorisation_box_logo">
 					</div>
@@ -96,7 +96,7 @@
 					    <input class="authorisation_box_button contr_shadow" type="button" value="Пропустить" >
 					</form> 
 				
-				</div>-->
+				</div>
 				
 				<!--
 					<div class="previos_info shadow">
