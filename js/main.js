@@ -5,7 +5,8 @@ var stringNames = [
 	"Новости",
 	"Персональная информация",
 	"Расписание",
-	"Сообщения"
+	"Сообщения",
+	"Гостевой вход"
 ]
 
 var messages = [
@@ -68,16 +69,30 @@ var contentZone = {
 		location.hash = '#menu';
 	},
 	
+	showGuestMenu:function(dur){
+		this.$menu.fadeIn(dur);
+		this.$settings.fadeIn();
+		location.hash = '#guest';
+	},
+	
 	hideMenu:function(dur){
 		this.$menu.fadeOut(dur);
 	},
 	
 	showNews:function(dur){
 		this.$news.fadeIn(dur);
+		location.hash = '#news';
 	},
 	
 	hideNews:function(dur){
 		this.$news.fadeOut(dur);
+	},
+	
+	closeAll:function(){
+		this.$auth.fadeOut(0);
+		this.$menu.fadeOut(0);
+		this.$news.fadeOut(0);
+		if(location.hash != "news") toolBar.hideSecMenu();
 	}
 	
 }
@@ -93,39 +108,13 @@ $(window).load(function(){
 
 $(document).ready(function(){
 	
-	if(location.hash != ''){
-		
-		switch(location.hash){
-			
-			case '#menu':
-				loadMenuPage();
-			break;
-			
-			case '#person':
-			break;
-			
-			case '#auth':
-				loadAuthPage();
-			break;
-			
-			case '#news':
-				loadNewsPage();
-			break;
-			
-			case '#messages':
-			break;
-			
-			default:
-			    location.hash = '';
-				loadMenuPage();
-			break;
-			
-		}
-		
-	} else {
-		loadMenuPage();
-	}
-	
+	window.addEventListener('hashchange', function(event){
+		contentZone.closeAll();
+		pageRouting();
+	})
+
+	pageRouting();
+
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
 		event.preventDefault();
@@ -135,17 +124,25 @@ $(document).ready(function(){
 			authObj = (tryAutorisate($(this).serialize()));
 			
 			if (authObj.FIO != "undefined"){
+				location.hash = "menu";
 				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
-				contentZone.hideAuth(0);
-				loadMenuPage();	
+				$('.authblock').css('display','inline-block');				
 			}
 			
 			showTooltip(authObj.serverRequest, 2000);
 		}  
 		
-		
-		
 	})
+	
+	$('.authorisation_box_button').click(function(){
+		
+		location.hash = "guest";
+		authObj = {"FIO":"Здравствуйте, Гость","serverRequest":"Гостевой вход","is_student":"undefined","groups":[]};
+		setJSON("guest_inf", authObj, $('.save_password').prop('checked'));
+		showTooltip(authObj.serverRequest, 2000);
+		
+	});
+	
 	
 	$('.header_line_addition_menu_item').click(function(){
 		$('.header_line_addition_menu_item').each(function(){
@@ -154,6 +151,9 @@ $(document).ready(function(){
 		$(this).addClass('current_item');
 	}); 
 	
+	$('.news_button').click(function(){
+		loadNewsPage();
+	})
 	
 })
 
@@ -276,13 +276,29 @@ function loadMenuPage(){
 	}
 }
 
+function loadGuestPage(){
+	
+		var userInfo;
+		if(localStorage.guest_inf != undefined){
+			userInfo = getJSON('guest_inf', true);
+		} else {
+			userInfo = getJSON('guest_inf', false);
+		}
+		
+		$('.previous_info_fullname').html(userInfo.FIO);
+		
+		$('.authblock').css('display', 'none');
+		contentZone.showGuestMenu();
+		toolBar.setTitle(stringNames[1]);
+		toolBar.displayMenuIcon();
+	
+}
+
 function loadNewsPage(){
-	if(isAuth()){
 		contentZone.showNews();
 		toolBar.setTitle(stringNames[3]);	
 		toolBar.displayMenuIcon();
 		toolBar.displaySecMenu();
-	}
 }
 
 function setJSON(key, value, flag) {
@@ -309,4 +325,44 @@ function getJSON(key, flag) {
 			}
 	
 	return value ? JSON.parse(value) : null;
+}
+
+function pageRouting(){
+	
+	if(location.hash != ''){
+		
+		switch(location.hash){
+			
+			case '#menu':
+				loadMenuPage();
+			break;
+			
+			case '#guest':
+				loadGuestPage();
+			break;
+			
+			case '#person':
+			break;
+			
+			case '#auth':
+				loadAuthPage();
+			break;
+			
+			case '#news':
+				loadNewsPage();
+			break;
+			
+			case '#messages':
+			break;
+			
+			default:
+			    location.hash = '';
+				loadMenuPage();
+			break;
+			
+		}
+		
+	} else {
+		loadMenuPage();
+	}
 }

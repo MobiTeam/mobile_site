@@ -120,7 +120,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_menuitem news_button contr_shadow">
 						
 							<img src="/vladonxp/mobile_site/img/news_icon.png" />
 						
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_menuitem contr_shadow authblock">
 							
 							<img src="/vladonxp/mobile_site/img/pers_icon.png" />
 						
@@ -138,7 +138,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_menuitem contr_shadow authblock">
 							
 							<img src="/vladonxp/mobile_site/img/message_icon.png" />
 						   

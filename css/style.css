@@ -384,3 +384,7 @@ html, body{
 .main_menu{
 	display:none;
 }
+
+.authblock{
+	display:inline-block;
+}
