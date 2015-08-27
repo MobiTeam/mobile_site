@@ -12,6 +12,11 @@ var messages = [
 	"Вы точно хотите уйти из приложения?"
 ]
 
+var errMessages = [
+	"Ошибка получения данных, проверьте интернет соединение.",
+	"Ошибка подключения к серверу. Проверьте наличие интернет соединения."
+]
+
 var toolBar = {
 	
 	$button:$('.header_line__content_button'),
@@ -83,10 +88,7 @@ $(window).load(function(){
 	/* $('.content_box').masonry({
 		itemSelector: '.content_box_menuitem',
 	}); */
-	/* $('.wrapper').removeClass('loading'); */
-		
-	
-	
+
 });
 
 $(document).ready(function(){
@@ -132,19 +134,15 @@ $(document).ready(function(){
 		
 		event.preventDefault();
 				
-		/* if(validateForm()){
+		if(validateForm()){
 			tryAutorisate($(this).serialize());
-		}  */
-		
-		if(true){
-				
 			toolBar.setTitle(stringNames[1]);	
 			toolBar.displayMenuIcon();
 			contentZone.hideAuth(0);
 			contentZone.showMenu(300);
-			
-			
-		}
+		}  
+		
+		
 		
 	})
 	
@@ -180,6 +178,14 @@ function tagInput(className){
 	alert('Input ' + className + 'was tagged');
 }
 
+function clearUTF8(str) {
+	var clrStr = '';
+	if (str[0] != '{'){
+		clrStr = str.substr(3, str.length);
+	}
+    return clrStr;
+}
+
 function tryAutorisate(userData){
 
 	opBl();
@@ -188,10 +194,19 @@ function tryAutorisate(userData){
 		url: 'mobile_reciever.php',
 		data: userData,
 		success: function(responseTxt){
-			console.log(responseTxt);
+			
+			var clrResp = clearUTF8(responseTxt);
+			
+			try {
+				
+				return(JSON.parse(clrResp));
+				
+			} catch(e){
+				showTooltip(errMessages[0], 2000);
+			}
 		},
 		error: function(){
-			alert('Ошибка подключения к серверу. Проверьте наличие интернет соединения.');	
+			showTooltip(errMessages[1], 2000);	
 		},
 		complete: function(){
 			clBl();
@@ -199,14 +214,14 @@ function tryAutorisate(userData){
 	})
 }
 
-function showTooltip(toolText){
+function showTooltip(toolText, duration){
 	
 	$tooltip = $('.tooltip');
 	$tooltip.fadeIn(200);
 	$tooltip.html(toolText);
 	setTimeout(function(){
 		$tooltip.fadeOut(200);
-	}, 1000);
+	}, duration);
 	
 }
 

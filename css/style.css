@@ -367,7 +367,7 @@ html, body{
 	bottom:20px;
 	position:fixed;
 	margin:0 auto;
-	display:block;
+	display:none;
 	width:200px;
 	z-index:20000;
 	background:rgba(0,0,0,0.75);

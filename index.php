@@ -113,7 +113,7 @@
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 						<div class="content_box_menuitem contr_shadow">
 							
-							<img src="/img/calendar_icon.png" />
+							<img src="/vladonxp/mobile_site/img/calendar_icon.png" />
 							
 							<div class="content_box_name_item">	
 							  Расписание
@@ -122,7 +122,7 @@
 						
 						<div class="content_box_menuitem contr_shadow">
 						
-							<img src="/img/news_icon.png" />
+							<img src="/vladonxp/mobile_site/img/news_icon.png" />
 						
 							<div class="content_box_name_item"> 
 							  Новости
@@ -131,7 +131,7 @@
 						
 						<div class="content_box_menuitem contr_shadow">
 							
-							<img src="/img/pers_icon.png" />
+							<img src="/vladonxp/mobile_site/img/pers_icon.png" />
 						
 							<div class="content_box_name_item">	
 							  Персональная инф.
@@ -140,7 +140,7 @@
 						
 						<div class="content_box_menuitem contr_shadow">
 							
-							<img src="/img/message_icon.png" />
+							<img src="/vladonxp/mobile_site/img/message_icon.png" />
 						   
 							<div class="content_box_name_item">	
 							  Сообщения
@@ -155,9 +155,9 @@
 		    
 		</div> 
 		
-		<!--<div class="tooltip">
+		<div class="tooltip">
 				
-		</div>-->
+		</div>
 		
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/main.js"></script>
