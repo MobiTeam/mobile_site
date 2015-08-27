@@ -123,12 +123,8 @@ $(document).ready(function(){
 		}
 		
 	} else {
-		if(localStorage.userId == undefined && sessionStorage.userId == undefined){
-			loadAuthPage();
-		} else loadMenuPage();
+		loadMenuPage();
 	}
-	
-	/* toolBar.setTitle(stringNames[0]); */
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
@@ -138,14 +134,13 @@ $(document).ready(function(){
 			
 			authObj = (tryAutorisate($(this).serialize()));
 			
-			if (authObj.FIO == "undefined"){
-				showTooltip(authObj.serverRequest, 2000);
-			} else {
-				toolBar.setTitle(stringNames[1]);	
-				toolBar.displayMenuIcon();
+			if (authObj.FIO != "undefined"){
+				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
 				contentZone.hideAuth(0);
-				contentZone.showMenu(300); 
+				loadMenuPage();	
 			}
+			
+			showTooltip(authObj.serverRequest, 2000);
 		}  
 		
 		
@@ -248,21 +243,70 @@ function hideLoader(){
 	$('.pre_loader').fadeOut(200);
 }
 
+function isAuth(){
+	if(localStorage.auth_inf != undefined || sessionStorage.auth_inf != undefined){
+		return true;
+	} else loadAuthPage();
+	return false;
+}
+
 function loadAuthPage(){
-	contentZone.showAuth();
-	toolBar.setTitle(stringNames[0]);
-	toolBar.displayArrIcon();
+		contentZone.showAuth();
+		toolBar.setTitle(stringNames[0]);
+		toolBar.displayArrIcon();
 }
 
 function loadMenuPage(){
-	contentZone.showMenu();
-	toolBar.setTitle(stringNames[1]);
-	toolBar.displayMenuIcon();
+	if(isAuth()){
+		var userInfo;
+		if(localStorage.auth_inf != undefined){
+			userInfo = getJSON('auth_inf', true);
+		} else {
+			userInfo = getJSON('auth_inf', false);
+		}
+		
+		$('.previous_info_fullname').html(userInfo.FIO);
+		if (userInfo.is_student == '1'){
+			$('.previous_info_group').html((userInfo.groups).join(','));
+		}
+		
+		contentZone.showMenu();
+		toolBar.setTitle(stringNames[1]);
+		toolBar.displayMenuIcon();
+	}
 }
 
 function loadNewsPage(){
-	contentZone.showNews();
-	toolBar.setTitle(stringNames[3]);	
-	toolBar.displayMenuIcon();
-	toolBar.displaySecMenu();
+	if(isAuth()){
+		contentZone.showNews();
+		toolBar.setTitle(stringNames[3]);	
+		toolBar.displayMenuIcon();
+		toolBar.displaySecMenu();
+	}
+}
+
+function setJSON(key, value, flag) {
+	try {   
+	        if(flag == true){
+				localStorage[key] = JSON.stringify(value);				
+			} else {
+				sessionStorage[key] = JSON.stringify(value);
+			}
+			
+		} catch(ex){
+					
+		}
+}
+
+function getJSON(key, flag) {
+	
+	var value;
+	
+	if(flag == true){
+				value = localStorage[key];				
+			} else {
+				value = sessionStorage[key];
+			}
+	
+	return value ? JSON.parse(value) : null;
 }

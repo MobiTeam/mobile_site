@@ -84,7 +84,7 @@
 						<input class="authorisation_box_input logininp contr_shadow" name="login" placeholder="Логин" type="text" required="">
 						<input class="authorisation_box_input passinp contr_shadow" name="password" placeholder="Пароль" type="password" required="">
 						
-						<span class="authorisation_box_passtext">Сохранить пароль?</span><input type="checkbox" name="save_password" value="1"><br>
+						<span class="authorisation_box_passtext">Запомнить меня</span><input type="checkbox" class="save_password" name="save_password" value="1"><br>
 						
 						<br>
 						<input class="authorisation_box_submit contr_shadow" type="submit" value="Войти" >
@@ -101,8 +101,8 @@
 						
 						<span class="previous_info_text">
 						
-							<span class="previous_info_fullname">Петроченко Владислав Юрьевич<span><br>
-							<span class="previous_info_group">1521б</span>
+							<span class="previous_info_fullname"></span><br>
+							<span class="previous_info_group"></span>
 						
 						</span>
 						
