@@ -328,7 +328,7 @@ function getJSON(key, flag) {
 }
 
 function pageRouting(){
-	
+	debugger;
 	if(location.hash != ''){
 		
 		switch(location.hash){
@@ -356,13 +356,22 @@ function pageRouting(){
 			break;
 			
 			default:
-			    location.hash = '';
-				loadMenuPage();
-			break;
+			    debugger;
+			    if(isAuth()){
+					location.hash = '#menu';
+				} else if (localStorage.guest_inf != undefined || sessionStorage.guest_inf != undefined){
+					location.hash = '#guest';
+				} else location.hash = '#auth'; 
+			break; 
 			
 		}
 		
 	} else {
-		loadMenuPage();
+		debugger;
+		if(isAuth()){
+			location.hash = '#menu';
+		} else if (localStorage.guest_inf != undefined || sessionStorage.guest_inf != undefined){
+			location.hash = '#guest';
+		} else location.hash = '#auth'; 
 	}
 }
