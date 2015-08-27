@@ -135,11 +135,17 @@ $(document).ready(function(){
 		event.preventDefault();
 				
 		if(validateForm()){
-			tryAutorisate($(this).serialize());
-			toolBar.setTitle(stringNames[1]);	
-			toolBar.displayMenuIcon();
-			contentZone.hideAuth(0);
-			contentZone.showMenu(300);
+			
+			authObj = (tryAutorisate($(this).serialize()));
+			
+			if (authObj.FIO == "undefined"){
+				showTooltip(authObj.serverRequest, 2000);
+			} else {
+				toolBar.setTitle(stringNames[1]);	
+				toolBar.displayMenuIcon();
+				contentZone.hideAuth(0);
+				contentZone.showMenu(300); 
+			}
 		}  
 		
 		
@@ -187,9 +193,12 @@ function clearUTF8(str) {
 }
 
 function tryAutorisate(userData){
-
+    
+	var jsonObj;
+	
 	opBl();
 	$.ajax({
+		async: false,
 		type: 'POST',
 		url: 'mobile_reciever.php',
 		data: userData,
@@ -199,7 +208,7 @@ function tryAutorisate(userData){
 			
 			try {
 				
-				return(JSON.parse(clrResp));
+				jsonObj = JSON.parse(clrResp);
 				
 			} catch(e){
 				showTooltip(errMessages[0], 2000);
@@ -212,6 +221,8 @@ function tryAutorisate(userData){
 			clBl();
 		}
 	})
+	
+	return jsonObj;
 }
 
 function showTooltip(toolText, duration){
