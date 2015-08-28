@@ -153,6 +153,7 @@
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
 		<script src="js/view.js"></script>
+		<script src="js/bind_action.js"></script>
 		
 	</body>
 </html>
