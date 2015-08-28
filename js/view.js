@@ -40,7 +40,7 @@ var view = {
 		}    
 	},
 
-	loadPage(){
+	loadPage:function(){
 		
 		this.closeAll();
 		
