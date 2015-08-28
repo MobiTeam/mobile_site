@@ -136,32 +136,4 @@ left outer join
 order by 1, 3, 2
 
 --------------------------------------------------------------------------------------------------------------------------------
-select distinct 
-       '???????? ??????????????? ???????????<>'||
-       '???????? ?  ??????????? ??????????????? ??????&<>'||
-       '?? '||UCS.fwSeason|| ' ??????? '||
-       to_char(to_oradate(UCK.fdBeg),'YYYY') || '-' || 
-       to_char(to_oradate(UCK.fdEnd),'YYYY') || ' ???????? ???? <>'||
-       F.fName||'<>/>'||
-       US.fName s1
-from U_StudGroup USG inner join U_Curr_Group      UCG  on UCG.fcStGr      = USG.fNrec
-                     inner join U_CurriCulum      UCC  on UCG.fcCurr      = UCC.fNrec
-                     inner join U_Curr_Dis        UCD  on UCD.fcCurr      = UCG.fcCurr
-                     inner join U_Curr_DisContent UCDC on UCDC.fcCurr_dis = UCD.fNrec                     
-                     inner join U_Discipline      UD   on UCD.fcDis       = UD.fNrec
-                     inner join U_Curr_Semester   UCS  on UCDC.fcSemester = UCS.fNrec
-                     inner join U_TypeWork        UTW  on UCDC.fcTypeWork = UTW.fNrec
-                     inner join Catalogs          F    on USG.fcFaculty   = F.fNrec
-                     inner join U_Curr_Course     UCK  on UCS.fcCurr_Course = UCK.fNrec
-                     inner join U_Specialization  US   on UCC.fcSpecialization = US.fNrec
-where utw.fwtype in (4,5,14,8)
-  and UCC.fwType = 2
- -- and to_char(UCC.fYearEd) = to_char(:GOD)
- -- and UCS.fwSeason         = :SEMESTR
---  and trunc(to_oradate(UCS.fdBeg)) <= trunc(:VDATE)
---  and trunc(to_oradate(UCS.fdEnd)) >= trunc(:VDATE)
- -- and UCC.fcSpecialization like case when :PODR like '%e%' then substr(:PODR,1,16)  else '%' end
-union all
-select 'Сводная ведомость успеваемости' s1
-from dual
-order by 1 desc
+
