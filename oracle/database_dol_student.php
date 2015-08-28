@@ -1,7 +1,9 @@
 <?php
 
  require_once('database_connect.php');
+ 	require_once('../auth/ad_functions.php');
  
+    $FFIO=$_POST['FFIO'];
  
  // Долги за общежития студента
  	$sql="Select * from V_STUD_DOL 
@@ -12,16 +14,26 @@
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	
-	
-	while(OCIFetch($s)){
-		$NUMDOG = ociresult($s,'NUMDOG'); //Номер договора	
-		$Ostatok_LA = ociresult($s,'OSTATOK_LA'); //Остаток на конец месяца	
-		$Nachisl = ociresult($s,'NACHISL'); //Начислено
-		$Oplata = ociresult($s,'OPLATA'); //Оплачено
-		$Ostatok = ociresult($s,'OSTATOK'); //Остаток
-		$Date = ociresult($s,'DAT'); //Дата обновления	
-	}
-	OCICommit($c); 
+		
+		$Dol_json = array();
+		$count = 0;
+				
+		while(OCIFetch($s)){
+			
+			$Dol_json[$count] = array(
+									"Numdog" => ociresult($s,'NUMDOG'), 
+									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
+									"Nachisl" => ociresult($s,'NACHISL'), 
+									"Oplata" => ociresult($s,'OPLATA'), 
+									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Date" => ociresult($s,'DAT'), 
+
+
+								);
+			$count ++;
+		
+		}
+
 	
 	
 	//Долги за обучения студента
@@ -33,16 +45,23 @@
 		$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	
+		$Dol_education_json = array();
+		$count = 0;
+				
+				
+				while(OCIFetch($s)){
+			
+			$Dol_education_json[$count] = array(
+									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
+									"Nachisl" => ociresult($s,'NACHISL'), 
+									"Oplata" => ociresult($s,'OPLATA'), 
+									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Date" => ociresult($s,'DAT'), 
+
+
+								);
+			$count ++;
+		
+		}		
 	
-	while(OCIFetch($s)){
-		$Ostatok_LA = ociresult($s,'OSTATOK_LA'); //Остаток на конец месяца	
-		$Nachisl = ociresult($s,'NACHISL'); //Начислено
-		$Oplata = ociresult($s,'OPLATA'); //Оплачено
-		$Ostatok = ociresult($s,'OSTATOK'); //Остаток
-		$Date = ociresult($s,'DAT'); //Дата обновления	
-	}
-	
-	
-	
-	OCICommit($c); 
 ?>

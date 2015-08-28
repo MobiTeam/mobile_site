@@ -1,31 +1,44 @@
 <?php
 
    require_once('database_connect.php');
-
+	require_once('../auth/ad_functions.php');
+   
+   
+   $FFIO=$_POST['FFIO'];
+   $GRUP=$_POST['GRUP'];
    
    //Полное назначение студента
 	$sql="Select * from v_stud_appoint_all ap  
 	where instr(
         upper(replace(replace(ap.FFIO,'.',''),' ','')),
-        upper(replace(replace('".$FIO."','.',''),' ','')),1)>=1
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
         and ap.grup like '%\'".$GRUP."\'%'";
 	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
-	while(OCIFetch($s)){
-		$FIO = ociresult($s,'FFIO'); //ФИО		
-		$Tabnmb = ociresult($s,'FTABNMB');	//Номер зачетки	
-		$SEX = ociresult($s,'FSEX');  //ПОЛ	
-		$Course= ociresult($s,'FCOURSE'); // Курс	
-		$date_zach = ociresult($s,'ZACH');// Дата зачисления		
-		$Fac = ociresult($s,'FAK'); //Институт		
-		$Spec = ociresult($s,'SPEC');	//Специальность	
-		$Post = ociresult($s,'FSPOST');		//Направление
-		$Grup = ociresult($s,'GRUP');		// Группа
-		$Bud_name = ociresult($s,'FSFINSOURCENAME');		//Бюджет
-		$Bud = ociresult($s,'BUD');		//Бюджет сокращенно 
-		$Degree = ociresult($s,'FSDEGREE');	//Степень	
-	}
 	
-	OCICommit($c); 
+		$appoint_json = array();
+		$count = 0;
+				
+		while(OCIFetch($s)){
+			
+			$appoint_json[$count] = array(
+									"fio" => ociresult($s,'FFIO'), 
+									"Tabnmb" => ociresult($s,'FTABNMB'), 
+									"Sex" => ociresult($s,'FSEX'), 
+									"course" => ociresult($s,'FCOURSE'), 
+									"date_zach" => ociresult($s,'ZACH'), 
+									"Faculty" => ociresult($s,'FAK'), 
+									"Spec" => ociresult($s,'SPEC'), 
+									"Post" => ociresult($s,'FSPOST'), 
+									"Grup" => ociresult($s,'GRUP'), 
+									"Bud_name" => ociresult($s,'FSFINSOURCENAME'), 
+									"Bud" => ociresult($s,'BUD'), 
+									"Degree" => ociresult($s,'FSDEGREE')
+								);
+			$count ++;
+		
+		} 
+		
+	//print_r(utf8_json_encode($appoint_json));
 ?>
