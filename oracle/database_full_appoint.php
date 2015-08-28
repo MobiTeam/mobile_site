@@ -10,6 +10,10 @@
 	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
+	
+	 $appoint_json = array();
+	
+	
 	while(OCIFetch($s)){
 		$FIO = ociresult($s,'FFIO'); //ФИО		
 		$Tabnmb = ociresult($s,'FTABNMB');	//Номер зачетки	

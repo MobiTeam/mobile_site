@@ -11,6 +11,8 @@
 	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
+	
+	
 	while(OCIFetch($s)){
 		$NUMDOG = ociresult($s,'NUMDOG'); //Номер договора	
 		$Ostatok_LA = ociresult($s,'OSTATOK_LA'); //Остаток на конец месяца	
@@ -30,6 +32,8 @@
 	
 		$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
+	
+	
 	while(OCIFetch($s)){
 		$Ostatok_LA = ociresult($s,'OSTATOK_LA'); //Остаток на конец месяца	
 		$Nachisl = ociresult($s,'NACHISL'); //Начислено

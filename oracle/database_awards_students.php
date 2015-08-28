@@ -10,6 +10,9 @@
 		
 		$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
+	
+	
+	
 	while(OCIFetch($s)){
 		
 	$FNVIDOPL = ociresult($s,'FNVIDOPL'); 	
