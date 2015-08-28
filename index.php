@@ -60,21 +60,9 @@
 				
 				<div class="news_box">
 					
-					<div class="news_box_item contr_shadow">
-						
-						<div class="news_box_item_image">
-							
-						</div>
-						
-						<div class="news_box_item_text">
-							
-						
-						</div>
-						<div style="clear:both"></div>
-					</div>
+					
 				 
-				</div>
-				
+				</div>				
 				<div class="authorisation_box">
 				
 					<div class="authorisation_box_logo">
@@ -164,6 +152,8 @@
 		<script src="js/waterfall.js"></script>
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
+		<script src="js/view.js"></script>
+		<script src="js/bind_action.js"></script>
 		
 	</body>
 </html>
