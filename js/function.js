@@ -117,10 +117,9 @@ function clearUTF8(str) {
 
 function newsWrap(obj){
 	
-	/* for(){
-		
-		
-	} */
+	for(var i = 0; i < obj.length; i++){
+		console.log(obj[i]);		
+	} 
 	
 	/* <div class="news_box_item contr_shadow">
 						
