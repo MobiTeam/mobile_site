@@ -80,7 +80,7 @@
 					<div class="authorisation_box_logo">
 					</div>
 					
-					 <form class="authorisation_box_form">
+					 <form class="authorisation_box_form" method="post" action="">
 						<input class="authorisation_box_input logininp contr_shadow" name="login" placeholder="Логин" type="text" required="">
 						<input class="authorisation_box_input passinp contr_shadow" name="password" placeholder="Пароль" type="password" required="">
 						
@@ -111,7 +111,7 @@
 					</div>
 				
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
-						<div class="content_box_menuitem contr_shadow">
+						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
 							
 							<img src="/vladonxp/mobile_site/img/calendar_icon.png" />
 							
@@ -120,7 +120,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem news_button contr_shadow">
+						<div class="content_box_menuitem contr_shadow" hashtag="news">
 						
 							<img src="/vladonxp/mobile_site/img/news_icon.png" />
 						
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow authblock">
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<img src="/vladonxp/mobile_site/img/pers_icon.png" />
 						
@@ -138,7 +138,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow authblock">
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="message">
 							
 							<img src="/vladonxp/mobile_site/img/message_icon.png" />
 						   
@@ -162,6 +162,8 @@
 		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/waterfall.js"></script>
+		<script src="js/function.js"></script>
+		<script src="js/mess.js"></script>
 		
 	</body>
 </html>
