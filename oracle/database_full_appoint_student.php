@@ -2,11 +2,13 @@
 
    require_once('database_connect.php');
 
-	$sql="Select * from v_stud_appoint_all ap 
+   
+   //Полное назначение студента
+	$sql="Select * from v_stud_appoint_all ap  
 	where instr(
         upper(replace(replace(ap.FFIO,'.',''),' ','')),
         upper(replace(replace('".$FIO."','.',''),' ','')),1)>=1
-        and ap.grup like '%\'".$GRUP."\'%'"
+        and ap.grup like '%\'".$GRUP."\'%'";
 	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
