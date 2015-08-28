@@ -33,8 +33,11 @@ var view = {
 	
 	changePage:function(hash){
 		
-		location.hash = hash != undefined ? ('#' + hash) : location.hash;
-     
+		var currentHash = location.hash;
+		
+		if(('#' + hash) != currentHash && hash != undefined){
+			location.hash = hash;
+		}    
 	},
 
 	loadPage(){
@@ -55,7 +58,7 @@ var view = {
 						$('.previous_info_group').html((userInfo.groups).join(','));
 					}
 						
-					this.$menu.fadeIn(250);
+					this.$menu.stop().fadeTo(250, 1);
 					this.$settings.fadeIn();
 					this.setTitle(stringNames[1]);
 					this.displayMenuIcon();
@@ -71,7 +74,7 @@ var view = {
 				break;
 						
 				case '#news':
-					this.$news.fadeIn(250);
+					this.$news.stop().fadeTo(250, 1);
 					this.$settings.fadeIn();
 					this.setTitle(stringNames[3]);
 					this.displayMenuIcon();
@@ -83,7 +86,7 @@ var view = {
 				break;
 				
 				default:
-					location.hash = '#menu';
+				    view.changePage('menu');
 				break;
 						
 					}
@@ -98,7 +101,7 @@ var view = {
 						$('.previous_info_fullname').html(userInfo.FIO);
 						
 						$('.authblock').css('display', 'none');
-						this.$menu.fadeIn(250);
+						this.$menu.stop().fadeTo(250, 1);
 						this.$settings.fadeIn();
 						this.setTitle(stringNames[1]);
 						this.displayMenuIcon();
@@ -106,7 +109,7 @@ var view = {
 					break;
 					
 					case '#news':
-						this.$news.fadeIn(250);
+						this.$news.stop().fadeTo(250, 1);
 						this.$settings.fadeIn();
 						this.setTitle(stringNames[3]);
 						this.displayMenuIcon();
@@ -121,12 +124,12 @@ var view = {
 					break;
 					
 					default:
-						location.hash = '#guest';
+						view.changePage('guest'); 
 					break;
 								
 				}				
 			} else {
-				location.hash = '#auth'; 
+				view.changePage('auth'); 
 				loadAuth();
 			} 
 	}
@@ -154,7 +157,7 @@ $(document).ready(function(){
 		view.loadPage();
 	});
 	
-	location.hash = '#firt_in';
+	view.changePage('firt_in');
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
