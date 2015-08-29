@@ -4,6 +4,13 @@
 		view.loadPage();
 	});
 	
+	$( window ).on( "resize", function(){
+	
+		$menu_bl = $('.sidebar_menu_block');
+		$('.sidebar_wr').css('width', $menu_bl.width()+15+'px');
+		
+	});
+		
 	$('.header_line__content_button ').click(function(){
 		if($(this).hasClass('menu_button')){
 			/* $('body').css('overflow', 'hidden'); */
