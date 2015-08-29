@@ -73,6 +73,14 @@ function clBl(){
 	$('.overlay').css('display', 'none');
 }
 
+function opMenBl(){ 
+	$('.menuoverlay').css('display', 'block');
+}
+
+function clMenBl(){
+	$('.menuoverlay').css('display', 'none');
+}
+
 // сохранение JSON в localStorage/sessionStorage
 function setJSON(key, value, flag) {
 	try {   

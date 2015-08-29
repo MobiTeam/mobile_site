@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE HTML>
-<html>
+<html><!--manifest="off.manifest"-->
 	
 	<head>
 		
@@ -24,7 +24,31 @@
 			Югорский Государственный <br>Университет
 		</div>
 		<div class="overlay"></div>
-		 
+		
+		<div class="menuoverlay"></div>
+			
+			<div class="sidebar_menu_block">
+				
+				<div class="sidebar_wr">
+					<div class="sidebar_menu_block_back_arr">
+					</div>
+					
+					<div class="authorisation_box_logo menu_box_logo">
+										
+					</div>
+					
+					<ul class="sidebar_menu_block_menu">
+							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr">Главная страница</li>
+							<li class="sidebar_menu_block_menu_item news_item">Новости</li>
+							<li class="sidebar_menu_block_menu_item timetable_item">Расписание</li>
+							<li class="sidebar_menu_block_menu_item pers_item">Персональная информация</li>
+							<li class="sidebar_menu_block_menu_item mes_item">Сообщения</li>
+							<li class="sidebar_menu_block_menu_item set_item">Настройки</li>
+							<li class="sidebar_menu_block_menu_item close_item">Сменить пользователя</li>
+					</ul>
+				</div>
+			</div>
+			
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
 					<div class="header_line__helper">
@@ -101,7 +125,7 @@
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
 							
-							<img src="/vladonxp/mobile_site/img/calendar_icon.png" />
+							<img src="/img/calendar_icon.png" />
 							
 							<div class="content_box_name_item">	
 							  Расписание
@@ -110,7 +134,7 @@
 						
 						<div class="content_box_menuitem contr_shadow" hashtag="news">
 						
-							<img src="/vladonxp/mobile_site/img/news_icon.png" />
+							<img src="/img/news_icon.png" />
 						
 							<div class="content_box_name_item"> 
 							  Новости
@@ -119,7 +143,7 @@
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
-							<img src="/vladonxp/mobile_site/img/pers_icon.png" />
+							<img src="/img/pers_icon.png" />
 						
 							<div class="content_box_name_item">	
 							  Персональная инф.
@@ -128,7 +152,7 @@
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="message">
 							
-							<img src="/vladonxp/mobile_site/img/message_icon.png" />
+							<img src="/img/message_icon.png" />
 						   
 							<div class="content_box_name_item">	
 							  Сообщения
@@ -147,13 +171,12 @@
 				
 		</div>
 		
-		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/view.js"></script>
 		<script src="js/waterfall.js"></script>
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
-		<script src="js/view.js"></script>
 		<script src="js/bind_action.js"></script>
-		
+		<script src="js/main.js"></script>
 	</body>
 </html>

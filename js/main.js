@@ -11,6 +11,11 @@ $(document).ready(function(){
 	
 	view.loadPage();
 	
+	$menu_bl = $('.sidebar_menu_block');
+	$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
+	
+	$('.sidebar_wr').css('width', $menu_bl.width()+15+'px');
+	
 })
 
 function validateForm(){
