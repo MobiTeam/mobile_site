@@ -37,7 +37,7 @@
 									"Degree" => ociresult($s,'FSDEGREE')
 								);
 			$count ++;
-		
+			
 		} 
 		
 	//print_r(utf8_json_encode($appoint_json));

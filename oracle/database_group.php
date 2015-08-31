@@ -5,6 +5,8 @@
 	
 	 $GRUP=$_POST['GRUP'];
 	 
+	 
+	 //Студенты в группе
 	 $sql = "Select * from v_stud_group
 		where FSDEPCODE like '".$GRUP."'";
 		
