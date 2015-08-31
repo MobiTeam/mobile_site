@@ -2,6 +2,32 @@
 	
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
+		if($('.menuoverlay').css('display') == 'block'){
+			closeSidebar();
+		}
+	});
+	
+	$( window ).on( "resize", function(){
+	
+		$menu_bl = $('.sidebar_menu_block');
+		$('.sidebar_wr').css('width', $menu_bl.width()+15+'px');
+		if($('.menuoverlay').css('display') != 'block'){
+			$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
+		}
+		
+	});
+		
+	$('.header_line__content_button ').click(function(){
+		if($(this).hasClass('menu_button')){
+			/* $('body').css('overflow', 'hidden'); */
+			openSidebar();
+				
+		}
+	});
+	
+	$('.sidebar_menu_block_back_arr').click(function(){
+		/* $('body').css('overflow', 'scroll'); */
+		closeSidebar();
 	});
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
@@ -43,8 +69,12 @@
 		$(this).addClass('current_item');
 	}); 
 	
-	$('.content_box_menuitem').click(function(){
+	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
 		view.changePage($(this).attr('hashtag'));
 	}) 
+	
+	$('.menuoverlay').click(function(){
+		closeSidebar();
+	});
 	
 })

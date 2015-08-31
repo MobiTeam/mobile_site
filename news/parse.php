@@ -40,6 +40,9 @@
 				$f_pos = strpos($content,$first_tag);
 				$s_pos = strpos($content,$sec_tag);
 				
+				preg_match('~name="description" content="([\s\S]*?)"~', $content, $descrarr);
+				$descr = $descrarr[1];
+								
 				if(preg_match_all('~[0-9\.,]*~',$date[0][0],$num_date)){
 				  	$cl_date = substr(implode($num_date[0]),0,10); 
 				} else die('Шаблон даты поменялся.');
@@ -92,7 +95,8 @@
 						// $img_news=$_POST[''];
 						// $prev_news=$_POST[''];
 						// $prev_img_news=$_POST[''];
-						// $source_news=$_POST[''];
+						
+					  $source_news = 1;	
 					  include('db_load.php');
                       include('db_insert_goodlinks.php');					
 				} else{

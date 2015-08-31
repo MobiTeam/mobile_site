@@ -32,6 +32,6 @@
 		
 		} 
 		
-		print_r(utf8_json_encode($news_json));		
+		print_r(json_encode_cyr($news_json));		
 	
 ?>

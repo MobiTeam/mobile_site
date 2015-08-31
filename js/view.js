@@ -40,7 +40,7 @@ var view = {
 		}    
 	},
 
-	loadPage(){
+	loadPage:function(){
 		
 		this.closeAll();
 		
@@ -61,7 +61,7 @@ var view = {
 				break;
 						
 				case '#news':
-				   loadNewsBlock();
+				    loadNewsBlock();
 				break;
 						
 				case '#messages':
@@ -108,6 +108,8 @@ var view = {
 //функции загрузки блоков
 
 function loadAuth(){
+	sessionStorage.clear();
+	localStorage.clear();
 	view.$auth.fadeIn(0);
 	view.setTitle(stringNames[0]);
 	view.displayArrIcon();
@@ -147,4 +149,7 @@ function loadNewsBlock(){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	view.$second_menu.fadeIn(0); 
+	
+	newsWrap(myajax(false, 'POST', 'oracle/database_news.php'));
+	
 }

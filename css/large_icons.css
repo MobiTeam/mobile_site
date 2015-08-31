@@ -36,4 +36,48 @@
 		background:url('../img/ugrasu_logo@2x.png') no-repeat;
 		background-size:cover;
 	}
+	
+	.sidebar_menu_block_back_arr{
+		background:url('../img/arrow_black@2x.png');
+		background-size: 24px 24px;
+	}
+	
+	.main_item{
+		background:url('../img/home_icon@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.pers_item{
+		background:url('../img/person_icon@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.set_item{
+		background:url('../img/settings_icon_bl@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.mes_item{
+		background:url('../img/message_icon_bl@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.close_item{
+		background:url('../img/close_icon@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.news_item{
+		background:url('../img/news_icon_bl@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+
+	.timetable_item{
+		background:url('../img/time_icon@2x.png') no-repeat left center;
+		background-size: 24px 24px;
+	}
+	
+	.menu_box_logo{
+		background-size:100px 100px;
+	}
 }
