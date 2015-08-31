@@ -383,6 +383,8 @@ html, body{
 	float:left;
 	background:grey;
 	margin:5px 12px 5px 5px;
+	background-repeat:no-repeat;
+	background-position:center center;
 }
 
 .news_box_item_text{

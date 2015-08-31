@@ -146,6 +146,7 @@ function newsWrap(obj){
 }
 
 function closeSidebar(){
+	$("html,body").css("overflow","auto");
 	$('.menuoverlay').stop().fadeTo(250, 0);
 		$menuBlock = $('.sidebar_menu_block');
 		$menuBlock.removeClass('contr_shadow')
@@ -157,6 +158,7 @@ function closeSidebar(){
 }
 
 function openSidebar(){
+	$("html,body").css("overflow","hidden");
 	$('.menuoverlay').stop().fadeTo(250, 0.6);	
 			$('.sidebar_menu_block').addClass('contr_shadow')
 									.animate({

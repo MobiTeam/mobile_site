@@ -8,7 +8,7 @@
 	$( window ).on( "resize", function(){
 	
 		$menu_bl = $('.sidebar_menu_block');
-		$('.sidebar_wr').css('width', $menu_bl.width()+15+'px');
+		$('.sidebar_wr').css('width', $menu_bl.width()+15+'px').css('height', $(window).height());
 		if($('.menuoverlay').css('display') != 'block'){
 			$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
 		}
