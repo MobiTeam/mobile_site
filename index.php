@@ -37,7 +37,7 @@
 										
 					</div>
 					
-					<ul class="sidebar_menu_block_menu">
+					<ul class="sidebar_menu_block_menu unselected" unselectable="on" onselectstart="return false;">
 							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr">Главная страница</li>
 							<li class="sidebar_menu_block_menu_item news_item">Новости</li>
 							<li class="sidebar_menu_block_menu_item timetable_item">Расписание</li>
