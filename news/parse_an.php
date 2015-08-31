@@ -12,7 +12,7 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/?date=1996-06-28&PAGEN_1=26&SIZEN_1=2000000');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=63&PAGEN_1=11&SIZEN_1=20000');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);
@@ -97,7 +97,7 @@
 						// $prev_news=$_POST[''];
 						// $prev_img_news=$_POST[''];
 						
-					  $source_news = 1;	
+					  $source_news = 2;	
 					  include('db_load.php');
                       include('db_insert_goodlinks.php');					
 				} else{

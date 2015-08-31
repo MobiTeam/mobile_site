@@ -12,11 +12,11 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/?date=1996-06-28&PAGEN_1=26&SIZEN_1=2000000');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=19&PAGEN_1=5&SIZEN_1=200000');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);
-   
+   $image_full_src = '';
    //получаем массив ссылок
    if(preg_match_all('/href="([^"]+detail[^"]+)/', $content, $arr_url) && preg_match_all('/<img[^>]+src=([\'"])?((?(1).+?|[^\s>]+))(?(1)\1)/',$content,$arr_img)){ 
 	  
@@ -61,7 +61,7 @@
 					    
 						// || preg_match_all('#<div class="news-detail">([\s\S]*)<div style="clear:both"></div>#i', $chunk_cont, $arr2)
 						
-						include('file_load_images.php');
+						/* include('file_load_images.php'); */
                         $date_news=$cl_date;
 						$name_news=$art_name;
 						
@@ -97,7 +97,7 @@
 						// $prev_news=$_POST[''];
 						// $prev_img_news=$_POST[''];
 						
-					  $source_news = 1;	
+					  $source_news = 3;	
 					  include('db_load.php');
                       include('db_insert_goodlinks.php');					
 				} else{
