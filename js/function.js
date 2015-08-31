@@ -145,3 +145,21 @@ function newsWrap(obj){
 	
 }
 
+function closeSidebar(){
+	$('.menuoverlay').stop().fadeTo(250, 0);
+		$menuBlock = $('.sidebar_menu_block');
+		$menuBlock.removeClass('contr_shadow')
+									.animate({
+										'margin-left': '-' + $menuBlock.css('width')
+									}, 250, function(){
+										$('.menuoverlay').css('display','none');
+									});	
+}
+
+function openSidebar(){
+	$('.menuoverlay').stop().fadeTo(250, 0.6);	
+			$('.sidebar_menu_block').addClass('contr_shadow')
+									.animate({
+										'margin-left': "0px"
+									}, 250);	
+}
