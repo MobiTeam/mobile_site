@@ -26,6 +26,7 @@ function myajax(async, type, url, data){
 			clBl();
 		}
 	});
+	
 	return jsonObj;
 		
 }
@@ -125,22 +126,22 @@ function clearUTF8(str) {
 
 function newsWrap(obj){
 	
+	$newsblock = $('.news_box');
+	$newsblock.html('');
 	for(var i = 0; i < obj.length; i++){
-		console.log(obj[i]);		
-	} 
-	
-	/* <div class="news_box_item contr_shadow">
-						
-						<div class="news_box_item_image">
-							
-						</div>
-						
-						<div class="news_box_item_text">
-							
-						
-						</div>
-						<div style="clear:both"></div>
-					</div> */
+		var imglink = 'news/pre_images/img_' + obj[i].id + '.jpg';
+		$newsblock.append('<div class="news_box_item contr_shadow" idnews="' + obj[i].id + '">\
+						  <div class="news_box_item_image" style="background-image:url(' + imglink + ');">\
+						  </div>\
+						  <div class="news_box_item_text">\
+						  <div class="news_box_item_title">\
+						  ' + obj[i].name_news + '\
+						  </div>\
+						  '	+ obj[i].name_news + 
+						  '</div>\
+						  <div style="clear:both"></div>\
+						  </div>');
+		} 
 	
 }
 

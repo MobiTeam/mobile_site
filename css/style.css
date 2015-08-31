@@ -360,9 +360,21 @@ html, body{
 }
 
 .news_box_item{
-	padding:5px;
+	padding:10px;
 	border-radius:2px;
 	background:white;
+	margin:12px 2px;
+}
+
+.news_box_item:active{
+	background:#D4DAFC;
+}
+
+.news_box_item_title{
+	font-weight:bold;
+	color:#4F4F4F;
+	font-size:18px;
+	line-height:28px;
 }
 
 .news_box_item_image{
@@ -370,7 +382,7 @@ html, body{
 	height:85px;
 	float:left;
 	background:grey;
-	margin:5px;
+	margin:5px 12px 5px 5px;
 }
 
 .news_box_item_text{

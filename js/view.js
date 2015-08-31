@@ -61,7 +61,7 @@ var view = {
 				break;
 						
 				case '#news':
-				   loadNewsBlock();
+				    loadNewsBlock();
 				break;
 						
 				case '#messages':
@@ -147,4 +147,7 @@ function loadNewsBlock(){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	view.$second_menu.fadeIn(0); 
+	
+	newsWrap(myajax(false, 'POST', 'oracle/database_news.php'));
+	
 }
