@@ -63,19 +63,18 @@
                         $date_news=$cl_date;
 						$name_news=$art_name;
 						
-						$replace_arr = array("'");
-						
+											
 		
                 		$text_news = '';
 						
 						#удаляем пустые абзацы
 						foreach(array_map("stripWhitespaces",$arr[2]) as $p){
 							if(iconv_strlen($p)>2){
-								$text_news.="<p>".$p."</p>";								
+								$text_news.="<p>".str_replace("'","''",$p)."</p>";								
 						   }
 						}
 						
-						//$text_news=str_replace($replace_arr,"''",implode(array_map("clear_tags",$arr[2])));
+						/* $text_news=str_replace($replace_arr,"''",implode(array_map("clear_tags",$arr[2]))); */
 							
 						
 						if(iconv_strlen($text_news)<=3800){
