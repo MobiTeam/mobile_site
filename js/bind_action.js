@@ -69,7 +69,7 @@
 		$(this).addClass('current_item');
 	}); 
 	
-	$('.content_box_menuitem').click(function(){
+	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
 		view.changePage($(this).attr('hashtag'));
 	}) 
 	

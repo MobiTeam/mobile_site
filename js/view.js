@@ -108,6 +108,8 @@ var view = {
 //функции загрузки блоков
 
 function loadAuth(){
+	sessionStorage.clear();
+	localStorage.clear();
 	view.$auth.fadeIn(0);
 	view.setTitle(stringNames[0]);
 	view.displayArrIcon();

@@ -38,13 +38,13 @@
 					</div>
 					
 					<ul class="sidebar_menu_block_menu unselected" unselectable="on" onselectstart="return false;">
-							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr">Главная страница</li>
-							<li class="sidebar_menu_block_menu_item news_item">Новости</li>
-							<li class="sidebar_menu_block_menu_item timetable_item">Расписание</li>
-							<li class="sidebar_menu_block_menu_item pers_item">Персональная информация</li>
-							<li class="sidebar_menu_block_menu_item mes_item">Сообщения</li>
-							<li class="sidebar_menu_block_menu_item set_item">Настройки</li>
-							<li class="sidebar_menu_block_menu_item close_item">Сменить пользователя</li>
+							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr" hashtag="menu">Главная страница</li>
+							<li class="sidebar_menu_block_menu_item news_item" hashtag="news">Новости</li>
+							<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
+							<li class="sidebar_menu_block_menu_item pers_item" hashtag="persinf">Персональная информация</li>
+							<li class="sidebar_menu_block_menu_item mes_item" hashtag="message">Сообщения</li>
+							<li class="sidebar_menu_block_menu_item set_item" hashtag="settings">Настройки</li>
+							<li class="sidebar_menu_block_menu_item close_item" hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 						
 						<span class="header_line__content_title"></span>
 						
-						<div class="header_line_content_settings">
+						<div class="header_line_content_settings" hashtag="settings">
 						  
 						</div>
 						
