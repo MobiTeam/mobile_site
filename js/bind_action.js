@@ -2,9 +2,7 @@
 	
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
-		if($('.menuoverlay').css('display') == 'block'){
-			closeSidebar();
-		}
+		
 	});
 	
 	$( window ).on( "resize", function(){
@@ -71,6 +69,9 @@
 	
 	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
 		view.changePage($(this).attr('hashtag'));
+		if($('.menuoverlay').css('display') == 'block'){
+			closeSidebar();
+		}
 	}) 
 	
 	$('.menuoverlay').click(function(){

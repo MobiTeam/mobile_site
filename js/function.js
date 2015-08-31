@@ -137,7 +137,7 @@ function newsWrap(obj){
 						  <div class="news_box_item_title">\
 						  ' + obj[i].name_news + '\
 						  </div>\
-						  '	+ obj[i].name_news + 
+						  '	+ obj[i].descr + 
 						  '</div>\
 						  <div style="clear:both"></div>\
 						  </div>');

@@ -40,8 +40,10 @@
 				$f_pos = strpos($content,$first_tag);
 				$s_pos = strpos($content,$sec_tag);
 				
-				preg_match('~name="description" content="([\s\S]*?)"~', $content, $descrarr);
-				$descr = $descrarr[1];
+				preg_match('~name="description" content="([\s\S]*?)"~', $content, $descrarr);&amp;lt;/p&amp;gt;
+
+
+				$descr = str_replace(array('&lt;p align=&quot;left&quot;&gt;26', '&amp;lt;p align=&amp;quot;left&amp;quot;&amp;gt;', 'p align=&quot;','&amp;', '&amp;lt;', 'p&amp;gt;','gt;','lt;','p align=&amp;', 'p align=&amp;quot', '/p'), '', stripWhitespaces($descrarr[1]));
 								
 				if(preg_match_all('~[0-9\.,]*~',$date[0][0],$num_date)){
 				  	$cl_date = substr(implode($num_date[0]),0,10); 

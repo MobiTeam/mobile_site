@@ -5,7 +5,7 @@
    
     if (!isset($_POST['id_news'])){
 			$sql="Select * from news 
-						  where ID<=(Select MAX(ID) from news)-290 and ID>=(Select MAX(ID) from news)-299
+						  where ID<=(Select MAX(ID) from news) and ID>=(Select MAX(ID) from news)-10
 						  Order by ID DESC";
 		} else {
 			$sql="Select * from news 
@@ -26,7 +26,7 @@
 									"name_news" => ociresult($s,'NAME_NEWS'), 
 									"date" => ociresult($s,'DATE_NEWS'), 
 									"text" => ociresult($s,'TEXT_NEWS').ociresult($s,'TEXT_NEWS2').ociresult($s,'TEXT_NEWS3').ociresult($s,'TEXT_NEWS4'), 
-									"prev_img" => ociresult($s,'PREV_IMG_NEWS')
+									"descr" => ociresult($s,'DESCRIPTION')
 								);
 			$count ++;
 		
