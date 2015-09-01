@@ -359,22 +359,45 @@ html, body{
 	display:none;
 }
 
+.news_box_details{
+	margin:82px 15px 0px 15px; 
+	display:none;
+	background:white;
+	padding:10px;
+}
+
 .news_box_item{
 	padding:10px;
 	border-radius:2px;
 	background:white;
-	margin:12px 2px;
+	margin:20px 2px;
 }
 
 .news_box_item:active{
 	background:#D4DAFC;
 }
 
-.news_box_item_title{
+.news_box_item_title, .full_article_title{
 	font-weight:bold;
-	color:#4F4F4F;
+	color:#484848;
 	font-size:18px;
 	line-height:26px;
+}
+
+.full_article_date{
+	color:grey;
+	text-align:right;
+	font-size:16px;
+}
+
+.full_article_title{
+	margin:10px;
+}
+
+.full_article_text p{
+	margin:10px;
+	text-indent:18px;
+	line-height:22px;
 }
 
 .news_box_item_image{

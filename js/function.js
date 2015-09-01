@@ -116,7 +116,7 @@ function clearUTF8(str) {
 	var clrStr = '';
 	var i = 0;
 	
-	while(str[i] != '{' && str[i] != '['){
+	while(str[i] != '{' && str[i] != '[' && i<20){
 		i++;
 	} 
 	
@@ -127,10 +127,14 @@ function clearUTF8(str) {
 function newsWrap(obj){
 	
 	$newsblock = $('.news_box');
-	$newsblock.html('');
+	var resHtml = '';
+	
 	for(var i = 0; i < obj.length; i++){
-		var imglink = 'news/pre_images/img_' + obj[i].id + '.jpg';
-		$newsblock.append('<div class="news_box_item contr_shadow" idnews="' + obj[i].id + '">\
+		
+		var id = obj[i].type == '3' ? 34 : obj[i].id;
+		
+		var imglink = 'news/pre_images/img_' + id + '.jpg';
+		resHtml += '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
 						  <div class="news_box_item_image" style="background-image:url(' + imglink + ');">\
 						  </div>\
 						  <div class="news_box_item_text">\
@@ -140,8 +144,12 @@ function newsWrap(obj){
 						  '	+ obj[i].descr + 
 						  '</div>\
 						  <div style="clear:both"></div>\
-						  </div>');
+						  </div>';
 		} 
+		
+		$newsblock.html('').css('display', 'none');
+		$newsblock.html(resHtml).fadeTo(250, 1);
+		
 	
 }
 
@@ -163,5 +171,20 @@ function openSidebar(){
 			$('.sidebar_menu_block').addClass('contr_shadow')
 									.animate({
 										'margin-left': "0px"
-									}, 250);	
+									}, 150);	
+}
+
+function loadDetails(id){
+	
+	location.hash = '#id' + id;
+	
+}
+
+function saveAndShow(){
+	if(sessionStorage['news_' + $('.current_item').attr('newstype')] == undefined){
+		newsWrap(myajax(false, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}));
+		sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();
+	} else {
+		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(250, 1);
+	}	
 }

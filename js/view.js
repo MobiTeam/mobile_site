@@ -6,6 +6,7 @@ var view = {
 	$auth:$('.authorisation_box'),
 	$menu:$('.main_menu'),
 	$news:$('.news_box'),
+	$full_art:$('.news_box_details'),
 	$settings:$('.header_line_content_settings'),
 	
 	setTitle : function(nameTitle){
@@ -29,6 +30,7 @@ var view = {
 		this.$menu.fadeOut(0);
 		this.$news.fadeOut(0);
 		this.$second_menu.fadeOut(0);
+		this.$full_art.fadeOut(0);
 	},
 	
 	changePage:function(hash){
@@ -69,7 +71,7 @@ var view = {
 				break;
 				
 				default:
-				    view.changePage('menu');
+					parseHashTag("menu");
 				break;
 						
 					}
@@ -93,7 +95,7 @@ var view = {
 					break;
 					
 					default:
-						view.changePage('guest'); 
+						parseHashTag("guest");
 					break;
 								
 				}				
@@ -105,7 +107,7 @@ var view = {
 		
 }	
 
-//������� �������� ������
+//функции загрузки блоков
 
 function loadAuth(){
 	sessionStorage.clear();
@@ -150,6 +152,49 @@ function loadNewsBlock(){
 	view.displayMenuIcon();
 	view.$second_menu.fadeIn(0); 
 	
-	newsWrap(myajax(false, 'POST', 'oracle/database_news.php'));
+	saveAndShow();
 	
+}
+
+function parseHashTag(access){
+	
+	var hash = location.hash;
+	$('.news_box').css('display', 'none');
+	$newsblock = $('.news_box_details');
+	$newsblock.html('').css('display', 'none');
+	
+	if(hash.substr(0,3) == '#id'){
+		
+		var id = +hash.replace(/\D+/g,"");
+		
+		if( typeof(id) === "number" ){
+			loadFullNews(id);			
+		} else {
+			$newsblock.html('Новости с заданным идентификатором не обнаружено.').fadeTo(150, 1);	
+		}
+				
+	} else {
+		view.changePage(access);	
+	}
+}
+
+function loadFullNews(id){
+	
+	view.setTitle(stringNames[3]);
+	view.displayMenuIcon();
+	
+	var obj = myajax(false, 'POST', 'oracle/database_news.php', {news_id: id});
+			
+	$('.news_box_details').html('<div class="full_article_news">\
+				<div class="full_article_title">\
+				' + obj.name_news + '\
+				</div>\
+				<div class="full_article_date">\
+				' + obj.date + '\
+				</div>\
+				<div class="full_article_text">\
+				' + obj.text + '\
+				</div>\
+				</div>').fadeTo(150, 1);
+				
 }

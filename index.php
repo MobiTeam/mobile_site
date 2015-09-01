@@ -13,7 +13,7 @@
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
 		<link href="css/large_phone.css" media="screen and (max-width: 736px)" rel="stylesheet"/> 
 		<link href="css/roboto_font.css" rel="stylesheet"/>
-		
+	
 	</head>
 	
 	<body>
@@ -83,10 +83,11 @@
 			<div class="content_box">
 				
 				<div class="news_box">
-					
-					
-				 
-				</div>				
+				</div>	
+				
+				<div class="news_box_details contr_shadow">
+				</div>
+				
 				<div class="authorisation_box">
 				
 					<div class="authorisation_box_logo">

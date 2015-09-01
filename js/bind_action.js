@@ -65,7 +65,7 @@
 			$(this).removeClass('current_item');
 		});
 		$(this).addClass('current_item');
-		newsWrap(myajax(false, 'POST', 'oracle/database_news.php', {type: $(this).attr('newstype')}));
+		saveAndShow();
 	}); 
 	
 	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
@@ -79,4 +79,5 @@
 		closeSidebar();
 	});
 	
+		
 })
