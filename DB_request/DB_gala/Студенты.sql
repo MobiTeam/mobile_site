@@ -67,7 +67,8 @@ and to_oradate(fappdate)<=sysdate
 and (to_oradate(fdisdate)>sysdate or fdisdate=0) order by ffio
 
 --------------------------------------------------------------СТИПЕНДИИ
-
+create or replace view v_cisu_stud_awards 
+as
 select  FFIO,fnVidOpl, to_char(M_1), to_char(M_2),to_char(M_3),to_char(M_4),to_char(M_5),to_char(M_6),to_char(M_7),to_char(M_8),to_char(M_9), to_char(M_10), to_char(M_11), to_char(M_12), to_char(M_13)
  from(
 select US.fFio, US.fsFaculty, US.fsPost, US.fsDepcode, US.fsFinsourceName, fVidOpl, decode(GROUPING(fnVidOpl), 1, 'ИТОГО', fnVidOpl) fnVidOpl,
@@ -82,7 +83,7 @@ select US.fFio, US.fsFaculty, US.fsPost, US.fsDepcode, US.fsFinsourceName, fVidO
                             inner join U_Student    U on U.fcPersons  = P.fNrec
                             inner join KlVidOpl     K on SVO.fVidOpl  = K.fVidOplP
          where SVO.fSumma <> 0
-           and SVO.fYearK = '2015'
+           and SVO.fYearK = to_char(sysdate,'YYYY')
           and lower(substr(P.ffio,1,length(replace('Якимчук Александр Васильевич','.',''))))=lower(replace('Якимчук Александр Васильевич','.',''))
 
         ) S, U_Student US

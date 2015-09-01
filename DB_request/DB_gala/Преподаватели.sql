@@ -3,6 +3,17 @@ grant select on mv_cisu_timetable to mobile;
 
 grant select on gala_rasp."Chair" to mobile;
 
+
+------------------- Сделать Гранты
+grant select on Budget.v_cisu_stud_dol to mobile;
+
+grant select on Budget.v_cisu_stud_education to mobile;
+
+grant select on budget.v_cisu_teac_kott to mobile;
+
+grant select on budget.v_cisu_teac_room to mobile;
+
+
 ----------------------------------------------------------------------------------CТАВКИ ПРЕПОДАВАТЕЛЯ(Кадровая информация о преподавателе)
 create materialized view mv_cisu_teach_appoint
   PCTFREE     10
