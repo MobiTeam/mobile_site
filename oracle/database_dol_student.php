@@ -28,7 +28,6 @@
 									"Ostatok" => ociresult($s,'OSTATOK'), 
 									"Date" => ociresult($s,'DAT'), 
 
-
 								);
 			$count ++;
 		
