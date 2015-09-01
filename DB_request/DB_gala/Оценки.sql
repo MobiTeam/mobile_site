@@ -51,7 +51,11 @@ left outer join
     
 -------------------------------Œ÷≈Õ »--------------------------
     
-select   UM.fsFio,UD.fName Dis,C.fName Zach,UL.fwSemestr,UTW.Fname typework,
+create or replace view v_cisu_stud_marks
+as
+
+
+select   UM.fsFio FIO ,UD.fName Dis,USG.Fname gr_name,C.fName Zach,UL.fwSemestr Semestr,replace(UTW.Fname,'˚','') typework,
           UM.fwMark
  from U_List UL inner join U_Marks      UM on UM.fcList = UL.fNrec
                 inner join U_StudGroup USG on UL.fcStGr = USG.fNrec
