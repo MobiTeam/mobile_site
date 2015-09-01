@@ -70,9 +70,9 @@
 					
 					<div class="header_line_addition_wrapper">
 						<div class="header_line_addition_menu">
-							<div class="header_line_addition_menu_item current_item">Новости</div>
-							<div class="header_line_addition_menu_item">Объявления</div>
-							<div class="header_line_addition_menu_item">Анонсы</div>
+							<div class="header_line_addition_menu_item current_item" newstype="1">Новости</div>
+							<div class="header_line_addition_menu_item" newstype="2">Объявления</div>
+							<div class="header_line_addition_menu_item" newstype="3">Анонсы</div>
 						</div>
 					</div>	
 					
