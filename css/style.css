@@ -470,7 +470,9 @@ html, body{
 .sidebar_menu_block_back_arr{
 	height:24px;
 	width:24px;
-	background:url('../img/arrow_black.png');
+	background:url('../img/arrow_black.png') white;
+	border:1px solid #444444;
+	border-radius:50%;
 	position:absolute;
 	margin:10px;
 	opacity:0.6;
@@ -504,6 +506,10 @@ html, body{
 .sidebar_wr{
 	overflow-y:scroll;
 	height:100%;
+}
+
+.fixed_block {
+	position:fixed;
 }
 
 .main_item{

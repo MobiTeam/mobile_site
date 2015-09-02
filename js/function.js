@@ -150,18 +150,19 @@ function newsWrap(obj){
 		$newsblock.html('').css('display', 'none');
 		$newsblock.html(resHtml).fadeTo(250, 1);
 		
+		
 	
 }
 
 function closeSidebar(){
-	$("html,body").css("overflow","auto");
+	$("html,body").css("overflow","");
 	$('.menuoverlay').stop().fadeTo(250, 0);
 		$menuBlock = $('.sidebar_menu_block');
 		$menuBlock.removeClass('contr_shadow')
-									.animate({
-										'margin-left': '-' + $menuBlock.css('width')
+		          .animate({ 'margin-left': '-' + $menuBlock.css('width')
 									}, 250, function(){
 										$('.menuoverlay').css('display','none');
+										$menuBlock.removeClass('fixed_block')
 									});	
 }
 
@@ -169,6 +170,7 @@ function openSidebar(){
 	$("html,body").css("overflow","hidden");
 	$('.menuoverlay').stop().fadeTo(250, 0.6);	
 			$('.sidebar_menu_block').addClass('contr_shadow')
+									.addClass('fixed_block')
 									.animate({
 										'margin-left': "0px"
 									}, 150);	
@@ -181,10 +183,22 @@ function loadDetails(id){
 }
 
 function saveAndShow(){
+	
 	if(sessionStorage['news_' + $('.current_item').attr('newstype')] == undefined){
 		newsWrap(myajax(false, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}));
 		sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();
 	} else {
 		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(250, 1);
-	}	
+	}
+
+}
+
+function clearCurrSidebarItem(){
+	$('.sidebar_menu_block_menu_item').each(function(){
+			$(this).removeClass('sidebar_menu_block_menu_item_curr');
+	});
+}
+
+function tagMenuItem(className){
+	$('.' + className).addClass('sidebar_menu_block_menu_item_curr');
 }

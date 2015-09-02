@@ -31,6 +31,8 @@ var view = {
 		this.$news.fadeOut(0);
 		this.$second_menu.fadeOut(0);
 		this.$full_art.fadeOut(0);
+		closeSidebar();
+		clearCurrSidebarItem();
 	},
 	
 	changePage:function(hash){
@@ -118,6 +120,8 @@ function loadAuth(){
 }
 
 function loadMainMenu(){
+	
+	tagMenuItem('main_item');
 	var userInfo = getJSON('auth_inf', (localStorage.auth_inf != undefined));
 					
 	$('.previous_info_fullname').html(userInfo.FIO);
@@ -133,6 +137,8 @@ function loadMainMenu(){
 }
 
 function loadGuestMenu(){
+	
+	tagMenuItem('main_item');
 	var userInfo = getJSON('guest_inf', (localStorage.guest_inf != undefined));
 					
 	$('.previous_info_fullname').html(userInfo.FIO);
@@ -146,7 +152,9 @@ function loadGuestMenu(){
 }
 
 function loadNewsBlock(){
-	view.$news.stop().fadeTo(250, 1);
+	
+	tagMenuItem('news_item');
+	view.$news.stop().fadeTo(250, 1).scrollTop(0);
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
@@ -158,6 +166,7 @@ function loadNewsBlock(){
 
 function parseHashTag(access){
 	
+	tagMenuItem('news_item');
 	var hash = location.hash;
 	$('.news_box').css('display', 'none');
 	$newsblock = $('.news_box_details');
@@ -195,6 +204,6 @@ function loadFullNews(id){
 				<div class="full_article_text">\
 				' + obj.text + '\
 				</div>\
-				</div>').fadeTo(150, 1);
+				</div>').fadeTo(150, 1).scrollTop(0);
 				
 }

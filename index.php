@@ -83,8 +83,8 @@
 			<div class="content_box">
 				
 				<div class="news_box">
-				</div>	
-				
+				</div>
+							
 				<div class="news_box_details contr_shadow">
 				</div>
 				

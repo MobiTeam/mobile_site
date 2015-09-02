@@ -2,7 +2,6 @@
 	
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
-		
 	});
 	
 	$( window ).on( "resize", function(){
@@ -66,6 +65,8 @@
 		});
 		$(this).addClass('current_item');
 		saveAndShow();
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
 	}); 
 	
 	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
@@ -75,9 +76,14 @@
 		}
 	}) 
 	
+	/* $('.sidebar_menu_block_menu_item').click(function(){
+		clearCurrSidebarItem();
+		$(this).addClass('sidebar_menu_block_menu_item_curr');
+	}); */
+	
 	$('.menuoverlay').click(function(){
 		closeSidebar();
 	});
 	
-		
+
 })
