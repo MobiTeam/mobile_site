@@ -8,6 +8,8 @@ var view = {
 	$news:$('.news_box'),
 	$full_art:$('.news_box_details'),
 	$settings:$('.header_line_content_settings'),
+	$timetable:$('.timetable_box'),
+	$persons:$('.person_box'),
 	
 	setTitle : function(nameTitle){
 	
@@ -31,6 +33,8 @@ var view = {
 		this.$news.fadeOut(0);
 		this.$second_menu.fadeOut(0);
 		this.$full_art.fadeOut(0);
+		this.$timetable.fadeOut(0);
+		this.$persons.fadeOut(0);
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -49,6 +53,8 @@ var view = {
 		this.closeAll();
 		
 		if(isAuth()){
+			
+			$('.auth_only').css('display', 'block');
 			
 			switch(location.hash){
 			    
@@ -72,6 +78,14 @@ var view = {
 				
 				break;
 				
+				case '#timetable':
+					loadTimetable();
+				break;
+				
+				case '#persinf':
+					loadPersonBlock();
+				break;
+				
 				default:
 					parseHashTag("menu");
 				break;
@@ -79,6 +93,8 @@ var view = {
 					}
 			
 		} else if(isGuest()){
+			
+				$('.auth_only').css('display', 'none');
 			
 			    switch(location.hash){
 					case '#guest':
@@ -89,7 +105,8 @@ var view = {
 						loadNewsBlock();
 					break;
 					
-					case '#titetable':
+					case '#timetable':
+						loadTimetable();
 					break;
 					
 					case '#auth':
@@ -162,6 +179,22 @@ function loadNewsBlock(){
 	
 	saveAndShow();
 	
+}
+
+function loadTimetable(){
+	tagMenuItem('timetable_item');
+	view.$timetable.stop().fadeTo(250, 1);
+	view.$settings.fadeIn();
+	view.setTitle(stringNames[5]);
+	view.displayMenuIcon();
+}
+
+function loadPersonBlock(){
+	tagMenuItem('pers_item');
+	view.$persons.stop().fadeTo(250, 1);
+	view.$settings.fadeIn();
+	view.setTitle(stringNames[4]);
+	view.displayMenuIcon();
 }
 
 function parseHashTag(access){

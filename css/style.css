@@ -354,6 +354,17 @@ html, body{
 	background:black;
 	position:fixed;
 }
+
+.timetable_box{
+	margin:82px 15px 0px 15px; 
+	display:none;
+}
+
+.person_box{
+	margin:82px 15px 0px 15px; 
+	display:none;
+}
+
 .news_box{
 	padding:112px 10px 0px 10px;
 	display:none;
@@ -437,6 +448,10 @@ html, body{
 
 .authblock{
 	display:inline-block;
+}
+
+.auth_only{
+	display:none;
 }
 
 .sidebar_menu_block{

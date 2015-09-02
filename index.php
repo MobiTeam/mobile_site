@@ -41,10 +41,10 @@
 							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr" hashtag="menu">Главная страница</li>
 							<li class="sidebar_menu_block_menu_item news_item" hashtag="news">Новости</li>
 							<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
-							<li class="sidebar_menu_block_menu_item pers_item" hashtag="persinf">Персональная информация</li>
-							<li class="sidebar_menu_block_menu_item mes_item" hashtag="message">Сообщения</li>
-							<li class="sidebar_menu_block_menu_item set_item" hashtag="settings">Настройки</li>
-							<li class="sidebar_menu_block_menu_item close_item" hashtag="auth">Сменить пользователя</li>
+							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
+							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>
+							<li class="sidebar_menu_block_menu_item set_item auth_only" hashtag="settings">Настройки</li>-->
+							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
 			</div>
@@ -58,9 +58,9 @@
 						
 						<span class="header_line__content_title"></span>
 						
-						<div class="header_line_content_settings" hashtag="settings">
+						<!--<div class="header_line_content_settings" hashtag="settings">
 						  
-						</div>
+						</div>-->
 						
 						<div class="header_line_content_search">
 						  
@@ -81,6 +81,14 @@
 			</div>
 			
 			<div class="content_box">
+			
+				<div class="timetable_box">
+					Расписание
+				</div>
+				
+				<div class="person_box">
+					Персональная информация
+				</div>
 				
 				<div class="news_box">
 				</div>
@@ -142,6 +150,7 @@
 							</div>
 						</div>
 						
+						<!--
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<img src="/img/pers_icon.png" />
@@ -158,7 +167,7 @@
 							<div class="content_box_name_item">	
 							  Сообщения
 							</div>
-						</div>
+						</div>-->
 						
 						<div style="clear:both">
 						</div>
