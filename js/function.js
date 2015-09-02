@@ -159,17 +159,18 @@ function closeSidebar(){
 	$('.menuoverlay').stop().fadeTo(250, 0);
 		$menuBlock = $('.sidebar_menu_block');
 		$menuBlock.removeClass('contr_shadow')
-		          .animate({ 'margin-left': '-' + $menuBlock.css('width')
+				       .animate({ 'margin-left': '-' + $menuBlock.css('width')
 									}, 250, function(){
 										$('.menuoverlay').css('display','none');
-										$menuBlock.removeClass('fixed_block')
+										$menuBlock.removeClass('fixed_block').css('display','none');
 									});	
 }
 
 function openSidebar(){
 	$("html,body").css("overflow","hidden");
 	$('.menuoverlay').stop().fadeTo(250, 0.6);	
-			$('.sidebar_menu_block').addClass('contr_shadow')
+			$('.sidebar_menu_block').css('display','block')
+									.addClass('contr_shadow')
 									.addClass('fixed_block')
 									.animate({
 										'margin-left': "0px"
