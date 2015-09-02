@@ -186,7 +186,7 @@ html, body{
 	margin:0 auto;
 }
 
-.authorisation_box_input{
+.authorisation_box_input, .timetable_box_input{
 	width:80%;
 	display:block;
 	max-width:300px;
@@ -206,7 +206,7 @@ html, body{
 	font-style:italic;
 }
 
-.authorisation_box_submit, .authorisation_box_button{
+.authorisation_box_submit, .authorisation_box_button, .timetable_box_submit{
 	width:180px;
 	height:36px;
 	display:block;
@@ -214,16 +214,20 @@ html, body{
 	font-family: "RobotoRegular", sans-serif;
 }
 
-.authorisation_box_submit{
+.timetable_box_submit{
+	width:100px;
+}
+
+.authorisation_box_submit, .timetable_box_submit{
 	margin-top:0px;
 }
 
-.authorisation_box_submit{
+.authorisation_box_submit, .timetable_box_submit{
 	background:#5677fc;
 	color:white;
 }
 
-.authorisation_box_submit:active{
+.authorisation_box_submit:active, .timetable_box_submit:active{
 	background:#3266d5;
 }
 

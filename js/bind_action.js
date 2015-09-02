@@ -19,12 +19,26 @@
 			/* $('body').css('overflow', 'hidden'); */
 			openSidebar();
 				
+		} else if($(this).hasClass('arr_button')){
+			
+			if(location.hash == '#auth'){
+				alert('kavabanga');
+			} else {
+				alert('no');
+			}
+			
+	
 		}
 	});
 	
 	$('.sidebar_menu_block_back_arr').click(function(){
 		/* $('body').css('overflow', 'scroll'); */
 		closeSidebar();
+	});
+	
+	$('.timetable_box_form').on("submit", function(event){
+		event.preventDefault();
+		console.log(myajax(false, 'POST', 'oracle/database_timetable.php', $(this).serialize()));
 	});
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
@@ -75,6 +89,8 @@
 			closeSidebar();
 		}
 	}) 
+	
+	
 	
 	/* $('.sidebar_menu_block_menu_item').click(function(){
 		clearCurrSidebarItem();

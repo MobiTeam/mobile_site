@@ -83,7 +83,10 @@
 			<div class="content_box">
 			
 				<div class="timetable_box">
-					Расписание
+					<form class="timetable_box_form" method="post" action="">
+						<input class="timetable_box_input contr_shadow" name="timetable_query" placeholder="Поиск расписания..." type="text" required="">
+						<input class="timetable_box_submit contr_shadow" type="submit" value="Поиск" >
+					</form>
 				</div>
 				
 				<div class="person_box">
