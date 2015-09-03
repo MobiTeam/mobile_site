@@ -48,23 +48,23 @@ where P.fIsemployee  = 'Ю'
   and A.fLprizn      = 0
   and (A.fDisMissDate = 0 or trunc(to_oradate(A.fDisMissDate)) >= trunc(sysdate))
   and (A.fAppointDate = 0 or trunc(to_oradate(A.fAppointDate)) <= trunc(sysdate))
-  --and G.fNrec in (select* from THE (select cast(gala_site.in_list(:PODR) as gala_site.rightsTB) from dual) a)
+
 order by  F.fName, C.fName||' ('||C.fCode||')', G.fName, fFio
 
 ------------------------------------------------------------------------Общежития
 select * from Dol_stud
-where lower(substr(fio,1,length(replace('Петроченко Владислав Юрьевич','.',''))))=lower(replace('Петроченко Владислав Юрьевич','.',''))
+where lower(substr(fio,1,length(replace('Гусаков','.',''))))=lower(replace('Гусаков','.',''))
  
 -----------------------------------------------------------------------Обучение 
 select * from Dol 
-where lower(substr(fio,1,length(replace(:ffio,'.',''))))=lower(replace(:ffio,'.',''))
+where lower(substr(fio,1,length(replace('Петроченко Владислав Юрьевич','.',''))))=lower(replace('Петроченко Владислав Юрьевич','.',''))
 
 -----------------------------------------------------------------Список студентов по группе
 
-select ffio,fsdepcode from U_student 
-where FSDEPCODE='1521б'
+select FFIO,FUNS,FSDEPCODE,FSPOST,FCODEPROF,FSFINSOURCENAME,FSFACULTY,FSDEGREE from U_student
+where FSDEPCODE='1551б'
 and to_oradate(fappdate)<=sysdate 
-and (to_oradate(fdisdate)>sysdate or fdisdate=0) order by ffio
+order by ffio
 
 --------------------------------------------------------------СТИПЕНДИИ
 create or replace view v_cisu_stud_awards 
@@ -118,7 +118,7 @@ where utw.fwtype in (4,5,14,8)
  -- and UCS.fwSeason        = :SEMESTR --СЕМЕСТР
   --and trunc(to_oradate(UCS.fdBeg)) <= sysdate
  --and trunc(to_oradate(UCS.fdEnd)) >= trunc('01.09.2012') дата
-  --and USG.Fname  = '1521б'
+  and USG.Fname  = '1551б'
 --order by UCS.fSemester, UCDC.fCode desc, UD.fName
 ) D
 left outer join 

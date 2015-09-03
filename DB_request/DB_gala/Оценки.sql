@@ -55,14 +55,15 @@ create or replace view v_cisu_stud_marks
 as
 
 
-select   UM.fsFio FIO ,UD.fName Dis,USG.Fname gr_name,C.fName Zach,UL.fwSemestr Semestr,replace(UTW.Fname,'ы','') typework,
+select   UM.fsFio FIO ,UD.fName Dis,USG.Fname gr_name,C.fName Zach,UL.fwSemestr Semestr,UTW.Fname typework,
           UM.fwMark
  from U_List UL inner join U_Marks      UM on UM.fcList = UL.fNrec
                 inner join U_StudGroup USG on UL.fcStGr = USG.fNrec
                 inner join U_Discipline      UD   on UL.fcDis       = UD.fNrec
                 inner join Catalogs      C on UM.fcMark = C.fNrec
                 inner join U_TypeWork        UTW  on UL.fcTypeWork = UTW.fNrec
-              where instr(
-        upper(replace(replace(UM.fsfio,'.',''),' ','')),
-        upper(replace(replace('якимчук','.',''),' ','')),1)>=1
+
         order by UL.fwSemestr ASC
+        
+        
+

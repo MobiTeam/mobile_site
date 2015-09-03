@@ -51,7 +51,8 @@ select RowNum rn, P.fStrTabn tab, P.fFio fio, V.path prof, A.fRate, A.fCategory,
    --and  P.fFio$up like 'БУРЛУЦКИЙ ВЛАДИМИР ВЛАДИМИРОВИЧ' 
 order by flprizn
 ------------------------------------------------------------------------------------------ТЕЛЕФОНЫ И ИХ МЕСТА ОБИТАНИЯ(контакт информация)
-
+create or replace view v_cisu_teac_tel
+as
 SELECT ffio$UP fio, c1.fName dol, t.korp, t.kab, com.faddr phone, trim(com.femail) email, com.fnrec id, t.fcparent korp_id, t.fnrec aud_id
 FROM persons p inner join appointments a on a.fperson = p.fnrec 
                inner join catalogs c1 on a.fpost = c1.fnrec
@@ -68,6 +69,7 @@ FROM persons p inner join appointments a on a.fperson = p.fnrec
  where (A.fDisMissDate = 0 or trunc(to_oradate(A.fDisMissDate)) >= trunc(sysdate))
    and (A.fAppointDate = 0 or trunc(to_oradate(A.fAppointDate)) <= trunc(sysdate))
    and  A.fLprizn = 0       
+   
    and  p.ffio$UP LIKE 'БУРЛУЦКИЙ ВЛАДИМИР ВЛАДИМИРОВИЧ' 
    
 ---------------------------------------------------------------------------СОТРУДНИКИ ПО КАФЕДРЕ
@@ -100,11 +102,15 @@ select rownum rn, tab, fio, prof, frate, fcategory, datereg, fname, fbud, stavka
                    ORDER BY fio   
 ---------------------------------------------------------------КОТТЕДЖИ--остаток-дата обновления
 select * from Dol_kott 
-where lower(substr(fio,1,length(replace(:ffio,'.',''))))=lower(replace(:ffio,'.',''))
+    where instr(
+        upper(replace(replace(FIO,'',''),' ','')),
+        upper(replace(replace('Бурлуцкий Владимир','.',''),' ','')),1)>=1
 
----------------------------------------------------------------ОБЩЕЖИТИЯ
+---------------------------------------------------------------ОБЩЕЖИТИЯ комнаты
 select * from Dol_rab 
-where lower(substr(fio,1,length(replace('Якимчук Александр Васильевич','.',''))))=lower(replace('Якимчук Александр Васильевич','.',''))
+    where instr(
+        upper(replace(replace(FIO,'',''),' ','')),
+        upper(replace(replace('Бурлуцкий Владимир','.',''),' ','')),1)>=1
 
 -----------------------------------------------------------Список корпусов
 

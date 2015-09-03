@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
    require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
@@ -7,22 +7,25 @@
    $FFIO=$_POST['FFIO'];
    $GRUP=$_POST['GRUP'];
    
-   //Ïîëíîå íàçíà÷åíèå ñòóäåíòà
+   // $FFIO="Ð¯ÐºÐ¸Ð¼Ñ‡ÑƒÐº";
+   // $GRUP="1521";
+   
+   //ÐŸÐ¾Ð»Ð½Ð¾Ðµ Ð½Ð°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð°
 	$sql="Select * from v_stud_appoint_all ap  
-	where instr(
+where instr(
         upper(replace(replace(ap.FFIO,'.',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
-        and ap.grup like '%\'".$GRUP."\'%'";
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";"
+    and ap.grup like '%\'".$GRUP."\'%' ";
 	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	
 		$appoint_json = array();
-		$count = 0;
+	
 				
 		while(OCIFetch($s)){
 			
-			$appoint_json[$count] = array(
+			$appoint_json = array(
 									"fio" => ociresult($s,'FFIO'), 
 									"Tabnmb" => ociresult($s,'FTABNMB'), 
 									"Sex" => ociresult($s,'FSEX'), 
@@ -36,9 +39,9 @@
 									"Bud" => ociresult($s,'BUD'), 
 									"Degree" => ociresult($s,'FSDEGREE')
 								);
-			$count ++;
+	
 			
 		} 
 		
-	//print_r(utf8_json_encode($appoint_json));
+	print_r(utf8_json_encode($appoint_json));
 ?>
