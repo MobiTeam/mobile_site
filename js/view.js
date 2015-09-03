@@ -10,6 +10,7 @@ var view = {
 	$settings:$('.header_line_content_settings'),
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
+	$search_butt:$('.header_line_content_search'),
 	
 	setTitle : function(nameTitle){
 	
@@ -35,6 +36,7 @@ var view = {
 		this.$full_art.fadeOut(0);
 		this.$timetable.fadeOut(0);
 		this.$persons.fadeOut(0);
+		this.$search_butt.fadeOut(0);
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -176,7 +178,6 @@ function loadNewsBlock(){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	view.$second_menu.fadeIn(0); 
-	
 	saveAndShow();
 	
 }
@@ -187,6 +188,7 @@ function loadTimetable(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[5]);
 	view.displayMenuIcon();
+	view.$search_butt.fadeIn(0);
 }
 
 function loadPersonBlock(){

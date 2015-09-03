@@ -364,6 +364,16 @@ html, body{
 	display:none;
 }
 
+.timetable_box_info{
+	background:white;
+	padding:7px;
+	border-radius:3px;
+}
+
+.timetable_box_form{
+	float:left;
+}
+
 .person_box{
 	margin:82px 15px 0px 15px; 
 	display:none;

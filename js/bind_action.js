@@ -72,6 +72,13 @@
 		
 	});
 	
+	$('.header_line_content_search').click(function(){
+		if($(this).hasClass('opened_input')){
+			$(this).removeClass('opened_input');
+		} else {
+			$(this).addClass('opened_input');
+		}
+	});
 	
 	$('.header_line_addition_menu_item').click(function(){
 		$('.header_line_addition_menu_item').each(function(){
