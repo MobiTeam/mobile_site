@@ -1,9 +1,26 @@
+// открытие/закрытие фона заглушки
+function opBl(){ 
+	$('.overlay').css('display', 'block');
+}
+
+function clBl(){
+	$('.overlay').css('display', 'none');
+}
+
+function opMenBl(){ 
+	$('.menuoverlay').css('display', 'block');
+}
+
+function clMenBl(){
+	$('.menuoverlay').css('display', 'none');
+}
+
 //загрузка с сервера [boolean, string, string, object]
 function myajax(async, type, url, data){ 
 	
 	var jsonObj;
 	opBl();
-	$.ajax({
+		$.ajax({
 		async: async,
 		type: type,
 		url:url,
@@ -27,7 +44,7 @@ function myajax(async, type, url, data){
 		}
 	});
 	
-	return jsonObj;
+	return jsonObj; 
 		
 }
 
@@ -63,23 +80,6 @@ function showTooltip(toolText, duration){
 		$tooltip.fadeOut(200);
 	}, dur);
 	
-}
-
-// открытие/закрытие фона заглушки
-function opBl(){ 
-	$('.overlay').css('display', 'block');
-}
-
-function clBl(){
-	$('.overlay').css('display', 'none');
-}
-
-function opMenBl(){ 
-	$('.menuoverlay').css('display', 'block');
-}
-
-function clMenBl(){
-	$('.menuoverlay').css('display', 'none');
 }
 
 // сохранение JSON в localStorage/sessionStorage
@@ -202,4 +202,39 @@ function clearCurrSidebarItem(){
 
 function tagMenuItem(className){
 	$('.' + className).addClass('sidebar_menu_block_menu_item_curr');
+}
+
+function showCurrentWeek(){
+	
+	var dt = new Date();
+	var currDay = dt.getDay();
+	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
+	
+	dt.setDate(dt.getDate() - diff);
+	
+	for(var i = 0; i < 6; i++){
+		
+		var className = currDay > dt.getDay() ? 'greyTag' 
+											  : currDay == dt.getDay() ? 'redTag'
+											  : '';
+		
+	    var curr_date = dt.getDate();
+		var curr_day = dt.getDay();
+		var curr_month = dt.getMonth() + 1;
+		var curr_year = dt.getFullYear();
+		$('.dt' + (i + 1)).attr('date_quer', ( curr_date <= 9 ? '0' + curr_date : curr_date ) + '.' + ( curr_month <= 9 ? '0' + curr_month : curr_month ) + '.' + curr_year )
+		                  .addClass(className)
+						  .html('<span>' + curr_date + ' ' + dateNames[curr_month + 5] + '</span><br><span>' + dateNames[curr_day - 1] + '</span>');
+		dt.setDate(dt.getDate() + 1);		
+		
+	}
+	
+	if(dt.getDay == 0){
+		//showNextWeek()
+	} else {
+		//
+	}
+	
+	
+	
 }

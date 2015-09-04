@@ -11,6 +11,8 @@ var view = {
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
 	$search_butt:$('.header_line_content_search'),
+	$form:$('.timetable_box_form'),
+	$dateline: $('.header_line_addition_datewr'),
 	
 	setTitle : function(nameTitle){
 	
@@ -37,6 +39,9 @@ var view = {
 		this.$timetable.fadeOut(0);
 		this.$persons.fadeOut(0);
 		this.$search_butt.fadeOut(0);
+		this.$dateline.fadeOut(0);
+		this.$title.css('display', 'block');
+		this.$form.css('display', 'none');
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -189,6 +194,8 @@ function loadTimetable(){
 	view.setTitle(stringNames[5]);
 	view.displayMenuIcon();
 	view.$search_butt.fadeIn(0);
+	view.$dateline.fadeIn(0);
+	showCurrentWeek();
 }
 
 function loadPersonBlock(){
