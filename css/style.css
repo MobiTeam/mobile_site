@@ -419,6 +419,7 @@ html, body{
 	background:white;
 	padding:7px;
 	border-radius:3px;
+	display:none;
 }
 
 .timetable_box_form{

@@ -229,12 +229,22 @@ function showCurrentWeek(){
 		
 	}
 	
-	if(dt.getDay == 0){
-		//showNextWeek()
-	} else {
-		//
-	}
-	
-	
-	
+}
+
+function issetTimetable(){
+	return localStorage.timetable != undefined;
+}
+
+function loadTimetableInf(){
+	$('.timetable_box_info').fadeOut(100);
+	//спарсить номер группы
+	console.log(myajax(false, 'POST', 'oracle/database_timetable.php'));
+}
+
+function issetUserGroup(){
+	return localStorage.user_inf == undefined && sessionStorage.user_inf == undefined;
+}
+
+function showTimetableAlert(){
+	$('.timetable_box_info').fadeIn(100);
 }

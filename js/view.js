@@ -196,6 +196,14 @@ function loadTimetable(){
 	view.$search_butt.fadeIn(0);
 	view.$dateline.fadeIn(0);
 	showCurrentWeek();
+	if(!issetTimetable()){
+		if(issetUserGroup()){
+			loadTimetableInf();
+		} else {
+			showTimetableAlert();
+		}
+		
+	}
 }
 
 function loadPersonBlock(){
