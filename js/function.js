@@ -232,7 +232,7 @@ function showCurrentWeek(){
 }
 
 function issetTimetable(){
-	return localStorage.timetable != undefined;
+	return sessionStorage.timetable != undefined;
 }
 
 function loadTimetableInf(){
@@ -247,4 +247,92 @@ function issetUserGroup(){
 
 function showTimetableAlert(){
 	$('.timetable_box_info').fadeIn(100);
+}
+
+function closeTimetableAlert(){
+	$('.timetable_box_info').fadeOut(100); 
+}
+
+function slideInput(){
+	$target = $('.header_line_content_search');
+	$target.addClass('opened_input');
+	$('.timetable_box_form').animate({
+		width: '60%'
+	}, 150).css('display', 'block');
+	view.setTitle('');
+}
+
+function closeInput(){
+	$target = $('.header_line_content_search');
+	$target.removeClass('opened_input');
+			
+	$('.timetable_box_form').animate({
+		width: '0'
+	}, 150, function(){
+		$(this).css('display', 'none');
+		view.$title.fadeIn();
+		if(location.hash == '#timetable'){
+			if(sessionStorage.query != undefined){
+				view.setTitle('"' + (sessionStorage.query).substr(0,8) + '..."');
+			} else view.setTitle(stringNames[5]);
+		}
+		
+	});
+}
+
+function displayTimetable(date){
+	
+	date = getCurrentDate(date);
+						 
+	if(date != undefined){
+		
+		closeTimetableAlert();
+		var timetable = JSON.parse(sessionStorage.timetable);
+		
+		
+		if (timetable[date.replace(/\./g,'')] != undefined){
+			timetableHTML = '<table class="timetable_style">';
+			var firstNumLesson = 0;		
+		
+			for(var i = 1, numLession = 6; i <= numLession; i++) {
+				
+				var item = timetable[date.replace(/\./g,'')][firstNumLesson];
+							
+				if (+item.PAIR == i) {
+					timetableHTML += '<tr class="timetable_tr">\
+										<td class="date_td">' + numLessonsArr[i] + '</td>\
+										<td>\
+										<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '-' + item.KORP + '</span><br>\
+										<span class="timetable_fio">' + item.TEAC_FIO + '</span><br>\
+										</td>\
+									  </tr>';
+					if (firstNumLesson < timetable[date.replace(/\./g,'')].length - 1) firstNumLesson++;				  
+				} else {
+					timetableHTML += '<tr class="timetable_tr">\
+										<td class="date_td">' + numLessonsArr[i] + '</td>\
+										<td></td>\
+									  </tr>';
+				}
+			}
+		
+		timetableHTML += '</table>';
+		
+		} else {
+			timetableHTML = 'Занятий нет.';
+		}
+       
+		$('.timetable_lessons').html(timetableHTML).css('display','none').fadeIn(120);
+		
+	}						 
+	
+}
+
+function getCurrentDate(date){
+	$currDate = $('.redTag');
+	$userSelectDate = $('.greenTag');
+	console.log($currDate.attr('date_quer'));
+	return date = date != undefined ? date : ($currDate.size() > 0) 
+							 ? $currDate.attr('date_quer') : !!$userSelectDate.size() 
+							 ? $userSelectDate.attr('date_quer') : null;
 }

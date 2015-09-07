@@ -1,3 +1,6 @@
+//экран мобильного приложения представлен в виде объекта view
+//свойства объекта - div и span блоки
+//методы объекта - функции отображающие или скрывающие определенные div или span блоки 
 var view = {
 	
 	$button:$('.header_line__content_button'),
@@ -42,6 +45,7 @@ var view = {
 		this.$dateline.fadeOut(0);
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
+		closeInput();
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -54,7 +58,9 @@ var view = {
 			location.hash = hash;
 		}    
 	},
-
+	//роутинг между экранами приложения реализован при помощи location.hash
+	//в зависимости от hash открывается определенный экран приложения
+	//при каждом изменении location.hash происходит перерисовка экрана
 	loadPage:function(){
 		
 		this.closeAll();
@@ -193,15 +199,20 @@ function loadTimetable(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[5]);
 	view.displayMenuIcon();
-	view.$search_butt.fadeIn(0);
+	view.$search_butt.fadeIn(0).removeClass('opened_input');
 	view.$dateline.fadeIn(0);
 	showCurrentWeek();
 	if(!issetTimetable()){
+		
 		if(issetUserGroup()){
 			loadTimetableInf();
 		} else {
 			showTimetableAlert();
 		}
+		
+	} else {
+		
+		displayTimetable();
 		
 	}
 }

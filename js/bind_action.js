@@ -4,6 +4,14 @@
 		view.loadPage();
 	});
 	
+	$('body').click(function(event){
+	    if (event.target.className != 'timetable_box_input' && location.hash == '#timetable') {
+		   closeInput();
+		}
+	})
+	
+	
+	
 	$( window ).on( "resize", function(){
 	
 		$menu_bl = $('.sidebar_menu_block');
@@ -38,7 +46,10 @@
 	
 	$('.timetable_box_form').on("submit", function(event){
 		event.preventDefault();
-		console.log(myajax(false, 'POST', 'oracle/database_timetable.php', $(this).serialize()));
+		sessionStorage.query = $('.timetable_box_input').val();
+		setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', $(this).serialize()), false);
+		displayTimetable();
+		closeInput();
 	});
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
@@ -74,35 +85,25 @@
 	
 	$('.header_line_content_search').click(function(){
 		if($(this).hasClass('opened_input')){
-			$(this).removeClass('opened_input');
 			
-			$('.timetable_box_form').animate({
-				width: '0'
-			}, 150, function(){
-				$(this).css('display', 'none');
-				 view.$title.fadeIn();
-				view.setTitle(stringNames[5]);
-			});
+			$('.timetable_box_submit').click();
 			
 		} else {
-			$(this).addClass('opened_input');
-			$('.timetable_box_form').animate({
-				width: '60%'
-			}, 150).css('display', 'block');
-			view.setTitle('');
+			slideInput();
 		}
 	});
 	
 	$('.date_item').click(function(){
-		
-			
+					
 		$('.date_item').each(function(){
 			$(this).removeClass('greenTag');
 		}); 
 		
 		$(this).addClass('greenTag');
 		
-		 
+		if(sessionStorage.timetable != undefined){
+			displayTimetable($(this).attr('date_quer'));
+		}  
 	
 	})
 	

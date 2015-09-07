@@ -58,13 +58,14 @@
 						
 						<span class="header_line__content_title"></span>
 						
-						<div class="header_line_content_search">
+						<div class="header_line_content_search" onclick="event.stopPropagation();">
 						  
 						</div>
 						
 						<div class="header_line_search_input">
 							<form class="timetable_box_form" method="post" action="">
 								<input class="timetable_box_input" name="timetable_query" placeholder="Поиск расписания..." type="text" required="">
+								<input style="display:none;" onclick="event.stopPropagation();" type="submit" class="timetable_box_submit" />
 							</form>
 						</div>
 						
@@ -81,6 +82,7 @@
 					</div>
 					
 					<div class="header_line_addition_datewr">
+						
 						<div class="header_line_addition_data">
 							<div class="date_item dt1"></div>
 							<div class="date_item dt2"></div>
@@ -89,6 +91,7 @@
 							<div class="date_item dt5"></div>
 							<div class="date_item dt6"></div>
 						</div>
+						
 					</div>	
 					
 					
@@ -110,6 +113,11 @@
 					<div class="timetable_box_info contr_shadow">
 						Мы не смогли определить номер вашей группы. Для просмотра расписания необходимо воспользоваться поиском и ввести номер группы, ФИО преподавателя или кафедру.
 					</div>
+					
+					<div class="timetable_lessons">
+					
+					</div>
+					
 				</div>
 				
 				<div class="person_box">
