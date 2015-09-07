@@ -90,6 +90,7 @@ html, body{
 
 .header_line__content_title{
 	line-height:54px;
+	float:left;
 }
 
 .header_line__content_button{
@@ -129,7 +130,7 @@ html, body{
 	background:url('../img/search_icon.png');
 	background-repeat:no-repeat;
 	background-position:center center;
-	display:none;
+	display:inline-block;
 }
 
 .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active{
@@ -157,14 +158,56 @@ html, body{
 	display:none;
 }
 
-.header_line_addition_menu{
+.header_line_addition_datewr{
+	background: white;
+	display:none;
+	border-bottom:1px solid #ababab;
+}
+
+
+
+.header_line_addition_menu, .header_line_addition_data{
     max-width:600px;
-	height:46px;
 	line-height:46px;
 	text-align:center;
 	margin:0 auto;
 	font-size:14px;
 	/* background:#5677fc; */
+}
+
+.header_line_addition_data{
+	line-height:0px;
+	
+}
+
+.date_item{
+	color:black;
+	display:inline-block;
+	padding:4px 1%;
+	font-family:"RobotoRegular", sans-serif;
+	/* max-width:46px; */
+	/* width:15%; */
+}
+
+.date_item:active{
+	opacity:1;
+}
+
+.greyTag{
+	color:#636476;
+}
+
+.redTag{
+	color:#108710;
+}
+
+.greenTag{
+	color:white!important;
+	background:#5677fc!important;
+}
+
+.date_item span{
+	line-height:20px;
 }
 
 .authorisation_box{
@@ -194,6 +237,14 @@ html, body{
 	margin:15px auto;
 	padding:0px 10px;
 	
+}
+
+.timetable_box_input{
+	margin:0px;
+	width:100%;
+	box-sizing:border-box;
+	margin-top:12px;
+	height:30px;
 }
 
 .authorisation_box_passtext{
@@ -360,8 +411,22 @@ html, body{
 }
 
 .timetable_box{
-	margin:82px 15px 0px 15px; 
+	margin:128px 15px 0px 15px; 
 	display:none;
+}
+
+.timetable_box_info{
+	background:white;
+	padding:7px;
+	border-radius:3px;
+	display:none;
+}
+
+.timetable_box_form{
+	float: right;
+	width: 0%;
+    max-width: 300px;
+	display: none;
 }
 
 .person_box{

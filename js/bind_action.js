@@ -72,6 +72,40 @@
 		
 	});
 	
+	$('.header_line_content_search').click(function(){
+		if($(this).hasClass('opened_input')){
+			$(this).removeClass('opened_input');
+			
+			$('.timetable_box_form').animate({
+				width: '0'
+			}, 150, function(){
+				$(this).css('display', 'none');
+				 view.$title.fadeIn();
+				view.setTitle(stringNames[5]);
+			});
+			
+		} else {
+			$(this).addClass('opened_input');
+			$('.timetable_box_form').animate({
+				width: '60%'
+			}, 150).css('display', 'block');
+			view.setTitle('');
+		}
+	});
+	
+	$('.date_item').click(function(){
+		
+			
+		$('.date_item').each(function(){
+			$(this).removeClass('greenTag');
+		}); 
+		
+		$(this).addClass('greenTag');
+		
+		 
+	
+	})
+	
 	
 	$('.header_line_addition_menu_item').click(function(){
 		$('.header_line_addition_menu_item').each(function(){

@@ -10,6 +10,9 @@ var view = {
 	$settings:$('.header_line_content_settings'),
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
+	$search_butt:$('.header_line_content_search'),
+	$form:$('.timetable_box_form'),
+	$dateline: $('.header_line_addition_datewr'),
 	
 	setTitle : function(nameTitle){
 	
@@ -35,6 +38,10 @@ var view = {
 		this.$full_art.fadeOut(0);
 		this.$timetable.fadeOut(0);
 		this.$persons.fadeOut(0);
+		this.$search_butt.fadeOut(0);
+		this.$dateline.fadeOut(0);
+		this.$title.css('display', 'block');
+		this.$form.css('display', 'none');
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -176,7 +183,6 @@ function loadNewsBlock(){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	view.$second_menu.fadeIn(0); 
-	
 	saveAndShow();
 	
 }
@@ -187,6 +193,17 @@ function loadTimetable(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[5]);
 	view.displayMenuIcon();
+	view.$search_butt.fadeIn(0);
+	view.$dateline.fadeIn(0);
+	showCurrentWeek();
+	if(!issetTimetable()){
+		if(issetUserGroup()){
+			loadTimetableInf();
+		} else {
+			showTimetableAlert();
+		}
+		
+	}
 }
 
 function loadPersonBlock(){
