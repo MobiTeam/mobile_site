@@ -12,7 +12,7 @@
 				   or teac_caf like '%" . $query . "%'
                      or gr_num like '%" . $query . "%'
                         or aud like '%" . $query . "%'
-						order by datezan, GR_NUM, PAIR, TEAC_FIO";
+						order by datezan, GR_NUM, PAIR, SUBGRUP, TEAC_FIO";
 		 
 	$s = OCIParse($c, $sql);
 	OCIExecute($s, OCI_DEFAULT);

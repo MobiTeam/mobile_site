@@ -207,6 +207,7 @@ function loadTimetable(){
 		if(issetUserGroup()){
 			loadTimetableInf();
 		} else {
+			$('.timetable_lessons').html('');
 			showTimetableAlert();
 		}
 		

@@ -10,7 +10,14 @@
 		}
 	})
 	
-	
+	$('.timetable_lessons').click(function(event){
+		if(event.target.className == 'found_by_sel_text') {
+			loadTimetableInf(event.target.innerHTML);
+			displayTimetable();
+			sessionStorage.query = event.target.innerHTML;
+			view.setTitle(sessionStorage.query);
+		}
+	})
 	
 	$( window ).on( "resize", function(){
 	
@@ -30,9 +37,7 @@
 		} else if($(this).hasClass('arr_button')){
 			
 			if(location.hash == '#auth'){
-				alert('kavabanga');
-			} else {
-				alert('no');
+				if (confirm('Вы действительно хотите закрыть приложение?')) location.href = 'http://google.com';
 			}
 			
 	

@@ -235,10 +235,10 @@ function issetTimetable(){
 	return sessionStorage.timetable != undefined;
 }
 
-function loadTimetableInf(){
+function loadTimetableInf(dataQuery){
 	$('.timetable_box_info').fadeOut(100);
 	//спарсить номер группы
-	console.log(myajax(false, 'POST', 'oracle/database_timetable.php'));
+	setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false));
 }
 
 function issetUserGroup(){
@@ -273,7 +273,7 @@ function closeInput(){
 		view.$title.fadeIn();
 		if(location.hash == '#timetable'){
 			if(sessionStorage.query != undefined){
-				view.setTitle('"' + (sessionStorage.query).substr(0,8) + '..."');
+				view.setTitle('<span class="full_sentense">По запросу:</span> "' + (sessionStorage.query).substr(0,8) + '..."');
 			} else view.setTitle(stringNames[5]);
 		}
 		
@@ -293,33 +293,56 @@ function displayTimetable(date){
 		if (timetable[date.replace(/\./g,'')] != undefined){
 			timetableHTML = '<table class="timetable_style">';
 			var firstNumLesson = 0;		
+			var twoLessonsInOneTime = false;
 		
 			for(var i = 1, numLession = 6; i <= numLession; i++) {
 				
 				var item = timetable[date.replace(/\./g,'')][firstNumLesson];
-							
+					
 				if (+item.PAIR == i) {
-					timetableHTML += '<tr class="timetable_tr">\
-										<td class="date_td">' + numLessonsArr[i] + '</td>\
-										<td>\
+					if (firstNumLesson < timetable[date.replace(/\./g,'')].length - 1){
+						firstNumLesson++;
+						if (+item.PAIR == timetable[date.replace(/\./g,'')][firstNumLesson]['PAIR']){
+							i--;
+							twoLessonsInOneTime = true;
+						} 
+					}		
+					
+					if(twoLessonsInOneTime == undefined){
+						timetableHTML += '<tr class="timetable_tr">\
+										<td class="' + getColorTypeLesson(item.VID) + '" >\
 										<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '-' + item.KORP + '</span><br>\
-										<span class="timetable_fio">' + item.TEAC_FIO + '</span><br>\
+										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span><br>\
+										<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
 										</td>\
 									  </tr>';
-					if (firstNumLesson < timetable[date.replace(/\./g,'')].length - 1) firstNumLesson++;				  
+						twoLessonsInOneTime = false;			  
+					} else {
+						var num = twoLessonsInOneTime ? i+1 : i;
+						timetableHTML += '<tr class="timetable_tr">\
+										<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="2"' : '') + '>' + numLessonsArr[num] + '</td>\
+										<td class="' + getColorTypeLesson(item.VID) + '">\
+										<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span><br>\
+										<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
+										</td>\
+									  </tr>';						
+					}
+					
+					twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;			
 				} else {
 					timetableHTML += '<tr class="timetable_tr">\
 										<td class="date_td">' + numLessonsArr[i] + '</td>\
 										<td></td>\
 									  </tr>';
 				}
+				
 			}
 		
 		timetableHTML += '</table>';
 		
 		} else {
-			timetableHTML = 'Занятий нет.';
+			timetableHTML = '<span class="no_lessons">Занятий нет.</span>';
 		}
        
 		$('.timetable_lessons').html(timetableHTML).css('display','none').fadeIn(120);
@@ -332,7 +355,32 @@ function getCurrentDate(date){
 	$currDate = $('.redTag');
 	$userSelectDate = $('.greenTag');
 	console.log($currDate.attr('date_quer'));
-	return date = date != undefined ? date : ($currDate.size() > 0) 
-							 ? $currDate.attr('date_quer') : !!$userSelectDate.size() 
-							 ? $userSelectDate.attr('date_quer') : null;
+	return date = date != undefined ? date : !!$userSelectDate.size() 
+							 ? $userSelectDate.attr('date_quer') : !!$currDate.size() 
+							 ? $currDate.attr('date_quer') : null;
+}
+
+function getColorTypeLesson(typeLesson) {
+	switch(typeLesson.toLowerCase()) {
+		case 'лек':
+			return 'green_td_tag';
+		break;
+		
+		case 'у':
+		case 'п':
+		case 'лб':
+		case 'пр':
+		case 'консул':
+		case 'кст':
+			return 'orange_td_tag';
+		break;
+		
+		case 'кп':
+		case 'зачет':
+		case 'тест':
+		case 'кр':
+		case 'экзам':
+			return 'red_td_tag';
+		break;
+	}
 }

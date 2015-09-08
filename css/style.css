@@ -417,7 +417,7 @@ html, body{
 }
 
 .timetable_box{
-	margin:109px 15px 0px 15px; 
+	margin:118px 15px 0px 15px; 
 	display:none;
 }
 
@@ -426,6 +426,7 @@ html, body{
 	padding:7px;
 	border-radius:3px;
 	display:none;
+	margin-top:10px;
 }
 
 .timetable_box_form{
@@ -634,11 +635,15 @@ html, body{
 	color:#242e8d;
 	font-family:"RobotoMedium", sans-serif;
 	vertical-align:middle;
+	text-align:center;
+	width:60px;
+	background:#F5F5FF!important;
 }
 
 .timetable_tr td{
-	border-bottom:1px solid #c6c6c6;
-	padding:5px;
+	border:1px solid #c6c6c6;
+	padding:6px;
+	background:white;
 }
 
 .timetable_disp{
@@ -649,10 +654,46 @@ html, body{
 	margin: 0 auto;
 	width:100%;
 	max-width:500px;
+	border-collapse: collapse;
+	margin-bottom:10px;
 }
 
 .timetable_fio{
 	
 }
 
+.full_sentense{
+	display:none;
+}
+
+.no_lessons{
+	max-width:500px;
+	width:100%;
+	display:block;
+	margin:0 auto;
+}
+
+.green_td_tag{
+	border-left:3px solid green!important;
+	background:#F5FFFD!important;
+}
+
+.orange_td_tag{
+	border-left:3px solid orange!important;
+	background:#FFFCF5!important;
+}
+
+.red_td_tag{
+	border-left:3px solid red!important;
+	background:#FFF5F5!important;
+}
+
+.found_by_sel_text{
+	color:blue!important;
+	text-decoration:underline;
+}
+
+.found_by_sel_text:active{
+	text-decoration:none;
+}
 
