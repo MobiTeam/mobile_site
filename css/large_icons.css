@@ -20,6 +20,14 @@
 	   background-size: 24px 24px;
 	}
 	
+	.opened_input{
+		background:url('../img/icon_done@2x.png');
+		background-size: 24px 24px;
+		background-position:center center;
+		background-repeat: no-repeat;
+	}
+
+	
 	.previos_info_circle{
 	   background-image: url('../img/student_hat@2x.jpg');
 	   background-size: 110px 82px;

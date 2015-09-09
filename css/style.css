@@ -133,6 +133,12 @@ html, body{
 	display:inline-block;
 }
 
+.opened_input{
+	background:url('../img/icon_done.png');
+	background-repeat: no-repeat;
+	background-position:center center;
+}
+
 .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active{
 	background-color:#3266d5;
 } 
@@ -411,7 +417,7 @@ html, body{
 }
 
 .timetable_box{
-	margin:128px 15px 0px 15px; 
+	margin:118px 15px 0px 15px; 
 	display:none;
 }
 
@@ -420,6 +426,7 @@ html, body{
 	padding:7px;
 	border-radius:3px;
 	display:none;
+	margin-top:10px;
 }
 
 .timetable_box_form{
@@ -623,3 +630,70 @@ html, body{
 .timetable_item{
 	background:url('../img/time_icon.png') no-repeat left center;
 }
+
+.date_td{
+	color:#242e8d;
+	font-family:"RobotoMedium", sans-serif;
+	vertical-align:middle;
+	text-align:center;
+	width:60px;
+	background:#F5F5FF!important;
+}
+
+.timetable_tr td{
+	border:1px solid #c6c6c6;
+	padding:6px;
+	background:white;
+}
+
+.timetable_disp{
+	font-family:"RobotoRegular", sans-serif;
+}
+
+.timetable_style{
+	margin: 0 auto;
+	width:100%;
+	max-width:500px;
+	border-collapse: collapse;
+	margin-bottom:10px;
+}
+
+.timetable_fio{
+	
+}
+
+.full_sentense{
+	display:none;
+}
+
+.no_lessons{
+	max-width:500px;
+	width:100%;
+	display:block;
+	margin:0 auto;
+}
+
+.green_td_tag{
+	border-left:3px solid green!important;
+	background:#F5FFFD!important;
+}
+
+.orange_td_tag{
+	border-left:3px solid orange!important;
+	background:#FFFCF5!important;
+}
+
+.red_td_tag{
+	border-left:3px solid red!important;
+	background:#FFF5F5!important;
+}
+
+.found_by_sel_text{
+	color:blue!important;
+	text-decoration:underline;
+}
+
+.found_by_sel_text:active{
+	text-decoration:none;
+}
+
