@@ -53,7 +53,7 @@ order by  F.fName, C.fName||' ('||C.fCode||')', G.fName, fFio
 
 ------------------------------------------------------------------------ќбщежити€
 select * from Dol_stud
-where lower(substr(fio,1,length(replace('√усаков','.',''))))=lower(replace('√усаков','.',''))
+where lower(substr(fio,1,length(replace('√усаков','.',''))))=lower(replace('якимчук','.',''))
  
 -----------------------------------------------------------------------ќбучение 
 select * from Dol 
@@ -62,7 +62,7 @@ where lower(substr(fio,1,length(replace('ѕетроченко ¬ладислав ёрьевич','.','')))
 -----------------------------------------------------------------—писок студентов по группе
 
 select FFIO,FUNS,FSDEPCODE,FSPOST,FCODEPROF,FSFINSOURCENAME,FSFACULTY,FSDEGREE from U_student
-where FSDEPCODE='1551б'
+where FSDEPCODE='1521б'
 and to_oradate(fappdate)<=sysdate 
 order by ffio
 
@@ -78,13 +78,14 @@ select US.fFio, US.fsFaculty, US.fsPost, US.fsDepcode, US.fsFinsourceName, fVidO
        sum(decode(fMes, 10, fSumma, 0)) M_10, sum(decode(fMes, 11, fSumma, 0)) M_11, sum(decode(fMes, 12, fSumma, 0)) M_12,
        sum(fSumma) M_13
   from (
-        select SVO.fVidOpl, K.fnVidOpl,  SVO.fMes, replace(SVO.fSumma,'.',',') fSumma, SVO.ftPerson
+        select SVO.fVidOpl,K.fnVidOpl,  SVO.fMes, replace(SVO.fSumma,'.',',') fSumma, SVO.ftPerson
+    
           from SumVidOp SVO inner join Persons      P on SVO.ftPerson = P.fNrec
                             inner join U_Student    U on U.fcPersons  = P.fNrec
                             inner join KlVidOpl     K on SVO.fVidOpl  = K.fVidOplP
          where SVO.fSumma <> 0
            and SVO.fYearK = to_char(sysdate,'YYYY')
-          and lower(substr(P.ffio,1,length(replace('якимчук јлександр ¬асильевич','.',''))))=lower(replace('якимчук јлександр ¬асильевич','.',''))
+        and lower(substr(P.ffio,1,length(replace('якимчук јлександр ¬асильевич','.',''))))=lower(replace('якимчук јлександр ¬асильевич','.',''))
 
         ) S, U_Student US
  where S.ftPerson = US.fcPersons

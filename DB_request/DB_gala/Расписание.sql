@@ -7,7 +7,7 @@ Where  (trunc(sysdate,'D')-10)<=gl.datezan
 ----------------------------------------------
  grant select on mv_cisu_timetable_all to mobile;
 ------------------------------------------------------------------Расписание все
-create materialized view mv_cisu_timetable_all
+create materialized view mv_cisu_timetable
   PCTFREE     10
   MAXTRANS    255
   TABLESPACE  users
@@ -20,7 +20,6 @@ LOGGING
 NOPARALLEL
 BUILD IMMEDIATE 
 REFRESH COMPLETE START WITH SYSDATE NEXT SYSDATE + 1/24  
-
 
 as
 Select tm.oid teac_OID , tm.fio teac_FIO,ch."Name" teac_caf,gl.discipline,gl.grup gr_num,gl.subgrup,gl.course gr_course,fc."Name" gr_ins,gl.datezan,to_char(gl.datezan,'Day') dayweek,gl.pair,gl.vid,gl.aud,gl.korp from gala_rasp."Lecturer" tm
@@ -50,3 +49,14 @@ Select * from gala_site.timetable gl
 Where  (trunc(sysdate,'D')-14)<=gl.datezan 
 
 Select sysdate from dual
+
+
+Select tm.oid teac_OID , tm.fio teac_FIO,ch."Name" teac_caf,gl.discipline,gl.grup gr_num,gl.subgrup,gl.course gr_course,fc."Name" gr_ins,gl.datezan,to_char(gl.datezan,'Day') dayweek,gl.pair,gl.vid,gl.aud,gl.korp from gala_rasp."Lecturer" tm
+INNER JOIN gala_site.timetable gl on gl.teacher=tm.fio
+INNER JOIN gala_rasp."Faculty" fc on fc.OID=gl.faculty
+INNER JOIN gala_rasp."Chair" ch on ch.OID=tm."Chair"
+--INNER JOIN gala_rasp."Group" gr on gr."Name"=gl.grup
+Where  (trunc(sysdate,'D')-30)<=gl.datezan 
+and fc.OID <>'21'
+
+Select * from budget.mv_cisu_timetable

@@ -6,13 +6,20 @@ grant select on gala_rasp."Chair" to mobile;
 
 ------------------- Сделать Гранты
 grant select on Budget.v_cisu_stud_dol to mobile;
-
+/
 grant select on Budget.v_cisu_stud_education to mobile;
-
+/
 grant select on budget.v_cisu_teac_kott to mobile;
-
+/
 grant select on budget.v_cisu_teac_room to mobile;
+-----------------------------------------------------
+/
+grant select on budget.v_cisu_teac_history_app to mobile;
+/
+grant select on budget.v_cisu_teac_holiday to mobile;
+/
 
+grant select on budget.v_cisu_stud_dol to mobile;
 
 ----------------------------------------------------------------------------------CТАВКИ ПРЕПОДАВАТЕЛЯ(Кадровая информация о преподавателе)
 create materialized view mv_cisu_teach_appoint
@@ -29,6 +36,7 @@ NOPARALLEL
 BUILD IMMEDIATE 
 REFRESH COMPLETE START WITH TO_DATE('12-5-2015 5:00 PM','DD-MM-YYYY HH12:MI PM') NEXT SYSDATE + 6/24  
 as
+
 select RowNum rn, P.fStrTabn tab, P.fFio fio, V.path prof, A.fRate, A.fCategory, to_oradate(A.fAppointDate) datereg,P.fSex,to_oradate(P.fBornDate) fBornDate,
        D.fName, NVL(B.fName,'Не указан') fBud, S.fCategory stavka,
        S.fcInf3, A.fcRef3, K.fNaiKat, 
@@ -72,7 +80,7 @@ FROM persons p inner join appointments a on a.fperson = p.fnrec
    
    and  p.ffio$UP LIKE 'БУРЛУЦКИЙ ВЛАДИМИР ВЛАДИМИРОВИЧ' 
    
----------------------------------------------------------------------------СОТРУДНИКИ ПО КАФЕДРЕ
+---------------------------------------------------------------------------СОТРУДНИКИ ПО КАФЕДРЕ-------------------------
 select rownum rn, tab, fio, prof, frate, fcategory, datereg, fname, fbud, stavka, fcinf3, fcref3, fnaikat, decode(flprizn,0,'Основное','Внутренее совместительство') prizn,t.ftarif 
        from tarstav t INNER JOIN
             (select 
@@ -112,35 +120,51 @@ select * from Dol_rab
         upper(replace(replace(FIO,'',''),' ','')),
         upper(replace(replace('Бурлуцкий Владимир','.',''),' ','')),1)>=1
 
------------------------------------------------------------Список корпусов
-
-select fnrec, fname from Catalogs where fcparent = '800100000000173C'
-
-
------------------------------------------------------------------------------------ОТПУСК СОТРУДНИКа
-
-select count(*)     over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg))) cnt_1,
-       row_number() over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg))                                                order by P.fFio, P.fStrTabN, A.fLprizn, extract (year from to_oradate(DPO.fPlanYearBeg)) desc, DPO.fPlanYearBeg desc) rn_1,
-       count(*)     over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg)), DPO.fWorkYearBeg, DPO.fWorkYearEnd) cnt_2,
-       row_number() over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg)), DPO.fWorkYearBeg, DPO.fWorkYearEnd           order by P.fFio, P.fStrTabN, A.fLprizn, extract (year from to_oradate(DPO.fPlanYearBeg)) desc, DPO.fPlanYearBeg desc) rn_2,
-       count(*)     over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg)), DPO.fWorkYearBeg, DPO.fWorkYearEnd, PO.fNrec) cnt_3,
-       row_number() over (partition by A.fStrTabN, extract (year from to_oradate(DPO.fPlanYearBeg)), DPO.fWorkYearBeg, DPO.fWorkYearEnd, PO.fNrec order by P.fFio, P.fStrTabN, A.fLprizn, extract (year from to_oradate(DPO.fPlanYearBeg)) desc, DPO.fPlanYearBeg desc) r3_2,
-       P.fFio, P.fStrTabN, A.fStrTabN, A.fLprizn, extract (year from to_oradate(DPO.fPlanYearBeg)) God, 
-       to_oradate(DPO.fWorkYearBeg) fWorkYearBeg, to_oradate(DPO.fWorkYearEnd) fWorkYearEnd,
-       to_oradate(DPO.fPlanYearBeg) fPlanYearBeg, to_oradate(DPO.fPlanYearEnd) fPlanYearEnd,
-       DPO.fDuration, K.fnOtpus, TD.fDocNmb, to_oradate(TD.fDocDate) fDocDate, TD.fwStatus,
-       F.fNrec, V.fNrec
-  from PlanOtpusk PO inner join DetPlanOtpusk DPO on DPO.fcPlanOtpus =  PO.fNrec
-                     inner join Persons         P on DPO.fPerson     =   P.fNrec
-                     inner join KlOtpusk        K on DPO.fVacType    =   K.fkOtpus
-                left outer join Appointments    A on DPO.fAppoint    =   A.fNRec
-                left outer join Vacations       V on V.fcDetPlanOtp  = DPO.fNrec
-                left outer join FactOtpusk      F on V.fcFactOtpusk  =   F.fNrec
-                left outer join TitleDoc       TD on F.fcPrikaz      =  TD.fNrec
-                
- -- where lower(substr(P.fFio,1,length(replace(:ffio,'.',''))))=lower(replace(:ffio,'.','')) 
- order by P.fFio, P.fStrTabN, A.fLprizn, extract (year from to_oradate(DPO.fPlanYearBeg)) desc, DPO.fPlanYearBeg
  
+ -------------------------------------------------------История назначений------------------------------------------------------------------
+ create or replace view V_CISU_TEAC_HISTORY_APP
+ as
+select RowNum rn, P.fStrTabn tab, P.fFio fio, V.path prof, A.fRate, A.fCategory, to_oradate(A.fAppointDate) datereg,P.fSex,to_oradate(P.fBornDate) fBornDate,
+       D.fName, NVL(B.fName,'Не указан') fBud, S.fCategory stavka,
+       S.fcInf3, A.fcRef3, K.fNaiKat, 
+       A.fLprizn, case when P.fcSovm = '8000000000000001'                     then 'Внешнее совместительство'
+                       when A.fLprizn = 0                                     then 'Основное место работы'
+                       when A.fLprizn = 3 and A.fKindApp = '80010000000286EC' then 'Совмещение должностей'
+                       when A.fLprizn = 3                                     then 'Внутреннее совместительство' end prizn,
+       decode( NVL(T.fTarif, 0), 0, s.fTaxRate, NVL(T.fTarif, 0) ) ftarif
+  from Persons P inner join Appointments    A on A.fPerson      = P.fNrec
+                 inner join StaffStruct     S on A.fStaffStr    = S.fNrec
+                 inner join Catalogs        D on A.fPost        = D.fNrec
+                 inner join V$DerevoFilials V on A.fDepartment  = V.fNrec
+            left outer join Catalogs        B on A.fcRef3       = B.fNrec
+            left outer join KlKatego        K on A.fEmpCategory = K.fNrec
+            left outer join TarStav         T on A.fTariff      = T.fNrec
+            left outer join Catalogs        H on A.fKindApp     = H.fNrec  
+ where 
+ (A.fAppointDate = 0 or trunc(to_oradate(A.fAppointDate)) <= trunc(sysdate))
+   and  A.fLprizn in (0,3)
+ order by flprizn
  
- ------------------------------------------------------------------------------------------------------------------------------
+ -----------------------------------------------------Отпуск сотрудника------------------------------------------------------------
+Create or replace view V_CISU_TEAC_HOLIDAY
+as
+Select FFIO,VID,FNOTPUS type_otp,FDOCDATE,FFOUNDATION,FFACTYEARBEG,FFACTYEAREND,FDURATION,COUNTDAY,FACTDAYSAVE,DIF_DAY from V_HD_VACATIONS
+where instr(
+       upper(replace(replace(FFIO,'.',''),' ','')),
+       upper(replace(replace('Якимчук','.',''),' ','')),1)>=1
 
+   order by FFIO,FDOCDATE
+
+ ---------------------------------------------------Перечень приказов по сотруднику---------------------------------------------------
+
+Select * FROM Persons P
+Inner join appointments A on A.fperson = p.fnrec
+
+----------------------------------------------------Рейтинг ППС-------------------------------------------------------------------------
+
+
+--------------------------------------------------Стимулирующие------------------------------------------------------------------------
+
+----------------------------------------------------Фактическая зарплата---------------------------------------------------------
+
+--------------------------------------------------------------Оценки по группе-------------------------------------------  

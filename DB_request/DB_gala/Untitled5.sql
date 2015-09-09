@@ -18,3 +18,4 @@ Select FFIO,FPERSON from mv_select_person where FPERSON in (Select FNREC_PERSONS
 
 
 
+Select * from v_cisu_timetable
