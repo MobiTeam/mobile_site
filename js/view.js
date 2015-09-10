@@ -11,6 +11,7 @@ var view = {
 	$news:$('.news_box'),
 	$full_art:$('.news_box_details'),
 	$settings:$('.header_line_content_settings'),
+	$settings_box:$('.settings_box'),
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
 	$search_butt:$('.header_line_content_search'),
@@ -43,6 +44,7 @@ var view = {
 		this.$persons.fadeOut(0);
 		this.$search_butt.fadeOut(0);
 		this.$dateline.fadeOut(0);
+		this.$settings_box.fadeOut(0);
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
 		closeInput();
@@ -75,10 +77,6 @@ var view = {
 					loadMainMenu();
 				break;
 						
-				case '#person':
-				
-				break;
-						
 				case '#auth':
 					loadAuth();
 				break;
@@ -97,6 +95,10 @@ var view = {
 				
 				case '#persinf':
 					loadPersonBlock();
+				break;
+				
+				case '#settings':
+					loadSettingsBlock();
 				break;
 				
 				default:
@@ -206,6 +208,7 @@ function loadTimetable(){
 		
 		if(issetUserGroup()){
 			loadTimetableInf();
+			displayTimetable();
 		} else {
 			$('.timetable_lessons').html('');
 			showTimetableAlert();
@@ -225,6 +228,14 @@ function loadPersonBlock(){
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();
 }
+
+function loadSettingsBlock(){
+	tagMenuItem('settings');
+	view.displayMenuIcon();
+	view.$settings_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[2]); 
+}
+
 
 function parseHashTag(access){
 	

@@ -42,5 +42,5 @@ function tagInput(className){
 }
 
 function tryAutorisate(userData){
-    return myajax(false, 'POST', 'mobile_reciever.php', userData);
+	return myajax(false, 'POST', 'mobile_reciever.php', userData);
 }

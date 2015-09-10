@@ -1,10 +1,12 @@
 // открытие/закрытие фона заглушки
 function opBl(){ 
-	$('.overlay').css('display', 'block');
+	$('#overlay').css('display', 'block'); 
 }
 
 function clBl(){
-	$('.overlay').css('display', 'none');
+	
+    $('#overlay').css('display', 'none'); 
+	
 }
 
 function opMenBl(){ 
@@ -20,32 +22,31 @@ function myajax(async, type, url, data){
 	
 	var jsonObj;
 	opBl();
-		$.ajax({
-		async: async,
-		type: type,
-		url:url,
-		data: data,
-		success: function(responseTxt){
-			var clrResp = clearUTF8(responseTxt);
-
-			try {
-			
-				jsonObj = JSON.parse(clrResp);
-				
-			} catch(e){
-				showTooltip(errMessages[0], 2000);
-			}
-		},
-		error: function(){
-			showTooltip(errMessages[1], 2000);	
-		},
-		complete: function(){
-			clBl();
-		}
-	});
 	
-	return jsonObj; 
+			$.ajax({
+			async: async,
+			type: type,
+			url: url,
+			data: data,
+			success: function(responseTxt){
+				var clrResp = clearUTF8(responseTxt);
+
+				try {
+					jsonObj = JSON.parse(clrResp);
+				} catch(e){
+					showTooltip(errMessages[0], 2000);
+				}
+				
+			},
+			error: function(){
+				showTooltip(errMessages[1], 2000);	
+			},
+			complete: function(){
+				clBl();
+			}
+		});
 		
+	return jsonObj; 		
 }
 
 // проверка на авторизацию
@@ -237,8 +238,19 @@ function issetTimetable(){
 
 function loadTimetableInf(dataQuery){
 	$('.timetable_box_info').fadeOut(100);
-	//спарсить номер группы
+	
+	if (dataQuery == undefined){
+		var auth_inf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+		var group_arr = auth_inf.groups;
+		
+		if(group_arr.length != 0){
+			dataQuery = group_arr[0];
+			sessionStorage.query = dataQuery;
+		}
+	}
+	
 	setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false));
+
 }
 
 function issetUserGroup(){
@@ -289,72 +301,136 @@ function displayTimetable(date){
 		closeTimetableAlert();
 		var timetable = JSON.parse(sessionStorage.timetable);
 		
+		$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
 		
-		if (timetable[date.replace(/\./g,'')] != undefined){
-			timetableHTML = '<table class="timetable_style">';
-			var firstNumLesson = 0;		
-			var twoLessonsInOneTime = false;
+	}						 
+	
+}
+
+function issetNumbersInQuery(query){
+	return !!query.match(/\d/g);
+}
+
+function createTimetableHTML(date, timetable, showEmptyFields){
+	
+	showEmptyFields = true;
+	
+	var dateNumbers = date.replace(/\./g,''),
+		timetableHTML = '<table class="timetable_style">',
+		notNameQuery = issetNumbersInQuery(sessionStorage.query);
+	
+	if(!!timetable[dateNumbers]){
+		var firstNumLesson = 0;
+		var twoLessonsInOneTime = false;
 		
-			for(var i = 1, numLession = 6; i <= numLession; i++) {
+		for(var i = 1, numLession = 6; i <= numLession; i++) {
+			
+			var item = timetable[dateNumbers][firstNumLesson];
+			
+			if (+item.PAIR == i) {
 				
-				var item = timetable[date.replace(/\./g,'')][firstNumLesson];
+				if((item.KORP).toLowerCase() == 'сок' && notNameQuery){
+							
+							timetableHTML += '<tr class="timetable_tr">\
+											<td class="date_td">' + numLessonsArr[i] + '</td>\
+											<td class="' + getColorTypeLesson(item.VID) + '" >\
+											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>';
+											
+							var counter = 0;
+									
+						    while((item.KORP).toLowerCase() == 'сок'){
+								
+								if (counter == 0){
+									timetableHTML += '<div class="hide_timetable_information">';
+								}
+								
+								
+								item = timetable[dateNumbers][firstNumLesson];
+								if((item.KORP).toLowerCase() == 'сок'){
+									
+								
+									timetableHTML += '<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span> <br> \
+												<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>';
+									counter++;
+									
+								}
+								
+								firstNumLesson++;
+								if (firstNumLesson == timetable[dateNumbers].length - 1){
+									break;
+								}	
+							
+							} 
+							
+								timetableHTML += '</div>';
+							
+							if(counter > 1) {
+								timetableHTML += '<input class="hide_information_button" type="button" value="Развернуть" />';
+							}
+							
+							timetableHTML += '</td>\
+										   </tr>';
+							firstNumLesson --;
+								
+					}  else {
+						
+						if (firstNumLesson < timetable[dateNumbers].length - 1){
+							firstNumLesson++;
+							if (+item.PAIR == timetable[dateNumbers][firstNumLesson]['PAIR']){
+									i--;
+									if(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) twoLessonsInOneTime = true;	
+							} 
+						}		
 					
-				if (+item.PAIR == i) {
-					if (firstNumLesson < timetable[date.replace(/\./g,'')].length - 1){
-						firstNumLesson++;
-						if (+item.PAIR == timetable[date.replace(/\./g,'')][firstNumLesson]['PAIR']){
-							i--;
-							twoLessonsInOneTime = true;
-						} 
-					}		
-					
-					if(twoLessonsInOneTime == undefined){
-						timetableHTML += '<tr class="timetable_tr">\
-										<td class="' + getColorTypeLesson(item.VID) + '" >\
-										<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span><br>\
-										<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-										</td>\
-									  </tr>';
-						twoLessonsInOneTime = false;			  
-					} else {
-						var num = twoLessonsInOneTime ? i+1 : i;
-						timetableHTML += '<tr class="timetable_tr">\
-										<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="2"' : '') + '>' + numLessonsArr[num] + '</td>\
-										<td class="' + getColorTypeLesson(item.VID) + '">\
-										<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-										<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span><br>\
-										<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-										</td>\
-									  </tr>';						
+						if(twoLessonsInOneTime == undefined){
+							timetableHTML += '<tr class="timetable_tr">\
+											<td class="' + getColorTypeLesson(item.VID) + '" >\
+											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+											<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + '</span><br>\
+											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
+											</td>\
+										  </tr>';
+							twoLessonsInOneTime = false;			  
+						} else {
+							var num = twoLessonsInOneTime || !(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) ? i+1 : i;
+							timetableHTML += '<tr class="timetable_tr">\
+											<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="2"' : '') + '>' + numLessonsArr[num] + '</td>\
+											<td class="' + getColorTypeLesson(item.VID) + '">\
+											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+											<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + '</span><br>\
+											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
+											</td>\
+										  </tr>';						
+						}
+						
+						twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;	
+										
 					}
-					
-					twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;			
-				} else {
-					timetableHTML += '<tr class="timetable_tr">\
+				
+			} else if (showEmptyFields) {
+				
+				timetableHTML += '<tr class="timetable_tr">\
 										<td class="date_td">' + numLessonsArr[i] + '</td>\
 										<td></td>\
 									  </tr>';
-				}
 				
 			}
+			
+		}		
 		
 		timetableHTML += '</table>';
 		
-		} else {
+	} else {
 			timetableHTML = '<span class="no_lessons">Занятий нет.</span>';
-		}
-       
-		$('.timetable_lessons').html(timetableHTML).css('display','none').fadeIn(120);
-		
-	}						 
+		} 
+	
+	return timetableHTML;
 	
 }
 
 function getCurrentDate(date){
 	$currDate = $('.redTag');
 	$userSelectDate = $('.greenTag');
-	console.log($currDate.attr('date_quer'));
 	return date = date != undefined ? date : !!$userSelectDate.size() 
 							 ? $userSelectDate.attr('date_quer') : !!$currDate.size() 
 							 ? $currDate.attr('date_quer') : null;

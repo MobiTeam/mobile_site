@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
 	
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
@@ -10,12 +10,31 @@
 		}
 	})
 	
+	$('.timetable_box_input').autocomplete({	
+			source:"oracle/database_get_timetable_info.php",
+			minLength:2
+		});
+		
+	$('.timetable_box_input').on('autocompleteselect',function(event, ui){
+        loadTimetableInf(ui.item.value);	
+		sessionStorage.query = ui.item.value;
+		displayTimetable();
+		closeInput();		
+   });	
+	
 	$('.timetable_lessons').click(function(event){
 		if(event.target.className == 'found_by_sel_text') {
+			sessionStorage.query = (event.target.innerHTML).trim();
 			loadTimetableInf(event.target.innerHTML);
-			displayTimetable();
-			sessionStorage.query = event.target.innerHTML;
+			displayTimetable();			
 			view.setTitle(sessionStorage.query);
+		} else if (event.target.className == 'hide_information_button') {
+			if (event.target.value == 'Развернуть'){
+				event.target.value = 'Свернуть';
+			} else {
+				event.target.value = 'Развернуть';
+			}
+			$('.hide_timetable_information').toggle(200);
 		}
 	})
 	
@@ -51,11 +70,11 @@
 	
 	$('.timetable_box_form').on("submit", function(event){
 		event.preventDefault();
-		sessionStorage.query = $('.timetable_box_input').val();
+		/* sessionStorage.query = $('.timetable_box_input').val();
 		setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', $(this).serialize()), false);
 		displayTimetable();
-		closeInput();
-	});
+		closeInput(); */
+	}); 
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
@@ -91,7 +110,7 @@
 	$('.header_line_content_search').click(function(){
 		if($(this).hasClass('opened_input')){
 			
-			$('.timetable_box_submit').click();
+			$('.timetable_box_input').val('');
 			
 		} else {
 			slideInput();
