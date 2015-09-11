@@ -49,10 +49,6 @@
 								  
 					  print_r(utf8_json_encode($data_user));
 			  	
-	} else if(isset($_POST['get_info'])){
-		
-		//require_once('');
-		
-	}
+	} 
 
 ?>

@@ -11,11 +11,18 @@ var view = {
 	$news:$('.news_box'),
 	$full_art:$('.news_box_details'),
 	$settings:$('.header_line_content_settings'),
+	$settings_box:$('.settings_box'),
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
 	$search_butt:$('.header_line_content_search'),
 	$form:$('.timetable_box_form'),
 	$dateline: $('.header_line_addition_datewr'),
+	$heightBlock: $('.space_height'),
+	$cont_header: $('.header_line__content'),
+	
+	correctHeight: function(){
+		this.$heightBlock.css('height', this.$cont_header.css('height'));
+	},
 	
 	setTitle : function(nameTitle){
 	
@@ -43,6 +50,7 @@ var view = {
 		this.$persons.fadeOut(0);
 		this.$search_butt.fadeOut(0);
 		this.$dateline.fadeOut(0);
+		this.$settings_box.fadeOut(0);
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
 		closeInput();
@@ -67,16 +75,14 @@ var view = {
 		
 		if(isAuth()){
 			
+			setUserSettings(+localStorage.settingsCode);
+			
 			$('.auth_only').css('display', 'block');
 			
 			switch(location.hash){
 			    
 				case '#menu':
 					loadMainMenu();
-				break;
-						
-				case '#person':
-				
 				break;
 						
 				case '#auth':
@@ -97,6 +103,10 @@ var view = {
 				
 				case '#persinf':
 					loadPersonBlock();
+				break;
+				
+				case '#settings':
+					loadSettingsBlock();
 				break;
 				
 				default:
@@ -135,6 +145,8 @@ var view = {
 				view.changePage('auth'); 
 				loadAuth();
 			} 
+			
+		this.correctHeight();	
 	}
 		
 }	
@@ -144,6 +156,7 @@ var view = {
 function loadAuth(){
 	sessionStorage.clear();
 	localStorage.clear();
+	$('.timetable_lessons').html('');
 	view.$auth.fadeIn(0);
 	view.setTitle(stringNames[0]);
 	view.displayArrIcon();
@@ -206,6 +219,8 @@ function loadTimetable(){
 		
 		if(issetUserGroup()){
 			loadTimetableInf();
+			displayTimetable();
+			view.correctHeight();
 		} else {
 			$('.timetable_lessons').html('');
 			showTimetableAlert();
@@ -225,6 +240,14 @@ function loadPersonBlock(){
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();
 }
+
+function loadSettingsBlock(){
+	tagMenuItem('settings');
+	view.displayMenuIcon();
+	view.$settings_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[2]); 
+}
+
 
 function parseHashTag(access){
 	

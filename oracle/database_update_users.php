@@ -13,9 +13,31 @@
 					when matched then 
 					UPDATE SET id_usergroup='".$num_group."',last_access=sysdate,count=count+1,full_name='".$data_user['FIO']."'";
 	
+	
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
-	OCICommit($c);  		
+	OCICommit($c); 
+
+	$sql = "select ID from USERS where LOGIN = '" . $login . "'";
+	$s = OCIParse($c,$sql);
+	OCIExecute($s, OCI_DEFAULT);
+	
+	while(OCIFetch($s)){
+			$id_user = ociresult($s,'ID');					
+		}
+	
+	if(isset($id_user)) {
+		$sql = "select CODE_SETTINGS from SETTINGS where ID_USER = " . $id_user . "";
+		$s = OCIParse($c,$sql);
+		OCIExecute($s, OCI_DEFAULT);	
+		
+		while(OCIFetch($s)){
+			$data_user['settings'] = ociresult($s,'CODE_SETTINGS');					
+		}	
+	}	
+		
+		
+		
 					
  
 ?>

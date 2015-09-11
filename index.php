@@ -9,6 +9,7 @@
 		<title>Мобильное приложение Югорского Государственного Университета</title>
 		
 		<link href="css/style.css" rel="stylesheet" />
+		<link href="css/jqui.css" rel="stylesheet" />
 		<link href="css/large_icons.css" rel="stylesheet" />
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
 		<link href="css/large_phone.css" media="screen and (max-width: 736px)" rel="stylesheet"/> 
@@ -23,7 +24,7 @@
 		<div class="pre_loader">
 			Югорский Государственный <br>Университет
 		</div>
-		<div class="overlay"></div>
+		<div id="overlay"></div>
 		
 		<div class="menuoverlay"></div>
 			
@@ -42,8 +43,8 @@
 							<li class="sidebar_menu_block_menu_item news_item" hashtag="news">Новости</li>
 							<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
 							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
-							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>
-							<li class="sidebar_menu_block_menu_item set_item auth_only" hashtag="settings">Настройки</li>-->
+							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
+							<li class="sidebar_menu_block_menu_item set_item auth_only" hashtag="settings">Настройки</li>
 							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
@@ -64,20 +65,19 @@
 						
 						<div class="header_line_search_input">
 							<form class="timetable_box_form" method="post" action="">
-								<input class="timetable_box_input" name="timetable_query" placeholder="Поиск расписания..." type="text" required="">
+								<input class="timetable_box_input" name="timetable_query" onclick="event.stopPropagation();" placeholder="Поиск расписания..." type="text" required="">
 								<input style="display:none;" onclick="event.stopPropagation();" type="submit" class="timetable_box_submit" />
 							</form>
 						</div>
 						
-						
-						
 						<!--<div class="header_line_content_settings" hashtag="settings">
 						  
+						</div>
+						
+						<div class="header_line_content_refresh" onclick="event.stopPropagation();">
+						  
 						</div>-->
-						
-						
-						
-						
+											
 						
 					</div>
 					
@@ -103,11 +103,46 @@
 						</div>
 					</div>	
 					
+					<div class="header_shadow_box contr_shadow">
+						
+					
+					</div>
+					
 				</div>
 				
 			</div>
 			
 			<div class="content_box">
+			
+				<div class="space_height"></div>
+			
+				<div class="settings_box">
+					
+					<div class="settings_box_header">Блок пользовательских настроек</div>
+					
+					<div class="settings_box_inputs">
+						
+						<div class="settings_box_inputs_item">
+							<div class="settings_box_inputs_item_text">
+								Вывод расписания занятий по неделям
+							</div>
+							<div class="settings_box_inputs_item_button">
+								<input class="item_ch_1" type="checkbox" name="item_ch_1">
+							</div>
+						</div>
+						
+						<div class="settings_box_inputs_item">
+							<div class="settings_box_inputs_item_text">
+								Отображать пустые строки в расписании
+							</div>
+							<div class="settings_box_inputs_item_button">
+								<input class="item_ch_2" type="checkbox" name="item_ch_2">
+							</div>
+						</div>
+						
+					</div>
+				
+				</div>
 			
 				<div class="timetable_box">
 					<div class="timetable_box_info contr_shadow">
@@ -217,10 +252,11 @@
 		
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/view.js"></script>
-		<script src="js/waterfall.js"></script>
+		<!--<script src="js/waterfall.js"></script>-->
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
 		<script src="js/bind_action.js"></script>
 		<script src="js/main.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	</body>
 </html>
