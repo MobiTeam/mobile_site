@@ -87,7 +87,10 @@ $(document).ready(function(){
 			if (authObj.FIO != "undefined"){
 				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
 				
-				$('.authblock').css('display','inline-block');				
+				$('.authblock').css('display','inline-block');	
+				
+				localStorage.settingsCode = authObj.settings;
+					
 			}
 			view.changePage('menu');
 			showTooltip(authObj.serverRequest, 2000);

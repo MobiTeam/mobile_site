@@ -460,3 +460,18 @@ function getColorTypeLesson(typeLesson) {
 		break;
 	}
 }
+
+
+function setUserSettings(settingsCode) {
+	
+	var binarCode = "" + (settingsCode == undefined ? (0).toString(2) : (+settingsCode).toString(2));
+	
+	$('[class *= "item_ch"]').each(function(index, value){
+		if (binarCode[index] == "1") {
+			$(this).prop("checked",true);
+		} else {
+			$(this).prop("checked", false);
+		}
+	});	
+	
+}

@@ -17,6 +17,12 @@ var view = {
 	$search_butt:$('.header_line_content_search'),
 	$form:$('.timetable_box_form'),
 	$dateline: $('.header_line_addition_datewr'),
+	$heightBlock: $('.space_height'),
+	$cont_header: $('.header_line__content'),
+	
+	correctHeight: function(){
+		this.$heightBlock.css('height', this.$cont_header.css('height'));
+	},
 	
 	setTitle : function(nameTitle){
 	
@@ -68,6 +74,8 @@ var view = {
 		this.closeAll();
 		
 		if(isAuth()){
+			
+			setUserSettings(+localStorage.settingsCode);
 			
 			$('.auth_only').css('display', 'block');
 			
@@ -137,6 +145,8 @@ var view = {
 				view.changePage('auth'); 
 				loadAuth();
 			} 
+			
+		this.correctHeight();	
 	}
 		
 }	

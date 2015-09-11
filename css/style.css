@@ -229,7 +229,7 @@ html, body{
 }
 
 .authorisation_box{
-	padding-top:86px;
+	padding-top:30px;
 	width:100%;
 	max-width:400px;
 	margin:0 auto;
@@ -316,7 +316,7 @@ html, body{
 	height:auto;
 	background:white;
 	color:#2c45aa;
-	padding:73px 0px 18px;
+	padding:18px 0px 18px;
 	text-align:center;
 	font-family: "RobotoRegular", sans-serif;
 }
@@ -429,7 +429,7 @@ html, body{
 }
 
 .timetable_box{
-	margin:118px 15px 0px 15px; 
+	margin:10px 15px 0px 15px; 
 	display:none;
 }
 
@@ -454,7 +454,7 @@ html, body{
 }
 
 .news_box{
-	padding:112px 10px 0px 10px;
+	padding:0px 10px 0px 10px;
 	display:none;
 }
 
@@ -735,7 +735,7 @@ html, body{
 }
 
 .settings_box{
-	margin: 55px 0px 5px;
+	margin: 0px 0px 5px;
 	
 }
 

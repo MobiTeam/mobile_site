@@ -114,11 +114,11 @@
 			
 			<div class="content_box">
 			
+				<div class="space_height"></div>
+			
 				<div class="settings_box">
 					
 					<div class="settings_box_header">Блок пользовательских настроек</div>
-					
-					!!!В разработке
 					
 					<div class="settings_box_inputs">
 						
@@ -127,7 +127,7 @@
 								Вывод расписания занятий по неделям
 							</div>
 							<div class="settings_box_inputs_item_button">
-								<input type="checkbox">
+								<input class="item_ch_1" type="checkbox" name="item_ch_1">
 							</div>
 						</div>
 						
@@ -136,7 +136,7 @@
 								Отображать пустые строки в расписании
 							</div>
 							<div class="settings_box_inputs_item_button">
-								<input type="checkbox">
+								<input class="item_ch_2" type="checkbox" name="item_ch_2">
 							</div>
 						</div>
 						
