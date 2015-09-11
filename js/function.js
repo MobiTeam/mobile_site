@@ -243,10 +243,11 @@ function loadTimetableInf(dataQuery){
 		var auth_inf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
 		var group_arr = auth_inf.groups;
 		
-		if(group_arr.length != 0){
+		if(group_arr.length >= 1){
 			dataQuery = group_arr[0];
 			sessionStorage.query = dataQuery;
 		}
+		
 	}
 	
 	setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false));
@@ -296,13 +297,16 @@ function displayTimetable(date){
 	
 	date = getCurrentDate(date);
 						 
-	if(date != undefined){
+	if(date != undefined && sessionStorage.timetable != "undefined"){
 		
 		closeTimetableAlert();
+		
 		var timetable = JSON.parse(sessionStorage.timetable);
 		
 		$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
 		
+	} else {
+		showTimetableAlert();
 	}						 
 	
 }

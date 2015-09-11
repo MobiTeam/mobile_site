@@ -156,6 +156,7 @@ var view = {
 function loadAuth(){
 	sessionStorage.clear();
 	localStorage.clear();
+	$('.timetable_lessons').html('');
 	view.$auth.fadeIn(0);
 	view.setTitle(stringNames[0]);
 	view.displayArrIcon();
@@ -219,6 +220,7 @@ function loadTimetable(){
 		if(issetUserGroup()){
 			loadTimetableInf();
 			displayTimetable();
+			view.correctHeight();
 		} else {
 			$('.timetable_lessons').html('');
 			showTimetableAlert();
