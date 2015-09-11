@@ -55,6 +55,8 @@ order by  F.fName, C.fName||' ('||C.fCode||')', G.fName, fFio
 select * from Dol_stud
 where lower(substr(fio,1,length(replace('Гусаков','.',''))))=lower(replace('Якимчук','.',''))
  
+
+Select * from v_cisu_stud_education
 -----------------------------------------------------------------------Обучение 
 select * from Dol 
 where lower(substr(fio,1,length(replace('Петроченко Владислав Юрьевич','.',''))))=lower(replace('Петроченко Владислав Юрьевич','.',''))
@@ -67,8 +69,8 @@ and to_oradate(fappdate)<=sysdate
 order by ffio
 
 --------------------------------------------------------------СТИПЕНДИИ
-create or replace view v_cisu_stud_awards 
-as
+--create or replace view v_cisu_stud_awards 
+--as
 select  FFIO,fnVidOpl, to_char(M_1), to_char(M_2),to_char(M_3),to_char(M_4),to_char(M_5),to_char(M_6),to_char(M_7),to_char(M_8),to_char(M_9), to_char(M_10), to_char(M_11), to_char(M_12), to_char(M_13)
  from(
 select US.fFio, US.fsFaculty, US.fsPost, US.fsDepcode, US.fsFinsourceName, fVidOpl, decode(GROUPING(fnVidOpl), 1, 'ИТОГО', fnVidOpl) fnVidOpl,

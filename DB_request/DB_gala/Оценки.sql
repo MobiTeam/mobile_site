@@ -66,4 +66,21 @@ select   UM.fsFio FIO ,UD.fName Dis,USG.Fname gr_name,C.fName Zach,UL.fwSemestr 
         order by UL.fwSemestr ASC
         
         
+        
+---------------------------------------Средний балл группы----------------------------------------------------------------------
 
+select   UM.fsFio FIO ,USG.Fname number_group,UD.fName Dis,USG.Fname gr_name,C.fName Zach,UL.fwSemestr Semestr,UTW.Fname typework,
+          UM.fwMark
+ from U_List UL inner join U_Marks      UM on UM.fcList = UL.fNrec
+                inner join U_StudGroup USG on UL.fcStGr = USG.fNrec
+                inner join U_Discipline      UD   on UL.fcDis       = UD.fNrec
+                inner join Catalogs      C on UM.fcMark = C.fNrec
+                inner join U_TypeWork        UTW  on UL.fcTypeWork = UTW.fNrec
+where USG.Fname  = '1521б'
+and UPPER(UM.fsfio) in (select UPPER(ffio) from U_student 
+Where   
+FSDEPCODE like '%1521б%' and
+ (fdisdate = 0 or trunc(to_oradate(fdisdate)) >= trunc(sysdate))
+  and (fappdate = 0 or trunc(to_oradate(fappdate)) <= trunc(sysdate)))
+  and UTW.Fname<>'Зачёты'
+        order by UL.fwSemestr ASC

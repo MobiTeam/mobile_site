@@ -2,6 +2,11 @@
 grant select on mv_cisu_timetable to mobile;
 
 grant select on gala_rasp."Chair" to mobile;
+/
+
+grant select on budget.v_cisu_teac_history_app to mobile;
+/
+grant select on budget.v_cisu_teac_holiday to mobile;
 
 
 ------------------- Сделать Гранты
@@ -14,12 +19,10 @@ grant select on budget.v_cisu_teac_kott to mobile;
 grant select on budget.v_cisu_teac_room to mobile;
 -----------------------------------------------------
 /
-grant select on budget.v_cisu_teac_history_app to mobile;
-/
-grant select on budget.v_cisu_teac_holiday to mobile;
-/
 
-grant select on budget.v_cisu_stud_dol to mobile;
+grant select on budget.v_cisu_teac_stimulpr to mobile;
+
+
 
 ----------------------------------------------------------------------------------CТАВКИ ПРЕПОДАВАТЕЛЯ(Кадровая информация о преподавателе)
 create materialized view mv_cisu_teach_appoint
@@ -163,8 +166,17 @@ Inner join appointments A on A.fperson = p.fnrec
 ----------------------------------------------------Рейтинг ППС-------------------------------------------------------------------------
 
 
---------------------------------------------------Стимулирующие------------------------------------------------------------------------
+--------------------------------------------------Надбавки------------------------------------------------------------------------
+
+create or replace view v_cisu_teac_stimulpr
+as
+Select FFIO,CFIN_NAME,SUMMA from V_SP_VPRIKAZ_PRINT
+where instr(
+       upper(replace(replace(FFIO,'.',''),' ','')),
+       upper(replace(replace('Татаринцев','.',''),' ','')),1)>=1
+       
 
 ----------------------------------------------------Фактическая зарплата---------------------------------------------------------
+
 
 --------------------------------------------------------------Оценки по группе-------------------------------------------  

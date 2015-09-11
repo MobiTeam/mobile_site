@@ -1,3 +1,12 @@
+create or replace synonym pps_krit for reit.krit;
+/
+create or replace synonym pps_reiting for reit.reiting;
+/
+create or replace synonym pps_rpersons for reit.rpersons;
+/
+create or replace synonym pps_money for reit.money;
+
+
 ----------------------Основное назначение преподавателя---------------------------------
 create or replace view v_teach_appoint_all
 as
@@ -46,29 +55,11 @@ where instr(
         upper(replace(replace(FFIO,'',''),' ','')),
         upper(replace(replace('Славский В','.',''),' ','')),1)>=1
         
----------------------------------------------------------------------------
 
 
-Create or replace view V_info_timetable
-as
-Select * from info_timetable
+---------------------------------------------Надбавки-------------------------------------------------
 
-
-
-Create table info_timetable
-as
-Select Distinct TEAC_FIO info from v_timetable
-/
-Insert into info_timetable(info)
-Select Distinct GR_NUM info from v_timetable
-/
-Insert into info_timetable(info)
-Select Distinct (aud||' '||korp) info from v_timetable
-
-
-Select * from v_info_timetable
-
-Select DISTINCT VID from v_timetable_all
+Select * from v_teac_nagruzka
 
 
 
