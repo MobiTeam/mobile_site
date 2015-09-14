@@ -17,8 +17,8 @@ function clMenBl(){
 	$('.menuoverlay').css('display', 'none');
 }
 
-//загрузка с сервера [boolean, string, string, object]
-function myajax(async, type, url, data){ 
+//загрузка с сервера [boolean, string, string, object, boolean]
+function myajax(async, type, url, data, notResponse){ 
 	
 	var jsonObj;
 	opBl();
@@ -29,12 +29,15 @@ function myajax(async, type, url, data){
 			url: url,
 			data: data,
 			success: function(responseTxt){
-				var clrResp = clearUTF8(responseTxt);
+				
+				if(notResponse == undefined || notResponse){
+					var clrResp = clearUTF8(responseTxt);
 
-				try {
-					jsonObj = JSON.parse(clrResp);
-				} catch(e){
-					showTooltip(errMessages[0], 2000);
+					try {
+						jsonObj = JSON.parse(clrResp);
+					} catch(e){
+						showTooltip(errMessages[0], 2000);
+					}
 				}
 				
 			},
@@ -472,10 +475,37 @@ function setUserSettings(settingsCode) {
 	
 	$('[class *= "item_ch"]').each(function(index, value){
 		if (binarCode[index] == "1") {
-			$(this).prop("checked",true);
+			$(this).attr("checked", true);
+			$('.word_stat' + (index + 1)).text("Вкл.");
 		} else {
-			$(this).prop("checked", false);
+			$(this).attr("checked", false);
+			$('.word_stat' + (index + 1)).text("Выкл.");
 		}
 	});	
 	
+}
+
+function createHtmlSettings() {
+	
+	var htmlSettings = '';
+	for (var i = 0; i < settingsTitle.length; i++) {
+		htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">\
+							<div class="settings_box_inputs_item_text">'
+								+ settingsTitle[i] + 
+								'<br><span class="settings_box_inputs_item_button_status word_stat' + (i + 1) + '"></span>\
+							</div>\
+							<div class="settings_box_inputs_item_button">\
+								<input class="item_ch_' + (i + 1) + ' js-switch" onchange="changeStatus(this, ' + (i + 1) + ')"  type="checkbox" name="item_ch_' + (i + 1) + '" checked>\
+							</div>\
+							<div style="clear:both;"></div>\
+						</div></div>'
+	}
+							
+	$('.settings_box_inputs').html(htmlSettings);				
+	
+}
+
+function changeStatus(thisObj, num) {
+	var str = thisObj.checked ? "Вкл." : "Выкл.";
+	$('.word_stat' + num).text(str);
 }

@@ -247,7 +247,7 @@ html, body{
 	margin:0 auto;
 }
 
-.authorisation_box_input, .timetable_box_input{
+.authorisation_box_input, .timetable_box_input, .settings_box_button_save{
 	width:80%;
 	display:block;
 	max-width:300px;
@@ -275,7 +275,7 @@ html, body{
 	font-style:italic;
 }
 
-.authorisation_box_submit, .authorisation_box_button, .timetable_box_submit{
+.authorisation_box_submit, .authorisation_box_button, .timetable_box_submit, .settings_box_button_save{
 	width:180px;
 	height:36px;
 	display:block;
@@ -291,12 +291,16 @@ html, body{
 	margin-top:0px;
 }
 
-.authorisation_box_submit, .timetable_box_submit{
+.settings_box_button_save{
+	margin-top:10px;
+}
+
+.authorisation_box_submit, .timetable_box_submit, .settings_box_button_save{
 	background:#5677fc;
 	color:white;
 }
 
-.authorisation_box_submit:active, .timetable_box_submit:active{
+.authorisation_box_submit:active, .timetable_box_submit:active, .settings_box_button_save:active{
 	background:#3266d5;
 }
 
@@ -736,7 +740,6 @@ html, body{
 
 .settings_box{
 	margin: 0px 0px 5px;
-	
 }
 
 .settings_box_header{
@@ -746,4 +749,36 @@ html, body{
 	font-size:14px;
 	background:#E1E1E1;
 	border-bottom:1px solid #BFBFBF;
+	text-align:center;
+}
+
+.settings_box_inputs{
+	width:98%;
+	margin:0 auto;
+	max-width:600px;
+	font-size:16px;
+	padding:5px;
+	
+}
+
+.settings_box_inputs_item{
+	border-bottom:1px solid #8C8C8C;
+	padding:5px;
+}
+
+.settings_box_inputs_item_text{
+	width:80%;
+	float:left;
+}
+
+.settings_box_inputs_item_button{
+	width:20%;
+	float:left;
+	text-align:center;
+}
+
+.settings_box_inputs_item_button_status{
+	color:grey;
+	font-size:14px;
+	font-family:"RobotoRegular", sans-serif;
 }

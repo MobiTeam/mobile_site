@@ -94,6 +94,15 @@ $(document).ready(function(){
 			}
 			view.changePage('menu');
 			showTooltip(authObj.serverRequest, 2000);
+			
+			createHtmlSettings();
+			setUserSettings(+localStorage.settingsCode);
+			
+			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+			
+			elems.forEach(function(html) {
+				var switchery = new Switchery(html);
+			});
 		}  
 		
 	})
@@ -153,7 +162,6 @@ $(document).ready(function(){
 	}) 
 	
 	
-	
 	/* $('.sidebar_menu_block_menu_item').click(function(){
 		clearCurrSidebarItem();
 		$(this).addClass('sidebar_menu_block_menu_item_curr');
@@ -162,6 +170,20 @@ $(document).ready(function(){
 	$('.menuoverlay').click(function(){
 		closeSidebar();
 	});
+	
+	$('.settings_box_button_save').click(function(){
+		
+		var codeSetString = '';
+		$('[class *= "item_ch_"]').each(function(){
+			codeSetString += $(this).prop("checked") ? '1' : '0';
+		});
+		
+		var id = getJSON('auth_inf', (localStorage.auth_inf != undefined)).id;
+		
+		localStorage.settingsCode = parseInt(codeSetString, 2);
+		myajax(true, 'POST', 'oracle/database_news.php', {code: localStorage.settingsCode, id_user: id}, true); 
+		
+	})
 	
 
 })
