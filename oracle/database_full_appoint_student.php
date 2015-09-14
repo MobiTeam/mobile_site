@@ -14,7 +14,7 @@
 	$sql="Select * from v_stud_appoint_all ap  
 where instr(
         upper(replace(replace(ap.FFIO,'.',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";"
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
     and ap.grup like '%\'".$GRUP."\'%' ";
 	
 	$s = OCIParse($c,$sql);
