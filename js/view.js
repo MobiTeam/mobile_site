@@ -75,8 +75,6 @@ var view = {
 		
 		if(isAuth()){
 			
-			setUserSettings(+localStorage.settingsCode);
-			
 			$('.auth_only').css('display', 'block');
 			
 			switch(location.hash){
@@ -242,6 +240,7 @@ function loadPersonBlock(){
 }
 
 function loadSettingsBlock(){
+	
 	tagMenuItem('settings');
 	view.displayMenuIcon();
 	view.$settings_box.stop().fadeTo(250, 1);

@@ -32,7 +32,8 @@
 		OCIExecute($s, OCI_DEFAULT);	
 		
 		while(OCIFetch($s)){
-			$data_user['settings'] = ociresult($s,'CODE_SETTINGS');					
+			$data_user['settings'] = ociresult($s,'CODE_SETTINGS');	
+			$data_user['id'] = $id_user;	
 		}	
 	}	
 		
