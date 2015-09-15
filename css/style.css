@@ -257,6 +257,10 @@ html, body{
 	
 }
 
+.settings_box_button_save{
+	padding:0px;
+}
+
 .timetable_box_input{
 	margin:0px;
 	width:100%;
@@ -435,14 +439,14 @@ html, body{
 .timetable_box{
 	margin:10px 15px 0px 15px; 
 	display:none;
+	padding-top:10px;
 }
 
 .timetable_box_info{
-	background:white;
+	background:#FFFFE7;	
 	padding:7px;
 	border-radius:3px;
 	display:none;
-	margin-top:10px;
 }
 
 .timetable_box_form{
@@ -674,6 +678,21 @@ html, body{
 	margin-bottom:10px;
 }
 
+.day_header{
+	margin: 0 auto;
+	width:100%;
+	max-width:500px;
+	background:#5677fc;
+	box-sizing:border-box;
+	padding:8px;
+	color:white;
+	margin-top:-10px;
+}
+
+.current_day{
+	background:#359d78;
+}
+
 .timetable_fio{
 	
 }
@@ -682,11 +701,20 @@ html, body{
 	display:none;
 }
 
+.timetable_lessons{
+	margin-bottom:10px;
+}
+
 .no_lessons{
 	max-width:500px;
 	width:100%;
 	display:block;
+	min-height:50px;
 	margin:0 auto;
+	background:white;
+	border: 1px solid #c6c6c6;
+	padding:7px;
+	box-sizing:border-box;
 }
 
 .green_td_tag{
@@ -781,4 +809,8 @@ html, body{
 	color:grey;
 	font-size:14px;
 	font-family:"RobotoRegular", sans-serif;
+}
+
+.date_a{
+	text-decoration:none;
 }

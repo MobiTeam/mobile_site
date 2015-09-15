@@ -240,7 +240,6 @@ function loadPersonBlock(){
 }
 
 function loadSettingsBlock(){
-	
 	tagMenuItem('settings');
 	view.displayMenuIcon();
 	view.$settings_box.stop().fadeTo(250, 1);

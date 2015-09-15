@@ -36,7 +36,7 @@
 				$counter = 0;
 			}
 			
-			if($isNameQuery && ociresult($s,'KORP') == 'СОК' && $counter != 0 && $num_pair == ociresult($s,'PAIR')){
+			if($isNameQuery && $counter != 0 && $num_pair == ociresult($s,'PAIR')){
 				
 				$prev_count = --$counter;
 				$group_num = $timetable_json[$num][$prev_count]["GR_NUM"];
