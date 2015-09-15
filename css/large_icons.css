@@ -28,8 +28,9 @@
 	}
 
 	.news_box_exit_button{
-		width: 48px;
-		height: 48px;
+		background-size: 24px 24px!important;
+		background-position: center center!important;
+		background-repeat: no-repeat!important;
 		background:url('../img/close-circle@2x.png');		
 	}
 	

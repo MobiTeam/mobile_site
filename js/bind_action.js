@@ -26,7 +26,6 @@ $(document).ready(function(){
 		if(event.target.className == 'found_by_sel_text') {
 			sessionStorage.query = (event.target.innerHTML).trim();
 			loadTimetableInf(event.target.innerHTML);
-			displayTimetable();			
 			view.setTitle(sessionStorage.query);
 		} else if (event.target.className == 'hide_information_button') {
 			if (event.target.value == 'Развернуть'){
@@ -82,27 +81,8 @@ $(document).ready(function(){
 				
 		if(validateForm()){
 			
-			authObj = (tryAutorisate($(this).serialize()));
-						
-			if (authObj.FIO != "undefined"){
-				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
-				
-				$('.authblock').css('display','inline-block');	
-				
-				localStorage.settingsCode = authObj.settings;
-					
-			}
-			view.changePage('menu');
-			showTooltip(authObj.serverRequest, 2000);
-			
-			createHtmlSettings();
-			setUserSettings(+localStorage.settingsCode);
-			
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-			
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
+			tryAutorisate($(this).serialize());
+		
 		}  
 		
 	})
@@ -142,7 +122,8 @@ $(document).ready(function(){
 			
 			if($('.item_ch_1').prop('checked')){
 				
-				$.scrollTo("#" + $(this).attr('name'), { offset: - 110, duration: 450 });
+				$(window).clearQueue();
+				$('body').scrollTo("#" + $(this).attr('name'), { offset: - 110, duration: 450 });
 				
 			} else {
 				displayTimetable($(this).attr('date_quer'));

@@ -1,3 +1,82 @@
+var displayTimetable = function(date){
+	
+	date = getCurrentDate(date);
+						 
+	if(date != undefined && sessionStorage.timetable != "undefined"){
+		
+		closeTimetableAlert();
+		
+		var timetable = JSON.parse(sessionStorage.timetable);
+		
+		if($('.item_ch_1').prop('checked') == undefined){
+			createHtmlSettings();
+			setUserSettings(+localStorage.settingsCode);
+			
+			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+			
+			elems.forEach(function(html) {
+				var switchery = new Switchery(html);
+			});
+		}
+		
+		if($('.item_ch_1').prop('checked')){
+			
+			var weekHTMLtimetable = '';
+			$('.date_item').each(function(index){
+				var chunks = $(this).attr('date_quer').split('.');
+				var currClassName = '';
+				currClassName = $(this).hasClass('redTag') ? 'current_day' : '';
+				weekHTMLtimetable += '<div id="' + $(this).attr('name') + '" class="day_header ' + currClassName + '">' + fullWeekNames[index] + " " + chunks[0] + " " + fullMonthNames[+chunks[1]] + '</div>'; 
+				weekHTMLtimetable += createTimetableHTML($(this).attr('date_quer'), timetable);
+			});
+			
+			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(120);
+			
+			setTimeout(function(){
+				$('.redTag').click();
+			}, 100);
+			
+		} else {
+			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
+		} 
+				
+	} else {
+		showTimetableAlert();
+	}						 
+	view.correctHeight();
+}
+
+var getAuthInfo = function(infoObj){
+			
+			authObj = infoObj;
+						
+			if (authObj.FIO != "undefined"){
+				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
+				
+				$('.authblock').css('display','inline-block');	
+				
+				localStorage.settingsCode = authObj.settings;
+					
+			}
+			view.changePage('menu');
+			showTooltip(authObj.serverRequest, 2000);
+			
+			createHtmlSettings();
+			setUserSettings(+localStorage.settingsCode);
+			
+			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+			
+			elems.forEach(function(html) {
+				var switchery = new Switchery(html);
+			});
+	
+}
+
+function tryAutorisate(userData){
+	return myajax(true, 'POST', 'mobile_reciever.php', userData, false, getAuthInfo, true);
+}
+
+
 // открытие/закрытие фона заглушки
 function opBl(){ 
 	$('#overlay').css('display', 'block'); 
@@ -18,7 +97,7 @@ function clMenBl(){
 }
 
 //загрузка с сервера [boolean, string, string, object, boolean]
-function myajax(async, type, url, data, notResponse){ 
+function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
 	
 	var jsonObj;
 	opBl();
@@ -38,6 +117,17 @@ function myajax(async, type, url, data, notResponse){
 					} catch(e){
 						showTooltip(errMessages[0], 2000);
 					}
+				}
+				
+				if(functionCallBack != undefined) {
+					
+					if(issetArgs == undefined || !issetArgs){
+						setJSON(savePlace, jsonObj);
+						functionCallBack();
+					} else {
+						functionCallBack(jsonObj);
+					}
+					return;
 				}
 				
 			},
@@ -153,9 +243,7 @@ function newsWrap(obj){
 		
 		$newsblock.html('').css('display', 'none');
 		$newsblock.html(resHtml).fadeTo(250, 1);
-		
-		
-	
+			
 }
 
 function closeSidebar(){
@@ -253,7 +341,7 @@ function loadTimetableInf(dataQuery){
 		
 	}
 	
-	setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false));
+	myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false, displayTimetable, false, 'timetable');
 
 }
 
@@ -294,54 +382,6 @@ function closeInput(){
 		}
 		
 	});
-}
-
-function displayTimetable(date){
-	
-	date = getCurrentDate(date);
-						 
-	if(date != undefined && sessionStorage.timetable != "undefined"){
-		
-		closeTimetableAlert();
-		
-		var timetable = JSON.parse(sessionStorage.timetable);
-		
-		if($('.item_ch_1').prop('checked') == undefined){
-			createHtmlSettings();
-			setUserSettings(+localStorage.settingsCode);
-			
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-			
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
-		}
-		
-		if($('.item_ch_1').prop('checked')){
-			
-			var weekHTMLtimetable = '';
-			$('.date_item').each(function(index){
-				var chunks = $(this).attr('date_quer').split('.');
-				var currClassName = '';
-				currClassName = $(this).hasClass('redTag') ? 'current_day' : '';
-				weekHTMLtimetable += '<div id="' + $(this).attr('name') + '" class="day_header ' + currClassName + '">' + fullWeekNames[index] + " " + chunks[0] + " " + fullMonthNames[+chunks[1]] + '</div>'; 
-				weekHTMLtimetable += createTimetableHTML($(this).attr('date_quer'), timetable);
-			});
-			
-			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(120);
-			
-			setTimeout(function(){
-				$('.redTag').click();
-			}, 100);
-			
-		} else {
-			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
-		} 
-				
-	} else {
-		showTimetableAlert();
-	}						 
-	
 }
 
 function issetNumbersInQuery(query){

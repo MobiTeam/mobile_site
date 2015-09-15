@@ -51,6 +51,3 @@ function tagInput(className){
 	alert('Input ' + className + 'was tagged');
 }
 
-function tryAutorisate(userData){
-	return myajax(false, 'POST', 'mobile_reciever.php', userData);
-}

@@ -217,8 +217,6 @@ function loadTimetable(){
 		
 		if(issetUserGroup()){
 			loadTimetableInf();
-			displayTimetable();
-			view.correctHeight();
 		} else {
 			$('.timetable_lessons').html('');
 			showTimetableAlert();

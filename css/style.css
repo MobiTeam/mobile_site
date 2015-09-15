@@ -205,7 +205,7 @@ b, strong {
 .date_item{
 	color:black;
 	display:inline-block;
-	padding:4px 1%;
+	padding:4px 1px;
 	font-family:"RobotoRegular", sans-serif;
 	/* max-width:46px; */
 	/* width:15%; */
