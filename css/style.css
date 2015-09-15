@@ -36,6 +36,10 @@ html, body{
 	font-family: "RobotoLight", sans-serif; 
 } 
 
+b, strong {
+	font-family: "RobotoMedium", sans-serif;
+}
+
 .wrapper{
     max-width:1024px;
 	min-width:240px;
@@ -466,8 +470,22 @@ html, body{
 	display:none;
 }
 
+.news_box_exit_button{
+	float:right;
+	background:url('../img/close-circle.png');
+	height:24px;
+	width:24px;
+	background-repeat:no-repeat;
+	opacity:0.8;
+	margin:5px;
+}
+
+.news_box_exit_button:active{
+	opacity:1;
+}
+
 .news_box_details{
-	margin:82px 15px 0px 15px; 
+	margin:21px 15px 0px 15px; 
 	display:none;
 	background:white;
 	padding:10px;
@@ -493,7 +511,8 @@ html, body{
 
 .full_article_date{
 	color:grey;
-	text-align:right;
+	text-align:left;
+	margin-left:9px;
 	font-size:16px;
 }
 
@@ -505,6 +524,10 @@ html, body{
 	margin:10px;
 	text-indent:18px;
 	line-height:22px;
+}
+
+.full_article_news{
+	margin-bottom:10px;
 }
 
 .news_box_item_image{

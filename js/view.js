@@ -277,7 +277,9 @@ function loadFullNews(id){
 	
 	var obj = myajax(false, 'POST', 'oracle/database_news.php', {news_id: id});
 			
-	$('.news_box_details').html('<div class="full_article_news">\
+		
+			
+	$('.news_box_details').html('<div class="news_box_exit_button" onclick="history.back();"></div><div class="full_article_news">\
 				<div class="full_article_title">\
 				' + obj.name_news + '\
 				</div>\
@@ -285,7 +287,7 @@ function loadFullNews(id){
 				' + obj.date + '\
 				</div>\
 				<div class="full_article_text">\
-				' + obj.text + '\
+				' + (obj.text).replace(/(href=")(\/.*?)(")/, "$1http://www.ugrasu.ru$2$3 target='blank'") + '\
 				</div>\
 				</div>').fadeTo(150, 1).scrollTop(0);
 				

@@ -330,6 +330,10 @@ function displayTimetable(date){
 			
 			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(120);
 			
+			setTimeout(function(){
+				$('.redTag').click();
+			}, 100);
+			
 		} else {
 			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
 		} 
