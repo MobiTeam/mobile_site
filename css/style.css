@@ -696,7 +696,7 @@ b, strong {
 .timetable_style{
 	margin: 0 auto;
 	width:100%;
-	max-width:500px;
+	max-width:900px;
 	border-collapse: collapse;
 	margin-bottom:10px;
 }
@@ -704,7 +704,7 @@ b, strong {
 .day_header{
 	margin: 0 auto;
 	width:100%;
-	max-width:500px;
+	max-width:900px;
 	background:#5677fc;
 	box-sizing:border-box;
 	padding:8px;
