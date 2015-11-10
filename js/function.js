@@ -96,7 +96,7 @@ function clMenBl(){
 	$('.menuoverlay').css('display', 'none');
 }
 
-//загрузка с сервера [boolean, string, string, object, boolean]
+//загрузка с сервера [boolean, string, string, object, boolean, callback, boolean, string]
 function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
 	
 	var jsonObj;
