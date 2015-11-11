@@ -243,7 +243,7 @@ function newsWrap(obj){
 		
 		$newsblock.html('').css('display', 'none');
 		$newsblock.html(resHtml).fadeTo(250, 1);
-			
+		sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();	
 }
 
 function closeSidebar(){
@@ -278,17 +278,21 @@ function loadDetails(id){
 function saveAndShow(){
 	
 	if(sessionStorage['news_' + $('.current_item').attr('newstype')] == undefined){
-		newsWrap(myajax(false, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}));
-		sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();
+		//придумать callback функцию
+		//myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace)
+		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}, false, newsWrap, true);
+		
 	} else {
-		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(250, 1);
+		opBl();
+		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(50, 1);
+		clBl();
 	}
 
 }
 
 function clearCurrSidebarItem(){
 	$('.sidebar_menu_block_menu_item').each(function(){
-			$(this).removeClass('sidebar_menu_block_menu_item_curr');
+		$(this).removeClass('sidebar_menu_block_menu_item_curr');
 	});
 }
 
