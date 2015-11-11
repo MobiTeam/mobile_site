@@ -58,7 +58,7 @@
 		
 		
 		
-		$sql="select * from news where source_news = " . $type . " and id >= ". $id_num . " and id <= " . $num . " order by ID desc";
+		$sql="select * from news where source_news = " . $type . " and id >= ". $id_num . " and id < " . $num . " order by ID desc";
 	
 		$s = OCIParse($c,$sql);
 		OCIExecute($s, OCI_DEFAULT);
