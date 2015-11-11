@@ -26,7 +26,7 @@ $(document).ready(function(){
 	$(window).scroll(function(){
 		//#4368FD
 		var sc = $(this).scrollTop(); 
-		console.log(sc);
+		
 		$(window).clearQueue();
 		$('.header_line__content').stop();
 		if(sc > 30){
@@ -41,6 +41,11 @@ $(document).ready(function(){
 			$('.header_shadow_box').fadeOut(100);
 		}
 		
+		if(location.hash == "#news") {
+			if ($(window).scrollTop() > $(document).height() - $(window).height() - 10) {
+				loadNextNews($('.current_item').attr('newstype'), ($('.news_box_item').last()).attr("idnews"));
+			}
+		}
 		
 	});
 	

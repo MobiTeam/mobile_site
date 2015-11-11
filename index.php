@@ -239,6 +239,7 @@
 		
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/view.js"></script>
+		<script src="js/news_loader.js"></script>
 		<!--<script src="js/waterfall.js"></script>-->
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
