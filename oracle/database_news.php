@@ -36,8 +36,8 @@
 		
 		if(isset($_POST['last_article'])){
 		
-			$num = $_POST['last_article'];
-			$id_num = $num - 5;
+			$num = $_POST['last_article'] - 1;
+			$id_num = $num - 7;
 			
 		} else {
 			$sql = "select MAX(id) AS NUM from NEWS where source_news = " . $type . "";
@@ -58,7 +58,7 @@
 		
 		
 		
-		$sql="select * from news where source_news = " . $type . " and id >= ". $id_num . " and id < " . $num . " order by ID desc";
+		$sql="select * from news where source_news = " . $type . " and id > ". $id_num . " and id <= " . $num . " order by ID desc";
 	
 		$s = OCIParse($c,$sql);
 		OCIExecute($s, OCI_DEFAULT);
