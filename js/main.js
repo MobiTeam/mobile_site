@@ -23,6 +23,27 @@ $(document).ready(function(){
 	});	
  
 	
+	$(window).scroll(function(){
+		//#4368FD
+		var sc = $(this).scrollTop(); 
+		console.log(sc);
+		$(window).clearQueue();
+		$('.header_line__content').stop();
+		if(sc > 30){
+			$('.header_shadow_box').fadeIn(100);
+			$('.header_line__content').animate({
+				backgroundColor : '#4368FD'
+			}, 100);
+		} else {
+			$('.header_line__content').animate({
+				backgroundColor : '#5677fc'
+			}, 100);
+			$('.header_shadow_box').fadeOut(100);
+		}
+		
+		
+	});
+	
 	$menu_bl = $('.sidebar_menu_block');
 	$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
 	$('.sidebar_wr').css('width', $menu_bl.width()+15+'px').css('height', $(window).height());

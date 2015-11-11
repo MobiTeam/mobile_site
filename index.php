@@ -104,7 +104,7 @@
 						</div>
 					</div>	
 					
-					<div class="header_shadow_box contr_shadow">
+					<div class="header_shadow_box contr_shadow_2">
 						
 					
 					</div>
