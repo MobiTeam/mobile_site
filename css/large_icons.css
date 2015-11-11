@@ -21,12 +21,18 @@
 	}
 	
 	.opened_input{
-		background:url('../img/close_white@2x.png');
+		background: url('../img/close_white@2x.png');
 		background-size: 24px 24px;
-		background-position:center center;
+		background-position: center center;
 		background-repeat: no-repeat;
 	}
 
+	.news_box_exit_button{
+		background-size: 24px 24px!important;
+		background-position: center center!important;
+		background-repeat: no-repeat!important;
+		background:url('../img/close-circle@2x.png');		
+	}
 	
 	.previos_info_circle{
 	   background-image: url('../img/student_hat@2x.jpg');

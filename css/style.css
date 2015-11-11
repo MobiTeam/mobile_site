@@ -30,11 +30,21 @@
 	box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
 }
 
+.contr_shadow_2{
+	-webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.5);
+}
+
 html, body{
     height:100%;
 	background:#f5f5f5;
 	font-family: "RobotoLight", sans-serif; 
 } 
+
+b, strong {
+	font-family: "RobotoMedium", sans-serif;
+}
 
 .wrapper{
     max-width:1024px;
@@ -68,7 +78,7 @@ html, body{
 }
 
 .header_line{
-	background:#5677fc;
+	/* background:#5677fc; */
 	color:white;
 	height:54px;
 	width:100%;
@@ -81,11 +91,17 @@ html, body{
 
 .header_line__content{
 	width:100%;
+	background:#5677fc;
 	box-sizing:border-box;
 } 
 
 .header_shadow_box{
-	height:100%;
+	height: 1px;
+    margin-top: -1px;
+    width: 100%;
+	z-index: 0;
+	position: relative;
+	display: none;
 }
 
 .header_line__helper{
@@ -158,7 +174,7 @@ html, body{
 .header_line_addition_menu_item{
 	width:32%;
 	display:inline-block;
-	background:#5677fc;
+	/* background:#5677fc; */
 }
 
 .header_line_addition_menu_item:active{
@@ -172,7 +188,7 @@ html, body{
 } 
 
 .header_line_addition_wrapper{
-	background:#5677fc;
+	/* contr_shadow */
 	display:none;
 }
 
@@ -190,7 +206,6 @@ html, body{
 	text-align:center;
 	margin:0 auto;
 	font-size:14px;
-	/* background:#5677fc; */
 }
 
 .header_line_addition_data{
@@ -201,7 +216,7 @@ html, body{
 .date_item{
 	color:black;
 	display:inline-block;
-	padding:4px 1%;
+	padding:4px 1px;
 	font-family:"RobotoRegular", sans-serif;
 	/* max-width:46px; */
 	/* width:15%; */
@@ -255,6 +270,10 @@ html, body{
 	margin:15px auto;
 	padding:0px 10px;
 	
+}
+
+.settings_box_button_save{
+	padding:0px;
 }
 
 .timetable_box_input{
@@ -435,14 +454,14 @@ html, body{
 .timetable_box{
 	margin:10px 15px 0px 15px; 
 	display:none;
+	padding-top:10px;
 }
 
 .timetable_box_info{
-	background:white;
+	background:#FFFFE7;	
 	padding:7px;
 	border-radius:3px;
 	display:none;
-	margin-top:10px;
 }
 
 .timetable_box_form{
@@ -462,8 +481,22 @@ html, body{
 	display:none;
 }
 
+.news_box_exit_button{
+	float:right;
+	background:url('../img/close-circle.png');
+	height:24px;
+	width:24px;
+	background-repeat:no-repeat;
+	opacity:0.8;
+	margin:5px;
+}
+
+.news_box_exit_button:active{
+	opacity:1;
+}
+
 .news_box_details{
-	margin:82px 15px 0px 15px; 
+	margin:21px 15px 10px 15px; 
 	display:none;
 	background:white;
 	padding:10px;
@@ -489,7 +522,8 @@ html, body{
 
 .full_article_date{
 	color:grey;
-	text-align:right;
+	text-align:left;
+	margin-left:9px;
 	font-size:16px;
 }
 
@@ -501,6 +535,10 @@ html, body{
 	margin:10px;
 	text-indent:18px;
 	line-height:22px;
+}
+
+.full_article_news{
+	margin-bottom:10px;
 }
 
 .news_box_item_image{
@@ -669,9 +707,24 @@ html, body{
 .timetable_style{
 	margin: 0 auto;
 	width:100%;
-	max-width:500px;
+	max-width:900px;
 	border-collapse: collapse;
 	margin-bottom:10px;
+}
+
+.day_header{
+	margin: 0 auto;
+	width:100%;
+	max-width:900px;
+	background:#5677fc;
+	box-sizing:border-box;
+	padding:8px;
+	color:white;
+	margin-top:-10px;
+}
+
+.current_day{
+	background:#359d78;
 }
 
 .timetable_fio{
@@ -682,11 +735,20 @@ html, body{
 	display:none;
 }
 
+.timetable_lessons{
+	margin-bottom:10px;
+}
+
 .no_lessons{
 	max-width:500px;
 	width:100%;
 	display:block;
+	min-height:50px;
 	margin:0 auto;
+	background:white;
+	border: 1px solid #c6c6c6;
+	padding:7px;
+	box-sizing:border-box;
 }
 
 .green_td_tag{
@@ -781,4 +843,8 @@ html, body{
 	color:grey;
 	font-size:14px;
 	font-family:"RobotoRegular", sans-serif;
+}
+
+.date_a{
+	text-decoration:none;
 }

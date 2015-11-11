@@ -1,3 +1,82 @@
+var displayTimetable = function(date){
+	
+	date = getCurrentDate(date);
+						 
+	if(date != undefined && sessionStorage.timetable != "undefined"){
+		
+		closeTimetableAlert();
+		
+		var timetable = JSON.parse(sessionStorage.timetable);
+		
+		if($('.item_ch_1').prop('checked') == undefined){
+			createHtmlSettings();
+			setUserSettings(+localStorage.settingsCode);
+			
+			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+			
+			elems.forEach(function(html) {
+				var switchery = new Switchery(html);
+			});
+		}
+		
+		if($('.item_ch_1').prop('checked')){
+			
+			var weekHTMLtimetable = '';
+			$('.date_item').each(function(index){
+				var chunks = $(this).attr('date_quer').split('.');
+				var currClassName = '';
+				currClassName = $(this).hasClass('redTag') ? 'current_day' : '';
+				weekHTMLtimetable += '<div id="' + $(this).attr('name') + '" class="day_header ' + currClassName + '">' + fullWeekNames[index] + " " + chunks[0] + " " + fullMonthNames[+chunks[1]] + '</div>'; 
+				weekHTMLtimetable += createTimetableHTML($(this).attr('date_quer'), timetable);
+			});
+			
+			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(120);
+			
+			setTimeout(function(){
+				$('.redTag').click();
+			}, 100);
+			
+		} else {
+			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
+		} 
+				
+	} else {
+		showTimetableAlert();
+	}						 
+	view.correctHeight();
+}
+
+var getAuthInfo = function(infoObj){
+			
+			authObj = infoObj;
+						
+			if (authObj.FIO != "undefined"){
+				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
+				
+				$('.authblock').css('display','inline-block');	
+				
+				localStorage.settingsCode = authObj.settings;
+					
+			}
+			view.changePage('menu');
+			showTooltip(authObj.serverRequest, 2000);
+			
+			createHtmlSettings();
+			setUserSettings(+localStorage.settingsCode);
+			
+			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+			
+			elems.forEach(function(html) {
+				var switchery = new Switchery(html);
+			});
+	
+}
+
+function tryAutorisate(userData){
+	return myajax(true, 'POST', 'mobile_reciever.php', userData, false, getAuthInfo, true);
+}
+
+
 // открытие/закрытие фона заглушки
 function opBl(){ 
 	$('#overlay').css('display', 'block'); 
@@ -17,8 +96,8 @@ function clMenBl(){
 	$('.menuoverlay').css('display', 'none');
 }
 
-//загрузка с сервера [boolean, string, string, object, boolean]
-function myajax(async, type, url, data, notResponse){ 
+//загрузка с сервера [boolean, string, string, object, boolean, callback, boolean, string]
+function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
 	
 	var jsonObj;
 	opBl();
@@ -30,7 +109,7 @@ function myajax(async, type, url, data, notResponse){
 			data: data,
 			success: function(responseTxt){
 				
-				if(notResponse == undefined || notResponse){
+				if(notResponse == undefined || !notResponse){
 					var clrResp = clearUTF8(responseTxt);
 
 					try {
@@ -40,9 +119,20 @@ function myajax(async, type, url, data, notResponse){
 					}
 				}
 				
+				if(functionCallBack != undefined) {
+					
+					if(issetArgs == undefined || !issetArgs){
+						setJSON(savePlace, jsonObj);
+						functionCallBack();
+					} else {
+						functionCallBack(jsonObj);
+					}
+					return;
+				}
+				
 			},
 			error: function(){
-				showTooltip(errMessages[1], 2000);	
+				showTooltip(errMessages[1], 2000);
 			},
 			complete: function(){
 				clBl();
@@ -128,7 +218,7 @@ function clearUTF8(str) {
 	return clrStr;
 }
 
-function newsWrap(obj){
+function newsWrap(obj, append){
 	
 	$newsblock = $('.news_box');
 	var resHtml = '';
@@ -152,10 +242,15 @@ function newsWrap(obj){
 		} 
 		
 		$newsblock.html('').css('display', 'none');
-		$newsblock.html(resHtml).fadeTo(250, 1);
 		
+		if(append != undefined && append == true){
+			$newsblock.append(sessionStorage['news_' + $('.current_item').attr('newstype')] + resHtml).fadeTo(0, 1);
+			sessionStorage['news_' + $('.current_item').attr('newstype')] += resHtml;	
+		} else {
+			$newsblock.html(resHtml).fadeTo(250, 1);
+			sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();	
+		}
 		
-	
 }
 
 function closeSidebar(){
@@ -190,17 +285,21 @@ function loadDetails(id){
 function saveAndShow(){
 	
 	if(sessionStorage['news_' + $('.current_item').attr('newstype')] == undefined){
-		newsWrap(myajax(false, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}));
-		sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();
+		//придумать callback функцию
+		//myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace)
+		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}, false, newsWrap, true);
+		
 	} else {
-		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(250, 1);
+		opBl();
+		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(50, 1);
+		clBl();
 	}
 
 }
 
 function clearCurrSidebarItem(){
 	$('.sidebar_menu_block_menu_item').each(function(){
-			$(this).removeClass('sidebar_menu_block_menu_item_curr');
+		$(this).removeClass('sidebar_menu_block_menu_item_curr');
 	});
 }
 
@@ -253,7 +352,7 @@ function loadTimetableInf(dataQuery){
 		
 	}
 	
-	setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false));
+	myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false, displayTimetable, false, 'timetable');
 
 }
 
@@ -296,31 +395,13 @@ function closeInput(){
 	});
 }
 
-function displayTimetable(date){
-	
-	date = getCurrentDate(date);
-						 
-	if(date != undefined && sessionStorage.timetable != "undefined"){
-		
-		closeTimetableAlert();
-		
-		var timetable = JSON.parse(sessionStorage.timetable);
-		
-		$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
-		
-	} else {
-		showTimetableAlert();
-	}						 
-	
-}
-
 function issetNumbersInQuery(query){
 	return !!query.match(/\d/g);
 }
 
 function createTimetableHTML(date, timetable, showEmptyFields){
 	
-	showEmptyFields = true;
+	showEmptyFields = $('.item_ch_2').prop('checked');
 	
 	var dateNumbers = date.replace(/\./g,''),
 		timetableHTML = '<table class="timetable_style">',
@@ -380,7 +461,7 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 							firstNumLesson --;
 								
 					}  else {
-						
+												
 						if (firstNumLesson < timetable[dateNumbers].length - 1){
 							firstNumLesson++;
 							if (+item.PAIR == timetable[dateNumbers][firstNumLesson]['PAIR']){
@@ -399,7 +480,13 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 										  </tr>';
 							twoLessonsInOneTime = false;			  
 						} else {
-							var num = twoLessonsInOneTime || !(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) ? i+1 : i;
+							
+							if(twoLessonsInOneTime){
+								num = i + 1;
+							} else {
+								num = i;
+							} 
+							/* var num = twoLessonsInOneTime || !(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) ? i+1 : i; */
 							timetableHTML += '<tr class="timetable_tr">\
 											<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="2"' : '') + '>' + numLessonsArr[num] + '</td>\
 											<td class="' + getColorTypeLesson(item.VID) + '">\
@@ -473,6 +560,12 @@ function setUserSettings(settingsCode) {
 	
 	var binarCode = "" + (settingsCode == undefined ? (0).toString(2) : (+settingsCode).toString(2));
 	
+	var num = $('[class *= "item_ch"]').size();
+	 
+	for(i = 0; i < num - binarCode.length; i++){
+		binarCode = "0" + binarCode; 	
+	}
+	 
 	$('[class *= "item_ch"]').each(function(index, value){
 		if (binarCode[index] == "1") {
 			$(this).attr("checked", true);

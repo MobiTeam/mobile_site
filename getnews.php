@@ -4,7 +4,8 @@
   require_once('auth/ad_functions.php');
     
 	if(isset($_POST['last_article'])){
-		$id_num = $_POST['last_article'];
+		$num = $_POST['last_article'];
+		$id_num = $num - 5;
 	} else {
 		$sql = "select MAX(id) AS NUM from NEWS";
 	
@@ -20,7 +21,7 @@
 		$id_num = $num - 15;
 	}
 	
-  $sql = "select id,name_news,date_news,text_news,text_news2,text_news3,text_news4,prev_img_news from news where id>".$id_num." order by DATE_NEWS DESC";
+  $sql = "select id,name_news,date_news,text_news,text_news2,text_news3,text_news4,prev_img_news from news where id>=".$id_num." and id<=".$num." order by DATE_NEWS DESC";
   
   $s = OCIParse($c,$sql);
   OCIExecute($s, OCI_DEFAULT);

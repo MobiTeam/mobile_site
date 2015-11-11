@@ -12,15 +12,15 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/?date=1996-06-28&PAGEN_1=26&SIZEN_1=2000000');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=1&SIZEN_1=200');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);
    
    //получаем массив ссылок
    if(preg_match_all('/href="([^"]+detail[^"]+)/', $content, $arr_url) && preg_match_all('/<img[^>]+src=([\'"])?((?(1).+?|[^\s>]+))(?(1)\1)/',$content,$arr_img)){ 
-	  
-       $source = 'Новости сайта ugrasu.ru';        
+	  	  
+	   $source = 'Новости сайта ugrasu.ru';        
 	   
        $first_tag = '<div class="news-detail">';	
 	   $sec_tag = '<div class="newsdate">';
@@ -43,8 +43,9 @@
 				preg_match('~name="description" content="([\s\S]*?)"~', $content, $descrarr);
 
 
-				$descr = str_replace(array('&lt;p align=&quot;left&quot;&gt;26', '&amp;lt;p align=&amp;quot;left&amp;quot;&amp;gt;', 'p align=&quot;','&amp;', '&amp;lt;', 'p&amp;gt;','gt;','lt;','p align=&amp;', 'p align=&amp;quot', '/p'), '', stripWhitespaces($descrarr[1]));
-								
+				//$descr = str_replace(array('&lt;p align=&quot;left&quot;&gt;26', '&amp;lt;p align=&amp;quot;left&amp;quot;&amp;gt;', 'p align=&quot;','&amp;', '&amp;lt;', 'p&amp;gt;','gt;','lt;','p align=&amp;', 'p align=&amp;quot', '/p'), '', stripWhitespaces($descrarr[1]));
+				$descr = stripWhitespaces($descrarr[1]);	
+					
 				if(preg_match_all('~[0-9\.,]*~',$date[0][0],$num_date)){
 				  	$cl_date = substr(implode($num_date[0]),0,10); 
 				} else die('Шаблон даты поменялся.');
@@ -71,6 +72,8 @@
 						
 						#удаляем пустые абзацы
 						foreach(array_map("stripWhitespaces",$arr[2]) as $p){
+							
+							
 							if(iconv_strlen($p)>2){
 								$text_news.="<p>".str_replace("'","''",$p)."</p>";								
 						   }

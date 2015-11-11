@@ -85,12 +85,12 @@
 					<div class="header_line_addition_datewr">
 						
 						<div class="header_line_addition_data">
-							<div class="date_item dt1"></div>
-							<div class="date_item dt2"></div>
-							<div class="date_item dt3"></div>
-							<div class="date_item dt4"></div>
-							<div class="date_item dt5"></div>
-							<div class="date_item dt6"></div>
+							<div class="date_item dt1" name="dt_s1"></div>
+							<div class="date_item dt2" name="dt_s2"></div>
+							<div class="date_item dt3" name="dt_s3"></div>
+							<div class="date_item dt4" name="dt_s4"></div>
+							<div class="date_item dt5" name="dt_s5"></div>
+							<div class="date_item dt6" name="dt_s6"></div>
 						</div>
 						
 					</div>	
@@ -104,7 +104,7 @@
 						</div>
 					</div>	
 					
-					<div class="header_shadow_box contr_shadow">
+					<div class="header_shadow_box contr_shadow_2">
 						
 					
 					</div>
@@ -121,13 +121,13 @@
 					
 					<div class="settings_box_header">Блок пользовательских настроек</div>
 					
-					<div class="settings_box_inputs">
+					<div class="settings_box_inputs unselected" unselectable="on" onselectstart="return false;">
 						
 						
 						
 					</div>
 					
-					<input class="settings_box_button_save" type="button" value="Сохранить изменения" >
+					<input class="settings_box_button_save " type="button" value="Сохранить изменения" >
 					
 				</div>
 			
@@ -239,12 +239,14 @@
 		
 		<script src="js/jquery-2.1.4.min.js"></script>
 		<script src="js/view.js"></script>
+		<script src="js/news_loader.js"></script>
 		<!--<script src="js/waterfall.js"></script>-->
 		<script src="js/function.js"></script>
 		<script src="js/mess.js"></script>
 		<script src="js/bind_action.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/switchery.min.js"></script>
+		<script src="js/scrollTo.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	</body>
 </html>

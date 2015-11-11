@@ -47,7 +47,7 @@
  function stripWhitespaces($string) {
 	 
 	  $old_string = $string;
-	  $string = str_replace(array("«","»"),'"',str_replace('·','&middot;',strip_tags($string,'<b></b><i></i><u></u><a></a>')));
+	  $string = str_replace(array("«","»"),'"',str_replace('·','&middot;',strip_tags($string,'<b></b><i></i><u></u><a></a><br>')));
 	  $string = preg_replace('/([^\pL\pN\pP\pS\pZ])|([\xC2\xA0])/u',' ', $string);
 	  $string = str_replace('  ',' ', $string);
 	  $string = trim($string);

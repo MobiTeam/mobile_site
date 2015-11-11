@@ -27,13 +27,38 @@
 		
 	} else {
 		
+		
 		if(isset($_POST['type'])){
 			$type = $_POST['type'];
 		} else {
 			$type = 1;
 		}
 		
-		$sql="select * from (select * from news where source_news = " . $type . " order by ID desc) where rownum < 11";
+		if(isset($_POST['last_article'])){
+		
+			$num = $_POST['last_article'] - 1;
+			$id_num = $num - 7;
+			
+		} else {
+			$sql = "select MAX(id) AS NUM from NEWS where source_news = " . $type . "";
+		
+			$s = OCIParse($c,$sql);
+			OCIExecute($s, OCI_DEFAULT); 
+			
+			while(OCIFetch($s)){
+				$num = ociresult($s,'NUM');		
+			}
+		
+			OCICommit($c); 
+			
+			
+			
+			$id_num = $num - 10;
+		}
+		
+		
+		
+		$sql="select * from news where source_news = " . $type . " and id > ". $id_num . " and id <= " . $num . " order by ID desc";
 	
 		$s = OCIParse($c,$sql);
 		OCIExecute($s, OCI_DEFAULT);
