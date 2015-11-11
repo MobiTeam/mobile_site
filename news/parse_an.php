@@ -12,7 +12,7 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=63&PAGEN_1=11&SIZEN_1=20000');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=63&PAGEN_1=11&SIZEN_1=200');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);

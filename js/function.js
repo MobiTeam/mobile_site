@@ -244,7 +244,7 @@ function newsWrap(obj, append){
 		$newsblock.html('').css('display', 'none');
 		
 		if(append != undefined && append == true){
-			$newsblock.append(sessionStorage['news_' + $('.current_item').attr('newstype')] + resHtml).fadeTo(250, 1);
+			$newsblock.append(sessionStorage['news_' + $('.current_item').attr('newstype')] + resHtml).fadeTo(0, 1);
 			sessionStorage['news_' + $('.current_item').attr('newstype')] += resHtml;	
 		} else {
 			$newsblock.html(resHtml).fadeTo(250, 1);

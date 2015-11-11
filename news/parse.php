@@ -12,15 +12,15 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/?date=1996-06-28&PAGEN_1=26&SIZEN_1=2000000');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=1&SIZEN_1=200');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);
    
    //получаем массив ссылок
    if(preg_match_all('/href="([^"]+detail[^"]+)/', $content, $arr_url) && preg_match_all('/<img[^>]+src=([\'"])?((?(1).+?|[^\s>]+))(?(1)\1)/',$content,$arr_img)){ 
-	  
-       $source = 'Новости сайта ugrasu.ru';        
+	  	  
+	   $source = 'Новости сайта ugrasu.ru';        
 	   
        $first_tag = '<div class="news-detail">';	
 	   $sec_tag = '<div class="newsdate">';
