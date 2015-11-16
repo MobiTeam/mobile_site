@@ -182,7 +182,11 @@ function setJSON(key, value, flag) {
 	        if(flag == true){
 				localStorage[key] = JSON.stringify(value);				
 			} else {
-				sessionStorage[key] = JSON.stringify(value);
+				if(sessionStorage[key] == undefined){
+					sessionStorage[key] = JSON.stringify(value);
+				} else {
+					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
+				}
 			}
 			
 		} catch(ex){
