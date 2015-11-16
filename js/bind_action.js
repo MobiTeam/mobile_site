@@ -87,6 +87,20 @@ $(document).ready(function(){
 		
 	})
 	
+	$('.header_line_content_calendar').click(function(){
+		
+	})
+	
+	$('.date_item_next').click(function(){
+		sessionStorage.diffDate = 7;
+		getTimetableWeek(7);		
+	});
+	
+	$('.date_item_back').click(function(){
+		sessionStorage.diffDate = -7;
+		getTimetableWeek(-7);
+	});
+	
 	$('.authorisation_box_button').click(function(){
 		
 		sessionStorage.clear();
@@ -105,6 +119,7 @@ $(document).ready(function(){
 			$('.timetable_box_input').val('');
 			
 		} else {
+			$('.header_line_content_calendar').fadeOut(0);
 			slideInput();
 		}
 	});

@@ -53,6 +53,12 @@ $(document).ready(function(){
 	$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
 	$('.sidebar_wr').css('width', $menu_bl.width()+15+'px').css('height', $(window).height());
 	
+	$(window).resize(function(){
+		view.correctHeight();
+	});	
+	
+	
+		
 })
 
 function validateForm(){

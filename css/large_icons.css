@@ -94,4 +94,21 @@
 	.menu_box_logo{
 		background-size:100px 100px;
 	}
+	
+	.header_line_content_calendar {
+		background:url('../img/calendar@2x.png') no-repeat center center;
+		background-size: 24px 24px;
+	}
+	
+	.date_item_back {
+		background: url('../img/back_bt@2x.png');
+		background-repeat: no-repeat;
+		background-size: 24px 24px;
+	}
+
+	.date_item_next {
+		background: url('../img/forw_bt@2x.png');
+		background-repeat: no-repeat;
+		background-size: 24px 24px;
+	}
 }
