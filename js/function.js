@@ -122,7 +122,7 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 				if(functionCallBack != undefined) {
 					
 					if(issetArgs == undefined || !issetArgs){
-						setJSON(savePlace, jsonObj, false, true);
+						setJSON(savePlace, jsonObj, false);
 						functionCallBack();
 					} else {
 						functionCallBack(jsonObj);
@@ -177,17 +177,12 @@ function showTooltip(toolText, duration){
 }
 
 // сохранение JSON в localStorage/sessionStorage
-function setJSON(key, value, flag, append) {
+function setJSON(key, value, flag) {
 	try {   
 	        if(flag == true){
 				localStorage[key] = JSON.stringify(value);				
 			} else {
-				if(append){
-					var obj = JSON.parse(sessionStorage[key]);
-					sessionStorage[key] = JSON.stringify($.extend(obj, value));
-				} else { 
-					sessionStorage[key] = JSON.stringify(value);
-				  } 
+				sessionStorage[key] = JSON.stringify(value);
 			}
 			
 		} catch(ex){
@@ -401,7 +396,7 @@ function chWeek(respTxt){
 		showTimetableAlert();
 	} else {
 		showCurrentWeek(getTimetableWeek(+sessionStorage.diffDate, true));
-		setJSON('timetable', respTxt, false, true);
+		setJSON('timetable', respTxt, false);
 		displayTimetable();
 		closeTimetableAlert();
 	}
