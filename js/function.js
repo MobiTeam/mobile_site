@@ -390,12 +390,14 @@ function loadTimetableInf(dataQuery, loadDate, changeWeek){
 
 }
 
-function chWeek(respTxt){
+function chWeek(respTxt) {
 	if(Object.keys(respTxt).length == 0){
 		$('.timetable_lessons').html('');
-		showTimetableAlert();
+		showTooltip("Расписание на следующую неделю еще не готово", 4500);
+		displayTimetable();
 	} else {
 		showCurrentWeek(getTimetableWeek(+sessionStorage.diffDate, true));
+		console.log(respTxt);
 		setJSON('timetable', respTxt, false);
 		displayTimetable();
 		closeTimetableAlert();
