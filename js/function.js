@@ -230,7 +230,7 @@ function newsWrap(obj, append){
 	
 	for(var i = 0; i < obj.length; i++){
 		
-		var id = obj[i].type == '3' ? 34 : obj[i].id;
+		var id = obj[i].type == '3' ? 'default_bg' : obj[i].id;
 		
 		var imglink = 'news/pre_images/img_' + id + '.jpg';
 		resHtml += '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
