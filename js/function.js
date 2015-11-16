@@ -316,7 +316,7 @@ function showCurrentWeek(date){
 	var dt = date == undefined ? new Date() : date;
 	var currDay = dt.getDay();
 	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
-	
+		
 	dt.setDate(dt.getDate() - diff);
 	
 	for(var i = 0; i < 6; i++){
@@ -360,7 +360,8 @@ function issetTimetable(){
 function getTimetableWeek(diff, onlyDate){
 	
 	var str = ($('.dt1').attr('date_quer')).split('.');
-	var dt = new Date(str[1] + '.' + str[0] + '.' + str[2]);
+	var dt = new Date(str[2] + '/' + str[1] + '/' + str[0] + ' 12:00:00');
+	
 	dt.setDate(dt.getDate() + diff);
 	
 	if(onlyDate){
@@ -395,17 +396,17 @@ function loadTimetableInf(dataQuery, loadDate, changeWeek){
 }
 
 function chWeek(respTxt) {
+	
 	if(Object.keys(respTxt).length == 0){
 		$('.timetable_lessons').html('');
 		showTooltip("Расписание на следующую неделю еще не готово", 4500);
 		displayTimetable();
-	} else {
-		showCurrentWeek(getTimetableWeek(+sessionStorage.diffDate, true));
-		console.log(respTxt);
+	} else { 
+		showCurrentWeek(getTimetableWeek(parseInt(sessionStorage.diffDate), true));
 		setJSON('timetable', respTxt, false);
 		displayTimetable();
 		closeTimetableAlert();
-	}
+	} 
 }
 
 function issetUserGroup(){
