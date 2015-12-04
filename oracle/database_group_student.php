@@ -21,7 +21,7 @@
 			
 			$group_json[$count] = array(
 									"fio" => ociresult($s,'FFIO'), 
-									"group" => ociresult($s,'FSDEPCODE'), 
+									"group" => ociresult($s,'FSDEPCODE')
 
 								);
 			$count ++;

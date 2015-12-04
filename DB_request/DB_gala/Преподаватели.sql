@@ -23,7 +23,6 @@ grant select on budget.v_cisu_teac_room to mobile;
 grant select on budget.v_cisu_teac_stimulpr to mobile;
 
 
-
 ----------------------------------------------------------------------------------CТАВКИ ПРЕПОДАВАТЕЛЯ(Кадровая информация о преподавателе)
 create materialized view mv_cisu_teach_appoint
   PCTFREE     10
@@ -152,19 +151,12 @@ select RowNum rn, P.fStrTabn tab, P.fFio fio, V.path prof, A.fRate, A.fCategory,
 Create or replace view V_CISU_TEAC_HOLIDAY
 as
 Select FFIO,VID,FNOTPUS type_otp,FDOCDATE,FFOUNDATION,FFACTYEARBEG,FFACTYEAREND,FDURATION,COUNTDAY,FACTDAYSAVE,DIF_DAY from V_HD_VACATIONS
+order by FFIO,FDOCDATE
 where instr(
        upper(replace(replace(FFIO,'.',''),' ','')),
        upper(replace(replace('Якимчук','.',''),' ','')),1)>=1
 
-   order by FFIO,FDOCDATE
-
- ---------------------------------------------------Перечень приказов по сотруднику---------------------------------------------------
-
-Select * FROM Persons P
-Inner join appointments A on A.fperson = p.fnrec
-
-----------------------------------------------------Рейтинг ППС-------------------------------------------------------------------------
-
+  
 
 --------------------------------------------------Надбавки------------------------------------------------------------------------
 
@@ -180,3 +172,5 @@ where instr(
 
 
 --------------------------------------------------------------Оценки по группе-------------------------------------------  
+
+Select * from mv_cisu_timetable_all

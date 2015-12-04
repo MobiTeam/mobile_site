@@ -1,5 +1,5 @@
 --СТУДЕНТЫ
-
+grant select on Budget.mv_cisu_stud_appoint to mobile;
 -----------------------------------------------------------------------------Назначение студента
 --переделать академ AO_OTPUSK
 create materialized view mv_cisu_stud_appoint
@@ -19,13 +19,13 @@ as
 select P.fNrec fPersons, P.fFio, P.fStrTabN fTabNmb, P.fSex, A.fVacation||' курс' fCourse,
        to_oradate(P.fBornDate) fBornDate, to_oradate(P.fAppDate) zach, 
        F.fName fak, C.fName||' ('||C.fCode||')' spec, 
-       G.fName grup, decode(K.fCode, 'Целевой', 'Целевой', substr(K.fCode,1,4)) bud,
-       AO.AO_Otpusk, AO.AO_Prikaz      
+       G.fName grup, decode(K.fCode, 'Целевой', 'Целевой', substr(K.fCode,1,4)) bud  
 from Persons P inner join Appointments     A on A.fPerson      = P.fNrec
                inner join U_StudGroup      G on A.fcCat1       = G.fNrec 
                inner join StaffStruct      S on A.fStaffStr    = S.fNrec
                inner join Catalogs         F on S.fPrivPension = F.fNrec -- Факультет
-               inner join U_Specialization C on S.fcDop2       = C.fNrec -- Специализация
+               inner join u_curriculum      cur on s.fcstr    = cur.fNrec
+               inner join U_Specialization C on cur.FCSPECIALIZATION = C.fNrec
                inner join Catalogs         Q on S.fcInf1       = Q.fNrec -- Квалификация
                inner join SpKau            K on S.fcNewSpr1    = K.fNrec -- Бюджет
           left outer join (select distinct V.fAppoint, 
@@ -141,3 +141,11 @@ order by 1, 3, 2
 
 --------------------------------------------------------------------------------------------------------------------------------
 
+                Select * from staffstruct S
+               inner join u_curriculum      cur on s.fcstr    = cur.fNrec
+               inner join U_Specialization C on cur.FCSPECIALIZATION = C.fNrec -- Специализация
+               
+               ---------------------------------------------
+               Select * from mv_cisu_stud_appoint
+               
+               

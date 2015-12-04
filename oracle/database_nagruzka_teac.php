@@ -26,7 +26,7 @@
 									"Group" => ociresult($s,'SG_FNAME'), 
 									"Course_gr" => ociresult($s,'FWCOURSE'), 
 									"Group_count" => ociresult($s,'FISTUDCOUNT'), 
-									"Itog" => ociresult($s,'ITOG'), 
+									"Itog" => ociresult($s,'ITOG')
 
 								);
 	

@@ -15,9 +15,9 @@ FBORNDATE borndate,STAVKA,FNAIKAT naikat
  from mv_teach_appoint
     where instr(
         upper(replace(replace(FIO,'',''),' ','')),
-        upper(replace(replace('Бурлуцкий Владимир','.',''),' ','')),1)>=1
+        upper(replace(replace('Нехорошев','.',''),' ','')),1)>=1
          
-----------------------------------Долги за коттеджи------------------------------------------------
+----------------------------------Долги за коттеджи-------------------------ДАТЬ GRANT с  GALREPORT-----------------------
 
 Select * from v_teac_kott
     where instr(
@@ -25,7 +25,7 @@ Select * from v_teac_kott
         upper(replace(replace('Бурлуцкий Владимир','.',''),' ','')),1)>=1
 
 
---------------------------Долги за комнаты--------------------------------------------------------
+--------------------------Долги за комнаты---------------------------------ДАТЬ GRANT с  GALREPORT-----------------------
 
 Select * from v_teac_room
     where instr(
@@ -34,13 +34,16 @@ Select * from v_teac_room
 
 ---------------------------------------Сотрудники по кафедре----------------------------------------
 Select * from v_teac_caf
-    where prof='Кафедра иностранных языков'
+where instr (
+        upper(replace(replace(prof,'',''),' ','')),
+        upper(replace(replace('иностранных','.',''),' ','')),1)>=1
+
 
 -----------------------------------Справочник-------------------------------
 Select * from v_teac_contact
     where instr(
         upper(replace(replace(FIO,'',''),' ','')),
-        upper(replace(replace('ТАТЬЯНКИН','.',''),' ','')),1)>=1
+        upper(replace(replace('Сабанцева','.',''),' ','')),1)>=1
         and rownum =1
         
 ------------------------------------------------Отпуска сотрудников---------------------------------
@@ -59,8 +62,14 @@ where instr(
 
 ---------------------------------------------Надбавки-------------------------------------------------
 
-Select * from v_teac_nagruzka
+Select * from v_teac_stimul
 
+Select * from v_teac_stimulpr
 
+------------------------------------------------------------------------------------------------------
+
+Select * from v_timetable_all
+    where trunc(to_date(datezan)) >= trunc(TO_DATE('09.11.2015','DD.MM.YYYY'))
+    and trunc(to_date(datezan)) <=trunc(TO_DATE('09.11.2015','DD.MM.YYYY'))+6
 
 

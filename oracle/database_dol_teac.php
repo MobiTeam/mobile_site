@@ -26,7 +26,7 @@
 									"Nachisl" => ociresult($s,'NACHISL'), 
 									"Oplata" => ociresult($s,'OPLATA'), 
 									"Ostatok" => ociresult($s,'OSTATOK'), 
-									"Date" => ociresult($s,'DAT'), 
+									"Date" => ociresult($s,'DAT')
 
 								);
 		$count++;

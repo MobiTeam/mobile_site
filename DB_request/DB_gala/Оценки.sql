@@ -76,10 +76,10 @@ select   UM.fsFio FIO ,USG.Fname number_group,UD.fName Dis,USG.Fname gr_name,C.f
                 inner join U_Discipline      UD   on UL.fcDis       = UD.fNrec
                 inner join Catalogs      C on UM.fcMark = C.fNrec
                 inner join U_TypeWork        UTW  on UL.fcTypeWork = UTW.fNrec
-where USG.Fname  = '1521б'
+where USG.Fname  = '1121б'
 and UPPER(UM.fsfio) in (select UPPER(ffio) from U_student 
 Where   
-FSDEPCODE like '%1521б%' and
+FSDEPCODE like '%1121б%' and
  (fdisdate = 0 or trunc(to_oradate(fdisdate)) >= trunc(sysdate))
   and (fappdate = 0 or trunc(to_oradate(fappdate)) <= trunc(sysdate)))
   and UTW.Fname<>'Зачёты'

@@ -11,7 +11,7 @@
    $sql="Select * from v_stud_marks
 where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
-        upper(replace(replace('".$FIO."','.',''),' ','')),1)>=1
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
     and gr_name like '%\'".$GRUP."\'%'";
 
 	$s = OCIParse($c,$sql);

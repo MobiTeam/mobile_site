@@ -36,7 +36,7 @@
 									"October" => ociresult($s,'OCTOBER'), 
 									"November" => ociresult($s,'NOVEMBER'), 
 									"December" => ociresult($s,'DECEMBER'), 
-									"Itogo" => ociresult($s,'ITOGO'), 
+									"Itogo" => ociresult($s,'ITOGO')
 
 								);
 			$count ++;

@@ -32,7 +32,7 @@
 									"Reg" => ociresult($s,'DATEREG'), 
 									"Sex" => ociresult($s,'SEX'), 
 									"Born" => ociresult($s,'BORNDATE'), 
-									"Category" => ociresult($s,'NAIKAT'), 
+									"Category" => ociresult($s,'NAIKAT') 
 								);
 	
 			$count++;

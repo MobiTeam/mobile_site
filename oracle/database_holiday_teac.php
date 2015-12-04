@@ -26,8 +26,7 @@
 									"Prikaz" => ociresult($s,'FFOUNDATION'), 
 									"Date_beg" => ociresult($s,'FFACTYEARBEG'), 
 									"Date_end" => ociresult($s,'FFACTYEAREND'), 
-									"Duration" => ociresult($s,'FDURATION'), 
-
+									"Duration" => ociresult($s,'FDURATION')
 								);
 	
 			$count++;

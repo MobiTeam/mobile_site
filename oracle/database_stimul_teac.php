@@ -20,8 +20,7 @@
 			
 			$stimul_teac_json = array(
 									"fio" => ociresult($s,'FFIO'), 
-									"summa" => ociresult($s,'SUMMA'), 
-
+									"summa" => ociresult($s,'SUMMA')
 								);
 	
 			
