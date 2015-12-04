@@ -11,11 +11,13 @@
 		
 	$sql = "select TEAC_FIO, DISCIPLINE, GR_NUM, SUBGRUP, TO_CHAR(DATEZAN, 'DD.MM.YYYY') datezan, 
                DAYWEEK, PAIR, VID, AUD, KORP 
-                 from v_timetable
-				where teac_fio = '" . $query . "'
+                 from v_timetable_all
+				where (trunc(to_date(datezan)) >= trunc(TO_DATE('" . $_POST['date_query'] . "','DD.MM.YYYY'))
+						and trunc(to_date(datezan)) <=trunc(TO_DATE('" . $_POST['date_query'] . "','DD.MM.YYYY'))+6) and 
+				  (teac_fio = '" . $query . "'
 				   or teac_caf = '" . $query . "'
                      or gr_num = '" . $query . "'
-                        or aud||' '||korp = '" . $query . "'
+                        or aud||' '||korp = '" . $query . "')
 						order by datezan, PAIR, GR_NUM, SUBGRUP, TEAC_FIO";
 		 
 	$s = OCIParse($c, $sql);

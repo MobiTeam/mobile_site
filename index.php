@@ -13,7 +13,7 @@
 		<link href="css/jqui.css" rel="stylesheet" />
 		<link href="css/large_icons.css" rel="stylesheet" />
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
-		<link href="css/large_phone.css" media="screen and (max-width: 736px)" rel="stylesheet"/> 
+		<link href="css/large_phone.css" media="screen and (min-width: 736px)" rel="stylesheet"/> 
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 	
 	</head>
@@ -59,10 +59,14 @@
 						</div>
 						
 						<span class="header_line__content_title"></span>
-						
+																		
 						<div class="header_line_content_search" onclick="event.stopPropagation();">
 						  
 						</div>
+												
+						<!--<div class="header_line_content_calendar" onclick="event.stopPropagation();">
+						  
+						</div>-->
 						
 						<div class="header_line_search_input">
 							<form class="timetable_box_form" method="post" action="">
@@ -85,12 +89,14 @@
 					<div class="header_line_addition_datewr">
 						
 						<div class="header_line_addition_data">
+							<div class="date_item_back date_item_bt"></div>
 							<div class="date_item dt1" name="dt_s1"></div>
 							<div class="date_item dt2" name="dt_s2"></div>
 							<div class="date_item dt3" name="dt_s3"></div>
 							<div class="date_item dt4" name="dt_s4"></div>
 							<div class="date_item dt5" name="dt_s5"></div>
 							<div class="date_item dt6" name="dt_s6"></div>
+							<div class="date_item_next date_item_bt"></div>
 						</div>
 						
 					</div>	
@@ -133,7 +139,7 @@
 			
 				<div class="timetable_box">
 					<div class="timetable_box_info contr_shadow">
-						Мы не смогли определить номер вашей группы. Для просмотра расписания необходимо воспользоваться поиском и ввести номер группы, ФИО преподавателя или кафедру.
+						Мы не смогли определить номер вашей группы или расписания на эту неделю еще не существует. Для просмотра расписания необходимо воспользоваться поиском и ввести номер группы, ФИО преподавателя или кафедру.
 					</div>
 					
 					<div class="timetable_lessons">
@@ -247,6 +253,6 @@
 		<script src="js/main.js"></script>
 		<script src="js/switchery.min.js"></script>
 		<script src="js/scrollTo.min.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="js/jq_min.js"></script>
 	</body>
 </html>

@@ -122,7 +122,7 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 				if(functionCallBack != undefined) {
 					
 					if(issetArgs == undefined || !issetArgs){
-						setJSON(savePlace, jsonObj);
+						setJSON(savePlace, jsonObj, false);
 						functionCallBack();
 					} else {
 						functionCallBack(jsonObj);
@@ -182,7 +182,11 @@ function setJSON(key, value, flag) {
 	        if(flag == true){
 				localStorage[key] = JSON.stringify(value);				
 			} else {
-				sessionStorage[key] = JSON.stringify(value);
+				if(sessionStorage[key] == undefined){
+					sessionStorage[key] = JSON.stringify(value);
+				} else {
+					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
+				}
 			}
 			
 		} catch(ex){
@@ -225,7 +229,7 @@ function newsWrap(obj, append){
 	
 	for(var i = 0; i < obj.length; i++){
 		
-		var id = obj[i].type == '3' ? 34 : obj[i].id;
+		var id = obj[i].type == '3' ? 'default_bg' : obj[i].id;
 		
 		var imglink = 'news/pre_images/img_' + id + '.jpg';
 		resHtml += '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
@@ -307,12 +311,12 @@ function tagMenuItem(className){
 	$('.' + className).addClass('sidebar_menu_block_menu_item_curr');
 }
 
-function showCurrentWeek(){
+function showCurrentWeek(date){
 	
-	var dt = new Date();
+	var dt = date == undefined ? new Date() : date;
 	var currDay = dt.getDay();
 	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
-	
+		
 	dt.setDate(dt.getDate() - diff);
 	
 	for(var i = 0; i < 6; i++){
@@ -334,11 +338,44 @@ function showCurrentWeek(){
 	
 }
 
+function getFirstWeekDay(notStr, thisDate) {
+	var dt = thisDate == undefined ? new Date() : thisDate;
+	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
+	dt.setDate(dt.getDate() - diff);
+	
+	if(notStr != undefined && notStr == true){
+		return dt;
+	}
+	
+	var day = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate();
+	var month = dt.getMonth() + 1;
+	month = month > 9 ? month : "0" + month;
+	return (day + "." + month + "." + dt.getFullYear());
+}
+
 function issetTimetable(){
 	return sessionStorage.timetable != undefined;
 }
 
-function loadTimetableInf(dataQuery){
+function getTimetableWeek(diff, onlyDate){
+	
+	var str = ($('.dt1').attr('date_quer')).split('.');
+	var dt = new Date(str[2] + '/' + str[1] + '/' + str[0] + ' 12:00:00');
+	
+	dt.setDate(dt.getDate() + diff);
+	
+	if(onlyDate){
+		return dt;
+	}
+	
+	if (localStorage.lastTmtQuery != undefined){
+		loadTimetableInf(localStorage.lastTmtQuery, getFirstWeekDay(false, dt), true);
+	} else {
+		showTimetableAlert();
+	}  
+}
+
+function loadTimetableInf(dataQuery, loadDate, changeWeek){
 	$('.timetable_box_info').fadeOut(100);
 	
 	if (dataQuery == undefined){
@@ -351,9 +388,25 @@ function loadTimetableInf(dataQuery){
 		}
 		
 	}
-	
-	myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery}, false, displayTimetable, false, 'timetable');
+	localStorage.lastTmtQuery = dataQuery;
+	if(changeWeek){
+		myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getFirstWeekDay()}, false, chWeek, true, 'timetable');
+	} else myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getFirstWeekDay()}, false, displayTimetable, false, 'timetable');
 
+}
+
+function chWeek(respTxt) {
+	
+	if(Object.keys(respTxt).length == 0){
+		$('.timetable_lessons').html('');
+		showTooltip("Расписание на следующую неделю еще не готово", 4500);
+		displayTimetable();
+	} else { 
+		showCurrentWeek(getTimetableWeek(parseInt(sessionStorage.diffDate), true));
+		setJSON('timetable', respTxt, false);
+		displayTimetable();
+		closeTimetableAlert();
+	} 
 }
 
 function issetUserGroup(){
@@ -378,15 +431,18 @@ function slideInput(){
 }
 
 function closeInput(){
+	
 	$target = $('.header_line_content_search');
 	$target.removeClass('opened_input');
 			
 	$('.timetable_box_form').animate({
 		width: '0'
 	}, 150, function(){
+		
 		$(this).css('display', 'none');
 		view.$title.fadeIn();
 		if(location.hash == '#timetable'){
+			$('.header_line_content_calendar').fadeIn(0);
 			if(sessionStorage.query != undefined){
 				view.setTitle('<span class="full_sentense">По запросу:</span> "' + (sessionStorage.query).substr(0,8) + '..."');
 			} else view.setTitle(stringNames[5]);

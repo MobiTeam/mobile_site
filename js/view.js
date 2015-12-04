@@ -19,6 +19,7 @@ var view = {
 	$dateline: $('.header_line_addition_datewr'),
 	$heightBlock: $('.space_height'),
 	$cont_header: $('.header_line__content'),
+	$cal_button: $('.header_line_content_calendar'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -54,6 +55,7 @@ var view = {
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
 		closeInput();
+		this.$cal_button.fadeOut(0);
 		closeSidebar();
 		clearCurrSidebarItem();
 	},
@@ -205,7 +207,9 @@ function loadNewsBlock(){
 }
 
 function loadTimetable(){
+	
 	tagMenuItem('timetable_item');
+	view.$cal_button.fadeIn(0);
 	view.$timetable.stop().fadeTo(250, 1);
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[5]);
