@@ -4,13 +4,14 @@
  	require_once('../auth/ad_functions.php');
 	
 	
-   $FFIO=$_POST['FFIO'];
-
+   // $FFIO=$_POST['FFIO'];
+ 	
+ 	$FFIO='Ð¯ÐºÐ¸Ð¼Ñ‡ÑƒÐº';
 	
- //Ñòèïåíäèÿ ñòóäåíòà
- $sql = "Select * from V_STUD_AWARDS
+ //Ð¡Ñ‚Ð¸Ð¿ÐµÐ½Ð´Ð¸Ñ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð°
+ $sql = "Select * from MV_STUD_AWARDS
 		    where instr(
-        upper(replace(replace(FIO,'.',''),' ','')),
+        upper(replace(replace(FFIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
 		$s = OCIParse($c,$sql);
@@ -43,7 +44,7 @@
 		
 		} 
 	
-	//print_r(utf8_json_encode($awards_json));
+	print_r(json_encode_cyr($awards_json));
 
 
 ?>

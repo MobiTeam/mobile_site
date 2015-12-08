@@ -3,20 +3,20 @@
     require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
 	
-      $caf=$_POST[''];	
+      $FFIO=$_POST[''];	
 
 
-	$sql="Select * from v_teac_caf
+	$sql="Select * from v_teac_contact
 where instr (
-        upper(replace(replace(prof,'',''),' ','')),
-        upper(replace(replace('".$caf."','.',''),' ','')),1)>=1";
+        upper(replace(replace(FIO,'',''),' ','')),
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
 
    $s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	
 		$contact_teac_json = array();
-		$count=0
+		$count=0;
 				
 		while(OCIFetch($s)){
 			
@@ -33,6 +33,6 @@ where instr (
 		} 
 		
 		
-	print_r(utf8_json_encode($contact_teac_json));
+	print_r(json_encode_cyr($contact_teac_json));
 
 ?>

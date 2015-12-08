@@ -4,6 +4,7 @@
 	require_once('../auth/ad_functions.php');
    
       $FFIO=$_POST[''];
+
    
      $sql="Select * from v_teac_nagruzka
 		where instr(
@@ -18,7 +19,7 @@
 				
 		while(OCIFetch($s)){
 			
-			$nagruzka_teac_json = array(
+			$nagruzka_teac_json[$count] = array(
 									"fio" => ociresult($s,'FFIO'), 
 									"Year" => ociresult($s,'FWYEARED'), 
 									"Sezon" => ociresult($s,'SEZON'), 
@@ -33,5 +34,5 @@
 			$count++;
 		} 
 		
-	print_r(utf8_json_encode($nagruzka_teac_json));
+	print_r(json_encode_cyr($nagruzka_teac_json));
  ?>

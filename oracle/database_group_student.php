@@ -3,12 +3,11 @@
  	require_once('database_connect.php');
  	require_once('../auth/ad_functions.php');
 	
-	 $GRUP=$_POST['GRUP'];
-	 
+	 $GRUP=$_POST[''];
 	 
 	 //Студенты в группе
 	 $sql = "Select * from v_stud_group
-		where FSDEPCODE like '".$GRUP."'";
+		where FSDEPCODE like '%".$GRUP."%'";
 		
 			$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
@@ -27,6 +26,6 @@
 			$count ++;
 		
 		} 
- 
-
+	 
+		print_r(json_encode_cyr($group_json));
 ?>

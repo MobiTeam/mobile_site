@@ -4,8 +4,9 @@
 	require_once('../auth/ad_functions.php');
    
       $FFIO=$_POST[''];
+
    
-   ////////Äîëãè çà êîòòåäæ
+   ////////Ð”Ð¾Ð»Ð³Ð¸ Ð·Ð° ÐºÐ¾Ñ‚Ñ‚ÐµÐ´Ð¶
    
      $sql="Select * from v_teac_kott
 		where instr(
@@ -33,7 +34,9 @@
 			
 		}
 
-////////////Äîëãè çà êîìíàòó
+		print_r(json_encode_cyr($dol_kott_teac_json));
+
+////////////Ð”Ð¾Ð»Ð³Ð¸ Ð·Ð° ÐºÐ¾Ð¼Ð½Ð°Ñ‚Ñƒ
 
   $sql="Select * from v_teac_room
 		where instr(
@@ -62,5 +65,5 @@
 		}
 		
 		
-	print_r(utf8_json_encode($dol_room_teac_json));
+	print_r(json_encode_cyr($dol_room_teac_json));
  ?>

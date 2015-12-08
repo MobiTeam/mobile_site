@@ -3,13 +3,15 @@
    require_once('database_connect.php');
    require_once('../auth/ad_functions.php');
    
-   $FFIO=$_POST[''];
+   // $FFIO=$_POST[''];
    
-   //Ïîëíîå íàçíà÷åíèå ïðåïîäàâàòåëÿ
+   $FFIO='Ð‘ÑƒÑ€Ð»ÑƒÑ†ÐºÐ¸Ð¹ Ð’Ð»Ð°Ð´Ð¸Ð¼Ð¸Ñ€';
+
+   //ÐŸÐ¾Ð»Ð½Ð¾Ðµ Ð½Ð°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð¿Ñ€ÐµÐ¿Ð¾Ð´Ð°Ð²Ð°Ñ‚ÐµÐ»Ñ
    
    $sql="Select * from V_TEACH_APPOINT_ALL 
 		where instr(
-        upper(replace(replace(FFIO,'.',''),' ','')),
+        upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
    $s = OCIParse($c,$sql);
@@ -20,8 +22,8 @@
 				
 		while(OCIFetch($s)){
 			
-			$appoint_teac_json = array(
-									"fio" => ociresult($s,'FFIO'), 
+			$appoint_teac_json[$count] = array(
+									"fio" => ociresult($s,'FIO'), 
 									"Inst" => ociresult($s,'INSTITUTE'), 
 									"Post" => ociresult($s,'POST'), 
 									"Rate" => ociresult($s,'RATE'), 
@@ -38,6 +40,6 @@
 			$count++;
 		} 
 		
-	print_r(utf8_json_encode($appoint_teac_json));
+	print_r(json_encode_cyr($appoint_teac_json));
    
  ?>

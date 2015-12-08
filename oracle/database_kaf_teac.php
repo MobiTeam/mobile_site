@@ -3,9 +3,13 @@
     require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
 	
-	
+	//Кафедра
 	$cafidra=$_POST[''];
-   
+
+	// $cafidra='Компьютерного моделирования';
+
+
+	//Сотрудники по кафедре
    $sql="Select * from v_teac_caf
 where instr (
         upper(replace(replace(prof,'',''),' ','')),
@@ -15,11 +19,11 @@ where instr (
 	OCIExecute($s, OCI_DEFAULT);
 	
 		$cafidra_teac_json = array();
-		$count=0
+		$count=0;
 				
 		while(OCIFetch($s)){
 			
-			$cafidra_teac_json = array(
+			$cafidra_teac_json[$count] = array(
 									"fio" => ociresult($s,'FIO'), 
 									"podr" => ociresult($s,'PROF'), 
 									"post" => ociresult($s,'FNAME')
@@ -28,7 +32,7 @@ where instr (
 			$count++;
 		} 
 		
-	print_r(utf8_json_encode($cafidra_teac_json));
+	print_r(json_encode_cyr($cafidra_teac_json));
    
    
    

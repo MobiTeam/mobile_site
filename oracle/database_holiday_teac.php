@@ -4,8 +4,10 @@
 	require_once('../auth/ad_functions.php');
    
       $FFIO=$_POST[''];
-   
-     $sql="Select * from v_teac_holiday 
+
+
+/////Отпуск преподавателя
+     $sql="Select * from mv_teac_holiday 
 		where instr(
         upper(replace(replace(FFIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -14,11 +16,11 @@
 	OCIExecute($s, OCI_DEFAULT);
 	
 		$holiday_teac_json = array();
-		$count=0
+		$count=0;
 				
 		while(OCIFetch($s)){
 			
-			$holiday_teac_json = array(
+			$holiday_teac_json[$count] = array(
 									"fio" => ociresult($s,'FFIO'), 
 									"Vid" => ociresult($s,'VID'), 
 									"Type" => ociresult($s,'TYPE_OTP'), 
@@ -32,5 +34,5 @@
 			$count++;
 		} 
 		
-	print_r(utf8_json_encode($holiday_teac_json));
+	print_r(json_encode_cyr($holiday_teac_json));
  ?>

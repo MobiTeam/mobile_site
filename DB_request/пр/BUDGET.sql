@@ -97,7 +97,9 @@ UPDATE bg_institute
 SET  LV='1'
 where NAME_INST like ('%ИНСТИТУТ%')
 ---------------------------------------
-Select ins.nrec_inst,ins.name_inst,ins.LV,dl.nrec_delegate,dl.fio_delegate,dl.date_from,dl.date_to from BG_DELEGATE dl
+create or replace view v_bg_delegate
+as
+Select ins.nrec_inst,ins.name_inst,ins.LV,dl.nrec_delegate,dl.fio_delegate,ins.lv_delegated,dl.date_from,dl.date_to from BG_DELEGATE dl
 right outer join BG_INSTITUTE ins on dl.nrec_inst=ins.nrec_inst
 and dl.DATE_TO is null or dl.DATE_TO>=sysdate
 ------------------------------------------------------------Соединение зав кафедр---------
@@ -108,4 +110,6 @@ Select distinct ruk.PODR,ins.name_inst,ruk.FPERSON,per.FFIO,sysdate from v_hd_ru
     Inner join mv_select_person per on per.fperson = ruk.fperson
     
     Select * from mv_select_person
+    
+    Select * from v_vpo_plan
 

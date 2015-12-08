@@ -3,9 +3,11 @@
  require_once('database_connect.php');
  	require_once('../auth/ad_functions.php');
  
-    $FFIO=$_POST['FFIO'];
+    $FFIO=$_POST[''];
+
  
- // Äîëãè çà îáùåæèòèÿ ñòóäåíòà
+ 
+ // Ð”Ð¾Ð»Ð³Ð¸ Ð·Ð° Ð¾Ð±Ñ‰ÐµÐ¶Ð¸Ñ‚Ð¸Ñ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð°
  	$sql="Select * from V_STUD_DOL 
     where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
@@ -33,9 +35,11 @@
 		
 		}
 
+		print_r(json_encode_cyr($Dol_json));
+
 	
 	
-	//Äîëãè çà îáó÷åíèÿ ñòóäåíòà
+	//Ð”Ð¾Ð»Ð³Ð¸ Ð·Ð° Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸Ñ ÑÑ‚ÑƒÐ´ÐµÐ½Ñ‚Ð°
 	$sql = "Select * from V_STUD_EDUCATION
 	where instr(
     upper(replace(replace(FIO,'.',''),' ','')),
@@ -62,5 +66,7 @@
 			$count ++;
 		
 		}		
+
+		print_r(json_encode_cyr($Dol_education_json));
 	
 ?>

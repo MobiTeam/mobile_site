@@ -6,3 +6,7 @@ grant select on galreport.dol_rab to mobile;
 /
 grant select on galreport.dol_stud to mobile;
 /
+
+
+
+

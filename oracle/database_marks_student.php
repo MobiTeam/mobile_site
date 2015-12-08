@@ -1,18 +1,19 @@
-﻿<?php
+<?php
 
    require_once('database_connect.php');
    require_once('../auth/ad_functions.php');
 
    
-   $FFIO=$_POST['FFIO'];
-   $GRUP=$_POST['GRUP'];
+   // $FFIO=$_POST[''];
+   // $GRUP=$_POST[''];
    
-   
+
+
    $sql="Select * from v_stud_marks
 where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
-    and gr_name like '%\'".$GRUP."\'%'";
+   		 and gr_name like '%".$GRUP."%'";
 
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
@@ -22,20 +23,20 @@ where instr(
 				
 		while(OCIFetch($s)){
 			
-			$appoint_json[$count] = array(
+			$marks_json[$count] = array(
 			
-								"discipline" => ociresult($s,'DIS')
-								"group" => ociresult($s,'GR_NAME')
-								"zach" => ociresult($s,'ZACH')
-								"semestr" => ociresult($s,'SEMESTR')
-								"type" => ociresult($s,'TYPEWORK')
+								"discipline" => ociresult($s,'DIS'),
+								"group" => ociresult($s,'GR_NAME'),
+								"zach" => ociresult($s,'ZACH'),
+								"semestr" => ociresult($s,'SEMESTR'),
+								"type" => ociresult($s,'TYPEWORK'),
 								"mark" => ociresult($s,'FWMARK')
 								);
 			$count ++;
 			
 		} 
 		
-	//print_r(utf8_json_encode($marks_json));
+	print_r(json_encode_cyr($marks_json));
    
    
 ?>
