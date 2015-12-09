@@ -321,10 +321,14 @@ function showCurrentWeek(date){
 	var dt = date == undefined ? new Date() : date;
 	var currDay = new Date();
 	var thisWeekDay = dt;
-	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
 	
-	console.log(currDay);
-	console.log(thisWeekDay);
+	currDay.setHours(12, 0, 0, 0);
+	thisWeekDay.setHours(12, 0, 0, 0); 
+
+	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
+
+	console.log(currDay.valueOf());
+	console.log(thisWeekDay.valueOf());
 
 	dt.setDate(dt.getDate() - diff);
 	
@@ -332,8 +336,8 @@ function showCurrentWeek(date){
 		
 
 		//разобраться с датами
-		var className = currDay > thisWeekDay ? 'greyTag' 
-											  : currDay == thisWeekDay ? 'redTag'
+		var className = currDay.valueOf() > thisWeekDay.valueOf() ? 'greyTag' 
+											  : currDay.valueOf() == thisWeekDay.valueOf() ? 'redTag'
 											  : '';
 		
 	    var curr_date = dt.getDate();

@@ -95,11 +95,15 @@ $(document).ready(function(){
 	})
 	
 	$('.date_item_next').click(function(){
+		$('.greyTag').removeClass('greyTag');
+		$('.redTag').removeClass('redTag');
 		sessionStorage.diffDate = 7;
 		getTimetableWeek(7);		
 	});
 	
 	$('.date_item_back').click(function(){
+		$('.greyTag').removeClass('greyTag');
+		$('.redTag').removeClass('redTag');
 		sessionStorage.diffDate = -7;
 		getTimetableWeek(-7);
 	});
