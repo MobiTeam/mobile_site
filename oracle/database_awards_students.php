@@ -4,9 +4,8 @@
  	require_once('../auth/ad_functions.php');
 	
 	
-   // $FFIO=$_POST['FFIO'];
+   $FFIO=$_POST['FFIO'];
  	
- 	$FFIO='Якимчук';
 	
  //Стипендия студента
  $sql = "Select * from MV_STUD_AWARDS

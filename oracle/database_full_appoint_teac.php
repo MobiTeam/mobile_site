@@ -3,9 +3,8 @@
    require_once('database_connect.php');
    require_once('../auth/ad_functions.php');
    
-   // $FFIO=$_POST[''];
+   $FFIO=$_POST[''];
    
-   $FFIO='Бурлуцкий Владимир';
 
    //Полное назначение преподавателя
    

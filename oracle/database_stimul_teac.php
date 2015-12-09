@@ -3,9 +3,8 @@
    require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
    
-      // $FFIO=$_POST[''];
-	$FFIO='Бурлуцкий Вл';
-   
+      $FFIO=$_POST[''];
+
 //Стимулирующие ППС
 
      $sql="Select * from v_teac_stimul

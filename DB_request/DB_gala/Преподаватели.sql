@@ -147,6 +147,12 @@ select RowNum rn, P.fStrTabn tab, P.fFio fio, V.path prof, A.fRate, A.fCategory,
    and  A.fLprizn in (0,3)
  order by flprizn
  
+ ---”брать тех кто уволен
+ Select * from Persons
+ where instr(
+       upper(replace(replace(FFIO,'.',''),' ','')),
+       upper(replace(replace('якимчук','.',''),' ','')),1)>=1
+       and FDISDATE
  -----------------------------------------------------ќтпуск сотрудника------------------------------------------------------------
 Create or replace view V_CISU_TEAC_HOLIDAY
 as
