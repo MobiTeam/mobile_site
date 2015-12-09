@@ -38,7 +38,9 @@ var displayTimetable = function(date){
 			
 		} else {
 			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
-		} 
+		}
+
+
 				
 	} else {
 		showTimetableAlert();
@@ -123,6 +125,9 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 					
 					if(issetArgs == undefined || !issetArgs){
 						setJSON(savePlace, jsonObj, false);
+						console.log(savePlace);
+						console.log(jsonObj);
+						console.log(sessionStorage[savePlace]);
 						functionCallBack();
 					} else {
 						functionCallBack(jsonObj);
@@ -182,7 +187,7 @@ function setJSON(key, value, flag) {
 	        if(flag == true){
 				localStorage[key] = JSON.stringify(value);				
 			} else {
-				if(sessionStorage[key] == undefined){
+				if(sessionStorage[key] == undefined || sessionStorage[key] == "undefined"){
 					sessionStorage[key] = JSON.stringify(value);
 				} else {
 					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
@@ -314,15 +319,21 @@ function tagMenuItem(className){
 function showCurrentWeek(date){
 	
 	var dt = date == undefined ? new Date() : date;
-	var currDay = dt.getDay();
+	var currDay = new Date();
+	var thisWeekDay = dt;
 	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
-		
+	
+	console.log(currDay);
+	console.log(thisWeekDay);
+
 	dt.setDate(dt.getDate() - diff);
 	
 	for(var i = 0; i < 6; i++){
 		
-		var className = currDay > dt.getDay() ? 'greyTag' 
-											  : currDay == dt.getDay() ? 'redTag'
+
+		//разобраться с датами
+		var className = currDay > thisWeekDay ? 'greyTag' 
+											  : currDay == thisWeekDay ? 'redTag'
 											  : '';
 		
 	    var curr_date = dt.getDate();
@@ -339,6 +350,7 @@ function showCurrentWeek(date){
 }
 
 function getFirstWeekDay(notStr, thisDate) {
+
 	var dt = thisDate == undefined ? new Date() : thisDate;
 	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
 	dt.setDate(dt.getDate() - diff);
@@ -351,13 +363,14 @@ function getFirstWeekDay(notStr, thisDate) {
 	var month = dt.getMonth() + 1;
 	month = month > 9 ? month : "0" + month;
 	return (day + "." + month + "." + dt.getFullYear());
+
 }
 
 function issetTimetable(){
 	return sessionStorage.timetable != undefined;
 }
 
-function getTimetableWeek(diff, onlyDate){
+function getTimetableWeek(diff, onlyDate, returnStr){
 	
 	var str = ($('.dt1').attr('date_quer')).split('.');
 	var dt = new Date(str[2] + '/' + str[1] + '/' + str[0] + ' 12:00:00');
@@ -365,7 +378,12 @@ function getTimetableWeek(diff, onlyDate){
 	dt.setDate(dt.getDate() + diff);
 	
 	if(onlyDate){
-		return dt;
+		if(returnStr){
+			var day = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate();
+			var month = dt.getMonth() + 1;
+			month = month > 9 ? month : "0" + month;
+			return (day + "." + month + "." + dt.getFullYear());
+		} else return dt;
 	}
 	
 	if (localStorage.lastTmtQuery != undefined){
@@ -388,10 +406,11 @@ function loadTimetableInf(dataQuery, loadDate, changeWeek){
 		}
 		
 	}
+
 	localStorage.lastTmtQuery = dataQuery;
 	if(changeWeek){
-		myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getFirstWeekDay()}, false, chWeek, true, 'timetable');
-	} else myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getFirstWeekDay()}, false, displayTimetable, false, 'timetable');
+		myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getTimetableWeek(0, true, true)}, false, chWeek, true, 'timetable');
+	} else myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getTimetableWeek(0, true, true)}, false, displayTimetable, false, 'timetable');
 
 }
 

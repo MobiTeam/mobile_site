@@ -16,8 +16,10 @@ $(document).ready(function(){
 		});
 		
 	$('.timetable_box_input').on('autocompleteselect',function(event, ui){
+        sessionStorage.timetable = undefined;
+        sessionStorage.query = ui.item.value;
+        $('.timetable_lessons').html('')
         loadTimetableInf(ui.item.value);	
-		sessionStorage.query = ui.item.value;
 		displayTimetable();
 		closeInput();		
    });	
@@ -25,6 +27,7 @@ $(document).ready(function(){
 	$('.timetable_lessons').click(function(event){
 		if(event.target.className == 'found_by_sel_text') {
 			sessionStorage.query = (event.target.innerHTML).trim();
+			sessionStorage.timetable = undefined;
 			loadTimetableInf(event.target.innerHTML);
 			view.setTitle(sessionStorage.query);
 		} else if (event.target.className == 'hide_information_button') {

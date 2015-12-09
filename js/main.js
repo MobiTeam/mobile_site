@@ -1,4 +1,4 @@
-$(window).load(function(){
+/**/$(window).load(function(){
 	
 	hideLoader();
 	/* $('.content_box').masonry({

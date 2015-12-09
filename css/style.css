@@ -848,7 +848,7 @@ b, strong {
 .settings_box_inputs{
 	width:98%;
 	margin:0 auto;
-	max-width:600px;
+	/*max-width:600px;*/
 	font-size:16px;
 	padding:5px;
 	
@@ -867,7 +867,7 @@ b, strong {
 .settings_box_inputs_item_button{
 	width:20%;
 	float:left;
-	text-align:center;
+	text-align:right;
 }
 
 .settings_box_inputs_item_button_status{
