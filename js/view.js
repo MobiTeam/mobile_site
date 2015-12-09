@@ -216,7 +216,9 @@ function loadTimetable(){
 	view.displayMenuIcon();
 	view.$search_butt.fadeIn(0).removeClass('opened_input');
 	view.$dateline.fadeIn(0);
+	
 	showCurrentWeek();
+	
 	if(!issetTimetable()){
 		
 		if(issetUserGroup()){
