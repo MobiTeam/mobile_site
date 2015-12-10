@@ -434,12 +434,78 @@ b, strong {
 	border-radius:3px;
 }
 
+.news_content {
+	background: #445ab1;	
+}
+
+.group_content {
+	background: #28acbb;
+}
+
+.pers_content {
+	background: #5eae49;
+}
+
+.finance_content {
+	background: #bac029;
+}
+
+.message_content {
+	background: #a8847a;
+}
+
+.contacts_content {
+	background: #ff7aa5;
+}
+
+.app_info {
+	background: #f64b4b;
+}
+
+.coffe_content {
+	background: #d97fd3;
+}
+
+.content_box_menuitem:active .coffe_content {
+	background: #ba68c8;
+}
+
+.content_box_menuitem:active .app_info {
+	background: #d32f2f;
+}
+
+.content_box_menuitem:active .contacts_content {
+	background-color: #ff6295!important;
+}
+
+.content_box_menuitem:active .message_content {
+	background-color: #996e62!important;
+}
+
+.content_box_menuitem:active .group_content {
+	background-color: #0098a9!important;
+}
+
+.content_box_menuitem:active .news_content {
+	background-color: #233da3!important;
+}
+
+.content_box_menuitem:active .finance_content {
+	background-color: #aeb503!important;
+}
+
+.content_box_menuitem:active .pers_content {
+	background-color: #41a029!important;
+}
+
 .content_box_itemwrapper{
 	text-align:center;
 	font-family:"RobotoRegular", sans-serif; 
 	margin:8px;
 	margin-top:20px;
 }
+
+
 
 .pre_loader{
 	width:100%;
@@ -878,4 +944,8 @@ b, strong {
 
 .date_a{
 	text-decoration:none;
+}
+
+.group_info_box {
+	display: none;
 }

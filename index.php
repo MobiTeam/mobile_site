@@ -152,6 +152,10 @@
 					Персональная информация
 				</div>
 				
+				<div class="group_info_box">
+					Моя группа
+				</div>
+
 				<div class="news_box">
 				</div>
 							
@@ -196,7 +200,7 @@
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
 							
-							<img src="/img/calendar_icon.png" />
+							<img src="img/calendar_icon.png" />
 							
 							<div class="content_box_name_item">	
 							  Расписание
@@ -205,31 +209,76 @@
 						
 						<div class="content_box_menuitem contr_shadow" hashtag="news">
 						
-							<img src="/img/news_icon.png" />
+							<img src="img/news_new.png" />
 						
-							<div class="content_box_name_item"> 
+							<div class="content_box_name_item news_content"> 
 							  Новости
 							</div>
 						</div>
 						
-						<!--
+						
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="group_info">
+							
+							<img src="img/group_new.png" />
+						   
+							<div class="content_box_name_item group_content">	
+							  Моя группа
+							</div>
+						</div>
+
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
-							<img src="/img/pers_icon.png" />
+							<img src="img/personal_new.png" />
 						
-							<div class="content_box_name_item">	
+							<div class="content_box_name_item pers_content">	
 							  Персональная инф.
+							</div>
+						</div>
+
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
+							
+							<img src="img/money_rub.png" style='width:70px;' />
+						
+							<div class="content_box_name_item finance_content">	
+							  Финансовая инф.
 							</div>
 						</div>
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="message">
 							
-							<img src="/img/message_icon.png" />
+							<img src="img/message_new.png" />
 						   
-							<div class="content_box_name_item">	
+							<div class="content_box_name_item message_content">	
 							  Сообщения
 							</div>
-						</div>-->
+						</div>
+
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="dir_info">
+							
+							<img src="img/contacts_new.png" />
+						   
+							<div class="content_box_name_item contacts_content">	
+							  Справочник
+							</div>
+						</div>
+
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="coffe_block">
+							
+							<img src="img/coffee_icon.png" />
+						   
+							<div class="content_box_name_item coffe_content">	
+							  Столовая
+							</div>
+						</div>
+
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="about_app">
+							
+							<img src="img/info.png"  style='width:80px;' />
+						   
+							<div class="content_box_name_item app_info">	
+							  О приложении
+							</div>
+						</div>
 						
 						<div style="clear:both">
 						</div>

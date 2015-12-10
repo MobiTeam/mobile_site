@@ -20,6 +20,7 @@ var view = {
 	$heightBlock: $('.space_height'),
 	$cont_header: $('.header_line__content'),
 	$cal_button: $('.header_line_content_calendar'),
+	$group_block: $('.group_info_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -42,6 +43,7 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$group_block.fadeOut(0);
 		this.$auth.fadeOut(0);
 		this.$menu.fadeOut(0);
 		this.$news.fadeOut(0);
@@ -78,6 +80,10 @@ var view = {
 		if(isAuth()){
 			
 			$('.auth_only').css('display', 'block');
+			//проверка на наличие группы, если есть, то выводить кнопку.
+			/*if(){
+
+			}*/
 			
 			switch(location.hash){
 			    
@@ -105,6 +111,10 @@ var view = {
 					loadPersonBlock();
 				break;
 				
+				case '#group_info':
+					loadGroupBlock();
+				break;
+
 				case '#settings':
 					loadSettingsBlock();
 				break;
@@ -248,6 +258,13 @@ function loadSettingsBlock(){
 	view.displayMenuIcon();
 	view.$settings_box.stop().fadeTo(250, 1);
 	view.setTitle(stringNames[2]); 
+}
+
+function loadGroupBlock(){
+	tagMenuItem('group_info');
+	view.displayMenuIcon();
+	view.$group_block.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[8]); 
 }
 
 
