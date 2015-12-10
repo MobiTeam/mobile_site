@@ -125,9 +125,6 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 					
 					if(issetArgs == undefined || !issetArgs){
 						setJSON(savePlace, jsonObj, false);
-						console.log(savePlace);
-						console.log(jsonObj);
-						console.log(sessionStorage[savePlace]);
 						functionCallBack();
 					} else {
 						functionCallBack(jsonObj);
@@ -327,9 +324,6 @@ function showCurrentWeek(date){
 
 	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
 
-	console.log(currDay.valueOf());
-	console.log(thisWeekDay.valueOf());
-
 	dt.setDate(dt.getDate() - diff);
 	
 	for(var i = 0; i < 6; i++){
@@ -449,7 +443,10 @@ function slideInput(){
 	$target.addClass('opened_input');
 	$('.timetable_box_form').animate({
 		width: '60%'
-	}, 150).css('display', 'block');
+	}, 150, function(){
+		$inp = $('.timetable_box_input');
+		$inp.autocomplete("search");
+		}).css('display', 'block');
 	view.setTitle('');
 }
 
@@ -464,6 +461,7 @@ function closeInput(){
 		
 		$(this).css('display', 'none');
 		view.$title.fadeIn();
+		$('.ui-autocomplete').fadeOut();
 		if(location.hash == '#timetable'){
 			$('.header_line_content_calendar').fadeIn(0);
 			if(sessionStorage.query != undefined){

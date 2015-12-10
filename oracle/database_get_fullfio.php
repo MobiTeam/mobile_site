@@ -1,6 +1,7 @@
 ﻿<?php 
    
    require_once('database_connect.php');
+   session_start();
    
    switch($data_user["is_student"]){
 	   case "0":
@@ -29,6 +30,9 @@
 	   $data_user['groups'] = $data_stud_arr['GRUP'];
 	   break;
    }
+
+   $_SESSION['FIO'] = $data_user['FIO'];
+   $_SESSION['groups'] = $data_user['groups'];
    
     OCICommit($c);  		
 			
