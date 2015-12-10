@@ -27,7 +27,7 @@
 	   OCIExecute($s, OCI_DEFAULT);
 	   ocifetchstatement($s, $data_stud_arr);
 	   $data_user['FIO'] = $data_stud_arr['FFIO'][0];
-	   $data_user['groups'] = $data_stud_arr['GRUP'];
+	   $data_user['groups']z = $data_stud_arr['GRUP'];
 	   break;
    }
 
