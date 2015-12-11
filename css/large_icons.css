@@ -111,14 +111,15 @@
 		background-repeat: no-repeat;
 		background-size: 24px 24px;
 	}
+
+	.man_student:after {
+		background: url('../img/man_icon@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
+
+	.girl_student:after {
+		background: url('../img/woman_icon@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
 }
 
-.man_student:after {
-	background: url('../img/man_icon@2x.png') no-repeat center center;
-	background-size: 40px 40px;
-}
-
-.girl_student:after {
-	background: url('../img/woman_icon@2x.png') no-repeat center center;
-	background-size: 40px 40px;
-}

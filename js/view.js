@@ -21,6 +21,7 @@ var view = {
 	$cont_header: $('.header_line__content'),
 	$cal_button: $('.header_line_content_calendar'),
 	$group_block: $('.group_info_box'),
+	$about_block: $('.about_info_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -43,6 +44,7 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$about_block.fadeOut(0);
 		this.$group_block.fadeOut(0);
 		this.$auth.fadeOut(0);
 		this.$menu.fadeOut(0);
@@ -120,6 +122,10 @@ var view = {
 					loadSettingsBlock();
 				break;
 				
+				case '#about_app':
+					loadAppInfo();
+				break; 
+
 				default:
 					parseHashTag("menu");
 				break;
@@ -147,6 +153,10 @@ var view = {
 						loadAuth();
 					break;
 					
+					case '#about_app':
+						loadAppInfo();
+					break; 
+
 					default:
 						parseHashTag("guest");
 					break;
@@ -163,6 +173,13 @@ var view = {
 }	
 
 //функции загрузки блоков
+
+function loadAppInfo(){
+	tagMenuItem('about_item');
+	view.setTitle(stringNames[9]);
+	view.displayMenuIcon();
+	view.$about_block.fadeIn(0);
+}
 
 function loadAuth(){
 	sessionStorage.clear();

@@ -1014,3 +1014,13 @@ b, strong {
 .girl_student:after{
 	background: url('../img/woman_icon.png') no-repeat;
 }
+
+.about_info_box_text {
+	margin: 15px 10px 10px 10px;
+	background: white;
+	padding: 12px;
+}
+
+.about_info_box_text p{
+	margin-bottom: 10px;
+}

@@ -52,7 +52,7 @@
 							<!-- <li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		 -->
 							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
 							<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
-							<!-- <li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li> -->
+							<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
 							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
@@ -161,6 +161,16 @@
 				
 				<div class="group_info_box">
 					
+				</div>
+
+				<div class="about_info_box">
+					<div class="about_info_box_text contr_shadow"><p><b>mob.ugrasu.ru</b> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
+					<p>Данное приложение создано с целью облегчения и прощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
+					<p>С помощью данного приложения вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
+					а также персональную информацию такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
+					<p><b>Разработчики:</b><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
+					<p>Отдельные благодарности за содействие в разработке приложения Бурлуцкому Владимиру Владимировичу, Татаринцеву Ярославу Борисовичу и Шавкуну Алексею Евгеньевичу.</p>
+					</div>					
 				</div>
 
 				<div class="news_box">
@@ -276,7 +286,7 @@
 							<div class="content_box_name_item coffe_content">	
 							  Столовая
 							</div>
-						</div>
+						</div> -->
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="about_app">
 							
@@ -285,7 +295,7 @@
 							<div class="content_box_name_item app_info">	
 							  О приложении
 							</div>
-						</div> -->
+						</div> 
 						
 						<div style="clear:both">
 						</div>
