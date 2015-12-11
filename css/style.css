@@ -948,4 +948,21 @@ b, strong {
 
 .group_info_box {
 	display: none;
+	padding: 0px 15px 10px 15px;
+	background: white;
+}
+
+.group_name_header {
+	display: block;
+	font-weight: bold;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	font-size: 18px;
+	border-bottom: 2px solid grey;
+	
+}
+
+.group_student_line {
+	border-bottom: 1px solid grey;
+	padding: 14px 0px;
 }

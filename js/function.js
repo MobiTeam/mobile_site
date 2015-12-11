@@ -476,9 +476,30 @@ function loadGroupInfo(){
 
 	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
 	var groupsArr = allInf.groups;
-	console.log(groupsArr);
-	console.log(allInf);
+	
+	if(sessionStorage.groups_students == undefined){
+		myajax(true, "POST", "oracle/database_group_student.php", {groups: groupsArr, hash : allInf.hash, FIO : allInf.FIO}, false, showGroupInfo, false, "groups_students");
+	} else {
+		showGroupInfo();
+	}
+	
+}
 
+function showGroupInfo(){
+	
+	var groupsStud = getJSON('groups_students', (localStorage.groups_students != undefined));
+	var htmlCode = "";
+
+	for(var key in groupsStud){
+		var group = groupsStud[key];
+		htmlCode += "<span class='group_name_header'>Группа: " + group.number + "</span>";
+		for (var i = 0; i < group.fio.length; i++) {
+			htmlCode += "<div class='group_student_line'>" + (i + 1) + ") " + group.fio[i] + "</div>";
+		};	
+	}
+
+	view.$group_block.html(htmlCode);
+	
 }
 
 function issetNumbersInQuery(query){

@@ -80,10 +80,11 @@ var view = {
 		if(isAuth()){
 			
 			$('.auth_only').css('display', 'block');
-			//проверка на наличие группы, если есть, то выводить кнопку.
-			/*if(){
-
-			}*/
+			//проверка на студента
+			var infBlock = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+			if(infBlock.is_student == "0"){
+				$('.only_stud').fadeOut(0);
+			}
 			
 			switch(location.hash){
 			    

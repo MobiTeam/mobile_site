@@ -2,12 +2,17 @@
 	session_start(); 
 	require_once('../auth/ad_functions.php');
 	userAutentificate();
-	$GRUP = $_SESSION['groups'];
+	if(isset($_SESSION['groups'])){
+		$GRUP = $_SESSION['groups'];
+	} else {
+		$GRUP = $_POST['groups'];
+	}
+	$GRUP = array("1521б", "1121");
 	require_once('database_connect.php');
  	
-	
-	 
-    $group_json = array();
+
+
+	$group_json = array();
 	for ($i=0; $i < count($GRUP); $i++) { 
  		
 		 //Студенты в группе

@@ -153,7 +153,7 @@
 				</div>
 				
 				<div class="group_info_box">
-					Моя группа
+					
 				</div>
 
 				<div class="news_box">
@@ -217,7 +217,7 @@
 						</div>
 						
 						
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="group_info">
+						<div class="content_box_menuitem contr_shadow authblock only_stud" hashtag="group_info">
 							
 							<img src="img/group_new.png" />
 						   
