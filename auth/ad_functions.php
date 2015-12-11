@@ -46,6 +46,26 @@ function jsonRemoveUnicodeSequences($struct){
    return preg_replace("/\\\\u([a-f0-9]{4})/e", "iconv('UCS-4LE','UTF-8',pack('V', hexdec('U$1')))", json_encode($struct));
 }
 	  
+
+   function userAutentificate(){
+
+        if(!isset($_SESSION['FIO'])){
+
+        	if(!isset($_POST['FIO']) && !isset($_POST['hash'])){
+        		die('permission denied');
+        	} else {
+
+        		$hash_fio = strrev(sha1(strrev(md5(strrev($_POST['FIO'])))));
+
+        		if($hash_fio != $_POST['hash']){
+        			die('you\'re a hacker');
+        		}
+
+        	}
+
+        }
+
+   }	   
 		
   function utf8_json_encode($arr){
 			return($result = preg_replace_callback(

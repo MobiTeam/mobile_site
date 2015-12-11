@@ -264,7 +264,8 @@ function loadGroupBlock(){
 	tagMenuItem('group_info');
 	view.displayMenuIcon();
 	view.$group_block.stop().fadeTo(250, 1);
-	view.setTitle(stringNames[8]); 
+	view.setTitle(stringNames[8]);
+	loadGroupInfo();
 }
 
 
