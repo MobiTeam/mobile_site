@@ -12,7 +12,7 @@
 	for ($i=0; $i < count($GRUP); $i++) { 
  		
 		 //Студенты в группе
-	 	$sql = "Select * from v_stud_group
+	 	$sql = "Select * from mv_stud_group
 		where FSDEPCODE like '%".$GRUP[$i]."%'
 		order by FFIO";
 		
@@ -21,14 +21,17 @@
 			
 		$count = 0;
  		$group = array();
+ 		$sex=array();
  		while(OCIFetch($s)){
  			$group[$count]=ociresult($s,'FFIO');
+ 			$sex[$count]=ociresult($s,'FSEX');
  			$number_group=ociresult($s,'FSDEPCODE');
 			$count ++;
 		} 
 
 		$group_json[$i] = array(
 			"fio" => $group, 
+			"sex"=> $sex,
 			"number" => $number_group
 		);
 
