@@ -2,6 +2,7 @@
 	session_start(); 
 	require_once('../auth/ad_functions.php');
 	userAutentificate();
+	// $GRUP=array();
 	$GRUP = $_SESSION['groups'];
 	require_once('database_connect.php');
  	

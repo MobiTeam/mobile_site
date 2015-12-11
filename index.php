@@ -45,7 +45,14 @@
 							<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
 							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
 							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
+							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
+							<li class="sidebar_menu_block_menu_item persinf_item" hashtag="persinf">Персональная</li>
+							<!-- <li class="sidebar_menu_block_menu_item finance_item" hashtag="finance_inf">Финансовая</li> -->
+							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
+							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
+							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
 							<li class="sidebar_menu_block_menu_item set_item auth_only" hashtag="settings">Настройки</li>
+							<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
 							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
