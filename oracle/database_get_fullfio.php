@@ -31,6 +31,8 @@
 	   break;
    }
 
+   $data_user['hash'] = strrev(sha1(strrev(md5(strrev($data_user['FIO'])))));
+
    $_SESSION['FIO'] = $data_user['FIO'];
    $_SESSION['groups'] = $data_user['groups'];
    

@@ -472,6 +472,15 @@ function closeInput(){
 	});
 }
 
+function loadGroupInfo(){
+
+	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var groupsArr = allInf.groups;
+	console.log(groupsArr);
+	console.log(allInf);
+
+}
+
 function issetNumbersInQuery(query){
 	return !!query.match(/\d/g);
 }

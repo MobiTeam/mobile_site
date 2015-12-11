@@ -1,8 +1,10 @@
 ﻿<?php
 	session_start(); 
+	require_once('../auth/ad_functions.php');
+	userAutentificate();
 	$GRUP = $_SESSION['groups'];
 	require_once('database_connect.php');
- 	require_once('../auth/ad_functions.php');
+ 	
 	
 	 
     $group_json = array();
