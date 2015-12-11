@@ -993,5 +993,24 @@ b, strong {
 
 .group_student_line {
 	border-bottom: 1px solid grey;
-	padding: 14px 0px;
+	position: relative;
+	padding: 14px 65px 14px 0px;
+}
+
+.man_student:after, .girl_student:after {
+	content: '';
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+    margin-top: -20px;
+}
+
+.man_student:after{
+	background: url('../img/man_icon.png') no-repeat;
+}
+
+.girl_student:after{
+	background: url('../img/woman_icon.png') no-repeat;
 }

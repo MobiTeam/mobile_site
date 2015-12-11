@@ -494,7 +494,8 @@ function showGroupInfo(){
 		var group = groupsStud[key];
 		htmlCode += "<span class='group_name_header'>Группа: " + group.number + "</span>";
 		for (var i = 0; i < group.fio.length; i++) {
-			htmlCode += "<div class='group_student_line'>" + (i + 1) + ") " + group.fio[i] + "</div>";
+
+			htmlCode += "<div class='group_student_line " + (group.sex[i] == "М" ? "man_student" : "girl_student" ) + "'>" + (i + 1) + ") " + group.fio[i] + "</div>";
 		};	
 	}
 

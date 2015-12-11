@@ -4,9 +4,9 @@
 	require_once('../auth/ad_functions.php');
 	
       $FFIO=$_POST[''];	
+		// $FFIO='Тей';
 
-
-	$sql="Select * from v_teac_contact
+	$sql="Select * from mv_teac_contact
 where instr (
         upper(replace(replace(FIO,'',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -24,7 +24,7 @@ where instr (
 									"fio" => ociresult($s,'FIO'), 
 									"phone" => ociresult($s,'PHONE'), 
 									"korp" => ociresult($s,'KORP'), 
-									"phone" => ociresult($s,'PODR'), 
+									"podr" => ociresult($s,'PODR'), 
 									"dol" => ociresult($s,'DOL'), 
 									"rukovoditel" => ociresult($s,'RUK')
 								);

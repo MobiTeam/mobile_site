@@ -46,13 +46,13 @@
 							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
 							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
 							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
-							<li class="sidebar_menu_block_menu_item persinf_item" hashtag="persinf">Персональная</li>
+							<!-- <li class="sidebar_menu_block_menu_item persinf_item" hashtag="persinf">Персональная</li> -->
 							<!-- <li class="sidebar_menu_block_menu_item finance_item" hashtag="finance_inf">Финансовая</li> -->
 							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
-							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
+							<!-- <li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		 -->
 							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
-							<li class="sidebar_menu_block_menu_item set_item auth_only" hashtag="settings">Настройки</li>
-							<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
+							<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
+							<!-- <li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li> -->
 							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
 					</ul>
 				</div>
@@ -233,7 +233,7 @@
 							</div>
 						</div>
 
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
+						<!-- <div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<img src="img/personal_new.png" />
 						
@@ -241,7 +241,7 @@
 							  Персональная инф.
 							</div>
 						</div>
-
+						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
 							
 							<img src="img/money_rub.png" style='width:70px;' />
@@ -259,7 +259,7 @@
 							  Сообщения
 							</div>
 						</div>
-
+						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="dir_info">
 							
 							<img src="img/contacts_new.png" />
@@ -268,7 +268,7 @@
 							  Справочник
 							</div>
 						</div>
-
+						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="coffe_block">
 							
 							<img src="img/coffee_icon.png" />
@@ -277,7 +277,7 @@
 							  Столовая
 							</div>
 						</div>
-
+						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="about_app">
 							
 							<img src="img/info.png"  style='width:80px;' />
@@ -285,7 +285,7 @@
 							<div class="content_box_name_item app_info">	
 							  О приложении
 							</div>
-						</div>
+						</div> -->
 						
 						<div style="clear:both">
 						</div>
