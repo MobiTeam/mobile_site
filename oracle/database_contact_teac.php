@@ -4,7 +4,7 @@
 	require_once('../auth/ad_functions.php');
 	
       $FFIO=$_POST[''];	
-		// $FFIO='Тей';
+		// $FFIO='Бурлуцкий';
 
 	$sql="Select * from mv_teac_contact
 where instr (
@@ -20,15 +20,15 @@ where instr (
 				
 		while(OCIFetch($s)){
 			
-			$contact_teac_json = array(
+			$contact_teac_json[$count] = array(
 									"fio" => ociresult($s,'FIO'), 
 									"phone" => ociresult($s,'PHONE'), 
 									"korp" => ociresult($s,'KORP'), 
 									"podr" => ociresult($s,'PODR'), 
-									"dol" => ociresult($s,'DOL'), 
+									"dol" => ociresult($s,'DOL'),
+									"email"=>ociresult($s,'EMAIL'),
 									"rukovoditel" => ociresult($s,'RUK')
 								);
-	
 			$count++;
 		} 
 		

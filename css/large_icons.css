@@ -86,9 +86,44 @@
 		background-size: 24px 24px;
 	}
 
+	.about_item{
+		background:url('../img/new_icon/mini_icon/info@2x.png') no-repeat left center;	
+		background-size: 24px 24px;
+	}
+
 	.timetable_item{
 		background:url('../img/time_icon@2x.png') no-repeat left center;
 		background-size: 24px 24px;
+	}
+
+	.persinf_item{
+	background:url('../img/new_icon/mini_icon/personal@2x.png') no-repeat left center;
+	background-size: 24px 24px;	
+	}
+
+	.finance_item{
+	background:url('../img/new_icon/mini_icon/finance@2x.png') no-repeat left center;
+	background-size: 24px 24px;	
+	}
+
+	.group_item{
+	background:url('../img/new_icon/mini_icon/group@2x.png') no-repeat left center;	
+	background-size: 24px 24px;
+	}
+
+	.guide_item{
+	background:url('../img/new_icon/mini_icon/guide@2x.png') no-repeat left center;		
+	background-size: 24px 24px;
+	}
+
+	.message_item{
+	background:url('../img/new_icon/mini_icon/message@2x.png') no-repeat left center;		
+	background-size: 24px 24px;	
+	}	
+
+	.coffee_item{
+	background:('../img/new_icon/mini_icon/coffee@2x.png') no-repeat left center;
+	background-size: 24px 24px;	
 	}
 	
 	.menu_box_logo{
