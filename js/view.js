@@ -6,6 +6,7 @@ var view = {
 	$button:$('.header_line__content_button'),
 	$title:$('.header_line__content_title'),
 	$second_menu:$('.header_line_addition_wrapper'),
+	$guide_menu:$('.header_line_addition_wrapper_guide'),
 	$auth:$('.authorisation_box'),
 	$menu:$('.main_menu'),
 	$news:$('.news_box'),
@@ -21,6 +22,7 @@ var view = {
 	$cont_header: $('.header_line__content'),
 	$cal_button: $('.header_line_content_calendar'),
 	$group_block: $('.group_info_box'),
+	$dir_info_block: $('.dir_info_box'),
 	$about_block: $('.about_info_box'),
 	
 	correctHeight: function(){
@@ -44,6 +46,8 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$guide_menu.fadeOut(0);
+		this.$dir_info_block.fadeOut(0);
 		this.$about_block.fadeOut(0);
 		this.$group_block.fadeOut(0);
 		this.$auth.fadeOut(0);
@@ -126,6 +130,10 @@ var view = {
 					loadAppInfo();
 				break; 
 
+				case '#dir_info':
+					loadDirInfo();
+				break;
+
 				default:
 					parseHashTag("menu");
 				break;
@@ -156,6 +164,10 @@ var view = {
 					case '#about_app':
 						loadAppInfo();
 					break; 
+
+					case '#dir_info':
+						loadDirInfo();
+					break;
 
 					default:
 						parseHashTag("guest");
@@ -286,6 +298,15 @@ function loadGroupBlock(){
 	loadGroupInfo();
 }
 
+function loadDirInfo(){
+	tagMenuItem('guide_item');
+	view.$dir_info_block.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[10]);
+	view.displayMenuIcon();
+	view.$guide_menu.fadeIn(0);
+	view.$guide_menu.find('.current_item').click();
+
+}
 
 function parseHashTag(access){
 	
@@ -309,6 +330,7 @@ function parseHashTag(access){
 		view.changePage(access);	
 	}
 }
+
 
 function loadFullNews(id){
 	

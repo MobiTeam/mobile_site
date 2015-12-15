@@ -1,3 +1,22 @@
+var showTeachContacts = function(obj){
+	
+	var personHTML = "Результаты поиска (" + obj.length + "):";
+	for (var i = 0; i < obj.length; i++) {
+		personHTML += "<div class='person_contacts_info contr_shadow'>";
+		personHTML += "<div class='person_contacts_header'><b>" + obj[i].fio + "</b><br><b class='grey_bold_text'>email: " + (obj[i].email == null ? "нет" : obj[i].email) + "</b></div>";
+		personHTML += "<div class='person_contacts_img'></div>";
+		personHTML += "<div class='person_contacts_middle'>" + obj[i].dol + "<br>«" + obj[i].podr + "»</div>";
+		personHTML += "<div style='clear:both'></div>";
+		personHTML += "<div class='person_contacts_footer'><span class='phone_block'>тел: " + (obj[i].phone == null ? " - " : obj[i].phone) + "</span> <span class='cabinet_block'>кабинет: " + (obj[i].korp == null ? " - " : obj[i].korp) + "</span><div style='clear:both;'></div></div>"
+		personHTML += "</div>";
+		
+
+	};
+
+	$('.guide_item_search_result').html(personHTML);
+}
+
+
 var displayTimetable = function(date){
 	
 	date = getCurrentDate(date);

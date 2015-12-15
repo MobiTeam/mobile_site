@@ -45,6 +45,11 @@
 					#058ae6;
 		background-size: 64px 64px;
 	}
+
+	.person_contacts_img {
+		background: url('../img/person_guide-icon@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
 	
 	.authorisation_box_logo{
 		background:url('../img/ugrasu_logo@2x.png') no-repeat;

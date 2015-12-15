@@ -49,7 +49,7 @@
 							<!-- <li class="sidebar_menu_block_menu_item persinf_item" hashtag="persinf">Персональная</li> -->
 							<!-- <li class="sidebar_menu_block_menu_item finance_item" hashtag="finance_inf">Финансовая</li> -->
 							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
-							<!-- <li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		 -->
+							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
 							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
 							<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
 							<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
@@ -116,6 +116,13 @@
 							<div class="header_line_addition_menu_item" newstype="3">Анонсы</div>
 						</div>
 					</div>	
+
+					<div class="header_line_addition_wrapper_guide">
+						<div class="header_line_addition_menu_guide">
+							<div class="header_line_addition_menu_guide_item current_item" guidetype="1">Поиск</div>
+							<div class="header_line_addition_menu_guide_item" guidetype="2">Студенту</div>
+						</div>
+					</div>	
 					
 					<div class="header_shadow_box contr_shadow_2">
 						
@@ -160,11 +167,15 @@
 				</div>
 				
 				<div class="group_info_box">
+				
+				</div>
+
+				<div class="dir_info_box">
 					
 				</div>
 
 				<div class="about_info_box">
-					<div class="about_info_box_text contr_shadow"><p><b>mob.ugrasu.ru</b> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
+					<div class="about_info_box_text contr_shadow"><p><b>mob.ugrasu.ru [ver 0.1]</b> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
 					<p>Данное приложение создано с целью облегчения и упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
 					<p>С помощью данного приложения вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
 					а также персональную информацию такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
@@ -268,9 +279,9 @@
 							<div class="content_box_name_item message_content">	
 							  Сообщения
 							</div>
-						</div>
+						</div> -->
 						
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="dir_info">
+						<div class="content_box_menuitem contr_shadow" hashtag="dir_info">
 							
 							<img src="img/contacts_new.png" />
 						   
@@ -279,7 +290,7 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="coffe_block">
+						<!--<div class="content_box_menuitem contr_shadow authblock" hashtag="coffe_block">
 							
 							<img src="img/coffee_icon.png" />
 						   

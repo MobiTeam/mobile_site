@@ -181,13 +181,18 @@ b, strong {
 	background-color:#3266d5;
 } 
 
-.header_line_addition_menu_item{
+.header_line_addition_menu_item {
 	width:32%;
 	display:inline-block;
 	/* background:#5677fc; */
 }
 
-.header_line_addition_menu_item:active{
+.header_line_addition_menu_guide_item {
+	width:48%;
+	display:inline-block;
+}
+
+.header_line_addition_menu_item:active, .header_line_addition_menu_guide_item:active {
 	background:#3266d5;
 }
 
@@ -197,7 +202,7 @@ b, strong {
 	font-family:"RobotoRegular", sans-serif;
 } 
 
-.header_line_addition_wrapper{
+.header_line_addition_wrapper, .header_line_addition_wrapper_guide{
 	/* contr_shadow */
 	display:none;
 }
@@ -210,7 +215,7 @@ b, strong {
 
 
 
-.header_line_addition_menu, .header_line_addition_data{
+.header_line_addition_menu, .header_line_addition_data, .header_line_addition_menu_guide{
     max-width:720px;
 	line-height:46px;
 	text-align:center;
@@ -975,6 +980,27 @@ b, strong {
 	text-decoration:none;
 }
 
+
+ .dir_info_box {
+ 	display: none;
+ }
+
+ .search_form_block {
+ 	background: white;
+ 	box-sizing: border-box;
+ 	z-index: 500;
+ 	padding: 10px 15px;
+ 	position: fixed;
+ 	max-width: 1024px;
+ 	width: 100%;
+ }
+
+ .search_form_block_span {
+ 	display: block;
+ 	color: grey;
+ 	border-bottom: 1px dashed grey;
+ }
+
 .group_info_box {
 	display: none;
 	padding: 0px 15px 10px 15px;
@@ -1023,4 +1049,77 @@ b, strong {
 
 .about_info_box_text p{
 	margin-bottom: 10px;
+}
+
+.guide_item_text {
+	border: 1px solid grey;
+	margin: 5px 2px 5px 0px;
+	width: 98%;
+	max-width: 340px;
+	padding: 2px;
+}
+
+.guide_item_search_result {
+	position: relative;
+	z-index: 0;
+	padding: 12px;
+}
+
+.search_form_block_descr {
+	background: #FFFFE7;
+	border-radius: 3px;
+	display: block;
+	border: 1px solid grey;
+	font-size: 14px;
+	padding: 4px;
+}
+
+.person_contacts_info {
+	margin: 7px 0px 16px 0px;
+	padding:0px;
+	background: white;
+	border-radius: 3px;
+}
+
+.person_contacts_img {
+	float: left;
+    /* width: 40px; */
+    width: 30%;
+    /* margin: 16px; */
+    height: 40px;
+    margin: 26px 0px;
+    background: url('../img/person_guide-icon.png') no-repeat center center;
+}
+
+.person_contacts_header {
+	border-bottom: 1px solid #ccc;
+	background: #FCFCFC;
+    padding: 3px 7px;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.person_contacts_footer {
+	border-top: 1px solid #ccc;
+	background: #FCFCFC;
+    padding: 5px 7px;
+    border-radius: 0px 0px 3px 3px;
+}
+
+.grey_bold_text {
+	color: grey;
+	opacity: 0.8;
+}
+
+.person_contacts_middle {
+	float: right;
+	width: 68%;
+	padding: 5px 1%;
+}
+
+.phone_block {
+	float: left;
+}
+
+.cabinet_block {
+	float: right;
 }

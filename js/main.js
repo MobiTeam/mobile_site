@@ -24,7 +24,7 @@ $(document).ready(function(){
  
 	
 	$(window).scroll(function(){
-		//#4368FD
+		
 		var sc = $(this).scrollTop(); 
 		
 		$(window).clearQueue();

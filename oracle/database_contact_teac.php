@@ -3,10 +3,9 @@
     require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
 	
-      $FFIO=$_POST[''];	
-		// $FFIO='Бурлуцкий';
-
-	$sql="Select * from mv_teac_contact
+      $FFIO=$_POST['FIO'];	
+	
+	  $sql="Select * from mv_teac_contact
 where instr (
         upper(replace(replace(FIO,'',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";

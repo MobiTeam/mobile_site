@@ -156,6 +156,50 @@ $(document).ready(function(){
 	
 	})
 	
+
+	$('.header_line_addition_menu_guide_item').click(function(){
+		$('.header_line_addition_menu_guide_item').each(function(){
+			$(this).removeClass('current_item');
+		});
+		$(this).addClass('current_item');
+		
+		//функция для открытия блока
+
+		if($(this).attr('guidetype') == 1){
+
+			if($('.search_form_block').size() == 0){
+
+
+				view.$dir_info_block.html('<div class="search_form_block contr_shadow"><span class="search_form_block_span">Форма поиска:</span>\
+				               <input class="guide_item_text" type="text" value="" /><br>\
+							<span class="search_form_block_descr">Посредством данной формы поиска можно получить необходимую информацию о преподавателе или сотруднике университета.\
+							<br>Для того, чтобы найти интересующего вас человека, необходимо начать вводить его фамилию или имя в строке поиска, а затем выбрать из предложенных вариантов.</span>\
+							</div>\
+							<div class="guide_item_search_result">Загрузка...</div>');
+
+	 			$('.guide_item_text').autocomplete({	
+					source:"oracle/database_get_guidenames_info.php",
+					minLength:2
+				});
+
+				$('.guide_item_text').on('autocompleteselect',function(event, ui){
+ 				$('.search_form_block_descr').hide(150, function(){
+ 					$('.guide_item_search_result').css("padding-top", ($('.search_form_block').height() + 25) + "px");
+ 				});
+
+ 					myajax(true, "POST", "oracle/database_contact_teac.php", {FIO : ui.item.value}, false, showTeachContacts, true);
+		  	 	});	
+
+			}
+
+ 		} else {
+			view.$dir_info_block.load('university_guide.html');
+		}
+		
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
+	});
+
 	$('.header_line_addition_menu_item').click(function(){
 		$('.header_line_addition_menu_item').each(function(){
 			$(this).removeClass('current_item');
