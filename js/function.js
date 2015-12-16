@@ -1,3 +1,73 @@
+var loadRateData = function(){
+
+	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var rateInf = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
+	
+	if(rateInf == undefined){
+		myajax(true, "POST", "oracle/database_dol.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, genRateHtml, true, "user_rate_info");
+	} else {
+		genRateHtml();
+	}
+
+}
+
+var loadIncomeData = function(){
+
+	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	/*var rateInf = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
+
+	if(rateInf == undefined){
+		myajax(true, "POST", "oracle/database_dol.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, genRateHtml, true, "user_rate_info");
+	} else {
+		genRateHtml();
+	}*/
+
+}
+
+var toogleShowBlock = function(className, statClass){
+	$el = $('.' + className);
+
+	if($el.css('display') == "none"){
+		$('.' + statClass).html("свернуть");
+	} else $('.' + statClass).html("развернуть");
+
+	$el.toggle(100);
+}
+
+var genRateHtml = function(obj){
+
+	if(obj != undefined){
+		setJSON("user_rate_info", obj, $('.save_password').prop('checked'));
+	} else {
+		obj = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
+	}
+	
+	var rateHtml = "<div class='fin_block_inform'>";
+
+	if(obj.length == 0){
+		rateHtml += "Данные отсутствуют.";
+	} else {
+		for(var i = 0; i < obj.length; i++){
+			rateHtml += "<div class='rate_box contr_shadow'>";
+			rateHtml += "<div class='rate_box_head'><b>" + (i + 1) +") " + obj[i].type + "</b></div>";
+			rateHtml += "<div class='dog_wrapper'><div class='rate_box_img'></div>";
+			rateHtml += "<div class='dog_name'>Договор: " + (obj[i].Numdog == null ? "-" : obj[i].Numdog) + "<br></div></div>";
+			rateHtml += "<div class='rate_box_middle'>";
+			rateHtml += "Остаток (кон. мес.): " + (obj[i].Ostatok_LA == null ? "-" : obj[i].Ostatok_LA) + "<br>";
+			rateHtml += "<span style='color: red;'>Начислено: " + (obj[i].Nachisl == null ? "-" : obj[i].Nachisl) + "</span><br>";
+			rateHtml += "<span style='color: green;'>Оплата: " + (obj[i].Oplata == null ? "-" : obj[i].Oplata) + "</span><br>";
+			rateHtml += "Остаток: " + (obj[i].Ostatok == null ? "-" : obj[i].Ostatok) + "</div><div style='clear:both;'></div>";
+			rateHtml += "<div class='rate_footer'>Дата обновления: " + obj[i].Date + "</div>";
+			rateHtml += "</div>";
+		}
+	}
+
+	rateHtml += "</div>"
+
+	$('.fin_info_box_menu_rate').html(rateHtml);
+} 
+
+
 var showTeachContacts = function(obj){
 	
 	var personHTML = "Результаты поиска (" + obj.length + "):";

@@ -46,6 +46,16 @@
 		background-size: 64px 64px;
 	}
 
+	.fin_info_box_menu_rateitem:before {
+		background: url("../img/rate_icon@2x.png");
+		background-size: 40px 40px;
+	}
+
+	.fin_info_box_menu_incomeitem:before {
+		background: url("../img/incomes_icon@2x.png");
+		background-size: 40px 40px;
+	}
+
 	.person_contacts_img {
 		background: url('../img/person_guide-icon@2x.png') no-repeat center center;
 		background-size: 40px 40px;

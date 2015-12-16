@@ -1,15 +1,19 @@
 ﻿
 <?php
-
- require_once('database_connect.php');
+ session_start();
  require_once('../auth/ad_functions.php');
- 
-    $FFIO=$_POST[''];
- 	// $FFIO='Бурлуцкий';
- 
+ userAutentificate();
+
+ if(isset($_SESSION['FIO'])){
+	$FFIO = $_SESSION['FIO'];
+ } else {
+	$FFIO = $_POST['FIO'];
+ }
+ // $FFIO = "Пак Анна";
+ require_once('database_connect.php');
  
  // Долги за общежития студента(1)
- 	$sql="Select * from V_STUD_DOL 
+ 	$sql="Select * from MV_STUD_DOL 
     where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -24,11 +28,12 @@
 		while(OCIFetch($s)){
 			
 			$Dol_json[$count] = array(
+									"type" => 'Долг за общежитие',
 									"Numdog" => ociresult($s,'NUMDOG'), 
-									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
-									"Nachisl" => ociresult($s,'NACHISL'), 
-									"Oplata" => ociresult($s,'OPLATA'), 
-									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Ostatok_LA" => (double)str_replace(",",".", ociresult($s,'OSTATOK_LA')), 
+									"Nachisl" => (double) str_replace(",",".",ociresult($s,'NACHISL')), 
+									"Oplata" => (double) str_replace(",",".",ociresult($s,'OPLATA')),  
+									"Ostatok" => (double) str_replace(",",".",ociresult($s,'OSTATOK')),  
 									"Date" => ociresult($s,'DAT'),
 									"prizn"=>'1'
 
@@ -38,12 +43,8 @@
 		}
 
 		
-		
-
-	
-	
 	//Долги за обучения студента(2)
-	$sql = "Select * from V_STUD_EDUCATION
+	$sql = "Select * from MV_STUD_EDUCATION
 	where instr(
     upper(replace(replace(FIO,'.',''),' ','')),
     upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -56,11 +57,12 @@
 				while(OCIFetch($s)){
 			
 			$Dol_json[$count] = array(
+									"type" => 'Долг за обучение',
 									"Numdog" => ociresult($s,'КОД'),	
-									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
-									"Nachisl" => ociresult($s,'NACHISL'), 
-									"Oplata" => ociresult($s,'OPLATA'), 
-									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Ostatok_LA" => (double)str_replace(",",".", ociresult($s,'OSTATOK_LA')), 
+									"Nachisl" => (double) str_replace(",",".",ociresult($s,'NACHISL')), 
+									"Oplata" => (double) str_replace(",",".",ociresult($s,'OPLATA')), 
+									"Ostatok" =>(double) str_replace(",",".",ociresult($s,'OSTATOK')),  
 									"Date" => ociresult($s,'DAT'),
 									"prizn"=>'2' 
 
@@ -71,7 +73,7 @@
 
 		 ////////Долги за коттедж преподаватели и сотрудники(3)
    
-     $sql="Select * from v_teac_kott
+     $sql="Select * from mv_teac_kott
 		where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -84,11 +86,12 @@
 		while(OCIFetch($s)){
 			
 			$Dol_json[$count] = array(
+									"type" => 'Долг за найм жил. помещений',
 									"Numdog" => ociresult($s,'NUMDOG'), 
-									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
-									"Nachisl" => ociresult($s,'NACHISL'), 
-									"Oplata" => ociresult($s,'OPLATA'), 
-									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Ostatok_LA" => (double)str_replace(",",".", ociresult($s,'OSTATOK_LA')), 
+									"Nachisl" => (double) str_replace(",",".",ociresult($s,'NACHISL')), 
+									"Oplata" => (double) str_replace(",",".",ociresult($s,'OPLATA')),  
+									"Ostatok" => (double) str_replace(",",".",ociresult($s,'OSTATOK')), 
 									"Date" => ociresult($s,'DAT'),
 									"prizn"=>'3' 
 
@@ -101,7 +104,7 @@
 
 ////////////Долги за семейную комнату(4)
 
-  $sql="Select * from v_teac_room
+  $sql="Select * from mv_teac_room
 		where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -115,11 +118,12 @@
 		while(OCIFetch($s)){
 			
 			$Dol_json[$count] = array(
+									"type" => 'Долг за личную комнату',
 									"Numdog" => ociresult($s,'NUMDOG'), 
-									"Ostatok_LA" => ociresult($s,'OSTATOK_LA'), 
-									"Nachisl" => ociresult($s,'NACHISL'), 
-									"Oplata" => ociresult($s,'OPLATA'), 
-									"Ostatok" => ociresult($s,'OSTATOK'), 
+									"Ostatok_LA" => (double)str_replace(",",".", ociresult($s,'OSTATOK_LA')), 
+									"Nachisl" => (double) str_replace(",",".",ociresult($s,'NACHISL')), 
+									"Oplata" => (double) str_replace(",",".",ociresult($s,'OPLATA')),  
+									"Ostatok" => (double) str_replace(",",".",ociresult($s,'OSTATOK')), 
 									"Date" => ociresult($s,'DAT'),
 									"prizn"=>'4'  
 

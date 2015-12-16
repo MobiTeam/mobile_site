@@ -24,6 +24,7 @@ var view = {
 	$group_block: $('.group_info_box'),
 	$dir_info_block: $('.dir_info_box'),
 	$about_block: $('.about_info_box'),
+	$fin_info_box: $('.fin_info_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -46,6 +47,7 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$fin_info_box.fadeOut(0);
 		this.$guide_menu.fadeOut(0);
 		this.$dir_info_block.fadeOut(0);
 		this.$about_block.fadeOut(0);
@@ -96,6 +98,10 @@ var view = {
 			    
 				case '#menu':
 					loadMainMenu();
+				break;
+
+				case '#finance_inf':
+					loadFinInfo();
 				break;
 						
 				case '#auth':
@@ -281,6 +287,15 @@ function loadPersonBlock(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();
+}
+
+function loadFinInfo(){
+	tagMenuItem('finance_item');
+	view.displayMenuIcon();
+	view.$fin_info_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[11]); 
+	loadRateData();
+	loadIncomeData();
 }
 
 function loadSettingsBlock(){

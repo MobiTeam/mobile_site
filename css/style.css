@@ -1098,7 +1098,7 @@ b, strong {
     border-radius: 3px 3px 0px 0px;
 }
 
-.person_contacts_footer {
+.person_contacts_footer, .rate_footer {
 	border-top: 1px solid #ccc;
 	background: #FCFCFC;
     padding: 5px 7px;
@@ -1127,3 +1127,91 @@ b, strong {
 	text-align: right;
 	width: 48%;
 }
+
+.fin_info_box {
+	display: none;
+	padding: 5px;
+}
+
+.fin_info_box_menu_item {
+	border-bottom: 1px solid #8C8C8C;
+    padding: 10px;
+    margin: 4px;
+    /*font-weight: bold;*/
+    /*color: #666666;*/
+}
+
+.fin_info_box_menu_item_stat {
+	color: grey;
+    font-size: 14px;
+    font-family: "RobotoRegular", sans-serif;
+}
+
+.fin_info_box_menu_rate, .fin_info_box_menu_income {
+	display: none;
+}
+
+.fin_info_box_menu_rateitem:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/rate_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.fin_info_box_menu_incomeitem:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/incomes_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.fin_block_inform {
+	padding: 5px;
+}
+
+.rate_box {
+	background: white;
+	margin: 2px;
+	border-radius: 3px;
+	margin-bottom: 14px;
+}
+
+.rate_box_head {
+	border-bottom: 1px solid #ccc;
+	background: #FCFCFC;
+	color: #4E4E4E;
+    padding: 3px 7px;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.rate_box_middle {
+	padding: 6px;
+	float: right;
+	width: 65%;
+	margin-top:24px;
+}
+
+.rate_box_img {
+	background: url('../img/agree_icon.png') no-repeat center center;
+	height:65px;
+	padding: 5px;
+	margin:0px;
+	float: both;
+}
+
+.dog_name {
+	padding: 6px;
+	font-size: 14px;
+}
+
+.dog_wrapper {
+	float: left;
+	width: 30%;
+}
+
