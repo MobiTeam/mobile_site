@@ -3,7 +3,7 @@
    require_once('database_connect.php');
    session_start();
    
-   switch($data_user["is_student"]){
+   switch($data_user["is_student"]) {
 	   case "0":
 	   $sql = "select FIO
 			  from MV_TEACH_APPOINT
@@ -16,6 +16,7 @@
 	   ocifetchstatement($s, $data_stud_arr);
 	   $data_user['FIO'] = mb_convert_case($data_stud_arr['FIO'][0],MB_CASE_TITLE,'UTF-8');
 	   break;
+
 	   case "1":
 	   $sql = "select FFIO, GRUP
 			  from MV_STUD_APPOINT
@@ -29,6 +30,7 @@
 	   $data_user['FIO'] = $data_stud_arr['FFIO'][0];
 	   $data_user['groups'] = $data_stud_arr['GRUP'];
 	   break;
+   
    }
 
    $data_user['hash'] = strrev(sha1(strrev(md5(strrev($data_user['FIO'])))));

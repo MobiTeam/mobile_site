@@ -36,12 +36,14 @@
 						   }					
 											
 					} else $serverRequest = $data_message;
-					 
+
+						echo $data_user['serverRequest'];
+
 					  if(isset($serverRequest) && ($data_user['serverRequest'] == 'default')){
 						  $data_user['FIO'] = 'undefined';	
 						  $data_user['is_student'] = 'undefined';	
 						  $data_user['serverRequest'] = $serverRequest;				  
-					  } else if ($data_user['serverRequest'] == 'default'){
+					  } else { // if ($data_user['serverRequest'] == 'default')
 						  $data_user['serverRequest'] = $succ_message;
 						  require_once('oracle/database_get_fullfio.php');				  
 						  require_once('oracle/database_update_users.php');				  

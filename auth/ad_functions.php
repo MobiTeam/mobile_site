@@ -24,7 +24,7 @@
 					$zn = ldap_get_entries($ldap, $ls);
 					if(isset($zn[0]['cn'][0])){
 						$data_user['FIO'] = $zn[0]['cn'][0];
-					}
+          }
 					return 1;
 				}
 				else
