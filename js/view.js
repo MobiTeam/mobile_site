@@ -25,6 +25,9 @@ var view = {
 	$dir_info_block: $('.dir_info_box'),
 	$about_block: $('.about_info_box'),
 	$fin_info_box: $('.fin_info_box'),
+	$coffe_info_box: $('.coffe_info_box'),
+	$header_line_my_bag: $('.header_line_my_bag'),
+	$shopping_box: $('.shopping_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -47,6 +50,9 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$shopping_box.fadeOut(0);
+		this.$header_line_my_bag.fadeOut(0);
+		this.$coffe_info_box.fadeOut(0);
 		this.$fin_info_box.fadeOut(0);
 		this.$guide_menu.fadeOut(0);
 		this.$dir_info_block.fadeOut(0);
@@ -140,6 +146,10 @@ var view = {
 					loadDirInfo();
 				break;
 
+				case '#coffe_block':
+					showCoffeBox();
+				break;
+
 				default:
 					parseHashTag("menu");
 				break;
@@ -173,6 +183,10 @@ var view = {
 
 					case '#dir_info':
 						loadDirInfo();
+					break;
+
+					case '#coffe_block':
+						showCoffeBox();
 					break;
 
 					default:
@@ -287,6 +301,16 @@ function loadPersonBlock(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();
+}
+
+function showCoffeBox(){
+	view.displayMenuIcon();
+	view.$coffe_info_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[12]); 
+	view.$header_line_my_bag.fadeIn(0);
+	loadCoffeInfo();
+	//loadRateData();
+	//loadIncomeData();
 }
 
 function loadFinInfo(){

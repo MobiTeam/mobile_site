@@ -5,6 +5,8 @@
    
       $FFIO=$_POST[''];
 
+      // $FFIO='Татаринцев';
+
 //Стимулирующие ППС
 
      $sql="Select * from v_teac_stimul
@@ -21,8 +23,10 @@
 		while(OCIFetch($s)){
 			
 			$stimul_teac_json[$count] = array(
-									"fio" => ociresult($s,'FIO'), 
-									"summa" => ociresult($s,'SUMMA')
+									"name"=> 'Надбавки ППС',
+									"ball" =>(double) str_replace(',','.',ociresult($s,'BALL')),//Балл
+									"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
+									"type"=> '1'
 								);
 			$count++;
 	
@@ -40,21 +44,46 @@
    $s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	
-		$stimulpr_teac_json = array();
+
 				
 		while(OCIFetch($s)){
 			
 			$stimul_teac_json[$count] = array(
-									"fio" => ociresult($s,'FFIO'), 
-									"summa" => ociresult($s,'SUMMA')
+									"name"=> 'Стимулирующие выплаты',
+									"ball" => 100,//Баллы
+									"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
+									"type"=> '2'
 								);
 			$count++;	
 			
 		} 
+
+		//Ставка и оклад сотрудников
+	$sql="Select INITCAP(FIO),RATE,TARIF from V_TEACH_APPOINT_ALL
+        where instr(
+        upper(replace(replace(FIO,'.',''),' ','')),
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+
+   $s = OCIParse($c,$sql);
+	OCIExecute($s, OCI_DEFAULT);
+
+				
+		while(OCIFetch($s)){
+			
+			$stimul_teac_json[$count] = array(
+									"name"=> 'Заработная плата',
+									"ball" => (double) str_replace(',', '.', ociresult($s,'RATE')) ,//Ставка
+									"summa" => (double) str_replace(',', '.', ociresult($s,'TARIF')),
+									"type" => '3'
+								);
+			$count++;	
+			
+		} 
+
+
 		
-		if($stimul_teac_json){
 	print_r(json_encode_cyr($stimul_teac_json));
-		}
+
 
 
  ?>

@@ -132,9 +132,26 @@ b, strong {
 	background-repeat:no-repeat;
 }
 
-.header_line_content_refresh, .header_line_content_search, .header_line_content_settings{
+.header_line_content_refresh, .header_line_content_search, .header_line_content_settings, .header_line_my_bag{
 	float:right;
 	width:46px;
+}
+
+.header_line_my_bag {
+	width: 120px;
+	color: white;
+	font-size: 14px;
+	border: 1px solid white;
+	margin-top: 14px;
+	margin-right: 6px;
+	padding: 3px;
+	display: none;
+}
+
+.header_line_my_bag:before {
+	content: "Итого: ";
+	float: left;
+	display: block;
 }
 
 .header_line_content_settings{
@@ -1215,3 +1232,121 @@ b, strong {
 	width: 30%;
 }
 
+.coffe_info_box {
+	display: none;
+}
+
+.calc_coffe_table {
+	margin: 1%;
+	margin-bottom: 105px;
+	width: 98%;
+	background: white;
+	border-collapse: collapse;
+}
+
+.calc_coffe_table td {
+	/* border: 1px solid grey; */
+}
+
+.title_coffe {
+	background: #5677fc;
+	color: white;
+}
+
+.title_coffe_sub {
+	background: #359d78;
+	color: white;
+}
+
+.title_coffe td, .title_coffe_sub td {
+	padding: 10px;
+}
+
+.menu_item {
+	font-size: 14px;
+}
+
+.menu_item td {
+	padding: 10px;
+	border-bottom: 1px dashed grey;
+	
+}
+
+.menu_title_coffe {
+	font-size: 18px;
+	font-weight: bold;
+	color: #585858;
+	margin: 5px 8px;
+	display: block;
+}
+
+.info_tr td{
+	padding: 10px; 
+	font-size: 14px;
+	border-bottom: 1px dashed grey;
+	color: grey;
+	font-weight: bold;
+}
+
+.adding_menu {
+	background: #f1f1f1;
+	height: 100px;
+	border-top: 1px solid #b5b5b4;
+	/* opacity: 0.85; */
+	width: 100%;
+	max-width: 1024px;
+	position: fixed;
+	display: none;
+	bottom: 0;
+}
+
+.adding_menu_button {
+	float: right;
+	margin:10px;
+	width: 80px;
+	height: 80px;
+	background: url('../img/plus-circle.png') center center no-repeat;
+}
+
+.adding_menu_info {
+	padding: 8px;
+	width: 50%;
+	float: left;
+	font-size: 14px;
+}
+
+.num_del_inp {
+	padding: 5px;
+}
+
+.adding_menu_info_title {
+	font-weight: bold;
+}
+
+.my_bag {
+	background: white;
+	width: 20px;
+	z-index: 99999;
+}
+
+.shopping_box {
+	position: fixed;
+	z-index: 999;
+	background: white;
+	width:100%;
+	top:50px;
+	max-width: 1024px;
+	color: grey;
+	height: 100%;
+	padding: 10px;
+	box-sizing:border-box;
+	display: none;
+}
+
+.exit_button_dish {
+	color: brown;
+}
+
+.exit_button_dish {
+	text-decoration: none;
+}

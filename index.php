@@ -47,7 +47,7 @@
 							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
 							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
 							<!-- <li class="sidebar_menu_block_menu_item persinf_item" hashtag="persinf">Персональная</li> -->
-							<li class="sidebar_menu_block_menu_item finance_item" hashtag="finance_inf">Финансы</li>
+							<li class="sidebar_menu_block_menu_item finance_item auth_only" hashtag="finance_inf">Финансы</li>
 							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
 							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
 							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
@@ -80,6 +80,10 @@
 								<input class="timetable_box_input" name="timetable_query" onclick="event.stopPropagation();" placeholder="Поиск расписания..." type="text" required="">
 								<input style="display:none;" onclick="event.stopPropagation();" type="submit" class="timetable_box_submit" />
 							</form>
+						</div>
+
+						<div class="header_line_my_bag" onclick="showBag()">
+						   0  
 						</div>
 						
 						<!--<div class="header_line_content_settings" hashtag="settings">
@@ -180,6 +184,10 @@
 				<div class="dir_info_box">
 					
 				</div>
+
+				<div class="coffe_info_box">
+					
+				</div>				
 
 				<div class="about_info_box">
 					<div class="about_info_box_text contr_shadow"><p><b>mob.ugrasu.ru [ver 0.1]</b> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
@@ -297,14 +305,14 @@
 							</div>
 						</div>
 						
-						<!--<div class="content_box_menuitem contr_shadow authblock" hashtag="coffe_block">
+						<div class="content_box_menuitem contr_shadow" hashtag="coffe_block">
 							
 							<img src="img/coffee_icon.png" />
 						   
 							<div class="content_box_name_item coffe_content">	
 							  Столовая
 							</div>
-						</div> -->
+						</div>
 						
 						<div class="content_box_menuitem contr_shadow" hashtag="about_app">
 							
@@ -328,6 +336,7 @@
 		</div>
 		
 		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/money_coffee.js"></script>
 		<script src="js/view.js"></script>
 		<script src="js/news_loader.js"></script>
 		<!--<script src="js/waterfall.js"></script>-->

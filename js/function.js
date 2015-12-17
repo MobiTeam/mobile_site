@@ -1,3 +1,98 @@
+var dishes = [];
+
+var loadCoffeInfo = function(){
+
+	var cookInf = getJSON('cook_info', (localStorage.auth_inf != undefined));
+	if(cookInf == undefined){
+		myajax(true, "POST", "cookshop/parse.php",  {}, false, showCookCalc, true, "cook_info");
+	} else {
+		showCookCalc(cookInf);
+	}
+
+}
+
+function showCookCalc(obj){
+	
+	//setJSON('cook_info', obj, (localStorage.auth_inf != undefined));
+	var htmlCoffeBlock = "<div class='shopping_box'></div><span class='menu_title_coffe'>Меню столовой «Большая перемена»:</span><table class='calc_coffe_table contr_shadow unselected'>";
+	for(var i = 0; i < obj.length; i++){
+		htmlCoffeBlock += "<tr class='title_coffe'><td colspan='3'>" + obj[i].title + "</td></tr>";
+		for(var j = 0; j < obj[i].cat.length; j++){
+			if(obj[i].cat[j].cat_name != ""){
+				htmlCoffeBlock += "<tr class='title_coffe_sub'><td colspan='3'>" + obj[i].cat[j].cat_name + "</td></tr>";
+			}
+			var dishes = obj[i].cat[j].dishes;
+			if(dishes.length > 0){
+				htmlCoffeBlock += "<tr class='info_tr'><td>Наименование</td><td>Кол-во</td><td>Цена</td></tr>";
+			}
+			for (var z = 0; z < dishes.length; z++) {
+				htmlCoffeBlock += "<tr class='menu_item' onclick=\"changeWeight('" + ((dishes[z].title).replace(/"/g, '')) + "', " + dishes[z].price + ")\"><td>" + dishes[z].title + "</td><td>" + dishes[z].weight + "</td><td style='color:#DF7401; font-weight:bold;'>" + dishes[z].price + "</td></tr>";
+			};		
+		}
+	}
+
+	htmlCoffeBlock += "</table>";
+	
+	htmlCoffeBlock += "<div class='adding_menu contr_shadow'>\
+							<div class='adding_menu_info'><span class='adding_menu_info_title' name_dish=''></span><br><span class='adding_menu_info_price'></span><br> <b>Количество :</b> <input class='num_del_inp' onkeyup='inp_sum_n(this,2)' onpaste='inp_sum_n(this,2)' onfocus='inp_sum_n(this,2)' type='text' value='1' />\
+							</div>\
+							<div class='adding_menu_button' onclick='addToBag()'></div>\
+						</div>";
+	view.$coffe_info_box.html(htmlCoffeBlock);
+}
+
+function changeWeight(title, price){
+	$('.adding_menu').show(150);
+	$('.adding_menu_info_title').attr("name_dish", title).html(title.substr(0,16) + "...");
+	$('.adding_menu_info_price').html("<b>Цена :</b> <span class='curr_item_cost'>" + price + "</span> руб.");
+}
+
+function addToBag(){
+	var currSumm = parseFloat($('.header_line_my_bag').text().trim());
+	var addingSumm = parseFloat($('.curr_item_cost').text().trim());
+	dishes.push({
+		title_dish: $('.adding_menu_info_title').attr("name_dish"),
+		amount: $('.num_del_inp').val(),
+		summ: addingSumm * $('.num_del_inp').val(),
+		order: dishes.length,
+		show: true
+	});
+	console.log(dishes);
+	$('.header_line_my_bag').html(" " + (currSumm + addingSumm * $('.num_del_inp').val()) + " руб.");
+	$('.num_del_inp').val(1);
+
+
+	$('.adding_menu').hide(150);
+
+}
+
+function closeBag(){
+	$('.shopping_box').hide(100);
+}
+
+function delete_dish(index){
+	var currSumm = parseFloat($('.header_line_my_bag').text().trim());
+	dishes[index].show = false;
+	$('.header_line_my_bag').html(currSumm - dishes[index].summ);
+	showBag();
+}
+
+function showBag(){
+
+	var htmlDishes = "<b>Ваш заказ <span class='exit_button_dish' onclick='closeBag()'>[закрыть]</span>:</b><br><table class='calc_coffe_table'>";
+    htmlDishes += "<tr class='info_tr'><td>Наименование</td><td>Кол-во</td><td>Цена</td><td></td></tr>";
+
+	for(var i = 0; i < dishes.length; i++){
+		if(dishes[i].show){
+			htmlDishes += "<tr class='menu_item' style='color:black;'><td>" + dishes[i].title_dish + "</td><td>" + dishes[i].amount + "</td><td style='color:#DF7401; font-weight:bold;'>" + dishes[i].summ + "</td><td><span onclick='delete_dish(" + dishes[i].order + ")'><b>удалить</b></span></td></tr>";
+		}
+	}
+
+	htmlDishes += "</table>"
+
+	$('.shopping_box').html("<div style='overflow-y:scroll;height:100%;'>" + htmlDishes + "</div>").show(100);
+}
+
 var loadRateData = function(){
 
 	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
@@ -79,8 +174,6 @@ var showTeachContacts = function(obj){
 		personHTML += "<div style='clear:both'></div>";
 		personHTML += "<div class='person_contacts_footer'><span class='phone_block'>тел: " + (obj[i].phone == null ? " - " : obj[i].phone) + "</span> <span class='cabinet_block'>кабинет: " + (obj[i].korp == null ? " - " : obj[i].korp) + "</span><div style='clear:both;'></div></div>"
 		personHTML += "</div>";
-		
-
 	};
 
 	$('.guide_item_search_result').html(personHTML);

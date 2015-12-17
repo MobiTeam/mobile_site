@@ -4,12 +4,13 @@
  	require_once('../auth/ad_functions.php');
 	
 	
-   $FFIO=$_POST['FFIO'];
- 	
+   // $FFIO=$_POST['FFIO'];
+ 	$FFIO='Якимчук А';
 	
  //Стипендия студента
  $sql = "Select * from MV_STUD_AWARDS
-		    where instr(
+		    where YEAR_AWARDS = '2013' and 
+		     instr(
         upper(replace(replace(FFIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
@@ -35,7 +36,8 @@
 									"September" => ociresult($s,'SEPTEMBER'), 
 									"October" => ociresult($s,'OCTOBER'), 
 									"November" => ociresult($s,'NOVEMBER'), 
-									"December" => ociresult($s,'DECEMBER'), 
+									"December" => ociresult($s,'DECEMBER'),
+									"Year"=>ociresult($s,'YEAR_AWARDS'), 
 									"Itogo" => ociresult($s,'ITOGO')
 
 								);
