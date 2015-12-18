@@ -19,6 +19,21 @@
        background-image: url('../img/settings_icon@2x.png');
 	   background-size: 24px 24px;
 	}
+
+	.person_info_box_menu_alsitem:before{
+		background: url('../img/record_book@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
+
+	.person_info_box_menu_loaditem:before{
+		background: url('../img/load_icon@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
+
+	.person_info_box_menu_appitem:before{
+		background: url('../img/info_person@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
 	
 	.rate_box_img {
 		background: url('../img/agree_icon@2x.png') no-repeat center center;
@@ -60,10 +75,59 @@
 		background: url("../img/rate_icon@2x.png");
 		background-size: 40px 40px;
 	}
+	
+
+	.main_calendar_icon {
+		background: url('../img/schedule_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_news_icon {
+		background: url('../img/newspaper_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_group_icon {
+		background: url('../img/students_group_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_person_icon {
+		background: url('../img/person_hi_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_rouble_icon {
+		background: url('../img/rouble_hi_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_directory_icon {
+		background: url('../img/directory_hi_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_coffe_icon {
+		background: url('../img/coffe_hi_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_info_icon {
+		background: url('../img/info_hi_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
 
 	.fin_info_box_menu_incomeitem:before {
 		background: url("../img/incomes_icon@2x.png");
 		background-size: 40px 40px;
+	}
+
+	.previos_info_circle{
+		background-image: url('../img/stud_hat@2x.png');
+		background-repeat:no-repeat;
+		background-size: 128px 128px;
+		background-position:center center;
 	}
 
 	.person_contacts_img {

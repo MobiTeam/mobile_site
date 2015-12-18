@@ -37,7 +37,7 @@
 											
 					} else $serverRequest = $data_message;
 
-						echo $data_user['serverRequest'];
+						//echo $data_user['serverRequest'];
 
 					  if(isset($serverRequest) && ($data_user['serverRequest'] == 'default')){
 						  $data_user['FIO'] = 'undefined';	

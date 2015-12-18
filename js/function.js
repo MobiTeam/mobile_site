@@ -109,13 +109,125 @@ var loadRateData = function(){
 var loadIncomeData = function(){
 
 	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
-	/*var rateInf = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
 
-	if(rateInf == undefined){
-		myajax(true, "POST", "oracle/database_dol.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, genRateHtml, true, "user_rate_info");
+	if(allInf.is_student == "1"){
+		var studIncInf = getJSON('student_income_inf', (localStorage.auth_inf != undefined));
+		if(studIncInf == undefined){
+			myajax(true, "POST", "oracle/database_awards_students.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, getStudentAwards, true, "student_income_inf");
+		} else {
+			getStudentAwards(studIncInf);
+		}
 	} else {
-		genRateHtml();
-	}*/
+		var teachIncInf = getJSON('teach_income_inf', (localStorage.auth_inf != undefined));
+		if(teachIncInf == undefined){
+			myajax(true, "POST", "oracle/database_stimul_teac.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, showTeachIcome, true, "teach_income_inf");
+		} else {
+			showTeachIcome(teachIncInf);
+		}
+	}
+	
+}
+
+var getStudentAwards = function(obj){
+	
+	setJSON("student_income_inf", obj, (localStorage.auth_inf != undefined));
+	var years = Object.keys(obj);	
+	var select = "<b style='color:grey;margin: 5px;'>Выберите год:</b><select onchange='createHtmlAvard()' class='selected_aw_year'>";
+	for(var i = 0; i < years.length; i++){
+		if (i == years.length - 1) {
+			select += "<option selected>" + years[i] + "</option>";
+		} else select += "<option>" + years[i] + "</option>";
+	}
+	
+	select += "</select>";
+	var incomeHTML = "<div class='fin_block_inform'>" + select;
+	incomeHTML += "<div class='award_block'></div>";
+	
+	incomeHTML += "</div>"
+
+	$('.fin_info_box_menu_income').html(incomeHTML);
+	createHtmlAvard(obj);
+
+}
+
+var createHtmlAvard = function(obj){
+
+	if(obj == undefined){
+		obj = getJSON('student_income_inf', (localStorage.auth_inf != undefined));
+	} 
+
+	var selYearObj = obj[$('.selected_aw_year').val()];
+	var incomeHTML = "";
+
+	if(selYearObj.length == 0){
+		incomeHTML += "Данные отсутствуют.";
+	} else {
+
+		for(var key in selYearObj){
+			
+			if(selYearObj[key]["summ"].lenght > 0){
+				var n = selYearObj[key];
+				for (var i = 0; i < selYearObj[key]["summ"].lenght; i++) {
+					console.log(selYearObj[key]["summ"].lenght);
+					incomeHTML += "<div class='rate_box contr_shadow'>";
+					incomeHTML += "<div class='rate_box_head'>" + fullMonthNames2[key] + "</div>";
+					incomeHTML += "<div class='rate_box_middle' style='margin-top:10px;'></div>";
+					incomeHTML += "</div>";
+				};
+				
+			}
+		}
+		/*for(var i = 0; i < selYearObj.length; i++){
+
+			incomeHTML += "<div class='rate_box contr_shadow'>123";
+			incomeHTML += "</div>";
+		}*/
+			
+			// incomeHTML += "<div class='rate_box contr_shadow'>";
+			// incomeHTML += "<div class='rate_box_head'><b>" + (i + 1) +") " + obj[i].name + "</b></div>";
+			// incomeHTML += "<div class='dog_wrapper'><div class='rate_box_img'></div>";
+			// incomeHTML += "</div><div class='rate_box_middle' style='margin-top:10px;'>";
+			// incomeHTML +=  (obj[i].type == 3 ? "Ставка: " : "Баллы: ") + (obj[i].ball == null ? "-" : obj[i].ball) + "<br>";
+			// incomeHTML += "<span style='color: green;'>" + (obj[i].type == 3 ? "Оклад: " : "Сумма: ") + (obj[i].summa == null ? "-" : obj[i].summa) + "</span><br>";
+			// incomeHTML += "</div><div style='clear:both;'></div>";
+			// if(obj[i].type == 3){
+			// 	incomeHTML += "<div class='rate_footer'><b style='color:grey;'>Должность:</b> " + (obj[i].post == null ? "-" : obj[i].post) + "</div>";
+			// }	
+			// incomeHTML += "</div>";
+
+	}
+
+	$('.award_block').html(incomeHTML);
+
+}
+
+var showTeachIcome = function(obj){
+	setJSON("teach_income_inf", obj, (localStorage.auth_inf != undefined));
+		
+	var incomeHTML = "<div class='fin_block_inform'>";
+
+	if(obj.length == 0){
+		incomeHTML += "Данные отсутствуют.";
+	} else {
+		for(var i = 0; i < obj.length; i++){
+			
+			incomeHTML += "<div class='rate_box contr_shadow'>";
+			incomeHTML += "<div class='rate_box_head'><b>" + (i + 1) +") " + obj[i].name + "</b></div>";
+			incomeHTML += "<div class='dog_wrapper'><div class='rate_box_img'></div>";
+			incomeHTML += "</div><div class='rate_box_middle' style='margin-top:10px;'>";
+			incomeHTML +=  (obj[i].type == 3 ? "Ставка: " : "Баллы: ") + (obj[i].ball == null ? "-" : obj[i].ball) + "<br>";
+			incomeHTML += "<span style='color: green;'>" + (obj[i].type == 3 ? "Оклад: " : "Сумма: ") + (obj[i].summa == null ? "-" : obj[i].summa) + "</span><br>";
+			incomeHTML += "</div><div style='clear:both;'></div>";
+			if(obj[i].type == 3){
+				incomeHTML += "<div class='rate_footer'><b style='color:grey;'>Должность:</b> " + (obj[i].post == null ? "-" : obj[i].post) + "</div>";
+			}	
+			incomeHTML += "</div>";
+		}
+	}
+
+	incomeHTML += "</div>"
+
+	$('.fin_info_box_menu_income').html(incomeHTML);
 
 }
 

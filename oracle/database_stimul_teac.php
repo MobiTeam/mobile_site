@@ -1,18 +1,23 @@
 <?php
 
-   require_once('database_connect.php');
+    session_start(); 
 	require_once('../auth/ad_functions.php');
+	userAutentificate();
+	if(isset($_SESSION['FIO'])){
+		$FFIO = $_SESSION['FIO'];
+	} else {
+		$FFIO = $_POST['FIO'];
+	}
+
+   require_once('database_connect.php');
    
-      $FFIO=$_POST[''];
-
-      // $FFIO='Татаринцев';
-
+  
 //Стимулирующие ППС
 
-     $sql="Select * from v_teac_stimul
+	 $sql="Select * from v_teac_stimul
 		where instr(
-        upper(replace(replace(FIO,'.',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+	    upper(replace(replace(FIO,'.',''),' ','')),
+	    upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
    $s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
@@ -59,7 +64,7 @@
 		} 
 
 		//Ставка и оклад сотрудников
-	$sql="Select INITCAP(FIO),RATE,TARIF from V_TEACH_APPOINT_ALL
+	$sql="Select INITCAP(FIO),RATE,TARIF,POST from V_TEACH_APPOINT_ALL
         where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -74,6 +79,7 @@
 									"name"=> 'Заработная плата',
 									"ball" => (double) str_replace(',', '.', ociresult($s,'RATE')) ,//Ставка
 									"summa" => (double) str_replace(',', '.', ociresult($s,'TARIF')),
+									"post"=> ociresult($s,'POST'),
 									"type" => '3'
 								);
 			$count++;	

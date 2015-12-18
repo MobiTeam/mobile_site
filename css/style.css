@@ -1,4 +1,4 @@
-* { 
+﻿* { 
   vertical-align: baseline; 
   font-weight: inherit; 
   font-family: inherit; 
@@ -406,7 +406,7 @@ b, strong {
 	height:130px;
 	width:130px;
 	background:#5677fc;
-	background-image:url('../img/student_hat.jpg');
+	background-image:url('../img/stud_hat.png');
 	background-repeat:no-repeat;
 	background-position:center center;
 	border-radius:65px;
@@ -436,7 +436,7 @@ b, strong {
 	opacity:0.85;
 }
 
-.content_box_menuitem:active img{
+.content_box_menuitem:active .main_icon_block{
     opacity:1;
 }
 
@@ -591,7 +591,7 @@ b, strong {
 }
 
 .person_box{
-	margin:82px 15px 0px 15px; 
+	margin:12px; 
 	display:none;
 }
 
@@ -1164,7 +1164,7 @@ b, strong {
     font-family: "RobotoRegular", sans-serif;
 }
 
-.fin_info_box_menu_rate, .fin_info_box_menu_income {
+.fin_info_box_menu_rate, .fin_info_box_menu_income, .person_box_menu_app, .person_box_menu_als, .person_box_menu_load {
 	display: none;
 }
 
@@ -1183,6 +1183,36 @@ b, strong {
 	display: block;
 	margin: 0px 15px 0px 5px;
 	background: url("../img/incomes_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.person_info_box_menu_alsitem:before{
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/record_book.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.person_info_box_menu_loaditem:before{
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/load_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.person_info_box_menu_appitem:before{
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/info_person.png");
 	float: left;
 	width: 40px;
 	height: 40px;
@@ -1349,4 +1379,46 @@ b, strong {
 
 .exit_button_dish {
 	text-decoration: none;
+}
+
+
+/* иконки с главной страницы */
+
+.main_icon_block {
+	width: 64px;
+	height: 64px;
+	margin: 12px auto;
+	opacity: 0.85;
+}
+
+.main_calendar_icon {
+	background: url('../img/schedule_icon.png') no-repeat center center;
+}
+
+.main_news_icon {
+	background: url('../img/newspaper_icon.png') no-repeat center center;
+}
+
+.main_group_icon {
+	background: url('../img/students_group_icon.png') no-repeat center center;
+}
+
+.main_person_icon {
+	background: url('../img/person_hi_icon.png') no-repeat center center;
+}
+
+.main_rouble_icon {
+	background: url('../img/rouble_hi_icon.png') no-repeat center center;
+}
+
+.main_directory_icon {
+	background: url('../img/directory_hi_icon.png') no-repeat center center;
+}
+
+.main_coffe_icon {
+	background: url('../img/coffe_hi_icon.png') no-repeat center center;
+}
+
+.main_info_icon {
+	background: url('../img/info_hi_icon.png') no-repeat center center;
 }

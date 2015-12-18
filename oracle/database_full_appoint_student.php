@@ -1,10 +1,20 @@
 <?php
 
-   require_once('database_connect.php');
+  session_start(); 
 	require_once('../auth/ad_functions.php');
+	userAutentificate();
+	if(isset($_SESSION['FIO'])){
+		$FFIO = $_SESSION['FIO'];
+	} else {
+		$FFIO = $_POST['FIO'];
+	}
+	
+	require_once('database_connect.php');
    
-   $FFIO=$_POST[''];
+   //$FFIO=$_POST[''];
    // $GRUP=$_POST['']; // не используем, по необходимости подключить ниже к запросу и передавать
+
+	//$FFIO = "Ермак Александр";
 
    //Полное назначение студента
 	$sql="Select * from v_stud_appoint_all ap  
@@ -23,7 +33,6 @@ where instr(
 		while(OCIFetch($s)){
 			
 			$appoint_json[$count] = array(
-									"fio" => ociresult($s,'FFIO'), 
 									"Tabnmb" => ociresult($s,'FTABNMB'), 
 									"Sex" => ociresult($s,'FSEX'), 
 									"course" => ociresult($s,'FCOURSE'), 
