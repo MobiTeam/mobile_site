@@ -132,14 +132,14 @@ var getStudentAwards = function(obj){
 	
 	setJSON("student_income_inf", obj, (localStorage.auth_inf != undefined));
 	var years = Object.keys(obj);	
-	var select = "<b style='color:grey;margin: 5px;'>Выберите год:</b><select onchange='createHtmlAvard()' class='selected_aw_year'>";
+	var select = "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Выберите год:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='createHtmlAvard()' class='selected_aw_year'>";
 	for(var i = 0; i < years.length; i++){
 		if (i == years.length - 1) {
 			select += "<option selected>" + years[i] + "</option>";
 		} else select += "<option>" + years[i] + "</option>";
 	}
 	
-	select += "</select>";
+	select += "</select></div>";
 	var incomeHTML = "<div class='fin_block_inform'>" + select;
 	incomeHTML += "<div class='award_block'></div>";
 	
@@ -165,15 +165,22 @@ var createHtmlAvard = function(obj){
 
 		for(var key in selYearObj){
 			
-			if(selYearObj[key]["summ"].lenght > 0){
+			if(selYearObj[key]["summ"].length > 0){
 				var n = selYearObj[key];
-				for (var i = 0; i < selYearObj[key]["summ"].lenght; i++) {
-					console.log(selYearObj[key]["summ"].lenght);
-					incomeHTML += "<div class='rate_box contr_shadow'>";
-					incomeHTML += "<div class='rate_box_head'>" + fullMonthNames2[key] + "</div>";
-					incomeHTML += "<div class='rate_box_middle' style='margin-top:10px;'></div>";
-					incomeHTML += "</div>";
+				
+				incomeHTML += "<div class='rate_box contr_shadow'>";
+				incomeHTML += "<div class='rate_box_head'>" + fullMonthNames2[key] + "</div>";
+				incomeHTML += "<div class='rate_box_middle' style='float: none; box-sizing: border-box; width: 100%; padding: 10px; margin-top:0px;'>";
+				var sum = 0;
+				for (var i = 0; i < selYearObj[key]["summ"].length; i++) {
+					
+					incomeHTML += "<div style='border-bottom:1px dashed grey;padding: 8px;'><b style='color:#2E2E2E;'>" + selYearObj[key]["names"][i] + ":</b> " + selYearObj[key]["summ"][i] + " руб.</div>";
+					sum += parseFloat(selYearObj[key]["summ"][i].replace(",","."));
 				};
+				
+				incomeHTML += "</div><div style='clear:both'></div>";
+				incomeHTML += "<div class='rate_footer'><b style='color:grey;'>Итого:</b>  " + sum + " руб. </div>";
+				incomeHTML += "</div>";
 				
 			}
 		}

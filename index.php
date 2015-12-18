@@ -46,7 +46,7 @@
 							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
 							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
 							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
-							<li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li>
+							<!-- <li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li> -->
 							<li class="sidebar_menu_block_menu_item finance_item auth_only" hashtag="finance_inf">Финансы</li>
 							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
 							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
@@ -277,15 +277,15 @@
 							</div>
 						</div>
 
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
+						<!--<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<div class="main_person_icon main_icon_block"></div>
 							<!-- <img src="img/personal_new.png" /> -->
 						
-							<div class="content_box_name_item pers_content">	
+							<!--<div class="content_box_name_item pers_content">	
 							  Персональная инф.
 							</div>
-						</div>
+						</div> -->
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
 							

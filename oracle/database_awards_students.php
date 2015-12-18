@@ -1,11 +1,16 @@
 <?php
-
+	
+	session_start();
+	require_once('../auth/ad_functions.php');
+	userAutentificate();
 	require_once('database_connect.php');
- 	require_once('../auth/ad_functions.php');
-	
-	
-   	// $FFIO=$_POST['FFIO'];
- 	$FFIO='Якимчук А';
+
+    if(isset($_SESSION['FIO'])){
+		$FFIO = $_SESSION['FIO'];
+	} else {
+		$FFIO = $_POST['FIO'];
+	}
+ 	
 	
 	 //Стипендия студента
 	 $sql = "Select * from MV_STUD_AWARDS
