@@ -46,7 +46,7 @@
 							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
 							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
 							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
-							<!-- <li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li> -->
+							<li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li>
 							<li class="sidebar_menu_block_menu_item finance_item auth_only" hashtag="finance_inf">Финансы</li>
 							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
 							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
@@ -169,17 +169,19 @@
 				<div class="person_box">
 					<div class="fin_info_box_menu_item person_info_box_menu_appitem unselected" onclick="toogleShowBlock('person_box_menu_app', 'rate_stat');">Назначение<br><span class='fin_info_box_menu_item_stat rate_stat'>развернуть</span></div>
 					<div class="person_box_menu_app">Загрузка..</div>
-					<div class="fin_info_box_menu_item person_info_box_menu_loaditem unselected" onclick="toogleShowBlock('person_box_menu_load', 'loadstat');">Нагрузка<br><span class='fin_info_box_menu_item_stat loadstat'>развернуть</span></div>
-					<div class="person_box_menu_load">Загрузка..</div>
-					<div class="fin_info_box_menu_item person_info_box_menu_alsitem unselected" onclick="toogleShowBlock('person_box_menu_als', 'income_stat');">Зачетная книжка<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
-					<div class="person_box_menu_als">Информация в процессе заполнения.</div>
+					<!--<div class="fin_info_box_menu_item person_info_box_menu_loaditem unselected notStud" onclick="toogleShowBlock('person_box_menu_load', 'loadstat');">Нагрузка<br><span class='fin_info_box_menu_item_stat loadstat'>развернуть</span></div>
+					<div class="person_box_menu_load notStud">Загрузка..</div>
+					<div class="fin_info_box_menu_item person_info_box_menu_alsitem unselected forStud" onclick="toogleShowBlock('person_box_menu_als', 'income_stat');">Зачетная книжка<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
+					<div class="person_box_menu_als forStud">Загрузка..</div>
+					<div class="fin_info_box_menu_item person_info_box_menu_session unselected forStud" onclick="toogleShowBlock('person_box_menu_ses', 'curr_session');">Текущая сессия<br><span class='fin_info_box_menu_item_stat curr_session'>развернуть</span></div>
+					<div class="person_box_menu_ses forStud">Загрузка..</div>-->
 				</div>
 				
 				<div class="fin_info_box">
 					<div class="fin_info_box_menu_item fin_info_box_menu_rateitem unselected" onclick="toogleShowBlock('fin_info_box_menu_rate', 'rate_stat');">Расходы<br><span class='fin_info_box_menu_item_stat rate_stat'>развернуть</span></div>
 					<div class="fin_info_box_menu_rate">Загрузка..</div>
 					<div class="fin_info_box_menu_item fin_info_box_menu_incomeitem unselected" onclick="toogleShowBlock('fin_info_box_menu_income', 'income_stat');">Доходы<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
-					<div class="fin_info_box_menu_income">Информация в процессе заполнения.</div>
+					<div class="fin_info_box_menu_income">Загрузка..</div>
 				</div>
 
 				<div class="group_info_box">
@@ -199,8 +201,8 @@
 					<p>Данное приложение создано с целью облегчения и упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
 					<p>С помощью данного приложения вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
 					а также персональную информацию такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
-					<p><b>Разработчики:</b><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
-					<p>Отдельные благодарности за содействие в разработке приложения Бурлуцкому Владимиру Владимировичу, Татаринцеву Ярославу Борисовичу, Шавкуну Алексею Евгеньевичу и Карпову Дмитрию Викторовичу.</p>
+					<p><b>Разработчики</b><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
+					<p> <b>Благодарности </b> <br> Бурлуцкому Владимиру Владимировичу <br> Татаринцеву Ярославу Борисовичу<br> Карпову Дмитрию Викторовичу <br> Шавкуну Алексею Евгеньевичу </p>
 					</div>					
 				</div>
 
@@ -277,15 +279,15 @@
 							</div>
 						</div>
 
-						<!--<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
+						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<div class="main_person_icon main_icon_block"></div>
 							<!-- <img src="img/personal_new.png" /> -->
 						
-							<!--<div class="content_box_name_item pers_content">	
+							<div class="content_box_name_item pers_content">	
 							  Персональная инф.
 							</div>
-						</div> -->
+						</div>
 						
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
 							

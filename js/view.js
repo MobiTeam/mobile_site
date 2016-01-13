@@ -90,6 +90,8 @@ var view = {
 	loadPage:function(){
 		
 		this.closeAll();
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
 		
 		if(isAuth()){
 			
@@ -298,6 +300,19 @@ function loadTimetable(){
 function loadPersonBlock(){
 	tagMenuItem('pers_item');
 	view.$persons.stop().fadeTo(250, 1);
+
+	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+
+	if(allInf.is_student == 0){
+		$('.forStud').css('display', 'none');
+		$('.notStud').css('display', 'block');
+		loadTeachInformation(allInf.hash, allInf.FIO);
+	} else {
+		$('.forStud').css('display', 'block');
+		$('.notStud').css('display', 'none');
+		loadStudentInformation(allInf.hash, allInf.FIO, allInf.groups);
+	}
+
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();

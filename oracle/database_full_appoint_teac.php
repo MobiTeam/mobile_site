@@ -1,11 +1,16 @@
 <?php
 
-   require_once('database_connect.php');
-   require_once('../auth/ad_functions.php');
+  	session_start(); 
+	require_once('../auth/ad_functions.php');
+	userAutentificate();
+	if(isset($_SESSION['FIO'])){
+		$FFIO = $_SESSION['FIO'];
+	} else {
+		$FFIO = $_POST['FIO'];
+	}
+	
+	require_once('database_connect.php');
    
-   $FFIO=$_POST[''];
-   
-
    //Полное назначение преподавателя
    
    $sql="Select * from V_TEACH_APPOINT_ALL 
@@ -22,18 +27,18 @@
 		while(OCIFetch($s)){
 			
 			$appoint_teac_json[$count] = array(
-									"fio" => ociresult($s,'FIO'), 
+									// "fio" => ociresult($s,'FIO'), 
 									"Inst" => ociresult($s,'INSTITUTE'), 
 									"Post" => ociresult($s,'POST'), 
-									"Rate" => ociresult($s,'RATE'), 
+									"Rate" => (double) str_replace(",",".", ociresult($s,'RATE')),  
 									"Prizn" => ociresult($s,'PRIZN'), 
 									"Bud" => ociresult($s,'BUDGET'), 
-									"Tarif" => ociresult($s,'TARIF'), 
+									// "Tarif" =>(double) str_replace(",",".",ociresult($s,'TARIF')), 
 									"Ncat" => ociresult($s,'CATEGORY'), 
 									"Reg" => ociresult($s,'DATEREG'), 
 									"Sex" => ociresult($s,'SEX'), 
-									"Born" => ociresult($s,'BORNDATE'), 
-									"Category" => ociresult($s,'NAIKAT') 
+									// "Born" => ociresult($s,'BORNDATE'), 
+									// "Category" => ociresult($s,'NAIKAT') 
 								);
 	
 			$count++;

@@ -1164,8 +1164,12 @@ b, strong {
     font-family: "RobotoRegular", sans-serif;
 }
 
-.fin_info_box_menu_rate, .fin_info_box_menu_income, .person_box_menu_app, .person_box_menu_als, .person_box_menu_load {
+.fin_info_box_menu_rate, .fin_info_box_menu_income, .person_box_menu_app, .person_box_menu_als, .person_box_menu_load, .person_box_menu_ses {
 	display: none;
+}
+
+.person_box_menu_app {
+	padding: 5px 2px;
 }
 
 .fin_info_box_menu_rateitem:before {
@@ -1189,6 +1193,16 @@ b, strong {
 }
 
 .person_info_box_menu_alsitem:before{
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/record_book.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.person_info_box_menu_session:before{
 	content: "";
 	display: block;
 	margin: 0px 15px 0px 5px;
@@ -1241,7 +1255,7 @@ b, strong {
 	padding: 6px;
 	float: right;
 	width: 65%;
-	margin-top:24px;
+	/*margin-top:24px;*/
 }
 
 .rate_box_img {

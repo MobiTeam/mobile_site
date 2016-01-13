@@ -8,7 +8,12 @@
 	  $sql="Select * from mv_teac_contact
 where instr (
         upper(replace(replace(FIO,'',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
+       or
+        instr (
+        upper(replace(replace(PODR,'',''),' ','')),
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
+        order by 1";
 		
 
    $s = OCIParse($c,$sql);

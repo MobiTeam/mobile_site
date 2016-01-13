@@ -1,5 +1,96 @@
 var dishes = [];
 
+function loadTeachInformation(hash, FIO){
+	
+	var teachInfoApp = getJSON('teachInfo_app', (localStorage.auth_inf != undefined));
+	var teachInfoLoad = getJSON('teachInfo_load', (localStorage.auth_inf != undefined));
+
+	if(teachInfoApp == undefined){
+		myajax(true, "POST", "oracle/database_full_appoint_teac.php",  {hash : hash, FIO : FIO}, false, showTeachAppoint, false, "teachInfo_app");
+	} else {
+		showTeachAppoint();
+	}
+
+	/*if(teachInfoLoad == undefined){
+		myajax(true, "POST", "oracle/database_nagruzka_teac.php",  {hash : hash, FIO : FIO}, false, showTeachLoad, true, "teachInfo_load");
+	} else {
+		showTeachLoad();
+	}*/
+}
+
+
+function loadStudentInformation(hash, FIO, groups){
+	
+	var studInfoApp = getJSON('studInfo_app', (localStorage.auth_inf != undefined));
+	var studInfoLoad = getJSON('studInfo_load', (localStorage.auth_inf != undefined));
+
+	if(studInfoApp == undefined){
+		myajax(true, "POST", "oracle/database_full_appoint_student.php",  {hash : hash, FIO : FIO}, false, showStudAppoint, false, "studInfo_app");
+	} else {
+		showStudAppoint();
+	}
+
+	/*if(studInfoLoad == undefined){
+		myajax(true, "POST", "oracle/database_marks_student.php",  {hash : hash, FIO : FIO, groups: groups}, false, showStudLoad, false, "studInfo_load");
+	} else {
+		showStudLoad();
+	}*/
+
+
+}
+
+function showTeachAppoint(){
+	var appoint = getJSON('teachInfo_app', (localStorage.auth_inf != undefined));
+	var htmlCode = "";
+
+	$('.person_box_menu_app').html(JSON.stringify(appoint));
+
+	for(var i = 0; i < appoint.length; i++){
+		htmlCode += "<div class='rate_box contr_shadow'>";
+		htmlCode += "<div class='rate_box_head'><b>Должность: " + appoint[i].Post + " [" + appoint[i].Rate + "]</b></div>";
+		htmlCode += "<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>\
+		<b>Отдел:</b> " + appoint[i].Inst + "<br><b>Признак:</b> " + appoint[i].Prizn + "<br>\
+		<b>Бюджет:</b> " + appoint[i].Bud + "</div>";
+		
+		htmlCode += "<div style='clear:both'></div><div class='rate_footer'>Дата договора: " + appoint[i].Reg + "</div>";
+		htmlCode += "</div>";
+	}
+
+	$('.person_box_menu_app').html(htmlCode);
+}
+
+function showTeachLoad(){
+
+
+}
+
+function showStudLoad(){
+	var appoint = getJSON('studInfo_load', (localStorage.auth_inf != undefined));
+	var htmlCode = "";
+
+	$('.person_box_menu_als').html(JSON.stringify(appoint));
+
+}
+
+function showStudAppoint(){
+	var appoint = getJSON('studInfo_app', (localStorage.auth_inf != undefined));
+	var htmlCode = "";
+	
+	for(var i = 0; i < appoint.length; i++){
+		htmlCode += "<div class='rate_box contr_shadow'>";
+		htmlCode += "<div class='rate_box_head'><b>Номер зачетной книжки: " + appoint[i].Tabnmb + "</b></div>";
+		htmlCode += "<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>\
+		<b>Факультет:</b> " + appoint[i].Faculty + "<br><b>Направление:</b> " + appoint[i].Spec + "<br>\
+		<b>Специальность: </b> " + appoint[i].Post + "<br><b>Степень:</b> " + appoint[i].Degree + "<br><b>Бюджет:</b> " + appoint[i].Bud + "</div>";
+		
+		htmlCode += "<div style='clear:both'></div><div class='rate_footer'>Дата зачисления: " + appoint[i].date_zach + "</div>";
+		htmlCode += "</div>";
+	}
+
+	$('.person_box_menu_app').html(htmlCode);
+	
+}
+
 var loadCoffeInfo = function(){
 
 	var cookInf = getJSON('cook_info', (localStorage.auth_inf != undefined));
@@ -184,24 +275,7 @@ var createHtmlAvard = function(obj){
 				
 			}
 		}
-		/*for(var i = 0; i < selYearObj.length; i++){
-
-			incomeHTML += "<div class='rate_box contr_shadow'>123";
-			incomeHTML += "</div>";
-		}*/
-			
-			// incomeHTML += "<div class='rate_box contr_shadow'>";
-			// incomeHTML += "<div class='rate_box_head'><b>" + (i + 1) +") " + obj[i].name + "</b></div>";
-			// incomeHTML += "<div class='dog_wrapper'><div class='rate_box_img'></div>";
-			// incomeHTML += "</div><div class='rate_box_middle' style='margin-top:10px;'>";
-			// incomeHTML +=  (obj[i].type == 3 ? "Ставка: " : "Баллы: ") + (obj[i].ball == null ? "-" : obj[i].ball) + "<br>";
-			// incomeHTML += "<span style='color: green;'>" + (obj[i].type == 3 ? "Оклад: " : "Сумма: ") + (obj[i].summa == null ? "-" : obj[i].summa) + "</span><br>";
-			// incomeHTML += "</div><div style='clear:both;'></div>";
-			// if(obj[i].type == 3){
-			// 	incomeHTML += "<div class='rate_footer'><b style='color:grey;'>Должность:</b> " + (obj[i].post == null ? "-" : obj[i].post) + "</div>";
-			// }	
-			// incomeHTML += "</div>";
-
+		
 	}
 
 	$('.award_block').html(incomeHTML);
