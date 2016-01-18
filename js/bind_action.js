@@ -1,35 +1,65 @@
+// объявление бокового меню [18.01.2016]
+/////////////////////////////////////////
+
+var slideout;
+
+window.onload = function() {
+	slideout = new Slideout({
+	  'panel': document.getElementById('panel'),
+	  'menu': document.getElementById('menu'),
+	  'side': 'left'
+	});
+};
+
+// назначение обработчиков [18.01.2016]
+////////////////////////////////////////
+
 $(document).ready(function(){
-	
+
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
 	});
+		
 	
+//  GUI расписания [18.01.2016]
+//////////////////////////////////////////////////////////////////////////////////////////////
+
 	$('body').click(function(event){
 	    if (event.target.className != 'timetable_box_input' && location.hash == '#timetable') {
 		   closeInput();
 		}
 	})
-	
+
+	$('.timetable_box_form').on("submit", function(event){
+		event.preventDefault();
+	}); 
+
 	$('.timetable_box_input').autocomplete({	
-			source:"oracle/database_get_timetable_info.php",
-			minLength:2
-		});
+		source:"oracle/database_get_timetable_info.php",
+		minLength:2
+	});
 		
 	$('.timetable_box_input').on('autocompleteselect',function(event, ui){
-        sessionStorage.timetable = undefined;
-        sessionStorage.query = ui.item.value;
+
+        saveValue('timetable',"undefined");
+        saveValue('query', ui.item.value);
+        
         $('.timetable_lessons').html('')
         loadTimetableInf(ui.item.value);	
 		displayTimetable();
 		closeInput();		
+   
    });	
 	
 	$('.timetable_lessons').click(function(event){
+
 		if(event.target.className == 'found_by_sel_text') {
-			sessionStorage.query = (event.target.innerHTML).trim();
-			sessionStorage.timetable = undefined;
+
+			saveValue("query", (event.target.innerHTML).trim());
+			saveValue("timetable", "undefined");
+			
 			loadTimetableInf(event.target.innerHTML);
-			view.setTitle(sessionStorage.query);
+
 		} else if (event.target.className == 'hide_information_button') {
 			if (event.target.value == 'Развернуть'){
 				event.target.value = 'Свернуть';
@@ -38,45 +68,43 @@ $(document).ready(function(){
 			}
 			$('.hide_timetable_information').toggle(200);
 		}
-	})
-	
-	$( window ).on( "resize", function(){
-	
-		$menu_bl = $('.sidebar_menu_block');
-		$('.sidebar_wr').css('width', $menu_bl.width()+15+'px').css('height', $(window).height());
-		if($('.menuoverlay').css('display') != 'block'){
-			$menu_bl.css('margin-left', '-'+$menu_bl.css('width'));
-		}
-		
 	});
+
+	$('.date_item_back, .date_item_next').click(function(){
 		
+		var diff = $(this).attr('diffDate'),
+			dateStr = getTimetableWeek(true, parseInt(diff)),
+			date = getTimetableWeek(false, parseInt(diff));
+		
+		$('.greyTag').removeClass('greyTag');
+		$('.redTag').removeClass('redTag');
+
+		loadTimetableInf(getValue('query'), dateStr);
+		renderWeekTable(date);	
+
+	});
+	
+
 	$('.header_line__content_button ').click(function(){
+		
 		if($(this).hasClass('menu_button')){
-			/* $('body').css('overflow', 'hidden'); */
-			openSidebar();
+			
+			slideout.toggle();
 				
 		} else if($(this).hasClass('arr_button')){
 			
 			if(location.hash == '#auth'){
 				if (confirm('Вы действительно хотите закрыть приложение?')) location.href = 'http://google.com';
 			}
-			
-	
+		
 		}
 	});
 	
 	$('.sidebar_menu_block_back_arr').click(function(){
-		/* $('body').css('overflow', 'scroll'); */
-		closeSidebar();
+		slideout.toggle();
 	});
 	
-	$('.timetable_box_form').on("submit", function(event){
-		event.preventDefault();
-		/* sessionStorage.query = $('.timetable_box_input').val();
-		setJSON('timetable', myajax(false, 'POST', 'oracle/database_timetable.php', $(this).serialize()), false);
-		displayTimetable();
-		closeInput(); */
-	}); 
+	
 	
 	$('.authorisation_box_form').on( "submit", function( event ){
 		
@@ -90,23 +118,6 @@ $(document).ready(function(){
 		
 	})
 	
-	$('.header_line_content_calendar').click(function(){
-		
-	})
-	
-	$('.date_item_next').click(function(){
-		$('.greyTag').removeClass('greyTag');
-		$('.redTag').removeClass('redTag');
-		sessionStorage.diffDate = 7;
-		getTimetableWeek(7);		
-	});
-	
-	$('.date_item_back').click(function(){
-		$('.greyTag').removeClass('greyTag');
-		$('.redTag').removeClass('redTag');
-		sessionStorage.diffDate = -7;
-		getTimetableWeek(-7);
-	});
 	
 	$('.authorisation_box_button').click(function(){
 		
@@ -114,7 +125,7 @@ $(document).ready(function(){
 		localStorage.user_inf = undefined;
 		
 		authObj = {"FIO":"Здравствуйте, Гость","serverRequest":"Гостевой вход","is_student":"undefined","groups":[]};
-		setJSON("guest_inf", authObj, $('.save_password').prop('checked'));
+		setJSON("guest_inf", authObj);
 		view.changePage('guest');
 		showTooltip(authObj.serverRequest, 2000);
 		
@@ -140,7 +151,7 @@ $(document).ready(function(){
 		$(this).addClass('greenTag');
 		
 				
-		if(sessionStorage.timetable != undefined){
+		if(issetTimetable()){
 			
 			if($('.item_ch_1').prop('checked')){
 				
@@ -150,7 +161,6 @@ $(document).ready(function(){
 			} else {
 				displayTimetable($(this).attr('date_quer'));
 			}
-			
 			
 		}  
 	
@@ -210,22 +220,9 @@ $(document).ready(function(){
 		document.body.scrollTop = 0;
 	}); 
 	
-	$('.content_box_menuitem, .sidebar_menu_block_menu_item, .header_line_content_settings').click(function(){
-		view.changePage($(this).attr('hashtag'));
-		if($('.menuoverlay').css('display') == 'block'){
-			closeSidebar();
-		}
-	}) 
-	
-	
-	/* $('.sidebar_menu_block_menu_item').click(function(){
-		clearCurrSidebarItem();
-		$(this).addClass('sidebar_menu_block_menu_item_curr');
-	}); */
-	
-	$('.menuoverlay').click(function(){
-		closeSidebar();
-	});
+	$('.sidebar_menu_block_menu_item').click(function(){ view.changePage($(this).attr('hashtag')); slideout.toggle();})
+
+	$('.content_box_menuitem, .header_line_content_settings').click(function(){ view.changePage($(this).attr('hashtag')); }) 
 	
 	$('.settings_box_button_save').click(function(){
 		
@@ -234,10 +231,11 @@ $(document).ready(function(){
 			codeSetString += $(this).prop("checked") ? '1' : '0';
 		});
 		
-		var id = getJSON('auth_inf', (localStorage.auth_inf != undefined)).id;
+		var id = getJSON('auth_inf').id;
 		
-		localStorage.settingsCode = parseInt(codeSetString, 2);
-		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: localStorage.settingsCode, id_user: id}, true); 
+		saveValue("settingsCode", parseInt(codeSetString, 2));
+		
+		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), id_user: id}, true); 
 		
 	})
 	

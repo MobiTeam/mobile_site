@@ -25,15 +25,14 @@
 			
  		while(OCIFetch($s)){
 		$object_json[$count] = array(
+				"group"=>$GRUP[$i],
 				"Disclipline" => ociresult($s,'DISCIPLINE'), 
-				"Type" => ociresult($s,'TYPE_WORK'),
+				"Type" => str_replace('ы','',ociresult($s,'TYPE_WORK')),
 				"Semestr" => ociresult($s,'SEMESTR') 
-					);
-			
+				);
 			$count ++;
 		} 
 
 	}			
 		print_r(json_encode_cyr($object_json));
-
 ?>

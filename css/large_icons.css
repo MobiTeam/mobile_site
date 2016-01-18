@@ -35,6 +35,11 @@
 		background-size: 40px 40px;
 	}
 	
+	.person_info_box_menu_session:before{
+		background: url("../img/books_icon@2x.png") no-repeat center center;
+		background-size: 40px 40px;
+	}
+
 	.rate_box_img {
 		background: url('../img/agree_icon@2x.png') no-repeat center center;
 		background-size: 40px 40px;

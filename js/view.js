@@ -28,6 +28,7 @@ var view = {
 	$coffe_info_box: $('.coffe_info_box'),
 	$header_line_my_bag: $('.header_line_my_bag'),
 	$shopping_box: $('.shopping_box'),
+	$hidden_inf_block: $('.hiddenInfBlock'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -50,6 +51,7 @@ var view = {
 	},
 	
 	closeAll: function(currentHash){
+		this.$hidden_inf_block.fadeOut(0);
 		this.$shopping_box.fadeOut(0);
 		this.$header_line_my_bag.fadeOut(0);
 		this.$coffe_info_box.fadeOut(0);
@@ -72,7 +74,6 @@ var view = {
 		this.$form.css('display', 'none');
 		closeInput();
 		this.$cal_button.fadeOut(0);
-		closeSidebar();
 		clearCurrSidebarItem();
 	},
 	
@@ -90,14 +91,12 @@ var view = {
 	loadPage:function(){
 		
 		this.closeAll();
-		document.documentElement.scrollTop = 0;
-		document.body.scrollTop = 0;
-		
+			
 		if(isAuth()){
 			
 			$('.auth_only').css('display', 'block');
 			//проверка на студента
-			var infBlock = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+			var infBlock = getJSON('auth_inf');
 			if(infBlock.is_student == "0"){
 				$('.only_stud').fadeOut(0);
 			}
@@ -202,6 +201,8 @@ var view = {
 			} 
 			
 		this.correctHeight();	
+		document.documentElement.scrollTop = 0;
+		document.body.scrollTop = 0;
 	}
 		
 }	
@@ -227,7 +228,7 @@ function loadAuth(){
 function loadMainMenu(){
 	
 	tagMenuItem('main_item');
-	var userInfo = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var userInfo = getJSON('auth_inf');
 					
 	$('.previous_info_fullname').html(userInfo.FIO);
 	
@@ -244,7 +245,7 @@ function loadMainMenu(){
 function loadGuestMenu(){
 	
 	tagMenuItem('main_item');
-	var userInfo = getJSON('guest_inf', (localStorage.guest_inf != undefined));
+	var userInfo = getJSON('guest_inf');
 					
 	$('.previous_info_fullname').html(userInfo.FIO);
 	
@@ -268,6 +269,9 @@ function loadNewsBlock(){
 	
 }
 
+// Блок работы с расписанием [18.01.2016]
+//////////////////////////////////////////
+
 function loadTimetable(){
 	
 	tagMenuItem('timetable_item');
@@ -279,15 +283,24 @@ function loadTimetable(){
 	view.$search_butt.fadeIn(0).removeClass('opened_input');
 	view.$dateline.fadeIn(0);
 	
-	showCurrentWeek();
+	renderWeekTable();
 	
 	if(!issetTimetable()){
 		
+		var uInfo = getJSON("auth_inf");
+
 		if(issetUserGroup()){
+			saveValue("query", uInfo.groups[0]);
 			loadTimetableInf();
 		} else {
-			$('.timetable_lessons').html('');
-			showTimetableAlert();
+
+			if(uInfo.is_student == "0"){
+				saveValue("query", uInfo.FIO);
+				loadTimetableInf();
+			} else {
+				$('.timetable_lessons').html('');
+				showTimetableAlert();
+			}			
 		}
 		
 	} else {
@@ -301,7 +314,7 @@ function loadPersonBlock(){
 	tagMenuItem('pers_item');
 	view.$persons.stop().fadeTo(250, 1);
 
-	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var allInf = getJSON('auth_inf');
 
 	if(allInf.is_student == 0){
 		$('.forStud').css('display', 'none');

@@ -17,11 +17,10 @@
 
 	require_once('database_connect.php');
 
+	// $FFIO='Ермак Александр Денисович';
+	// $GRUP=array('2231','4721б');
 
-	$marks=array();
-
-	$FFIO='Ермак Александр Денисович';
-	$GRUP=array('2231','4721б');
+	$marks=array();	
 
 	for ($i=0; $i < count($GRUP); $i++) { 	
 
@@ -30,15 +29,15 @@
 where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1
-   		 and gr_name like '%".$GRUP[$i]."%'";
+   		 and gr_name like '%".$GRUP[$i]."%'
+   		 order by TYPEWORK,SEMESTR";
 
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	$count = 0;
 	$marks_json = array();
 
-		while(OCIFetch($s)){
-			
+		while(OCIFetch($s)){		
 			$marks_json[$count] = array(
 			
 								"discipline" => ociresult($s,'DIS'),
@@ -52,9 +51,7 @@ where instr(
 			
 		} 
 		$marks[$i]=$marks_json;
-
 	}
-		
 	print_r(json_encode_cyr($marks));
    
    

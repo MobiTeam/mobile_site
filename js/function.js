@@ -1,9 +1,154 @@
+///////////////////////////////////////////
+// работа с хранилищем данных 15.01.2016 //
+///////////////////////////////////////////
+
+// сохранять данные в постоянную или переменную сессию
+function remMe(){
+	return localStorage.auth_inf != undefined || $('.save_password').prop('checked');
+}
+
+// сохранение JSON в localStorage/sessionStorage
+function setJSON(key, value) {
+
+	var flag = remMe();
+
+	try {   
+	    if(flag == true){
+	        if(localStorage[key] == undefined || localStorage[key] == "undefined"){
+				localStorage[key] = JSON.stringify(value);
+			} else {
+				localStorage[key] = JSON.stringify($.extend(JSON.parse(localStorage[key]), value));
+			}			
+		} else {
+			if(sessionStorage[key] == undefined || sessionStorage[key] == "undefined"){
+				sessionStorage[key] = JSON.stringify(value);
+			} else {
+					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
+			}
+		}			
+	} catch(ex){}
+}
+
+// получение JSON из localStorage/sessionStorage
+function getJSON(key) {
+	
+	var value, 
+		flag = remMe();
+	
+	if(flag == true){
+		value = localStorage[key];				
+	} else {
+		value = sessionStorage[key];
+	}
+	
+	if(value == undefined || value == "undefined"){
+		return null;
+	} else {
+		return JSON.parse(value)
+	}
+	
+}
+
+// получение значения переменной из localStorage/sessionStorage
+function getValue(key){
+
+	var flag = remMe();
+
+	if(flag == true){
+	 	return localStorage[key];
+	} else {
+	 	return sessionStorage[key];
+	}
+}
+
+// запись переменной в localStorage/sessionStorage
+function saveValue(key, value){
+
+	var flag = remMe();
+
+	 if(flag == true){
+	 	localStorage[key] = value;
+	 } else {
+	 	sessionStorage[key] = value;
+	 }
+}
+
+/////////////////////////////////////////
+// проверка на авторизацию  15.01.2016 //
+/////////////////////////////////////////
+
+
+function isAuth() {
+	if(localStorage.auth_inf != undefined || sessionStorage.auth_inf != undefined){
+		return true;
+	} 
+	return false;
+}
+
+function isGuest() {
+	if(localStorage.guest_inf != undefined || sessionStorage.guest_inf != undefined){
+		return true;
+	} 
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// унифицированная обертка на функцию $.ajax [boolean, string, string, object, boolean, callback, boolean, string] 15.01.2016 //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
+	
+	opBl();
+	var jsonObj;
+		
+	$.ajax({
+		async: async,
+		type: type,
+		url: url,
+		data: data,
+		success: function(responseTxt){
+				
+				if(notResponse == undefined || !notResponse){
+					var clrResp = clearUTF8(responseTxt);
+
+					try {
+						jsonObj = JSON.parse(clrResp);
+					} catch(e){
+						showTooltip(errMessages[0], 2000);
+					}
+				}
+				
+				if(functionCallBack != undefined) {
+					
+					if(issetArgs == undefined || !issetArgs){
+						setJSON(savePlace, jsonObj);
+						functionCallBack();
+					} else {
+						functionCallBack(jsonObj);
+					}
+					return;
+				}
+				
+			},
+		error: function(){
+			showTooltip(errMessages[1], 2000);
+		},
+		complete: function(){
+			clBl();
+		}
+	});
+		
+	return jsonObj; 		
+}
+
+
+
 var dishes = [];
 
 function loadTeachInformation(hash, FIO){
 	
-	var teachInfoApp = getJSON('teachInfo_app', (localStorage.auth_inf != undefined));
-	var teachInfoLoad = getJSON('teachInfo_load', (localStorage.auth_inf != undefined));
+	var teachInfoApp = getJSON('teachInfo_app');
+	var teachInfoLoad = getJSON('teachInfo_load');
 
 	if(teachInfoApp == undefined){
 		myajax(true, "POST", "oracle/database_full_appoint_teac.php",  {hash : hash, FIO : FIO}, false, showTeachAppoint, false, "teachInfo_app");
@@ -11,18 +156,19 @@ function loadTeachInformation(hash, FIO){
 		showTeachAppoint();
 	}
 
-	/*if(teachInfoLoad == undefined){
-		myajax(true, "POST", "oracle/database_nagruzka_teac.php",  {hash : hash, FIO : FIO}, false, showTeachLoad, true, "teachInfo_load");
+	if(teachInfoLoad == undefined){
+		myajax(true, "POST", "oracle/database_nagruzka_teac.php",  {hash : hash, FIO : FIO}, false, showTeachLoad, false, "teachInfo_load");
 	} else {
 		showTeachLoad();
-	}*/
+	}
 }
 
 
 function loadStudentInformation(hash, FIO, groups){
 	
-	var studInfoApp = getJSON('studInfo_app', (localStorage.auth_inf != undefined));
-	var studInfoLoad = getJSON('studInfo_load', (localStorage.auth_inf != undefined));
+	var studInfoApp = getJSON('studInfo_app');
+	var studInfoLoad = getJSON('studInfo_load');
+	var studInfoMarks = getJSON('studInfo_marks');
 
 	if(studInfoApp == undefined){
 		myajax(true, "POST", "oracle/database_full_appoint_student.php",  {hash : hash, FIO : FIO}, false, showStudAppoint, false, "studInfo_app");
@@ -30,20 +176,26 @@ function loadStudentInformation(hash, FIO, groups){
 		showStudAppoint();
 	}
 
-	/*if(studInfoLoad == undefined){
-		myajax(true, "POST", "oracle/database_marks_student.php",  {hash : hash, FIO : FIO, groups: groups}, false, showStudLoad, false, "studInfo_load");
+	if(studInfoLoad == undefined){
+		myajax(true, "POST", "oracle/database_object_student.php",  {hash : hash, FIO : FIO, groups: groups}, false, showStudLoad, false, "studInfo_load");
 	} else {
 		showStudLoad();
-	}*/
+	}
+
+	if(studInfoMarks == undefined){
+		myajax(true, "POST", "oracle/database_marks_student.php",  {hash : hash, FIO : FIO, groups: groups}, false, showStudMarks, false, "studInfo_marks");
+	} else {
+		showStudMarks();
+	}
 
 
 }
 
 function showTeachAppoint(){
-	var appoint = getJSON('teachInfo_app', (localStorage.auth_inf != undefined));
+	var appoint = getJSON('teachInfo_app');
 	var htmlCode = "";
 
-	$('.person_box_menu_app').html(JSON.stringify(appoint));
+	//$('.person_box_menu_app').html(JSON.stringify(appoint));
 
 	for(var i = 0; i < appoint.length; i++){
 		htmlCode += "<div class='rate_box contr_shadow'>";
@@ -61,19 +213,123 @@ function showTeachAppoint(){
 
 function showTeachLoad(){
 
+	var htmlCode = "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Семестр:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='getTeachLoadbySem()' class='selected_load_sem'><option val='Осень' selected>Осень</option><option val='Зима'>Зима</option></select></div>";
+	$('.person_box_menu_load').html(htmlCode + "<div class='teach_load_sem'></div>");
+	getTeachLoadbySem();
 
+}
+
+function getTeachLoadbySem(){
+
+	var loadJS = getJSON('teachInfo_load');
+	var htmlCode = "";
+	var currSem = $('.selected_load_sem').val();
+
+	for(var i = 0; i < loadJS.length; i++){
+
+		if(loadJS[i].Sezon === currSem){
+			htmlCode += "<div class='rate_box contr_shadow'>";
+			htmlCode += "<div class='rate_box_head'><b>Предмет: " + loadJS[i].Subj + " [" + loadJS[i].Sezon + " " + loadJS[i].Year + " г.]</b></div>";
+			htmlCode += "<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>\
+			<b>Группа:</b> " + loadJS[i].Group + " (" + loadJS[i].Course_gr + " курс)<br><b>Количество студентов:</b> " + loadJS[i].Group_count + "<br>\
+			</div>";
+			
+			htmlCode += "<div style='clear:both'></div><div class='rate_footer'><b style='color:brown;'>Нагрузка:</b> " + loadJS[i].Itog + " часов</div>";
+			htmlCode += "</div>";
+		}
+		
+	}
+
+	$('.teach_load_sem').html(htmlCode == "" ? "Занятий по данному критерию не найдено." : htmlCode);
 }
 
 function showStudLoad(){
-	var appoint = getJSON('studInfo_load', (localStorage.auth_inf != undefined));
+	var load = getJSON('studInfo_load');
 	var htmlCode = "";
 
-	$('.person_box_menu_als').html(JSON.stringify(appoint));
+	for(var i = 0; i < load.length; i++){
+
+			htmlCode += "<div class='rate_box contr_shadow'>";
+			htmlCode += "<div class='rate_box_head'><b>" + load[i].Disclipline + " [" + load[i].Type + "]</b></div>";
+			htmlCode += "<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>\
+			<b>Группа:</b> " + load[i].group + " (" + load[i].Semestr + " семестр)</div>";
+			
+			htmlCode += "<div style='clear:both'>";
+			htmlCode += "</div></div>";
+				
+	}
+
+	$('.person_box_menu_ses').html(htmlCode);
 
 }
 
+function showStudMarks(){
+
+	var userInfo = getJSON('auth_inf')['groups'];
+	var groupsOptions = "";
+
+	for(var i = 0; i < userInfo.length; i++){
+		groupsOptions += "<option value='" + userInfo[i] + "'>" + userInfo[i] + "</option>";
+	}
+
+	var marks = getJSON('studInfo_marks');
+    var semArr = [];
+    var semArrOption = "";
+
+	for(var group in marks){
+		for(var i = 0; i < marks[group].length; i++){
+			if(semArr.indexOf(marks[group][i].semestr) == -1){
+				semArr.push(marks[group][i].semestr);
+			}
+		}
+	}
+
+	for(var i = 0; i < semArr.length; i++){
+		if(i == semArr.length - 1){
+			semArrOption += "<option value='" + semArr[i] + "' selected>" + semArr[i] + "</option>";
+		} else semArrOption += "<option value='" + semArr[i] + "'>" + semArr[i] + "</option>";
+	}
+
+
+	
+
+	var htmlCode = "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Группа:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='createHTMLMarks()' class='selected_load_mks_gr'>" + groupsOptions + "</select></div>";
+	htmlCode += "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Семестр:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='createHTMLMarks()' class='selected_load_mks_sem'>" + semArrOption + "</select></div>";
+	$('.person_box_menu_als').html(htmlCode + "<div class='teach_load_mks'></div>");
+
+	createHTMLMarks();
+
+}
+
+function createHTMLMarks(){
+	
+	var htmlCode = "";
+	var marks = getJSON('studInfo_marks');
+	
+	var currSem = $('.selected_load_mks_sem').val();
+	var currGroup = $('.selected_load_mks_gr').val();
+
+	for(var group in marks){
+
+		for(var i = 0; i < marks[group].length; i++){
+
+			if(marks[group][i].group != currGroup) break;
+
+			if(marks[group][i].semestr == currSem){
+				
+				htmlCode += "<div style='border-bottom: 1px dashed grey; padding: 3px;'><b>" + marks[group][i].type + ":</b> " + marks[group][i].discipline + " <span style='color:brown'><b>[" + (marks[group][i].mark == 1 ? "Зачет" : marks[group][i].mark <= 0 ? "Не сдан" : marks[group][i].mark) + "]</span></b></div>";
+										
+			}
+			
+		}
+	}
+
+	$('.teach_load_mks').html("<div class='rate_box contr_shadow'><div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>" + htmlCode + "</div></div>");	
+}
+
+
 function showStudAppoint(){
-	var appoint = getJSON('studInfo_app', (localStorage.auth_inf != undefined));
+	var appoint = getJSON('studInfo_app');
 	var htmlCode = "";
 	
 	for(var i = 0; i < appoint.length; i++){
@@ -93,7 +349,7 @@ function showStudAppoint(){
 
 var loadCoffeInfo = function(){
 
-	var cookInf = getJSON('cook_info', (localStorage.auth_inf != undefined));
+	var cookInf = getJSON('cook_info');
 	if(cookInf == undefined){
 		myajax(true, "POST", "cookshop/parse.php",  {}, false, showCookCalc, true, "cook_info");
 	} else {
@@ -104,7 +360,7 @@ var loadCoffeInfo = function(){
 
 function showCookCalc(obj){
 	
-	//setJSON('cook_info', obj, (localStorage.auth_inf != undefined));
+	//setJSON('cook_info', obj);
 	var htmlCoffeBlock = "<div class='shopping_box'></div><span class='menu_title_coffe'>Меню столовой «Большая перемена»:</span><table class='calc_coffe_table contr_shadow unselected'>";
 	for(var i = 0; i < obj.length; i++){
 		htmlCoffeBlock += "<tr class='title_coffe'><td colspan='3'>" + obj[i].title + "</td></tr>";
@@ -148,7 +404,7 @@ function addToBag(){
 		order: dishes.length,
 		show: true
 	});
-	console.log(dishes);
+	
 	$('.header_line_my_bag').html(" " + (currSumm + addingSumm * $('.num_del_inp').val()) + " руб.");
 	$('.num_del_inp').val(1);
 
@@ -186,8 +442,8 @@ function showBag(){
 
 var loadRateData = function(){
 
-	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
-	var rateInf = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
+	var allInf = getJSON('auth_inf');
+	var rateInf = getJSON('user_rate_info');
 	
 	if(rateInf == undefined){
 		myajax(true, "POST", "oracle/database_dol.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, genRateHtml, true, "user_rate_info");
@@ -199,17 +455,17 @@ var loadRateData = function(){
 
 var loadIncomeData = function(){
 
-	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var allInf = getJSON('auth_inf');
 
 	if(allInf.is_student == "1"){
-		var studIncInf = getJSON('student_income_inf', (localStorage.auth_inf != undefined));
+		var studIncInf = getJSON('student_income_inf');
 		if(studIncInf == undefined){
 			myajax(true, "POST", "oracle/database_awards_students.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, getStudentAwards, true, "student_income_inf");
 		} else {
 			getStudentAwards(studIncInf);
 		}
 	} else {
-		var teachIncInf = getJSON('teach_income_inf', (localStorage.auth_inf != undefined));
+		var teachIncInf = getJSON('teach_income_inf');
 		if(teachIncInf == undefined){
 			myajax(true, "POST", "oracle/database_stimul_teac.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, showTeachIcome, true, "teach_income_inf");
 		} else {
@@ -221,7 +477,7 @@ var loadIncomeData = function(){
 
 var getStudentAwards = function(obj){
 	
-	setJSON("student_income_inf", obj, (localStorage.auth_inf != undefined));
+	setJSON("student_income_inf", obj);
 	var years = Object.keys(obj);	
 	var select = "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Выберите год:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='createHtmlAvard()' class='selected_aw_year'>";
 	for(var i = 0; i < years.length; i++){
@@ -244,7 +500,7 @@ var getStudentAwards = function(obj){
 var createHtmlAvard = function(obj){
 
 	if(obj == undefined){
-		obj = getJSON('student_income_inf', (localStorage.auth_inf != undefined));
+		obj = getJSON('student_income_inf');
 	} 
 
 	var selYearObj = obj[$('.selected_aw_year').val()];
@@ -283,7 +539,7 @@ var createHtmlAvard = function(obj){
 }
 
 var showTeachIcome = function(obj){
-	setJSON("teach_income_inf", obj, (localStorage.auth_inf != undefined));
+	setJSON("teach_income_inf", obj);
 		
 	var incomeHTML = "<div class='fin_block_inform'>";
 
@@ -319,15 +575,20 @@ var toogleShowBlock = function(className, statClass){
 		$('.' + statClass).html("свернуть");
 	} else $('.' + statClass).html("развернуть");
 
-	$el.toggle(100);
+	$el.toggle(10, function(){
+		$('body').scrollTo($el, {duration: 10, offset: -126});
+	});
+
+	
+	//$('body').scrollTo($('.' + statClass), { offset: - 100, duration: 150 });
 }
 
 var genRateHtml = function(obj){
 
 	if(obj != undefined){
-		setJSON("user_rate_info", obj, $('.save_password').prop('checked'));
+		setJSON("user_rate_info", obj);
 	} else {
-		obj = getJSON('user_rate_info', (localStorage.auth_inf != undefined));
+		obj = getJSON('user_rate_info');
 	}
 	
 	var rateHtml = "<div class='fin_block_inform'>";
@@ -373,73 +634,24 @@ var showTeachContacts = function(obj){
 }
 
 
-var displayTimetable = function(date){
-	
-	date = getCurrentDate(date);
-						 
-	if(date != undefined && sessionStorage.timetable != "undefined"){
-		
-		closeTimetableAlert();
-		
-		var timetable = JSON.parse(sessionStorage.timetable);
-		
-		if($('.item_ch_1').prop('checked') == undefined){
-			createHtmlSettings();
-			setUserSettings(+localStorage.settingsCode);
-			
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-			
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
-		}
-		
-		if($('.item_ch_1').prop('checked')){
-			
-			var weekHTMLtimetable = '';
-			$('.date_item').each(function(index){
-				var chunks = $(this).attr('date_quer').split('.');
-				var currClassName = '';
-				currClassName = $(this).hasClass('redTag') ? 'current_day' : '';
-				weekHTMLtimetable += '<div id="' + $(this).attr('name') + '" class="day_header ' + currClassName + '">' + fullWeekNames[index] + " " + chunks[0] + " " + fullMonthNames[+chunks[1]] + '</div>'; 
-				weekHTMLtimetable += createTimetableHTML($(this).attr('date_quer'), timetable);
-			});
-			
-			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(120);
-			
-			setTimeout(function(){
-				$('.redTag').click();
-			}, 100);
-			
-		} else {
-			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(120);
-		}
 
-
-				
-	} else {
-		showTimetableAlert();
-	}						 
-	view.correctHeight();
-}
 
 var getAuthInfo = function(infoObj){
 			
 			authObj = infoObj;
-						
+					
 			if (authObj.FIO != "undefined"){
-				setJSON("auth_inf", authObj, $('.save_password').prop('checked'));
+				setJSON("auth_inf", authObj);
 				
 				$('.authblock').css('display','inline-block');	
-				
-				localStorage.settingsCode = authObj.settings;
-					
+				saveValue('settingsCode', authObj.settings);
+
 			}
 			view.changePage('menu');
 			showTooltip(authObj.serverRequest, 2000);
 			
 			createHtmlSettings();
-			setUserSettings(+localStorage.settingsCode);
+			setUserSettings(getValue("settingsCode"));
 			
 			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 			
@@ -473,66 +685,9 @@ function clMenBl(){
 	$('.menuoverlay').css('display', 'none');
 }
 
-//загрузка с сервера [boolean, string, string, object, boolean, callback, boolean, string]
-function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
-	
-	var jsonObj;
-	opBl();
-	
-			$.ajax({
-			async: async,
-			type: type,
-			url: url,
-			data: data,
-			success: function(responseTxt){
-				
-				if(notResponse == undefined || !notResponse){
-					var clrResp = clearUTF8(responseTxt);
 
-					try {
-						jsonObj = JSON.parse(clrResp);
-					} catch(e){
-						showTooltip(errMessages[0], 2000);
-					}
-				}
-				
-				if(functionCallBack != undefined) {
-					
-					if(issetArgs == undefined || !issetArgs){
-						setJSON(savePlace, jsonObj, false);
-						functionCallBack();
-					} else {
-						functionCallBack(jsonObj);
-					}
-					return;
-				}
-				
-			},
-			error: function(){
-				showTooltip(errMessages[1], 2000);
-			},
-			complete: function(){
-				clBl();
-			}
-		});
-		
-	return jsonObj; 		
-}
 
-// проверка на авторизацию
-function isAuth(){
-	if(localStorage.auth_inf != undefined || sessionStorage.auth_inf != undefined){
-		return true;
-	} 
-	return false;
-}
 
-function isGuest(){
-	if(localStorage.guest_inf != undefined || sessionStorage.guest_inf != undefined){
-		return true;
-	} 
-	return false;
-}
 
 //скрыть предзагрузочный экран
 function hideLoader(){
@@ -553,37 +708,7 @@ function showTooltip(toolText, duration){
 	
 }
 
-// сохранение JSON в localStorage/sessionStorage
-function setJSON(key, value, flag) {
-	try {   
-	        if(flag == true){
-				localStorage[key] = JSON.stringify(value);				
-			} else {
-				if(sessionStorage[key] == undefined || sessionStorage[key] == "undefined"){
-					sessionStorage[key] = JSON.stringify(value);
-				} else {
-					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
-				}
-			}
-			
-		} catch(ex){
-					
-		}
-}
 
-// получение JSON из localStorage/sessionStorage
-function getJSON(key, flag) {
-	
-	var value;
-	
-	if(flag == true){
-		value = localStorage[key];				
-	} else {
-		value = sessionStorage[key];
-	}
-	
-	return value ? JSON.parse(value) : null;
-}
 
 // удаление BOM символов из строки
 function clearUTF8(str) {
@@ -625,11 +750,12 @@ function newsWrap(obj, append){
 		$newsblock.html('').css('display', 'none');
 		
 		if(append != undefined && append == true){
-			$newsblock.append(sessionStorage['news_' + $('.current_item').attr('newstype')] + resHtml).fadeTo(0, 1);
-			sessionStorage['news_' + $('.current_item').attr('newstype')] += resHtml;	
+			var htmlNewsCode = getValue('news_' + $('.current_item').attr('newstype')) + resHtml;
+			$newsblock.append(htmlNewsCode).fadeTo(0, 1);
+			saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
 		} else {
 			$newsblock.html(resHtml).fadeTo(250, 1);
-			sessionStorage['news_' + $('.current_item').attr('newstype')] = view.$news.html();	
+			saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
 		}
 		
 }
@@ -665,14 +791,15 @@ function loadDetails(id){
 
 function saveAndShow(){
 	
-	if(sessionStorage['news_' + $('.current_item').attr('newstype')] == undefined){
-		//придумать callback функцию
-		//myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace)
+	var htmlArtCode = getValue('news_' + $('.current_item').attr('newstype'));
+
+	if(htmlArtCode == undefined){
+		
 		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}, false, newsWrap, true);
 		
 	} else {
 		opBl();
-		view.$news.html(sessionStorage['news_' + $('.current_item').attr('newstype')]).fadeTo(50, 1);
+		view.$news.html(htmlArtCode).fadeTo(50, 1);
 		clBl();
 	}
 
@@ -688,171 +815,14 @@ function tagMenuItem(className){
 	$('.' + className).addClass('sidebar_menu_block_menu_item_curr');
 }
 
-function showCurrentWeek(date){
-	
-	var dt = date == undefined ? new Date() : date;
-	var currDay = new Date();
-	var thisWeekDay = dt;
-	
-	currDay.setHours(12, 0, 0, 0);
-	thisWeekDay.setHours(12, 0, 0, 0); 
 
-	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
-
-	dt.setDate(dt.getDate() - diff);
-	
-	for(var i = 0; i < 6; i++){
-		
-
-		//разобраться с датами
-		var className = currDay.valueOf() > thisWeekDay.valueOf() ? 'greyTag' 
-											  : currDay.valueOf() == thisWeekDay.valueOf() ? 'redTag'
-											  : '';
-		
-	    var curr_date = dt.getDate();
-		var curr_day = dt.getDay();
-		var curr_month = dt.getMonth() + 1;
-		var curr_year = dt.getFullYear();
-		$('.dt' + (i + 1)).attr('date_quer', ( curr_date <= 9 ? '0' + curr_date : curr_date ) + '.' + ( curr_month <= 9 ? '0' + curr_month : curr_month ) + '.' + curr_year )
-		                  .addClass(className)
-						  .html('<span>' + curr_date + ' ' + dateNames[curr_month + 5] + '</span><br><span>' + dateNames[curr_day - 1] + '</span>');
-		dt.setDate(dt.getDate() + 1);		
-		
-	}
-	
-}
-
-function getFirstWeekDay(notStr, thisDate) {
-
-	var dt = thisDate == undefined ? new Date() : thisDate;
-	var diff = dt.getDay() == 0 ? -1 : dt.getDay() - 1;
-	dt.setDate(dt.getDate() - diff);
-	
-	if(notStr != undefined && notStr == true){
-		return dt;
-	}
-	
-	var day = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate();
-	var month = dt.getMonth() + 1;
-	month = month > 9 ? month : "0" + month;
-	return (day + "." + month + "." + dt.getFullYear());
-
-}
-
-function issetTimetable(){
-	return sessionStorage.timetable != undefined;
-}
-
-function getTimetableWeek(diff, onlyDate, returnStr){
-	
-	var str = ($('.dt1').attr('date_quer')).split('.');
-	var dt = new Date(str[2] + '/' + str[1] + '/' + str[0] + ' 12:00:00');
-	
-	dt.setDate(dt.getDate() + diff);
-	
-	if(onlyDate){
-		if(returnStr){
-			var day = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate();
-			var month = dt.getMonth() + 1;
-			month = month > 9 ? month : "0" + month;
-			return (day + "." + month + "." + dt.getFullYear());
-		} else return dt;
-	}
-	
-	if (localStorage.lastTmtQuery != undefined){
-		loadTimetableInf(localStorage.lastTmtQuery, getFirstWeekDay(false, dt), true);
-	} else {
-		showTimetableAlert();
-	}  
-}
-
-function loadTimetableInf(dataQuery, loadDate, changeWeek){
-	$('.timetable_box_info').fadeOut(100);
-	
-	if (dataQuery == undefined){
-		var auth_inf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
-		var group_arr = auth_inf.groups;
-		
-		if(group_arr.length >= 1){
-			dataQuery = group_arr[0];
-			sessionStorage.query = dataQuery;
-		}
-		
-	}
-
-	localStorage.lastTmtQuery = dataQuery;
-	if(changeWeek){
-		myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getTimetableWeek(0, true, true)}, false, chWeek, true, 'timetable');
-	} else myajax(true, 'POST', 'oracle/database_timetable.php', {"timetable_query" : dataQuery, "date_query" : loadDate != undefined ? loadDate : getTimetableWeek(0, true, true)}, false, displayTimetable, false, 'timetable');
-
-}
-
-function chWeek(respTxt) {
-	
-	if(Object.keys(respTxt).length == 0){
-		$('.timetable_lessons').html('');
-		showTooltip("Расписание на следующую неделю еще не готово", 4500);
-		displayTimetable();
-	} else { 
-		showCurrentWeek(getTimetableWeek(parseInt(sessionStorage.diffDate), true));
-		setJSON('timetable', respTxt, false);
-		displayTimetable();
-		closeTimetableAlert();
-	} 
-}
-
-function issetUserGroup(){
-	return localStorage.user_inf == undefined && sessionStorage.user_inf == undefined;
-}
-
-function showTimetableAlert(){
-	$('.timetable_box_info').fadeIn(100);
-}
-
-function closeTimetableAlert(){
-	$('.timetable_box_info').fadeOut(100); 
-}
-
-function slideInput(){
-	$target = $('.header_line_content_search');
-	$target.addClass('opened_input');
-	$('.timetable_box_form').animate({
-		width: '60%'
-	}, 150, function(){
-		$inp = $('.timetable_box_input');
-		$inp.autocomplete("search");
-		}).css('display', 'block');
-	view.setTitle('');
-}
-
-function closeInput(){
-	
-	$target = $('.header_line_content_search');
-	$target.removeClass('opened_input');
-			
-	$('.timetable_box_form').animate({
-		width: '0'
-	}, 150, function(){
-		
-		$(this).css('display', 'none');
-		view.$title.fadeIn();
-		$('.ui-autocomplete').fadeOut();
-		if(location.hash == '#timetable'){
-			$('.header_line_content_calendar').fadeIn(0);
-			if(sessionStorage.query != undefined){
-				view.setTitle('<span class="full_sentense">По запросу:</span> "' + (sessionStorage.query).substr(0,8) + '..."');
-			} else view.setTitle(stringNames[5]);
-		}
-		
-	});
-}
 
 function loadGroupInfo(){
 
-	var allInf = getJSON('auth_inf', (localStorage.auth_inf != undefined));
+	var allInf = getJSON('auth_inf');
 	var groupsArr = allInf.groups;
 	
-	if(sessionStorage.groups_students == undefined){
+	if(getValue("groups_students") == undefined){
 		myajax(true, "POST", "oracle/database_group_student.php", {groups: groupsArr, hash : allInf.hash, FIO : allInf.FIO}, false, showGroupInfo, false, "groups_students");
 	} else {
 		showGroupInfo();
@@ -862,7 +832,7 @@ function loadGroupInfo(){
 
 function showGroupInfo(){
 	
-	var groupsStud = getJSON('groups_students', (localStorage.groups_students != undefined));
+	var groupsStud = getJSON('groups_students');
 	var htmlCode = "";
 
 	for(var key in groupsStud){
@@ -882,136 +852,6 @@ function issetNumbersInQuery(query){
 	return !!query.match(/\d/g);
 }
 
-function createTimetableHTML(date, timetable, showEmptyFields){
-	
-	showEmptyFields = $('.item_ch_2').prop('checked');
-	
-	var dateNumbers = date.replace(/\./g,''),
-		timetableHTML = '<table class="timetable_style">',
-		notNameQuery = issetNumbersInQuery(sessionStorage.query);
-	
-	if(!!timetable[dateNumbers]){
-		var firstNumLesson = 0;
-		var twoLessonsInOneTime = false;
-		
-		for(var i = 1, numLession = 6; i <= numLession; i++) {
-			
-			var item = timetable[dateNumbers][firstNumLesson];
-			
-			if (+item.PAIR == i) {
-				
-				if((item.KORP).toLowerCase() == 'сок' && notNameQuery){
-							
-							timetableHTML += '<tr class="timetable_tr">\
-											<td class="date_td">' + numLessonsArr[i] + '</td>\
-											<td class="' + getColorTypeLesson(item.VID) + '" >\
-											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>';
-											
-							var counter = 0;
-									
-						    while((item.KORP).toLowerCase() == 'сок'){
-								
-								if (counter == 0){
-									timetableHTML += '<div class="hide_timetable_information">';
-								}
-								
-								
-								item = timetable[dateNumbers][firstNumLesson];
-								if((item.KORP).toLowerCase() == 'сок'){
-									
-								
-									timetableHTML += '<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span> <br> \
-												<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>';
-									counter++;
-									
-								}
-								
-								firstNumLesson++;
-								if (firstNumLesson == timetable[dateNumbers].length - 1){
-									break;
-								}	
-							
-							} 
-							
-								timetableHTML += '</div>';
-							
-							if(counter > 1) {
-								timetableHTML += '<input class="hide_information_button" type="button" value="Развернуть" />';
-							}
-							
-							timetableHTML += '</td>\
-										   </tr>';
-							firstNumLesson --;
-								
-					}  else {
-												
-						if (firstNumLesson < timetable[dateNumbers].length - 1){
-							firstNumLesson++;
-							if (+item.PAIR == timetable[dateNumbers][firstNumLesson]['PAIR']){
-									i--;
-									if(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) twoLessonsInOneTime = true;	
-							} 
-						}		
-					
-						if(twoLessonsInOneTime == undefined){
-							timetableHTML += '<tr class="timetable_tr">\
-											<td class="' + getColorTypeLesson(item.VID) + '" >\
-											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-											<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + '</span><br>\
-											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-											</td>\
-										  </tr>';
-							twoLessonsInOneTime = false;			  
-						} else {
-							
-							if(twoLessonsInOneTime){
-								num = i + 1;
-							} else {
-								num = i;
-							} 
-							/* var num = twoLessonsInOneTime || !(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) ? i+1 : i; */
-							timetableHTML += '<tr class="timetable_tr">\
-											<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="2"' : '') + '>' + numLessonsArr[num] + '</td>\
-											<td class="' + getColorTypeLesson(item.VID) + '">\
-											<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-											<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + '</span><br>\
-											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-											</td>\
-										  </tr>';						
-						}
-						
-						twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;	
-										
-					}
-				
-			} else if (showEmptyFields) {
-				
-				timetableHTML += '<tr class="timetable_tr">\
-										<td class="date_td">' + numLessonsArr[i] + '</td>\
-										<td></td>\
-									  </tr>';
-				
-			}
-			
-		}		
-		
-		timetableHTML += '</table>';
-		
-	} else {
-			timetableHTML = '<span class="no_lessons">Занятий нет.</span>';
-		} 
-	
-	return timetableHTML;
-	
-}
-
-function getCurrentDate(date){
-	$currDate = $('.redTag');
-	$userSelectDate = $('.greenTag');
-	return date = date != undefined ? date : !!$userSelectDate.size() 
-							 ? $userSelectDate.attr('date_quer') : !!$currDate.size() 
-							 ? $currDate.attr('date_quer') : null;
-}
 
 function getColorTypeLesson(typeLesson) {
 	switch(typeLesson.toLowerCase()) {

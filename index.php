@@ -17,46 +17,46 @@
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 	
 	</head>
-	
-	<body>
-		
-		<div class="wrapper">
-		 
+
+		<body>
+
 		<div class="pre_loader">
 			Югорский Государственный <br>Университет
 		</div>
 		<div id="overlay"></div>
-		
-		<div class="menuoverlay"></div>
+
+		<div id="menu">
 			
-			<div class="sidebar_menu_block">
-				
-				<div class="sidebar_wr">
-					<div class="sidebar_menu_block_back_arr">
-					</div>
-					
-					<div class="authorisation_box_logo menu_box_logo">
-										
-					</div>
-					
-					<ul class="sidebar_menu_block_menu unselected" unselectable="on" onselectstart="return false;">
-							<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr" hashtag="menu">Главная страница</li>
-							<li class="sidebar_menu_block_menu_item news_item" hashtag="news">Новости</li>
-							<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
-							<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
-							<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
-							<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
-							<li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li>
-							<li class="sidebar_menu_block_menu_item finance_item auth_only" hashtag="finance_inf">Финансы</li>
-							<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
-							<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
-							<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
-							<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
-							<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
-							<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
-					</ul>
-				</div>
+			<div class="sidebar_menu_block_back_arr">
 			</div>
+			
+			<div class="authorisation_box_logo menu_box_logo">
+								
+			</div>
+					
+			<ul class="sidebar_menu_block_menu unselected" unselectable="on" onselectstart="return false;">
+					<li class="sidebar_menu_block_menu_item main_item sidebar_menu_block_menu_item_curr" hashtag="menu">Главная страница</li>
+					<li class="sidebar_menu_block_menu_item news_item" hashtag="news">Новости</li>
+					<li class="sidebar_menu_block_menu_item timetable_item" hashtag="timetable">Расписание</li>
+					<!--<li class="sidebar_menu_block_menu_item pers_item auth_only" hashtag="persinf">Персональная информация</li>
+					<li class="sidebar_menu_block_menu_item mes_item auth_only" hashtag="message">Сообщения</li>-->
+					<!-- <li class="sidebar_menu_block_menu_item group_item" hashtag="group_info">Моя группа</li> -->
+					<li class="sidebar_menu_block_menu_item persinf_item auth_only" hashtag="persinf">Персональная</li>
+					<li class="sidebar_menu_block_menu_item finance_item auth_only" hashtag="finance_inf">Финансы</li>
+					<!-- <li class="sidebar_menu_block_menu_item message_item" hashtag="message">Сообщения</li>		 -->
+					<li class="sidebar_menu_block_menu_item guide_item" hashtag="dir_info">Справочник</li>		
+					<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
+					<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
+					<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
+					<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
+			</ul>
+		
+		</div>
+
+		<div id="panel">
+		<div class="wrapper">
+		 
+		<div class="menuoverlay" style='display:none;'></div>			
 			
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
@@ -100,14 +100,14 @@
 					<div class="header_line_addition_datewr">
 						
 						<div class="header_line_addition_data">
-							<div class="date_item_back date_item_bt"></div>
+							<div class="date_item_back date_item_bt" diffDate="-7"></div>
 							<div class="date_item dt1" name="dt_s1"></div>
 							<div class="date_item dt2" name="dt_s2"></div>
 							<div class="date_item dt3" name="dt_s3"></div>
 							<div class="date_item dt4" name="dt_s4"></div>
 							<div class="date_item dt5" name="dt_s5"></div>
 							<div class="date_item dt6" name="dt_s6"></div>
-							<div class="date_item_next date_item_bt"></div>
+							<div class="date_item_next date_item_bt" diffDate="7"></div>
 						</div>
 						
 					</div>	
@@ -168,20 +168,20 @@
 				
 				<div class="person_box">
 					<div class="fin_info_box_menu_item person_info_box_menu_appitem unselected" onclick="toogleShowBlock('person_box_menu_app', 'rate_stat');">Назначение<br><span class='fin_info_box_menu_item_stat rate_stat'>развернуть</span></div>
-					<div class="person_box_menu_app">Загрузка..</div>
-					<!--<div class="fin_info_box_menu_item person_info_box_menu_loaditem unselected notStud" onclick="toogleShowBlock('person_box_menu_load', 'loadstat');">Нагрузка<br><span class='fin_info_box_menu_item_stat loadstat'>развернуть</span></div>
-					<div class="person_box_menu_load notStud">Загрузка..</div>
+					<div class="person_box_menu_app hiddenInfBlock">Загрузка..</div>
+					<div class="fin_info_box_menu_item person_info_box_menu_loaditem unselected notStud" onclick="toogleShowBlock('person_box_menu_load', 'loadstat');">Нагрузка<br><span class='fin_info_box_menu_item_stat loadstat'>развернуть</span></div>
+					<div class="person_box_menu_load hiddenInfBlock">Загрузка..</div>
 					<div class="fin_info_box_menu_item person_info_box_menu_alsitem unselected forStud" onclick="toogleShowBlock('person_box_menu_als', 'income_stat');">Зачетная книжка<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
-					<div class="person_box_menu_als forStud">Загрузка..</div>
+					<div class="person_box_menu_als hiddenInfBlock">Загрузка..</div>
 					<div class="fin_info_box_menu_item person_info_box_menu_session unselected forStud" onclick="toogleShowBlock('person_box_menu_ses', 'curr_session');">Текущая сессия<br><span class='fin_info_box_menu_item_stat curr_session'>развернуть</span></div>
-					<div class="person_box_menu_ses forStud">Загрузка..</div>-->
+					<div class="person_box_menu_ses hiddenInfBlock">Загрузка..</div>
 				</div>
 				
 				<div class="fin_info_box">
 					<div class="fin_info_box_menu_item fin_info_box_menu_rateitem unselected" onclick="toogleShowBlock('fin_info_box_menu_rate', 'rate_stat');">Расходы<br><span class='fin_info_box_menu_item_stat rate_stat'>развернуть</span></div>
-					<div class="fin_info_box_menu_rate">Загрузка..</div>
+					<div class="fin_info_box_menu_rate hiddenInfBlock">Загрузка..</div>
 					<div class="fin_info_box_menu_item fin_info_box_menu_incomeitem unselected" onclick="toogleShowBlock('fin_info_box_menu_income', 'income_stat');">Доходы<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
-					<div class="fin_info_box_menu_income">Загрузка..</div>
+					<div class="fin_info_box_menu_income hiddenInfBlock">Загрузка..</div>
 				</div>
 
 				<div class="group_info_box">
@@ -197,12 +197,22 @@
 				</div>				
 
 				<div class="about_info_box">
-					<div class="about_info_box_text contr_shadow"><p><b>mob.ugrasu.ru [ver 0.1]</b> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
-					<p>Данное приложение создано с целью облегчения и упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
-					<p>С помощью данного приложения вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
-					а также персональную информацию такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
-					<p><b>Разработчики</b><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
-					<p> <b>Благодарности </b> <br> Бурлуцкому Владимиру Владимировичу <br> Татаринцеву Ярославу Борисовичу<br> Карпову Дмитрию Викторовичу <br> Шавкуну Алексею Евгеньевичу </p>
+					
+					<div class="about_info_box_text contr_shadow">
+					<div class="authorisation_box_logo" style="margin:16px auto 26px;"></div>
+
+					<p><b>mob.ugrasu.ru</b> <span class='about_span'>(ver 0.2 alpha)</span> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
+					<p>Данное приложение создано с целью упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
+					<p>С помощью данного приложения Вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
+					а также персональную информацию, такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
+					<p style='display:block; border-top:1px dashed grey; padding-top: 5px;'><span class='about_span'>Разработчики:</span><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
+					<p style='border-top:1px dashed grey; padding-top: 5px;'><span class='about_span'>Благодарности:</span>
+						<ul style='margin-left:20px;'>
+							<li>Бурлуцкому Владимиру Владимировичу</li>
+							<li>Татаринцеву Ярославу Борисовичу</li>
+							<li>Карпову Дмитрию Викторовичу</li>
+							<li>Шавкуну Алексею Евгеньевичу</li>
+						</ul>
 					</div>					
 				</div>
 
@@ -349,18 +359,23 @@
 		<div class="tooltip">
 				
 		</div>
-		
-		<script src="js/jquery-2.1.4.min.js"></script>
-		<script src="js/money_coffee.js"></script>
-		<script src="js/view.js"></script>
-		<script src="js/news_loader.js"></script>
-		<!--<script src="js/waterfall.js"></script>-->
-		<script src="js/function.js"></script>
-		<script src="js/mess.js"></script>
-		<script src="js/bind_action.js"></script>
-		<script src="js/main.js"></script>
-		<script src="js/switchery.min.js"></script>
-		<script src="js/scrollTo.min.js"></script>
-		<script src="js/jq_min.js"></script>
-	</body>
+	    </div>
+
+				
+			
+			<script src="js/jquery-2.1.4.min.js"></script>
+			<script src="js/slideout.min.js"></script>
+			<script src="js/timetable.js"></script>
+			<script src="js/money_coffee.js"></script>
+			<script src="js/bind_action.js"></script>
+			<script src="js/view.js"></script>
+			<script src="js/news_loader.js"></script>
+			<!--<script src="js/waterfall.js"></script>-->
+			<script src="js/function.js"></script>
+			<script src="js/mess.js"></script>
+			<script src="js/main.js"></script>
+			<script src="js/switchery.min.js"></script>
+			<script src="js/scrollTo.min.js"></script>
+			<script src="js/jq_min.js"></script>
+		</body>
 </html>
