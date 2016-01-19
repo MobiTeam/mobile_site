@@ -16,8 +16,8 @@ function issetTimetable() {
 ////////////////////////////////////////////
 function issetUserGroup(){
 
-	var uGroup = getJSON("auth_inf").groups[0];
-	return uGroup != "undefined" && uGroup != null && uGroup != undefined;
+	var uGroup = getJSON("auth_inf") || getJSON("guest_inf");
+	return uGroup.groups.length >= 1;
 
 }
 
@@ -50,7 +50,7 @@ function getCurrentMonday(date) {
 
 function getCurrentDate(date){
 	$currDate = $('.redTag');
-	$userSelectDate = $('.dt1');
+	$userSelectDate = $('.greenTag');
 	return date = date != undefined ? date : !!$userSelectDate.size() 
 							 ? $userSelectDate.attr('date_quer') : !!$currDate.size() 
 							 ? $currDate.attr('date_quer') : null;
@@ -66,18 +66,17 @@ function renderWeekTable(date) {
 		currDay = new Date(),
 		thisWeekDay = dt;
 
-
+	$('.greenTag').removeClass('greenTag');	
 	currDay.setHours(12, 0, 0, 0);
 	thisWeekDay.setHours(12, 0, 0, 0); 	
 
 	dt = getCurrentMonday(dt);
 
 	for(var i = 0; i < 6; i++){
-		
+
 		var className = currDay.valueOf() > thisWeekDay.valueOf() ? 'greyTag' 
-											  : currDay.valueOf() == thisWeekDay.valueOf() ? 'redTag'
+											  : currDay.valueOf() == thisWeekDay.valueOf() ? 'greenTag redTag'
 											  : '';
-		
 	    var curr_date = dt.getDate();
 		var curr_day = dt.getDay();
 		var curr_month = dt.getMonth() + 1;
@@ -88,9 +87,24 @@ function renderWeekTable(date) {
 						  .html('<span>' + curr_date + ' ' + dateNames[curr_month + 5] + '</span><br><span>' + dateNames[curr_day - 1] + '</span>');
 		
 		dt.setDate(dt.getDate() + 1);		
-		
 	}
 
+	if($('.redTag').size() == 0){
+		$('.greenTag').removeClass('greenTag');
+		$('.dt1').addClass('greenTag');
+	}
+		
+}
+
+// Перевод даты в строку
+///////////////////////////
+
+function dateToString(dt){
+	var day   = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate(), 
+	    month = dt.getMonth() + 1;
+
+	month = month > 9 ? month : "0" + month;
+	return (day + "." + month + "." + dt.getFullYear());
 }
 
 // получить понедельник отрисованной недели
@@ -103,11 +117,7 @@ function getTimetableWeek(toString, diff){
 	dt.setDate(dt.getDate() + (diff || 0));	
 		
 	if(toString){
-		var day   = dt.getDate() > 9 ? dt.getDate() : "0" + dt.getDate(), 
-		    month = dt.getMonth() + 1;
-
-		month = month > 9 ? month : "0" + month;
-		return (day + "." + month + "." + dt.getFullYear());
+		return dateToString(dt);
 	} 
 
 	return dt;	
@@ -136,9 +146,8 @@ function loadTimetableInf(dataQuery, loadDate){
 	}
 
 	var sendObj = {"timetable_query" : dataQuery, "date_query" : loadDate || getTimetableWeek(true, 0)};
-
 	myajax(true, 'POST', 'oracle/database_timetable.php', sendObj, false, displayTimetable, false, 'timetable');
-	
+
 }
 
 
@@ -186,6 +195,7 @@ function closeInput(){
 var displayTimetable = function(date){
 	
 	date = getCurrentDate(date);
+
 	var loadTimeTb = getJSON("timetable");
 	
 	if(date != undefined && loadTimeTb != "undefined" && loadTimeTb != null){
@@ -286,8 +296,7 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 								
 								item = timetable[dateNumbers][firstNumLesson];
 								if((item.KORP).toLowerCase() == 'сок'){
-									
-								
+																	
 									timetableHTML += '<span class="timetable_place">' + (item.VID).toLowerCase() + ' ' + (item.SUBGRUP != null ? ' (' + item.SUBGRUP + ' п/г) ' : '') + item.AUD + '/' + item.KORP + '</span> <br> \
 												<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>';
 									counter++;

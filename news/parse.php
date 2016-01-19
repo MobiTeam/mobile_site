@@ -12,7 +12,7 @@
    }
    
    
-   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=1&SIZEN_1=200');
+   $content = file_get_contents('http://www.ugrasu.ru/news/index.php?IBLOCK_ID=1&SIZEN_1=300');
    $flpos = strpos($content,"<div id=\"content\">");
    $slpos = strpos($content,"<div class=\"news-detail-share\">");
    $content = substr($content,$flpos,$slpos-$flpos);
@@ -30,8 +30,12 @@
 	   require_once('db_load_completelinks.php');//получаем массив добавленных ссылок
 	   
 	   $arr_img_rev = array_reverse($arr_img[2]);
-	   	   
-	   foreach(array_reverse(array_diff(array_map("add_domain",array_unique($arr_url[1])),$data_links_arr["URL"])) as $key){
+
+	   $arr_news = array_reverse(array_diff(array_map("add_domain",array_unique($arr_url[1])),$data_links_arr["URL"]));
+	   
+	   $arr_img_rev = array_slice($arr_img_rev, count($arr_img_rev) - count($arr_news));
+
+	   foreach($arr_news as $key){
 		    
 			$article_url = $key;
 		   
@@ -101,12 +105,12 @@
 						// $prev_img_news=$_POST[''];
 						
 					  $source_news = 1;	
-					  include('db_load.php');
-                      include('db_insert_goodlinks.php');					
+						include('db_load.php');
+                   		include('db_insert_goodlinks.php');					
 				} else{
 					echo('Ошибка:  '.$article_url.'<br>');
 					$err_count++;
-					include('db_insert_badlinks.php');
+		    		include('db_insert_badlinks.php');
                }
                 $counter++;			   
 			} else die('Сервер недоступен. Ошибка загрузки новостей.');			 

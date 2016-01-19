@@ -78,10 +78,12 @@ $(document).ready(function(){
 		
 		$('.greyTag').removeClass('greyTag');
 		$('.redTag').removeClass('redTag');
+		$('.dt1').addClass('greyTag');
 
 		loadTimetableInf(getValue('query'), dateStr);
-		renderWeekTable(date);	
-
+		renderWeekTable(date);
+		
+		
 	});
 	
 

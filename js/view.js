@@ -294,13 +294,18 @@ function loadTimetable(){
 			loadTimetableInf();
 		} else {
 
-			if(uInfo.is_student == "0"){
-				saveValue("query", uInfo.FIO);
-				loadTimetableInf();
+			if(!isGuest()){
+				if(uInfo.is_student == "0"){
+					saveValue("query", uInfo.FIO);
+					loadTimetableInf();
+				} else {
+					$('.timetable_lessons').html('');
+					showTimetableAlert();
+				}		
+
 			} else {
-				$('.timetable_lessons').html('');
 				showTimetableAlert();
-			}			
+			}					
 		}
 		
 	} else {
@@ -404,10 +409,11 @@ function loadFullNews(id){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	
-	var obj = myajax(false, 'POST', 'oracle/database_news.php', {news_id: id});
+	myajax(true, 'POST', 'oracle/database_news.php', {news_id: id}, false, showFullNews, true);
 			
-		
-			
+}
+
+function showFullNews(obj){
 	$('.news_box_details').html('<div class="news_box_exit_button" onclick="history.back();"></div><div class="full_article_news">\
 				<div class="full_article_title">\
 				' + obj.name_news + '\
@@ -419,5 +425,9 @@ function loadFullNews(id){
 				' + (obj.text).replace(/(href=")(\/.*?)(")/, "$1http://www.ugrasu.ru$2$3 target='blank'") + '\
 				</div>\
 				</div>').fadeTo(150, 1).scrollTop(0);
+}		
+			
+	
 				
-}
+
+

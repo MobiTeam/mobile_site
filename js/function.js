@@ -126,9 +126,8 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 					} else {
 						functionCallBack(jsonObj);
 					}
-					return;
+					
 				}
-				
 			},
 		error: function(){
 			showTooltip(errMessages[1], 2000);
@@ -137,8 +136,9 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 			clBl();
 		}
 	});
-		
-	return jsonObj; 		
+
+	return jsonObj;
+	
 }
 
 
@@ -757,6 +757,8 @@ function newsWrap(obj, append){
 			$newsblock.html(resHtml).fadeTo(250, 1);
 			saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
 		}
+
+		$newsblock.waterfall();
 		
 }
 

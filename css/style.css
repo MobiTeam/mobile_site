@@ -627,6 +627,7 @@ b, strong {
 	border-radius:2px;
 	background:white;
 	margin:20px 2px;
+	/*max-width: 350px;*/
 }
 
 .news_box_item:active{

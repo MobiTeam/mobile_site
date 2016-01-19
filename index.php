@@ -270,14 +270,14 @@
 						
 						<div class="content_box_menuitem contr_shadow" hashtag="news">
 						
-							<div class="main_news_icon main_icon_block"></div>
+							<div class="main_news_icon main_icon_block"></div> -->
 							<!-- <img src="img/news_new.png" /> -->
 						
 							<div class="content_box_name_item news_content"> 
 							  Новости
 							</div>
 						</div>
-						
+						 
 						
 						<div class="content_box_menuitem contr_shadow authblock only_stud" hashtag="group_info">
 							
@@ -370,7 +370,7 @@
 			<script src="js/bind_action.js"></script>
 			<script src="js/view.js"></script>
 			<script src="js/news_loader.js"></script>
-			<!--<script src="js/waterfall.js"></script>-->
+			<!--<script src="js/waterfall-light.js"></script>-->
 			<script src="js/function.js"></script>
 			<script src="js/mess.js"></script>
 			<script src="js/main.js"></script>

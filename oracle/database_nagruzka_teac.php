@@ -12,8 +12,6 @@
    
    require_once('database_connect.php');
 
-
-
    $sql="Select FWYEARED,SEZON,UD_FNAME,SG_FNAME,FWCOURSE,FISTUDCOUNT,sum(ITOG) as ITOG from v_teac_nagruzka
 		where instr(
         upper(replace(replace(FFIO,'.',''),' ','')),
