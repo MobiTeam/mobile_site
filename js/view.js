@@ -409,7 +409,7 @@ function loadFullNews(id){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	
-	myajax(true, 'POST', 'oracle/database_news.php', {news_id: id}, false, showFullNews, true);
+	myajax(true, 'POST', 'oracle/database_news.php', {news_id: id, type: $('.current_item').attr('newstype')}, false, showFullNews, true);
 			
 }
 

@@ -102,7 +102,7 @@
 						// $prev_img_news=$_POST[''];
 						
 					  $source_news = 3;	
-					  include('db_load.php');
+					  include('db_load_inf.php');
                       include('db_insert_goodlinks.php');					
 				} else{
 					echo('Ошибка:  '.$article_url.'<br>');

@@ -58,6 +58,7 @@
 				
 				mb_internal_encoding("UTF-8");				
 			
+			print_r($arr_img_rev);
 			if (preg_match_all('#<(p|li|div)[^>]*>([\s\S]{2,}?)<\/(p|li|div)>#m', $chunk_cont, $arr)){
 				
 				          echo('<h2>'.$art_name.'<br>   Дата:'.$cl_date.'</h2>');  			         
@@ -102,7 +103,7 @@
 						// $prev_img_news=$_POST[''];
 						
 					  $source_news = 2;	
-					  include('db_load.php');
+					  include('db_load_an.php');
                       include('db_insert_goodlinks.php');					
 				} else{
 					echo('Ошибка:  '.$article_url.'<br>');

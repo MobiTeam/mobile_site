@@ -724,42 +724,47 @@ function clearUTF8(str) {
 	return clrStr;
 }
 
-function newsWrap(obj, append){
+function newsWrap(obj, append) {
 	
 	$newsblock = $('.news_box');
 	var resHtml = '';
 	
 	for(var i = 0; i < obj.length; i++){
 		
-		var id = obj[i].type == '3' ? 'default_bg' : obj[i].id;
+		resHtml += getHtmlNews(obj, i);
 		
-		var imglink = 'news/pre_images/img_' + id + '.jpg';
-		resHtml += '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
-						  <div class="news_box_item_image" style="background-image:url(' + imglink + ');">\
-						  </div>\
-						  <div class="news_box_item_text">\
-						  <div class="news_box_item_title">\
-						  ' + obj[i].name_news + '\
-						  </div>\
-						  '	+ obj[i].descr + 
-						  '</div>\
-						  <div style="clear:both"></div>\
-						  </div>';
-		} 
+	} 
 		
-		$newsblock.html('').css('display', 'none');
-		
-		if(append != undefined && append == true){
-			var htmlNewsCode = getValue('news_' + $('.current_item').attr('newstype')) + resHtml;
-			$newsblock.append(htmlNewsCode).fadeTo(0, 1);
-			saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
-		} else {
-			$newsblock.html(resHtml).fadeTo(250, 1);
-			saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
-		}
+	$newsblock.html('').css('display', 'none');
+	
+	if(append != undefined && append == true){
+		var htmlNewsCode = getValue('news_' + $('.current_item').attr('newstype')) + resHtml;
+		$newsblock.append(htmlNewsCode).fadeTo(0, 1);
+		saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
+	} else {
+		$newsblock.html(resHtml).fadeTo(150, 1);
+		saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
+	}
+	
+}
 
-		$newsblock.waterfall();
+function getHtmlNews(obj, i) {
+
+	var id = obj[i].type == '3' ? 'default_bg' : obj[i].id;
+	var imglink = 'news/pre_images/img_' + id + '.jpg';
 		
+	return '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
+			  <div class="news_box_item_image" style="background-image:url(' + imglink + ');">\
+			  </div>\
+			  <div class="news_box_item_text">\
+			  <div class="news_box_item_title">\
+			  ' + obj[i].name_news + '\
+			  </div>\
+			  '	+ obj[i].descr + 
+			  '</div>\
+			  <div style="clear:both"></div>\
+			  </div>';
+
 }
 
 function closeSidebar(){
@@ -800,10 +805,32 @@ function saveAndShow(){
 		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}, false, newsWrap, true);
 		
 	} else {
-		opBl();
-		view.$news.html(htmlArtCode).fadeTo(50, 1);
-		clBl();
+
+		var lastId = htmlArtCode.match(/idnews="(\d*)?"/)[1];
+		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype'), first_article: lastId}, false, newsAppend, true);
+
+		
 	}
+
+}
+
+function newsAppend(obj){
+
+	$newsblock = $('.news_box');
+	var resHtml = '';
+	
+	for(var i = 0; i < obj.length; i++){
+		
+		resHtml += getHtmlNews(obj);
+		
+	} 
+		
+	$newsblock.html('').css('display', 'none');
+	
+	var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
+	saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
+	$newsblock.append(htmlNewsCode).fadeIn(20);
+
 
 }
 
