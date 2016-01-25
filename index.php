@@ -370,7 +370,7 @@
 			<script src="js/bind_action.js"></script>
 			<script src="js/view.js"></script>
 			<script src="js/news_loader.js"></script>
-			<!--<script src="js/waterfall-light.js"></script>-->
+			<script src="js/waterfall-light.js"></script>
 			<script src="js/function.js"></script>
 			<script src="js/mess.js"></script>
 			<script src="js/main.js"></script>
@@ -378,4 +378,36 @@
 			<script src="js/scrollTo.min.js"></script>
 			<script src="js/jq_min.js"></script>
 		</body>
+		
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript">
+			(function (d, w, c) {
+				(w[c] = w[c] || []).push(function() {
+					try {
+						w.yaCounter34858050 = new Ya.Metrika({
+							id:34858050,
+							clickmap:true,
+							trackLinks:true,
+							accurateTrackBounce:true,
+							webvisor:true,
+							trackHash:true,
+							ut:"noindex"
+						});
+					} catch(e) { }
+				});
+
+				var n = d.getElementsByTagName("script")[0],
+					s = d.createElement("script"),
+					f = function () { n.parentNode.insertBefore(s, n); };
+				s.type = "text/javascript";
+				s.async = true;
+				s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+				if (w.opera == "[object Opera]") {
+					d.addEventListener("DOMContentLoaded", f, false);
+				} else { f(); }
+			})(document, window, "yandex_metrika_callbacks");
+		</script>
+		<noscript><div><img src="https://mc.yandex.ru/watch/34858050?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
 </html>

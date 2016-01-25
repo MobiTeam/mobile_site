@@ -141,8 +141,6 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 	
 }
 
-
-
 var dishes = [];
 
 function loadTeachInformation(hash, FIO){
@@ -725,13 +723,18 @@ function clearUTF8(str) {
 }
 
 function newsWrap(obj, append) {
+
+	if(obj == undefined){
+		clBl();
+		return false;
+	}
 	
 	$newsblock = $('.news_box');
 	var resHtml = '';
 	
 	for(var i = 0; i < obj.length; i++){
 		
-		resHtml += getHtmlNews(obj, i);
+		resHtml += getHtmlNews(obj[i]);
 		
 	} 
 		
@@ -745,22 +748,23 @@ function newsWrap(obj, append) {
 		$newsblock.html(resHtml).fadeTo(150, 1);
 		saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
 	}
+
+$newsblock.waterfall();
 	
 }
 
-function getHtmlNews(obj, i) {
+function getHtmlNews(obj) {
 
-	var id = obj[i].type == '3' ? 'default_bg' : obj[i].id;
-	var imglink = 'news/pre_images/img_' + id + '.jpg';
-		
-	return '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj[i].id + ');" idnews="' + obj[i].id + '">\
-			  <div class="news_box_item_image" style="background-image:url(' + imglink + ');">\
+	var id = obj.type == '3' ? 'default_bg' : obj.id;
+	
+	return '<div class="news_box_item contr_shadow" style="margin: 10px;" onclick="loadDetails(' + obj.id + ');" idnews="' + obj.id + '">\
+			  <div class="news_box_item_image" style="background-image:url(' + obj.img + ');">\
 			  </div>\
 			  <div class="news_box_item_text">\
 			  <div class="news_box_item_title">\
-			  ' + obj[i].name_news + '\
+			  ' + obj.name_news + '\
 			  </div>\
-			  '	+ obj[i].descr + 
+			  '	+ obj.descr + 
 			  '</div>\
 			  <div style="clear:both"></div>\
 			  </div>';
@@ -816,12 +820,17 @@ function saveAndShow(){
 
 function newsAppend(obj){
 
+	if(obj == undefined){
+		clBl();
+		return false;
+	}
+
 	$newsblock = $('.news_box');
 	var resHtml = '';
 	
 	for(var i = 0; i < obj.length; i++){
 		
-		resHtml += getHtmlNews(obj);
+		resHtml += getHtmlNews(obj[i]);
 		
 	} 
 		
@@ -829,7 +838,7 @@ function newsAppend(obj){
 	
 	var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
 	saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
-	$newsblock.append(htmlNewsCode).fadeIn(20);
+	$newsblock.append(htmlNewsCode).fadeIn(20).waterfall();
 
 
 }

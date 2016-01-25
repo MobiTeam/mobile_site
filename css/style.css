@@ -596,8 +596,8 @@ b, strong {
 }
 
 .news_box{
-	padding:0px 10px 0px 10px;
 	display:none;
+	width: 97%;
 }
 
 .news_box_exit_button{
@@ -627,7 +627,8 @@ b, strong {
 	border-radius:2px;
 	background:white;
 	margin:20px 2px;
-	/*max-width: 350px;*/
+	box-sizing: border-box;
+	max-width: 600px;
 }
 
 .news_box_item:active{
@@ -663,8 +664,8 @@ b, strong {
 }
 
 .news_box_item_image{
-	width:85px;
-	height:85px;
+	width:100px;
+	height:100px;
 	float:left;
 	background:grey;
 	margin:5px 12px 5px 5px;

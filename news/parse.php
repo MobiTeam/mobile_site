@@ -24,6 +24,7 @@
 	   
        $first_tag = '<div class="news-detail">';	
 	   $sec_tag = '<div class="newsdate">';
+	   $table_tag = 'news';
 	   
 	   require_once('db_get_last_articleid.php');//получаем ID последней новости
 	  		   

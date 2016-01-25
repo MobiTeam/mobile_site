@@ -19,7 +19,7 @@
        }
    }  
    
-   function saveImageFromAny($url,$file,$img_num){
+   function saveImageFromAny($url,$file,$img_num,$tag){
 	    $arr_images = getimagesize($url);
 		$gaussian = array(array(1.0, 2.0, 1.0), array(2.0, 4.0, 2.0), array(1.0, 2.0, 1.0));
 		$emboss = array(array(2, 0, 0), array(0, -1, 0), array(0, 0, -1));
@@ -29,13 +29,13 @@
 	   // imageconvolution($file, $gaussian, 16, 0);
 	   switch($arr_images['mime']){
 	        case 'image/jpeg':
-			return imagejpeg($file,"pre_images/img_".($img_num).'.jpg');
+			return imagejpeg($file,"pre_images/" . $tag . "_img_".($img_num).'.jpg');
 			break;
 			case 'image/png':
-			return imagepng($file,"pre_images/img_".($img_num).'.png');
+			return imagepng($file,"pre_images/" . $tag . "_img_".($img_num).'.png');
 			break;
 			case 'image/gif':
-			return imagegif($file,"pre_images/img_".($img_num).'.gif');
+			return imagegif($file,"pre_images/" . $tag . "_img_".($img_num).'.gif');
 			break;
 			default:
             throw new InvalidArgumentException('Файл "'.$url.'" имеет неподдерживаемый формат.');

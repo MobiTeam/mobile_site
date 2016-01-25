@@ -24,7 +24,8 @@
 	   
        $first_tag = '<div class="news-detail">';	
 	   $sec_tag = '<div class="newsdate">';
-	   
+	   $table_tag = 'anons';
+
 	   require_once('db_get_last_articleid.php');//получаем ID последней новости
 	  		   
 	   require_once('db_load_completelinks.php');//получаем массив добавленных ссылок

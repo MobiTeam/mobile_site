@@ -59,32 +59,30 @@
 
 			if(isset($_POST['last_article'])){
 		
-			$num = $_POST['last_article'] - 1;
-			$id_num = $num - 7;
+				$num = $_POST['last_article'] - 1;
+				$id_num = $num - 7;
 			
-		} else {
-			$sql = "select MAX(id) AS NUM from " . $table . " where source_news = " . $type . "";
-		
-			$s = OCIParse($c,$sql);
-			OCIExecute($s, OCI_DEFAULT); 
+			} else {
+
+				$sql = "select MAX(id) AS NUM from " . $table . "";
 			
-			while(OCIFetch($s)){
-				$num = ociresult($s,'NUM');		
+				$s = OCIParse($c,$sql);
+				OCIExecute($s, OCI_DEFAULT); 
+				
+				while(OCIFetch($s)){
+					$num = ociresult($s,'NUM');		
+				}
+
+				OCICommit($c);
+
+				$id_num = $num - 10;
+				
 			}
 		
-			OCICommit($c); 
-			
-			
-			
-			$id_num = $num - 10;
-		}
-		
-		
-		
-		$sql="select * from " . $table . " where id > ". $id_num . " and id <= " . $num . " order by ID desc";
+				
+			$sql="select * from " . $table . " where id > ". $id_num . " and id <= " . $num . " order by ID desc";			
 
 		}
-
 		
 	
 		$s = OCIParse($c,$sql);
@@ -100,7 +98,8 @@
 									"name_news" => ociresult($s,'NAME_NEWS'), 
 									"date" => ociresult($s,'DATE_NEWS'), 
 									"descr" => ociresult($s,'DESCRIPTION'),
-									"type" => ociresult($s,'SOURCE_NEWS')
+									"type" => ociresult($s,'SOURCE_NEWS'),
+									"img" => ociresult($s,'PREV_IMG_NEWS')
 								);
 			$count ++;
 		

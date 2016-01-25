@@ -15,9 +15,9 @@
 			top : false,	// all of column height
 			w : false,		// current container-width
 			col : false,	// grid number 
-			gap : 30,
-			gridWidth : [0,400,600,800,1200],
-			refresh: 100,
+			gap : 20,
+			gridWidth : [0,600,1200,1500,1900],
+			refresh: 20,
 			timer : false,
 			scrollbottom : false
 		}
@@ -47,7 +47,7 @@
 					ele : this.parent(),
 					endele: $('<div>').css({width:'100%',textAlign:'center',position:'absolute'}),
 					endtxt: 'No More Data',
-					gap: 300
+					gap: 20
 				},g_option[id].scrollbottom);
 			}
 
