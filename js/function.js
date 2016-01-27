@@ -130,7 +130,7 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 				}
 			},
 		error: function(){
-			showTooltip(errMessages[1], 2000);
+			showTooltip(errMessages[1], 3000);
 		},
 		complete: function(){
 			clBl();
@@ -636,6 +636,11 @@ var showTeachContacts = function(obj){
 
 var getAuthInfo = function(infoObj){
 			
+			if(infoObj == undefined){
+				showTooltip("Данного пользователя нет в базе данных", 4000);
+				return false;
+			}
+
 			authObj = infoObj;
 					
 			if (authObj.FIO != "undefined"){
@@ -703,6 +708,8 @@ function showTooltip(toolText, duration){
 	setTimeout(function(){
 		$tooltip.fadeOut(200);
 	}, dur);
+
+	clBl();
 	
 }
 
@@ -962,4 +969,32 @@ function createHtmlSettings() {
 function changeStatus(thisObj, num) {
 	var str = thisObj.checked ? "Вкл." : "Выкл.";
 	$('.word_stat' + num).text(str);
+}
+
+function loadMap(){
+	
+	var $block = $('.informationMap');
+
+	if($block.html().length < 25){
+		$block.load('university_map.html');
+	}
+
+}
+
+function loadCollectives(){
+
+	var $block = $('.informationColls');
+
+	if($block.html().length < 25){
+		$block.load('university_coll.html');
+	}
+
+}
+
+function loadDorm(){
+	var $block = $('.informationDorm');
+
+	if($block.html().length < 25){
+		$block.load('university_stud.html');
+	}	
 }

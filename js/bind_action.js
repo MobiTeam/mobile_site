@@ -7,7 +7,8 @@ window.onload = function() {
 	slideout = new Slideout({
 	  'panel': document.getElementById('panel'),
 	  'menu': document.getElementById('menu'),
-	  'side': 'left'
+	  'side': 'left',
+	  'touch': false
 	});
 };
 

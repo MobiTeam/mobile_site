@@ -1,4 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-	<b>Информация находится в процессе заполнения.</b><br>
-</html>
+<div class="information-box">
+	
+	<div class="fin_info_box_menu_item fin_info_box_menu_incomeitem unselected" onclick="toogleShowBlock('informationSt', 'rate_stat');">
+			Стипендии<br>
+		<span class='fin_info_box_menu_item_stat rate_stat'>
+			развернуть
+		</span>
+	</div>
+	<div class="informationSt hiddenInfBlock">
+		<b>РФ</b>
+			<ul>
+				<li>На «Хорошо» и «Хорошо» и «Отлично» - <span style='color:brown;font-weight:bold'>&nbsp3&nbsp000 руб</span>.</li>
+				<li>На «Отлично» - <span style='color:brown;font-weight:bold'>&nbsp4&nbsp500 руб</span>.</li>
+				<li>Ученого Совета – <span style='color:brown;font-weight:bold'>&nbsp20&nbsp000 руб</span>.</li>
+				<li>Государственная стипендия аспирантам – <span style='color:brown;font-weight:bold'>&nbsp20&nbsp000 руб</span>.</li>
+				<li>Материальная помощь – <span style='color:brown;font-weight:bold'>&nbsp13&nbsp050 руб</span>.</li>
+				<li>Социальная – <span style='color:brown;font-weight:bold'>&nbsp4&nbsp500 руб</span>.</li>
+			</ul>
+		<br>
+		<b>ХМАО</b>
+			<ul>
+				<li>На «Хорошо» и «Хорошо» и «Отлично» - <span style='color:brown;font-weight:bold'>&nbsp3&nbsp000 руб</span>.</li>
+				<li>На «Отлично» - <span style='color:brown;font-weight:bold'>&nbsp4&nbsp500 руб</span>.</li>
+				<li>Ученого Совета – <span style='color:brown;font-weight:bold'>&nbsp10&nbsp000 руб</span>.</li>
+				<li>Материальная помощь – <span style='color:brown;font-weight:bold'>&nbsp10&nbsp000 руб</span>.</li>
+				<li>Социальная – <span style='color:brown;font-weight:bold'>&nbsp4&nbsp500 руб</span>.</li>
+			</ul>
+	</div>
+
+
+	<div class="fin_info_box_menu_item fin_info_box_menu_map unselected" onclick="toogleShowBlock('informationMap', 'rate_map'); loadMap();">
+			Карта корпусов<br>
+		<span class='fin_info_box_menu_item_stat rate_map'>
+			развернуть
+		</span>
+	</div>
+	<div class="informationMap hiddenInfBlock" style="overflow:scroll;">
+		Загрузка...
+	</div>
+
+	<div class="fin_info_box_menu_item fin_info_box_menu_mans unselected" onclick="toogleShowBlock('informationColls', 'rate_colls'); loadCollectives();">
+			Творческие коллективы<br>
+		<span class='fin_info_box_menu_item_stat rate_colls'>
+			развернуть
+		</span>
+	</div>
+	<div class="informationColls hiddenInfBlock">
+		Загрузка...
+	</div>
+
+	<div class="fin_info_box_menu_item fin_info_box_menu_dorm unselected" onclick="toogleShowBlock('informationDorm', 'rate_dorm'); loadDorm();">
+			Студенческий городок<br>
+		<span class='fin_info_box_menu_item_stat rate_dorm'>
+			развернуть
+		</span>
+	</div>
+	<div class="informationDorm hiddenInfBlock">
+		Загрузка...
+	</div>
+
+</div>

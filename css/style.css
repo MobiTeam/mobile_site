@@ -1189,11 +1189,41 @@ b, strong {
 	height: 40px;
 }
 
+.fin_info_box_menu_mans:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/mans.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.fin_info_box_menu_dorm:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/dormitory.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
 .fin_info_box_menu_incomeitem:before {
 	content: "";
 	display: block;
 	margin: 0px 15px 0px 5px;
 	background: url("../img/incomes_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
+.fin_info_box_menu_map:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/location.png");
 	float: left;
 	width: 40px;
 	height: 40px;
@@ -1491,4 +1521,22 @@ b, strong {
 .about_span {
 	font-weight: bold;
 	color: #202020;
+}
+
+.information-box {
+	margin: 12px;
+}
+
+.informationSt {
+	padding: 10px;
+}
+
+.informationSt ul {
+	margin-left: 20px;
+}
+
+.gr_item_bl {
+	margin: 5px 0px;
+	padding: 8px;
+	border-bottom: 1px dashed grey;
 }

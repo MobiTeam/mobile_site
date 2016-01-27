@@ -30,6 +30,11 @@
 		background-size: 40px 40px;
 	}
 
+	.fin_info_box_menu_mans:before{
+		background: url('../img/mans@2x.png') no-repeat center center;
+		background-size: 40px 40px;
+	}
+
 	.person_info_box_menu_appitem:before{
 		background: url('../img/info_person@2x.png') no-repeat center center;
 		background-size: 40px 40px;
@@ -39,6 +44,17 @@
 		background: url("../img/books_icon@2x.png") no-repeat center center;
 		background-size: 40px 40px;
 	}
+
+	.person_info_box_menu_map:before{
+		background: url("../img/location@2x.png") no-repeat center center;
+		background-size: 40px 40px;
+	}
+
+	.fin_info_box_menu_dorm:before {
+		background: url("../img/dormitory@2x.png") no-repeat center center;
+		background-size: 40px 40px;
+	}
+
 
 	.rate_box_img {
 		background: url('../img/agree_icon@2x.png') no-repeat center center;
