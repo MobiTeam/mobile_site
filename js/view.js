@@ -409,12 +409,18 @@ function loadFullNews(id){
 	view.setTitle(stringNames[3]);
 	view.displayMenuIcon();
 	
-	myajax(true, 'POST', 'oracle/database_news.php', {news_id: id, type: $('.current_item').attr('newstype')}, false, showFullNews, true);
+	myajax(true, 'POST', 'oracle/database_news.php', {news_id: id, type: $('.current_item').attr('newstype')}, false, showFullNews, true, undefined, true);
 			
 }
 
 function showFullNews(obj){
-	$('.news_box_details').html('<div class="news_box_exit_button" onclick="history.back();"></div><div class="full_article_news">\
+
+	if(obj == undefined){
+		$('.news_box_details').html('<div class="news_box_exit_button" onclick="history.back();"></div><div class="full_article_news">\
+				<div class="full_article_title"> Отсутствует соедиение с интернетом. Новость не была загружена.\
+				</div></div>').fadeTo(150, 1).css('height', '100%');
+	} else {
+		$('.news_box_details').html('<div class="news_box_exit_button" onclick="history.back();"></div><div class="full_article_news">\
 				<div class="full_article_title">\
 				' + obj.name_news + '\
 				</div>\
@@ -425,6 +431,7 @@ function showFullNews(obj){
 				' + (obj.text).replace(/(href=")(\/.*?)(")/, "$1http://www.ugrasu.ru$2$3 target='blank'") + '\
 				</div>\
 				</div>').fadeTo(150, 1).scrollTop(0);
+	}
 }		
 			
 	

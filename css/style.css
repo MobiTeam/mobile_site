@@ -543,7 +543,7 @@ b, strong {
 	color:rgba(255,255,255,0.85);
 	padding-top:50px;
 	text-align:center;
-	box-sizing:border-box;
+	margin-top: -20px;
 }
 
 #overlay{
@@ -1426,10 +1426,13 @@ b, strong {
 
 .exit_button_dish {
 	color: brown;
+	float: right;
+    margin-right: 11px;
 }
 
 .exit_button_dish {
 	text-decoration: none;
+	text-align: right;
 }
 
 .hiddenInfBlock {

@@ -23,7 +23,7 @@ function setJSON(key, value) {
 			if(sessionStorage[key] == undefined || sessionStorage[key] == "undefined"){
 				sessionStorage[key] = JSON.stringify(value);
 			} else {
-					sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
+				sessionStorage[key] = JSON.stringify($.extend(JSON.parse(sessionStorage[key]), value));
 			}
 		}			
 	} catch(ex){}
@@ -64,6 +64,7 @@ function getValue(key){
 // запись переменной в localStorage/sessionStorage
 function saveValue(key, value){
 
+	console.log(key + ' saved');
 	var flag = remMe();
 
 	 if(flag == true){
@@ -92,11 +93,11 @@ function isGuest() {
 	return false;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// унифицированная обертка на функцию $.ajax [boolean, string, string, object, boolean, callback, boolean, string] 15.01.2016 //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// унифицированная обертка на функцию $.ajax [boolean, string, string, object, boolean, callback, boolean, string, boolean] 28.01.2016 //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace){ 
+function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs, savePlace, doAfterErr){ 
 	
 	opBl();
 	var jsonObj;
@@ -130,7 +131,13 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 				}
 			},
 		error: function(){
+
+			if(doAfterErr){
+				functionCallBack();
+			}
+
 			showTooltip(errMessages[1], 3000);
+
 		},
 		complete: function(){
 			clBl();
@@ -813,13 +820,22 @@ function saveAndShow(){
 
 	if(htmlArtCode == undefined){
 		
+		saveValue('l_n_query', new Date());
 		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype')}, false, newsWrap, true);
 		
 	} else {
 
-		var lastId = htmlArtCode.match(/idnews="(\d*)?"/)[1];
-		myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype'), first_article: lastId}, false, newsAppend, true);
+		var lastNewsQuery = getValue('l_n_query');
 
+		var d = new Date(lastNewsQuery);
+		var currDate = new Date();
+
+		if(currDate - d > 1500000){
+			var lastId = htmlArtCode.match(/idnews="(\d*)?"/)[1];
+			myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype'), first_article: lastId}, false, newsAppend, true, undefined, true);
+		} else {
+			newsAppend();
+		}
 		
 	}
 
@@ -827,26 +843,32 @@ function saveAndShow(){
 
 function newsAppend(obj){
 
+	$newsblock = $('.news_box');
+	$newsblock.html(' ');
+	var resHtml = '';
+
 	if(obj == undefined){
 		clBl();
+		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20).waterfall();
 		return false;
 	}
 
-	$newsblock = $('.news_box');
-	var resHtml = '';
-	
 	for(var i = 0; i < obj.length; i++){
 		
 		resHtml += getHtmlNews(obj[i]);
 		
 	} 
-		
-	$newsblock.html('').css('display', 'none');
 	
-	var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
-	saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
-	$newsblock.append(htmlNewsCode).fadeIn(20).waterfall();
-
+	if(resHtml != ""){
+		alert(123);
+		$newsblock.html('').css('display', 'none');
+		var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
+		saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
+		$newsblock.append(htmlNewsCode).fadeIn(20).waterfall();
+	} else {
+		$newsblock.html('').css('display', 'none');
+		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20).waterfall();
+	}	
 
 }
 
