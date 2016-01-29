@@ -643,32 +643,32 @@ var showTeachContacts = function(obj){
 
 var getAuthInfo = function(infoObj){
 			
-			if(infoObj == undefined){
-				showTooltip("Данного пользователя нет в базе данных", 4000);
-				return false;
-			}
+	if(infoObj == undefined){
+		showTooltip("Данного пользователя нет в базе данных", 4000);
+		return false;
+	}
 
-			authObj = infoObj;
-					
-			if (authObj.FIO != "undefined"){
-				setJSON("auth_inf", authObj);
-				
-				$('.authblock').css('display','inline-block');	
-				saveValue('settingsCode', authObj.settings);
+	authObj = infoObj;
+			
+	if (authObj.FIO != "undefined"){
+		setJSON("auth_inf", authObj);
+		
+		$('.authblock').css('display','inline-block');	
+		saveValue('settingsCode', authObj.settings);
 
-			}
-			view.changePage('menu');
-			showTooltip(authObj.serverRequest, 2000);
-			
-			createHtmlSettings();
-			setUserSettings(getValue("settingsCode"));
-			
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-			
-			elems.forEach(function(html) {
-				var switchery = new Switchery(html);
-			});
+	}
+	view.changePage('menu');
+	showTooltip(authObj.serverRequest, 2000);
 	
+	createHtmlSettings();
+	setUserSettings(getValue("settingsCode"));
+	
+	var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+	
+	elems.forEach(function(html) {
+		var switchery = new Switchery(html);
+	});
+
 }
 
 function tryAutorisate(userData){
@@ -1019,4 +1019,27 @@ function loadDorm(){
 	if($block.html().length < 25){
 		$block.load('university_stud.html');
 	}	
+}
+
+function showSendingForm(){
+
+
+	var userInfo = getJSON("auth_inf");
+
+	if(userInfo){
+		$('.fio_input_txt').val(userInfo.FIO);
+	}
+
+	opBl();
+	$('#modalForm').fadeIn(20);
+	
+
+}
+
+function closeModalForm(){
+
+	$("#modalForm").fadeOut(20, function(){
+		clBl();
+	});
+
 }

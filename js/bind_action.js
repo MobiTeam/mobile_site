@@ -241,6 +241,55 @@ $(document).ready(function(){
 		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), id_user: id}, true); 
 		
 	})
-	
+
+
+	$('.modalForm_fm').on( "submit", function( e ){
+
+		e.stopPropagation();
+		e.preventDefault();
+
+		$sbm_btn = $('.infoSubmBtn');
+		$sbm_btn.prop("disabled", true);
+
+		$elements = $('.modalForm_fm input[type="text"], .modalForm_fm textarea');
+
+		$elements.each(function(){
+
+			if($(this).val() == ""){
+				$(this).css('background', '#F6CED8');
+				showTooltip("Заполните все обязательные поля", 2500);
+				return false;
+			} else {
+				$(this).css('background', '#E3F6CE');
+			}
+
+		});
+
+
+		$.ajax({
+			type: 'POST',
+			url: 'oracle/database_insert_reviews.php',
+			data: $('.modalForm_fm').serialize(),
+			success: function(response){
+				
+				if(response.length < 5){
+					showTooltip("Сообщение было успешно отправлено", 2500);
+				} else showTooltip("На сервере произошла ошибка", 2500);
+				
+			},
+			error: function(){
+				showTooltip("Нет соединения с сервером. Повторите попытку позже", 2500);
+			},
+			complete: function(){
+				$sbm_btn.prop("disabled", false);
+				closeModalForm();
+			}
+		})
+
+		
+
+
+	});
+
 
 })

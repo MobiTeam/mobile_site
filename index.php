@@ -25,6 +25,23 @@
 		</div>
 		<div id="overlay"></div>
 
+		<div id="modalForm">
+			
+			<div class="news_box_exit_button" onclick="closeModalForm();"></div>
+
+			<form class="modalForm_fm" method="POST">
+				<input class="formInformationInput contr_shadow fio_input_txt" name="FIO" type="text" placeholder="ФИО" required />
+				<input class="formInformationInput contr_shadow" name="E-mail" type="text" placeholder="E-mail" required />
+				
+				<textarea class="contr_shadow no-resize modalForm_fm_textarea" name="Message_text" onclick="this.innerHTML = '';" required>Введите текст сообщения...
+				</textarea><br>
+
+				<input class="infoSubmBtn" type="submit" value="Отправить" />
+
+			</form>
+
+		</div>
+
 		<div id="menu">
 			
 			<div class="sidebar_menu_block_back_arr">
@@ -201,11 +218,19 @@
 					<div class="about_info_box_text contr_shadow">
 					<div class="authorisation_box_logo" style="margin:16px auto 26px;"></div>
 
-					<p><b>mob.ugrasu.ru</b> <span class='about_span'>(ver 0.2 alpha)</span> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
+					<p><b>mob.ugrasu.ru</b> <span class='about_span'>(ver 0.35 alpha)</span> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
 					<p>Данное приложение создано с целью упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
-					<p>С помощью данного приложения Вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета и библиотеки, 
+					<p>С помощью данного приложения Вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета, 
 					а также персональную информацию, такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
-					<p style='display:block; border-top:1px dashed grey; padding-top: 5px;'><span class='about_span'>Разработчики:</span><br> Петроченко Владислав - vladonxp@mail.ru <br> Якимчук Александр - viking0607@mail.ru</p>
+					
+					<p style='display:block; border-top:1px dashed grey; padding-top: 5px;'>
+						<span class='about_span'>Разработчики:</span><br> 
+						Петроченко Владислав - vladonxp@mail.ru <br>
+						Якимчук Александр - viking0607@mail.ru
+
+						<input class="sendInfoButton contr_shadow" type="button" value="Сообщить об ошибке" onclick="showSendingForm()" />
+					</p>
+					
 					<p style='border-top:1px dashed grey; padding-top: 5px;'><span class='about_span'>Благодарности:</span>
 						<ul style='margin-left:20px;'>
 							<li>Бурлуцкому Владимиру Владимировичу</li>
@@ -258,6 +283,17 @@
 					</div>
 				
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
+						
+						<div class="content_box_menuitem contr_shadow" hashtag="coffe_block">
+							
+							<!-- <img src="img/coffee_icon.png" /> -->
+							<div class="main_coffe_icon main_icon_block"></div>
+						   
+							<div class="content_box_name_item coffe_content">	
+							  Столовая
+							</div>
+						</div>
+
 						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
 							
 							<div class="main_calendar_icon main_icon_block"></div>
@@ -279,7 +315,7 @@
 						</div>
 						 
 						
-						<div class="content_box_menuitem contr_shadow authblock only_stud" hashtag="group_info">
+						<div class="content_box_menuitem contr_shadowF authblock only_stud" hashtag="group_info">
 							
 							<div class="main_group_icon main_icon_block"></div>
 							<!-- <img src="img/group_new.png" /> -->
@@ -325,16 +361,6 @@
 						   
 							<div class="content_box_name_item contacts_content">	
 							  Справочник
-							</div>
-						</div>
-						
-						<div class="content_box_menuitem contr_shadow" hashtag="coffe_block">
-							
-							<!-- <img src="img/coffee_icon.png" /> -->
-							<div class="main_coffe_icon main_icon_block"></div>
-						   
-							<div class="content_box_name_item coffe_content">	
-							  Столовая
 							</div>
 						</div>
 						
