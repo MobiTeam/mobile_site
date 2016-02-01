@@ -13,7 +13,9 @@
 		<link href="css/jqui.css" rel="stylesheet" />
 		<link href="css/large_icons.css" rel="stylesheet" />
 		<link href="css/portrait_phone.css" media="screen and (min-width: 480px)" rel="stylesheet"/> 
+		<link href="css/small_phone.css" media="screen and (max-width: 480px)" rel="stylesheet"/> 
 		<link href="css/large_phone.css" media="screen and (min-width: 736px)" rel="stylesheet"/> 
+
 		<link href="css/roboto_font.css" rel="stylesheet"/>
 	
 	</head>

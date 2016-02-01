@@ -54,7 +54,15 @@
 		background: url("../img/dormitory@2x.png") no-repeat center center;
 		background-size: 40px 40px;
 	}
-
+	
+	.fin_info_box_menu_city:before {
+	background: url("../img/city@2x.png") no-repeat center center;
+	background-size: 40px 40px;
+	}
+	
+	.found_by_sel_text::before {
+		background: blue url('../img/user_img.png') no-repeat center center;
+	}
 
 	.rate_box_img {
 		background: url('../img/agree_icon@2x.png') no-repeat center center;

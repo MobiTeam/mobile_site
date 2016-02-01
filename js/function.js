@@ -431,12 +431,12 @@ function delete_dish(index){
 
 function showBag(){
 
-	var htmlDishes = "<b>Ваш заказ <span class='exit_button_dish' onclick='closeBag()'>[закрыть]</span>:</b><br><table class='calc_coffe_table'>";
+	var htmlDishes = "<b>Ваш заказ <div style='margin-top: -1px;' class='news_box_exit_button' onclick='closeBag()'></div>:</b><br><table class='calc_coffe_table'>";
     htmlDishes += "<tr class='info_tr'><td>Наименование</td><td>Кол-во</td><td>Цена</td><td></td></tr>";
 
 	for(var i = 0; i < dishes.length; i++){
 		if(dishes[i].show){
-			htmlDishes += "<tr class='menu_item' style='color:black;'><td>" + dishes[i].title_dish + "</td><td>" + dishes[i].amount + "</td><td style='color:#DF7401; font-weight:bold;'>" + dishes[i].summ + "</td><td><span onclick='delete_dish(" + dishes[i].order + ")'><b>удалить</b></span></td></tr>";
+			htmlDishes += "<tr class='menu_item' style='color:black;'><td>" + dishes[i].title_dish + "</td><td>" + dishes[i].amount + "</td><td style='color:#DF7401; font-weight:bold;'>" + dishes[i].summ + "</td><td><span onclick='delete_dish(" + dishes[i].order + ")'><b style='color: brown;'>удалить</b></span></td></tr>";
 		}
 	}
 
@@ -655,6 +655,7 @@ var getAuthInfo = function(infoObj){
 		
 		$('.authblock').css('display','inline-block');	
 		saveValue('settingsCode', authObj.settings);
+		saveValue('subgroup', authObj.subgroup);
 
 	}
 	view.changePage('menu');
@@ -695,10 +696,6 @@ function clMenBl(){
 	$('.menuoverlay').css('display', 'none');
 }
 
-
-
-
-
 //скрыть предзагрузочный экран
 function hideLoader(){
 	$('.pre_loader').fadeOut(200);
@@ -719,8 +716,6 @@ function showTooltip(toolText, duration){
 	clBl();
 	
 }
-
-
 
 // удаление BOM символов из строки
 function clearUTF8(str) {
@@ -860,7 +855,6 @@ function newsAppend(obj){
 	} 
 	
 	if(resHtml != ""){
-		alert(123);
 		$newsblock.html('').css('display', 'none');
 		var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
 		saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
@@ -923,7 +917,7 @@ function issetNumbersInQuery(query){
 function getColorTypeLesson(typeLesson) {
 	switch(typeLesson.toLowerCase()) {
 		case 'лек':
-			return 'green_td_tag';
+			return 'green';
 		break;
 		
 		case 'у':
@@ -932,7 +926,7 @@ function getColorTypeLesson(typeLesson) {
 		case 'пр':
 		case 'консул':
 		case 'кст':
-			return 'orange_td_tag';
+			return 'orange';
 		break;
 		
 		case 'кп':
@@ -940,13 +934,15 @@ function getColorTypeLesson(typeLesson) {
 		case 'тест':
 		case 'кр':
 		case 'экзам':
-			return 'red_td_tag';
+			return 'red';
 		break;
 	}
 }
 
 
-function setUserSettings(settingsCode) {
+function setUserSettings() {
+
+	var settingsCode = getValue("settingsCode");
 	
 	var binarCode = "" + (settingsCode == undefined ? (0).toString(2) : (+settingsCode).toString(2));
 	
@@ -965,12 +961,15 @@ function setUserSettings(settingsCode) {
 			$('.word_stat' + (index + 1)).text("Выкл.");
 		}
 	});	
+
+	$('.select_subgroup').val(getValue("subgroup"));
 	
 }
 
 function createHtmlSettings() {
 	
 	var htmlSettings = '';
+
 	for (var i = 0; i < settingsTitle.length; i++) {
 		htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">\
 							<div class="settings_box_inputs_item_text">'
@@ -983,7 +982,22 @@ function createHtmlSettings() {
 							<div style="clear:both;"></div>\
 						</div></div>'
 	}
-							
+
+	// htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать рассписание по запросу<br> <input type="text" value="123" /></div></div>'
+	
+	/*htmlSettings += '<div class="settings_box_inputs">\
+							<div class="settings_box_inputs_item">\
+							Номер подгруппы\
+								<select class="select_subgroup">\
+									<option value="0">Нет</option>\
+									<option value="1">1</option>\
+									<option value="2">2</option>\
+									<option value="3">3</option>\
+									<option value="4">4</option>\
+								</select><div style="clear: both;"></div>\
+						</div>\
+					</div>';*/
+
 	$('.settings_box_inputs').html(htmlSettings);				
 	
 }

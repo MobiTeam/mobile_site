@@ -7,10 +7,11 @@
 	
 	 $ID=$_POST['id_user'];
 	 $Code=$_POST['code'];
+	 $SUB = $_POST['subgrp'];
 	
 
 	
-	$sql="update SETTINGS set CODE_SETTINGS='".$Code."'
+	$sql="update SETTINGS set CODE_SETTINGS='".$Code."', USER_SUBGROUP = '" . $SUB . "'
 	where ID_USER='".$ID."'";
 	
 	$s = OCIParse($c,$sql);

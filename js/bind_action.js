@@ -237,8 +237,9 @@ $(document).ready(function(){
 		var id = getJSON('auth_inf').id;
 		
 		saveValue("settingsCode", parseInt(codeSetString, 2));
+		saveValue("subgroup", $('.select_subgroup').val());
 		
-		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), id_user: id}, true); 
+		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id}, true); 
 		
 	})
 

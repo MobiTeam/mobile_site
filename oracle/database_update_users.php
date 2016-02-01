@@ -27,12 +27,13 @@
 		}
 	
 	if(isset($id_user)) {
-		$sql = "select CODE_SETTINGS from SETTINGS where ID_USER = " . $id_user . "";
+		$sql = "select CODE_SETTINGS, USER_SUBGROUP from SETTINGS where ID_USER = " . $id_user . "";
 		$s = OCIParse($c,$sql);
 		OCIExecute($s, OCI_DEFAULT);	
 		
 		while(OCIFetch($s)){
 			$data_user['settings'] = ociresult($s,'CODE_SETTINGS');	
+			$data_user['subgroup'] = ociresult($s,'USER_SUBGROUP');
 			$data_user['id'] = $id_user;	
 		}	
 	}	

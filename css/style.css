@@ -836,18 +836,20 @@ b, strong {
 	font-family:"RobotoMedium", sans-serif;
 	vertical-align:middle;
 	text-align:center;
-	width:60px;
+	width:49px;
 	background:#F5F5FF!important;
 }
 
 .timetable_tr td{
 	border:1px solid #c6c6c6;
-	padding:6px;
+	padding:7px;
 	background:white;
 }
 
 .timetable_disp{
 	font-family:"RobotoRegular", sans-serif;
+	margin-bottom: -16px;
+    display: block;
 }
 
 .timetable_style{
@@ -914,11 +916,23 @@ b, strong {
 
 .found_by_sel_text{
 	color:blue!important;
-	text-decoration:underline;
+	/*text-decoration:underline;*/
 }
 
 .found_by_sel_text:active{
 	text-decoration:none;
+}
+
+.found_by_sel_text::before {
+	content: '';
+	display: block;
+	float: left;
+	border-radius: 3px;
+	background: blue url('../img/user_img.png') no-repeat center center;
+	width: 22px;
+	height: 22px;
+	opacity: 0.8;
+	margin: 2px 5px 2px 0px;
 }
 
 .hide_information_button{
@@ -1550,6 +1564,7 @@ b, strong {
 	background: white;
 	height: 77%;
 	width: 90%;
+	min-height: 360px;
 	max-width: 500px;
 	max-height: 500px;
 	overflow: auto;
@@ -1596,3 +1611,59 @@ b, strong {
 .infoSubmBtn {
 	margin-top: -20px;
 }
+
+.menu_item td {
+	vertical-align: middle;
+}
+
+.empty_timetable_td {
+	border-left: 3px solid #ccc!important;
+	background: #FAFAFA!important;
+}
+
+.vid_color {
+	color: white;
+	padding: 2px 4px;
+	font-size: 13px;
+	display: inline-block;
+	border-radius: 3px;
+}
+
+.green_td_tag .vid_color{
+	background:green!important;
+}
+
+.orange_td_tag .vid_color{
+	background:#EF6C00!important;
+}
+
+.red_td_tag .vid_color{
+	background:#B71C1C!important;
+}
+
+.green_td_tag, .orange_td_tag, .red_td_tag {
+	padding-left: 15px!important;
+}
+
+.subgroup_num {
+	background: #C62828;
+	width: 20px;
+	height: 20px;
+	color: white;
+	display: block;
+	text-align: center;
+	border-radius: 10px;
+	float: left;
+	margin-left: -10px;
+	margin-right: 5px;
+}
+
+.select_subgroup {
+	padding: 5px;
+	margin-left: 5px;
+	float: right;
+	margin-top: -8px;
+}
+
+
+	
