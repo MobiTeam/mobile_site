@@ -2,6 +2,7 @@
 
    session_start();
    require_once('../auth/ad_functions.php');
+   
    userAutentificate();
 
    if(isset($_SESSION['FIO'])){
@@ -9,6 +10,8 @@
    } else {
 		$FFIO = $_POST['FIO'];
    }
+
+   $FFIO = preg_replace('#(.*)\s+(.).*\s+(.).*#usi', '$1 $2.$3.', $FFIO);
    
    require_once('database_connect.php');
 

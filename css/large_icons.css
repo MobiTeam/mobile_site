@@ -49,6 +49,10 @@
 		background: url("../img/location@2x.png") no-repeat center center;
 		background-size: 40px 40px;
 	}
+	.fin_info_box_menu_city:before{
+		background: url("../img/city@2x.png") no-repeat center center;
+		background-size: 40px 40px;
+	}
 
 	.fin_info_box_menu_dorm:before {
 		background: url("../img/dormitory@2x.png") no-repeat center center;

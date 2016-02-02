@@ -160,6 +160,8 @@ var view = {
 		} else if(isGuest()){
 			
 				$('.auth_only').css('display', 'none');
+				saveValue("subgroup", "0");
+			
 			
 			    switch(location.hash){
 					case '#guest':
@@ -296,7 +298,7 @@ function loadTimetable(){
 
 			if(!isGuest()){
 				if(uInfo.is_student == "0"){
-					saveValue("query", uInfo.FIO);
+					saveValue("query", (uInfo.FIO).replace(/(.*)\s+(.).*\s+(.).*/, '$1 $2.$3.'));
 					loadTimetableInf();
 				} else {
 					$('.timetable_lessons').html('');

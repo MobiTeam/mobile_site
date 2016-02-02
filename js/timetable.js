@@ -267,20 +267,36 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 	var dateNumbers = date.replace(/\./g,''),
 		timetableHTML = '<table class="timetable_style">',
 		notNameQuery = issetNumbersInQuery(getValue("query")),
-		currSubgr = !notNameQuery ? "0" : getValue("subgroup");
+		currSubgr = !notNameQuery ? "0" : getValue("subgroup"),
+		clearArr = [];
+
+
+    console.log(timetable);
+	if(currSubgr != "0" && !!timetable[dateNumbers]){
+
+		for(var key in timetable[dateNumbers]){
+			if(timetable[dateNumbers][key].SUBGRUP == null || currSubgr == timetable[dateNumbers][key].SUBGRUP){
+				clearArr.push(timetable[dateNumbers][key]);
+			}
+		}
+
+		timetable[dateNumbers] = clearArr.length > 0 ? clearArr : undefined;
+
+	}	
+
+	
 	
 	if(!!timetable[dateNumbers]){
 		var firstNumLesson = 0;
 		var twoLessonsInOneTime = false;
-		
+
 		for(var i = 1, numLession = 6; i <= numLession; i++) {
 			
 			var item = timetable[dateNumbers][firstNumLesson];
 			var subgroup = (item.SUBGRUP != null && currSubgr == "0") ? "<span class='subgroup_num'>" + item.SUBGRUP + "</span>" : "";
-			
-			if (+item.PAIR == i && (currSubgr == "0" || currSubgr == item.SUBGRUP || item.SUBGRUP == null)) {
 
-				
+			if (+item.PAIR == i) {
+
 				if((item.KORP).toLowerCase() == 'сок' && notNameQuery){
 							
 							
@@ -324,71 +340,59 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 										   </tr>';
 							firstNumLesson --;
 								
-					}  else {
+					} else {
 
-						if(currSubgr != "0"){
+						if (firstNumLesson < timetable[dateNumbers].length - 1){
+							firstNumLesson++;
+							if (+item.PAIR == timetable[dateNumbers][firstNumLesson]['PAIR']){
+									i--;
+									if(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) twoLessonsInOneTime = true;	
+							} 
+						}		
+					
+						if(twoLessonsInOneTime == undefined){
+							timetableHTML += '<tr class="timetable_tr">\
+											<td class="' + getColorTypeLesson(item.VID) + '_td_tag" >\
+											' + subgroup + '<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+											<span class="timetable_place"><span class="vid_color">' + (item.VID).toLowerCase() + '</span> ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + '</span><br>\
+											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
+											</td>\
+										  </tr>';
+							twoLessonsInOneTime = false;			  
+						} else {
+							
+							if(twoLessonsInOneTime){
+								num = i + 1;
+							} else {
+								num = i;
+							} 
+							
+							var rowsp = currSubgr == "0" ? "2" : "1";
 
 							timetableHTML += '<tr class="timetable_tr">\
-													<td class="date_td">' + numLessonsArr[i] + '</td>\
-													<td class="' + getColorTypeLesson(item.VID) + '_td_tag" >\
-													' + subgroup + '<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-													<span class="timetable_place"><span class="vid_color">' + (item.VID).toLowerCase() + '</span> ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + '</span><br>\
-													<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-													</td>\
-												  </tr>';
-
-						} else {
-								if (firstNumLesson < timetable[dateNumbers].length - 1){
-									firstNumLesson++;
-									if (+item.PAIR == timetable[dateNumbers][firstNumLesson]['PAIR']){
-											i--;
-											if(item.GR_NUM == timetable[dateNumbers][firstNumLesson]['GR_NUM']) twoLessonsInOneTime = true;	
-									} 
-								}		
-							
-								if(twoLessonsInOneTime == undefined){
-									timetableHTML += '<tr class="timetable_tr">\
-													<td class="' + getColorTypeLesson(item.VID) + '_td_tag" >\
-													' + subgroup + '<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-													<span class="timetable_place"><span class="vid_color">' + (item.VID).toLowerCase() + '</span> ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + '</span><br>\
-													<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-													</td>\
-												  </tr>';
-									twoLessonsInOneTime = false;			  
-								} else {
-									
-									if(twoLessonsInOneTime){
-										num = i + 1;
-									} else {
-										num = i;
-									} 
-									
-									var rowsp = currSubgr == "0" ? "2" : "1";
-
-									timetableHTML += '<tr class="timetable_tr">\
-													<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="' + rowsp + '"' : '') + '>' + numLessonsArr[num] + '</td>\
-													<td class="' + getColorTypeLesson(item.VID) + '_td_tag">\
-													' + subgroup + '<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
-													<span class="timetable_place"><span class="vid_color">' + (item.VID).toLowerCase() + '</span> ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + '</span><br>\
-													<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
-													</td>\
-												  </tr>';						
-								}
-								
-								twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;	
-
+											<td class="date_td" ' + (twoLessonsInOneTime ? 'rowspan="' + rowsp + '"' : '') + '>' + numLessonsArr[num] + '</td>\
+											<td class="' + getColorTypeLesson(item.VID) + '_td_tag">\
+											' + subgroup + '<span class="timetable_disp">' + item.DISCIPLINE + '</span><br>\
+											<span class="timetable_place"><span class="vid_color">' + (item.VID).toLowerCase() + '</span> ' + item.AUD + '/' + item.KORP + (notNameQuery == false ? ' - гр ' + item.GR_NUM : '') + '</span><br>\
+											<span class="timetable_fio"><span class="found_by_sel_text">' + item.TEAC_FIO + '</span></span><br>\
+											</td>\
+										  </tr>';						
 						}
+						
+						twoLessonsInOneTime = twoLessonsInOneTime ? undefined : false;	
+
+						
 										
 					}
 				
-			} else if (showEmptyFields) {
+			} else {
 				
-				timetableHTML += '<tr class="timetable_tr">\
+				if (showEmptyFields) timetableHTML += '<tr class="timetable_tr">\
 										<td class="date_td">' + numLessonsArr[i] + '</td>\
 										<td class="empty_timetable_td"></td>\
 									  </tr>';
-				
-			}
+
+			} 
 			
 		}		
 		

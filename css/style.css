@@ -1222,7 +1222,15 @@ b, strong {
 	width: 40px;
 	height: 40px;
 }
-
+.fin_info_box_menu_city:before {
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/city.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
 .fin_info_box_menu_incomeitem:before {
 	content: "";
 	display: block;
@@ -1665,5 +1673,13 @@ b, strong {
 	margin-top: -8px;
 }
 
+.about_city_block p{
+	text-indent: 12px;
+	margin-bottom: 7px;
+	font-size: 13px;
+	text-align: justify;
+}
 
-	
+.informationCity {
+	margin: 5px;
+}	

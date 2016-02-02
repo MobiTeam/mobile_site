@@ -985,7 +985,7 @@ function createHtmlSettings() {
 
 	// htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать рассписание по запросу<br> <input type="text" value="123" /></div></div>'
 	
-	/*htmlSettings += '<div class="settings_box_inputs">\
+	htmlSettings += '<div class="settings_box_inputs">\
 							<div class="settings_box_inputs_item">\
 							Номер подгруппы\
 								<select class="select_subgroup">\
@@ -996,7 +996,7 @@ function createHtmlSettings() {
 									<option value="4">4</option>\
 								</select><div style="clear: both;"></div>\
 						</div>\
-					</div>';*/
+					</div>';
 
 	$('.settings_box_inputs').html(htmlSettings);				
 	
@@ -1032,6 +1032,13 @@ function loadDorm(){
 
 	if($block.html().length < 25){
 		$block.load('university_stud.html');
+	}	
+}
+function loadCity(){
+	var $block = $('.informationCity');
+
+	if($block.html().length < 25){
+		$block.load('aboutCity.html');
 	}	
 }
 

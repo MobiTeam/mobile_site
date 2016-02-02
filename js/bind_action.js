@@ -169,7 +169,6 @@ $(document).ready(function(){
 	
 	})
 	
-
 	$('.header_line_addition_menu_guide_item').click(function(){
 		$('.header_line_addition_menu_guide_item').each(function(){
 			$(this).removeClass('current_item');

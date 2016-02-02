@@ -286,6 +286,16 @@
 				
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 						
+						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
+							
+							<div class="main_calendar_icon main_icon_block"></div>
+							 <!-- <img src="img/calendar_icon.png" /> -->
+							
+							<div class="content_box_name_item">	
+							  Расписание
+							</div>
+						</div>
+
 						<div class="content_box_menuitem contr_shadow" hashtag="coffe_block">
 							
 							<!-- <img src="img/coffee_icon.png" /> -->
@@ -296,16 +306,6 @@
 							</div>
 						</div>
 
-						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
-							
-							<div class="main_calendar_icon main_icon_block"></div>
-							 <!-- <img src="img/calendar_icon.png" /> -->
-							
-							<div class="content_box_name_item">	
-							  Расписание
-							</div>
-						</div>
-						
 						<div class="content_box_menuitem contr_shadow" hashtag="news">
 						
 							<div class="main_news_icon main_icon_block"></div> -->
@@ -317,7 +317,7 @@
 						</div>
 						 
 						
-						<div class="content_box_menuitem contr_shadowF authblock only_stud" hashtag="group_info">
+						<div class="content_box_menuitem contr_shadow authblock only_stud" hashtag="group_info">
 							
 							<div class="main_group_icon main_icon_block"></div>
 							<!-- <img src="img/group_new.png" /> -->
