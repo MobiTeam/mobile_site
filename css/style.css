@@ -916,6 +916,8 @@ b, strong {
 
 .found_by_sel_text{
 	color:blue!important;
+	margin-bottom: -15px;
+    display: block;
 	/*text-decoration:underline;*/
 }
 
@@ -1570,7 +1572,6 @@ b, strong {
 	position: fixed;
 	z-index: 99999;
 	background: white;
-	height: 77%;
 	width: 90%;
 	min-height: 360px;
 	max-width: 500px;

@@ -62,12 +62,17 @@ $(document).ready(function(){
 			loadTimetableInf(event.target.innerHTML);
 
 		} else if (event.target.className == 'hide_information_button') {
+
+			var targetTd = $( event.target.parentNode );
+			
+
 			if (event.target.value == 'Развернуть'){
 				event.target.value = 'Свернуть';
 			} else {
 				event.target.value = 'Развернуть';
 			}
-			$('.hide_timetable_information').toggle(200);
+			
+			targetTd.find('.hide_timetable_information').toggle(200);
 		}
 	});
 

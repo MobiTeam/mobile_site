@@ -65,7 +65,9 @@
 	}
 	
 	.found_by_sel_text::before {
-		background: blue url('../img/user_img.png') no-repeat center center;
+		background: blue url('../img/user_img@2x.png') no-repeat center center;
+		background-size: 16px 16px;
+
 	}
 
 	.rate_box_img {
