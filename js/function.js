@@ -656,6 +656,7 @@ var getAuthInfo = function(infoObj){
 		$('.authblock').css('display','inline-block');	
 		saveValue('settingsCode', authObj.settings);
 		saveValue('subgroup', authObj.subgroup);
+		saveValue('default_query', authObj.default_query);
 
 	}
 	view.changePage('menu');
@@ -943,7 +944,6 @@ function getColorTypeLesson(typeLesson) {
 function setUserSettings() {
 
 	var settingsCode = getValue("settingsCode");
-	
 	var binarCode = "" + (settingsCode == undefined ? (0).toString(2) : (+settingsCode).toString(2));
 	
 	var num = $('[class *= "item_ch"]').size();
@@ -963,13 +963,20 @@ function setUserSettings() {
 	});	
 
 	$('.select_subgroup').val(getValue("subgroup"));
+
+	var default_query = getValue("default_query");
+
+	if(default_query != null && default_query != "null"){
+		$('.default_query_inp').val(default_query).attr('default_query', default_query);
+	}
+
 	
 }
 
 function createHtmlSettings() {
 	
 	var htmlSettings = '';
-
+	
 	for (var i = 0; i < settingsTitle.length; i++) {
 		htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">\
 							<div class="settings_box_inputs_item_text">'
@@ -983,7 +990,7 @@ function createHtmlSettings() {
 						</div></div>'
 	}
 
-	// htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать рассписание по запросу<br> <input type="text" value="123" /></div></div>'
+	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать рассписание по запросу<br> <input class="default_query_inp" default_query="" value="" type="text" placeholder="Введите запрос для поиска расписания..." /></div></div>'
 	
 	htmlSettings += '<div class="settings_box_inputs">\
 							<div class="settings_box_inputs_item">\
@@ -998,7 +1005,16 @@ function createHtmlSettings() {
 						</div>\
 					</div>';
 
-	$('.settings_box_inputs').html(htmlSettings);				
+	$('.settings_box_inputs').html(htmlSettings);
+
+	$('.default_query_inp').autocomplete({	
+		source:"oracle/database_get_timetable_info.php",
+		minLength:2
+	});
+
+	$('.default_query_inp').on('autocompleteselect',function(event, ui){
+        $('.default_query_inp').attr('default_query', ui.item.value);
+    });				
 	
 }
 

@@ -987,7 +987,7 @@ b, strong {
 
 .settings_box_inputs_item{
 	border-bottom:1px solid #8C8C8C;
-	padding:5px;
+	padding:5px;	
 }
 
 .settings_box_inputs_item_text{
@@ -1672,6 +1672,7 @@ b, strong {
 	margin-left: 5px;
 	float: right;
 	margin-top: -8px;
+	border: 1px solid #E6E6E6;
 }
 
 .about_city_block p{
@@ -1684,3 +1685,12 @@ b, strong {
 .informationCity {
 	margin: 5px;
 }	
+
+.default_query_inp {
+	border: 1px solid #E6E6E6;
+	margin: 5px;
+	padding: 5px;
+	width: 90%;
+	max-width: 400px;
+	box-sizing:border-box;
+}

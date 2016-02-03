@@ -291,9 +291,12 @@ function loadTimetable(){
 		
 		var uInfo = getJSON("auth_inf");
 
-		if(issetUserGroup()){
+		if(uInfo.default_query != null && uInfo.default_query != ""){
+			saveValue("query", uInfo.default_query);
+			loadTimetableInf(uInfo.default_query);
+		} else if(issetUserGroup()){
 			saveValue("query", uInfo.groups[0]);
-			loadTimetableInf();
+			loadTimetableInf(uInfo.groups[0]);
 		} else {
 
 			if(!isGuest()){

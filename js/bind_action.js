@@ -39,7 +39,7 @@ $(document).ready(function(){
 		source:"oracle/database_get_timetable_info.php",
 		minLength:2
 	});
-		
+
 	$('.timetable_box_input').on('autocompleteselect',function(event, ui){
 
         saveValue('timetable',"undefined");
@@ -239,11 +239,12 @@ $(document).ready(function(){
 		});
 		
 		var id = getJSON('auth_inf').id;
-		
+		var default_query = $('.default_query_inp').attr('default_query');
+
 		saveValue("settingsCode", parseInt(codeSetString, 2));
 		saveValue("subgroup", $('.select_subgroup').val());
-		
-		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id}, true); 
+		saveValue("default_query", default_query);
+		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id, def_query: default_query}, true); 
 		
 	})
 
