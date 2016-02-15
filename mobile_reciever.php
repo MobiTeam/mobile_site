@@ -48,7 +48,7 @@
 						  require_once('oracle/database_get_fullfio.php');				  
 						  require_once('oracle/database_update_users.php');				  
 					  }
-								  
+
 					  print_r(utf8_json_encode($data_user));
 			  	
 	} 

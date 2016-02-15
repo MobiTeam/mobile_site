@@ -17,7 +17,7 @@
  		
 		 //Предметы группы на текущий семестр
 	 	$sql = "Select * from mv_stud_object
-		where GR_NUM like '%".$GRUP[$i]."%'
+		where GR_NUM = '".$GRUP[$i]."'
 		order by 2";
 		
 		$s = OCIParse($c,$sql);

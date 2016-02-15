@@ -39,7 +39,7 @@ create or replace synonym v_stud_dol for galreport.dol_stud
 /
 create or replace synonym v_stud_education for galreport.dol
 -----------------------------------------------------------
-Create or replace synonym v_teac_stimulpr for budget.v_cisu_teac_stimulpr
+Create or replace synonym v_teac_stimulpr for ais_fzp.v_sp_c_pr
 
 ------------------------------------------------------------
 Create or replace synonym mv_teac_prikaz for galreport.mv_mobile_prikaz

@@ -10,6 +10,7 @@ window.onload = function() {
 	  'side': 'left',
 	  'touch': false
 	});
+	
 };
 
 // назначение обработчиков [18.01.2016]
@@ -92,6 +93,13 @@ $(document).ready(function(){
 		
 	});
 	
+	view.$helper.click(function(){
+
+		opBl();
+		$('#helper_box').fadeIn(20);
+
+
+	});
 
 	$('.header_line__content_button ').click(function(){
 		
@@ -148,6 +156,28 @@ $(document).ready(function(){
 			$('.header_line_content_calendar').fadeOut(0);
 			slideInput();
 		}
+	});
+
+	$('.header_line_content_calendar').click(function(){
+
+		var htmlTMTB = "",
+			currWeek = getTimetableWeek(true),
+			timetable = getJSON('timetable'),
+			dateNumbers = currWeek.replace(/\./g,'');
+
+		if(!!timetable && !!timetable[dateNumbers]){
+			
+			
+			for(var i = 0; i < 6; i++){
+
+			}
+
+			showTmtbBox();
+			$('.currentWeekTimetable').html('<b>Расписание на текущую неделю</b>');
+		} else {
+			showTooltip("Для начала необходимо загрузить расписание.", 4000);
+		}		
+
 	});
 	
 	$('.date_item').click(function(){
@@ -280,7 +310,7 @@ $(document).ready(function(){
 				
 				if(response.length < 5){
 					showTooltip("Сообщение было успешно отправлено", 2500);
-				} else showTooltip("На сервере произошла ошибка", 2500);
+				} else showTooltip("Сообщение не было отправлено!", 2500);
 				
 			},
 			error: function(){

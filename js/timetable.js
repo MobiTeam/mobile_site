@@ -270,8 +270,6 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 		currSubgr = !notNameQuery ? "0" : getValue("subgroup"),
 		clearArr = [];
 
-
-    console.log(timetable);
 	if(currSubgr != "0" && !!timetable[dateNumbers]){
 
 		for(var key in timetable[dateNumbers]){

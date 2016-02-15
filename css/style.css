@@ -132,7 +132,7 @@ b, strong {
 	background-repeat:no-repeat;
 }
 
-.header_line_content_refresh, .header_line_content_search, .header_line_content_settings, .header_line_my_bag{
+.header_line_content_refresh, .header_line_content_search, .header_line_content_settings, .header_line_my_bag, .header_line_content_helper{
 	float:right;
 	width:46px;
 }
@@ -170,6 +170,16 @@ b, strong {
 	display:inline-block;
 }
 
+.header_line_content_helper{
+    height:54px;
+	background:url('../img/helper_icon.png');
+	background-repeat:no-repeat;
+	background-position:center center;
+	display:inline-block;
+}
+
+
+
 .header_line_content_calendar {
     height:54px;
 	width: 54px;
@@ -194,7 +204,7 @@ b, strong {
 	background-position:center center;
 }
 
-.header_line_content_calendar:active, .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active, .header_line_content_refresh:active{
+.header_line_content_calendar:active, .header_line_content_settings:active, .header_line_content_search:active, .header_line__content_button:active, .header_line_content_refresh:active, .header_line_content_helper:active{
 	background-color:#3266d5;
 } 
 
@@ -260,7 +270,7 @@ b, strong {
 	display: inline-block;
 	padding: 4px 1px;
 	font-family: "RobotoRegular", sans-serif;
-	font-size: 11px;
+	font-size: 10px;
 	/* max-width:46px; */
 	/* width:15%; */
 }
@@ -597,7 +607,7 @@ b, strong {
 
 .news_box{
 	display:none;
-	width: 97%;
+	width: 94%;
 }
 
 .news_box_exit_button{
@@ -628,6 +638,7 @@ b, strong {
 	background:white;
 	margin:20px 2px;
 	box-sizing: border-box;
+	width:300px;
 	max-width: 600px;
 }
 
@@ -671,6 +682,7 @@ b, strong {
 	margin:5px 12px 5px 5px;
 	background-repeat:no-repeat;
 	background-position:center center;
+	background-size: 100% 100%;
 }
 
 .news_box_item_text{
@@ -1568,7 +1580,7 @@ b, strong {
 	border-bottom: 1px dashed grey;
 }
 
-#modalForm {
+#modalForm, #helper_box, #weeek_tmtb_box {
 	position: fixed;
 	z-index: 99999;
 	background: white;
@@ -1678,7 +1690,7 @@ b, strong {
 .about_city_block p{
 	text-indent: 12px;
 	margin-bottom: 7px;
-	font-size: 13px;
+	font-size: 14px;
 	text-align: justify;
 }
 
@@ -1693,4 +1705,31 @@ b, strong {
 	width: 90%;
 	max-width: 400px;
 	box-sizing:border-box;
+}
+
+.helper_text {
+	margin: 30px 12px;
+	overflow: auto;
+}
+
+#helper_box {
+	height: 80%;
+}
+
+.alert_message {
+	display:block; 
+	border-top:1px dashed grey; 
+	padding: 12px;
+}
+
+.alert_message:before {
+	background: url('../img/alert_icon.png');
+	height: 32px;
+	width:32px;
+	content: '';
+	display: block;
+	float: left;
+	margin-right: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

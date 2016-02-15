@@ -26,6 +26,30 @@
 			Югорский Государственный <br>Университет
 		</div>
 		<div id="overlay"></div>
+		
+		<div id="weeek_tmtb_box">
+					
+			<div class="news_box_exit_button" onclick="closeTmtbBox();"></div>
+
+			<div class="currentWeekTimetable">
+				
+
+			</div>
+					
+		</div>
+
+		<div id="helper_box">
+			
+			<div class="news_box_exit_button" onclick="closeInformBox();"></div>
+
+			<div class="helper_text">Здравствуйте. Вы зашли на страницу личного кабинета.<br><br> Для входа в систему необходим персональный <b>логин</b> и <b>пароль</b>. Логин и пароль заводятся 
+			на студентов очной формы обучения при их зачислении. Для того, чтобы узнать свой логин и пароль
+			необходимо обратиться в учебную часть своего института. В случае утраты пароля его можно изменить,
+			для этого обращайтесь в <b>«Отдел сетевых технологий и телекоммуникаций»</b> (4 корпус, 111 кабинет)<br>
+			<br>Личный кабинет также работает и в <b>гостевом режиме</b>, который ограничен по функционалу.
+			</div>
+
+		</div>
 
 		<div id="modalForm">
 			
@@ -35,8 +59,7 @@
 				<input class="formInformationInput contr_shadow fio_input_txt" name="FIO" type="text" placeholder="ФИО" required />
 				<input class="formInformationInput contr_shadow" name="E-mail" type="text" placeholder="E-mail" required />
 				
-				<textarea class="contr_shadow no-resize modalForm_fm_textarea" name="Message_text" onclick="this.innerHTML = '';" required>Введите текст сообщения...
-				</textarea><br>
+				<textarea class="contr_shadow no-resize modalForm_fm_textarea" name="Message_text" onclick="clearText()" required>Введите текст сообщения...</textarea><br>
 
 				<input class="infoSubmBtn" type="submit" value="Отправить" />
 
@@ -67,7 +90,7 @@
 					<!-- <li class="sidebar_menu_block_menu_item coffee_item" hashtag="coffe_block">Столовая</li>		 -->	
 					<li class="sidebar_menu_block_menu_item set_item auth_only settings" hashtag="settings">Настройки</li>
 					<li class="sidebar_menu_block_menu_item about_item" hashtag="about_app">О приложении</li>
-					<li class="sidebar_menu_block_menu_item close_item " hashtag="auth">Сменить пользователя</li>
+					<li class="sidebar_menu_block_menu_item close_item" hashtag="auth">Сменить пользователя</li>
 			</ul>
 		
 		</div>
@@ -75,7 +98,7 @@
 		<div id="panel">
 		<div class="wrapper">
 		 
-		<div class="menuoverlay" style='display:none;'></div>			
+		<div class="menuoverlay" style='display:none;' onclick="slideout.close()"></div>
 			
 			<div class="header_line unselected" unselectable="on" onselectstart="return false;">
 				<div class="header_line__content">
@@ -89,10 +112,14 @@
 						<div class="header_line_content_search" onclick="event.stopPropagation();">
 						  
 						</div>
-												
-						<!--<div class="header_line_content_calendar" onclick="event.stopPropagation();">
+
+						<div class="header_line_content_helper" onclick="event.stopPropagation();">
 						  
-						</div>-->
+						</div>
+												
+						<!-- <div class="header_line_content_calendar" onclick="event.stopPropagation();">
+						  
+						</div> -->
 						
 						<div class="header_line_search_input">
 							<form class="timetable_box_form" method="post" action="">
@@ -105,11 +132,11 @@
 						   0  
 						</div>
 						
-						<!--<div class="header_line_content_settings" hashtag="settings">
+						<!-- <div class="header_line_content_settings auth_only" hashtag="settings">
 						  
-						</div>
+						</div> -->
 						
-						<div class="header_line_content_refresh" onclick="event.stopPropagation();">
+						<!--<div class="header_line_content_refresh" onclick="event.stopPropagation();">
 						  
 						</div>-->
 											
@@ -220,11 +247,16 @@
 					<div class="about_info_box_text contr_shadow">
 					<div class="authorisation_box_logo" style="margin:16px auto 26px;"></div>
 
-					<p><b>mob.ugrasu.ru</b> <span class='about_span'>(ver 0.35 alpha)</span> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
+					<p><b>mob.ugrasu.ru</b> <span class='about_span'>(ver 0.41 alpha)</span> - личный кабинет студентов и сотрудников Югорского Государственного университета.</p>
 					<p>Данное приложение создано с целью упрощения доступа студентов и сотрудников к информации из корпоративной сети университета.</p>
 					<p>С помощью данного приложения Вы с легкостью можете посмотреть расписание занятий, свежие новости с сайта университета, 
 					а также персональную информацию, такую как - список группы, успеваемость, назначение, финансовую информацию и пр.</p>
 					
+					<p class="alert_message">
+						Работоспособность сервиса проверена в браузерах Google Chrome, Mozilla Firefox и Safari. При использовании Android Browser и 
+						Internet Explorer возможны проблемы с отображением материала.						
+					</p>
+
 					<p style='display:block; border-top:1px dashed grey; padding-top: 5px;'>
 						<span class='about_span'>Разработчики:</span><br> 
 						Петроченко Владислав - vladonxp@mail.ru <br>
@@ -388,9 +420,6 @@
 				
 		</div>
 	    </div>
-
-				
-			
 			<script src="js/jquery-2.1.4.min.js"></script>
 			<script src="js/slideout.min.js"></script>
 			<script src="js/timetable.js"></script>

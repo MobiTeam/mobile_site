@@ -4,7 +4,7 @@
    
    $login = $clearLogin;
    $pass = md5($_POST['password']);
-   
+
    $sql = "select count(*) AS NUM 
              from USERS 
 			 where login = '".$login."'

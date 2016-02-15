@@ -607,10 +607,10 @@ var genRateHtml = function(obj){
 			rateHtml += "<div class='dog_wrapper'><div class='rate_box_img'></div>";
 			rateHtml += "<div class='dog_name'>Договор: " + (obj[i].Numdog == null ? "-" : obj[i].Numdog) + "<br></div></div>";
 			rateHtml += "<div class='rate_box_middle'>";
-			rateHtml += "Остаток (кон. мес.): " + (obj[i].Ostatok_LA == null ? "-" : obj[i].Ostatok_LA) + "<br>";
-			rateHtml += "<span style='color: red;'>Начислено: " + (obj[i].Nachisl == null ? "-" : obj[i].Nachisl) + "</span><br>";
+			rateHtml += "Остаток (с пред. мес.): " + (obj[i].Ostatok_LA == null ? "-" : obj[i].Ostatok_LA) + "<br>";
+			rateHtml += "<span style='color: red;'>Начислено в тек.месяце: " + (obj[i].Nachisl == null ? "-" : obj[i].Nachisl) + "</span><br>";
 			rateHtml += "<span style='color: green;'>Оплата: " + (obj[i].Oplata == null ? "-" : obj[i].Oplata) + "</span><br>";
-			rateHtml += "Остаток: " + (obj[i].Ostatok == null ? "-" : obj[i].Ostatok) + "</div><div style='clear:both;'></div>";
+			rateHtml += "Остаток (на кон.тек.месяца): " + (obj[i].Ostatok == null ? "-" : obj[i].Ostatok) + "</div><div style='clear:both;'></div>";
 			rateHtml += "<div class='rate_footer'>Дата обновления: " + obj[i].Date + "</div>";
 			rateHtml += "</div>";
 		}
@@ -990,7 +990,7 @@ function createHtmlSettings() {
 						</div></div>'
 	}
 
-	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать рассписание по запросу<br> <input class="default_query_inp" default_query="" value="" type="text" placeholder="Введите запрос для поиска расписания..." /></div></div>'
+	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать расписание по запросу<br> <input class="default_query_inp" default_query="" value="" type="text" placeholder="Введите запрос для поиска расписания..." /></div></div>'
 	
 	htmlSettings += '<div class="settings_box_inputs">\
 							<div class="settings_box_inputs_item">\
@@ -1073,10 +1073,36 @@ function showSendingForm(){
 
 }
 
+function showTmtbBox(){
+
+	opBl();
+	$('#weeek_tmtb_box').fadeIn(20);
+
+}
+
 function closeModalForm(){
 
 	$("#modalForm").fadeOut(20, function(){
 		clBl();
 	});
 
+}
+
+function closeInformBox(){
+
+	$("#helper_box").fadeOut(20, function(){
+		clBl();
+	});
+
+}
+
+function closeTmtbBox(){
+	$("#weeek_tmtb_box").fadeOut(20, function(){
+		clBl();
+	});
+}
+
+function clearText(){
+	$textarea = $('.modalForm_fm_textarea');
+	if ($textarea.html() == 'Введите текст сообщения...') $textarea.html("");
 }

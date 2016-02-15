@@ -9,7 +9,7 @@
  } else {
 	$FFIO = $_POST['FIO'];
  }
- // $FFIO = "Пак Анна";
+ 
  require_once('database_connect.php');
  
  // Долги за общежития студента(1)

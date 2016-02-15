@@ -14,6 +14,11 @@
 	   background-image: url('../img/search_icon@2x.png');
 	   background-size: 24px 24px;
    }
+
+   .header_line_content_helper { 
+	   background-image: url('../img/helper_icon@2x.png');
+	   background-size: 24px 24px;
+   }
    
    .header_line_content_settings{
        background-image: url('../img/settings_icon@2x.png');
@@ -279,6 +284,11 @@
 	.girl_student:after {
 		background: url('../img/woman_icon@2x.png') no-repeat center center;
 		background-size: 40px 40px;
+	}
+
+	.alert_message:before {
+		background: url('../img/alert_icon@2x.png');
+		background-size: 32px 32px;
 	}
 }
 

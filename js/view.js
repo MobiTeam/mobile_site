@@ -12,6 +12,7 @@ var view = {
 	$news:$('.news_box'),
 	$full_art:$('.news_box_details'),
 	$settings:$('.header_line_content_settings'),
+	$helper:$('.header_line_content_helper'),
 	$settings_box:$('.settings_box'),
 	$timetable:$('.timetable_box'),
 	$persons:$('.person_box'),
@@ -70,6 +71,7 @@ var view = {
 		this.$search_butt.fadeOut(0);
 		this.$dateline.fadeOut(0);
 		this.$settings_box.fadeOut(0);
+		this.$helper.fadeOut(0);
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
 		closeInput();
@@ -222,6 +224,7 @@ function loadAuth(){
 	sessionStorage.clear();
 	localStorage.clear();
 	$('.timetable_lessons').html('');
+	view.$helper.fadeIn(0);
 	view.$auth.fadeIn(0);
 	view.setTitle(stringNames[0]);
 	view.displayArrIcon();
@@ -291,7 +294,7 @@ function loadTimetable(){
 		
 		var uInfo = getJSON("auth_inf");
 
-		if(uInfo.default_query != null && uInfo.default_query != ""){
+		if(!!uInfo && uInfo.default_query != null && uInfo.default_query != ""){
 			saveValue("query", uInfo.default_query);
 			loadTimetableInf(uInfo.default_query);
 		} else if(issetUserGroup()){
@@ -301,8 +304,9 @@ function loadTimetable(){
 
 			if(!isGuest()){
 				if(uInfo.is_student == "0"){
-					saveValue("query", (uInfo.FIO).replace(/(.*)\s+(.).*\s+(.).*/, '$1 $2.$3.'));
-					loadTimetableInf();
+					var personFio = (uInfo.FIO).replace(/(.*)\s+(.).*\s+(.).*/, '$1 $2.$3.');
+					saveValue("query", personFio);
+					loadTimetableInf(personFio);
 				} else {
 					$('.timetable_lessons').html('');
 					showTimetableAlert();
