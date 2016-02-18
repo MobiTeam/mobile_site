@@ -282,8 +282,6 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 
 	}	
 
-	
-	
 	if(!!timetable[dateNumbers]){
 		var firstNumLesson = 0;
 		var twoLessonsInOneTime = false;
@@ -328,7 +326,7 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 							
 							} 
 							
-								timetableHTML += '</div>';
+							timetableHTML += '</div>';
 							
 							if(counter > 1) {
 								timetableHTML += '<input class="hide_information_button" type="button" value="Развернуть" />';
@@ -336,7 +334,12 @@ function createTimetableHTML(date, timetable, showEmptyFields){
 							
 							timetableHTML += '</td>\
 										   </tr>';
-							firstNumLesson --;
+							firstNumLesson--;
+
+							item = timetable[dateNumbers][firstNumLesson];
+							if((item.KORP).toLowerCase() == 'сок'){
+								firstNumLesson++;
+							}
 								
 					} else {
 

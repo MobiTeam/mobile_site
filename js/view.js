@@ -30,6 +30,7 @@ var view = {
 	$header_line_my_bag: $('.header_line_my_bag'),
 	$shopping_box: $('.shopping_box'),
 	$hidden_inf_block: $('.hiddenInfBlock'),
+	$lib_box: $('.lib_info_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -61,6 +62,7 @@ var view = {
 		this.$dir_info_block.fadeOut(0);
 		this.$about_block.fadeOut(0);
 		this.$group_block.fadeOut(0);
+		this.$lib_box.fadeOut(0);
 		this.$auth.fadeOut(0);
 		this.$menu.fadeOut(0);
 		this.$news.fadeOut(0);
@@ -151,6 +153,10 @@ var view = {
 
 				case '#coffe_block':
 					showCoffeBox();
+				break;
+
+				case '#lib_info':
+					showLibBox();
 				break;
 
 				default:
@@ -343,6 +349,13 @@ function loadPersonBlock(){
 	view.$settings.fadeIn();
 	view.setTitle(stringNames[4]);
 	view.displayMenuIcon();
+}
+
+function showLibBox(){
+	view.displayMenuIcon();
+	view.$lib_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[13]);
+	loadFormularInfo();
 }
 
 function showCoffeBox(){

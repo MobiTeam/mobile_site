@@ -27,7 +27,7 @@
 		}
 	
 	if(isset($id_user)) {
-		$sql = "select CODE_SETTINGS, USER_SUBGROUP, DEFAULT_TMTB_QUERY from SETTINGS where ID_USER = " . $id_user . "";
+		$sql = "select CODE_SETTINGS, USER_SUBGROUP, DEFAULT_TMTB_QUERY, FORMULAR_ID from SETTINGS where ID_USER = " . $id_user . "";
 		$s = OCIParse($c,$sql);
 		OCIExecute($s, OCI_DEFAULT);	
 		
@@ -35,6 +35,7 @@
 			$data_user['settings'] = ociresult($s,'CODE_SETTINGS');	
 			$data_user['subgroup'] = ociresult($s,'USER_SUBGROUP');
 			$data_user['default_query'] = ociresult($s,'DEFAULT_TMTB_QUERY');
+			$data_user['formular_id'] = ociresult($s,'FORMULAR_ID') != null ? ociresult($s,'FORMULAR_ID') : "";
 			$data_user['id'] = $id_user;	
 		}	
 	}	

@@ -32,6 +32,22 @@ $(document).ready(function(){
 		}
 	})
 
+	var bisy = false;
+	$(window).on('resize', function(){
+
+		if(location.hash == "#news" && !bisy){
+			bisy = true;
+			setTimeout(function(){
+				activateWaterfall();
+				bisy = false;
+			}, 500);
+		}
+
+		
+
+	});
+
+
 	$('.timetable_box_form').on("submit", function(event){
 		event.preventDefault();
 	}); 
@@ -270,11 +286,14 @@ $(document).ready(function(){
 		
 		var id = getJSON('auth_inf').id;
 		var default_query = $('.default_query_inp').attr('default_query');
+		var formular = $('.formular_num_inp').val();
 
 		saveValue("settingsCode", parseInt(codeSetString, 2));
 		saveValue("subgroup", $('.select_subgroup').val());
 		saveValue("default_query", default_query);
-		myajax(true, 'POST', 'oracle/database_set_settings.php', {code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id, def_query: default_query}, true); 
+		saveValue("formular", formular);
+
+		myajax(true, 'POST', 'oracle/database_set_settings.php', {formular_id: formular, code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id, def_query: default_query}, true); 
 		
 	})
 

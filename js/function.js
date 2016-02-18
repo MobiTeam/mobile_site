@@ -657,6 +657,7 @@ var getAuthInfo = function(infoObj){
 		saveValue('settingsCode', authObj.settings);
 		saveValue('subgroup', authObj.subgroup);
 		saveValue('default_query', authObj.default_query);
+		saveValue('formular', getValue('formular_id') || authObj.formular_id);
 
 	}
 	view.changePage('menu');
@@ -759,23 +760,23 @@ function newsWrap(obj, append) {
 		saveValue('news_' + $('.current_item').attr('newstype'), view.$news.html());
 	}
 
-$newsblock.waterfall();
-	
+	activateWaterfall();
+  	
 }
 
 function getHtmlNews(obj) {
 
 	var id = obj.type == '3' ? 'default_bg' : obj.id;
 	
-	return '<div class="news_box_item contr_shadow" style="margin: 10px;" onclick="loadDetails(' + obj.id + ');" idnews="' + obj.id + '">\
+	return '<div class="news_box_item contr_shadow" onclick="loadDetails(' + obj.id + ');" idnews="' + obj.id + '">\
 			  <div class="news_box_item_image" style="background-image:url(' + obj.img + ');">\
 			  </div>\
 			  <div class="news_box_item_text">\
 			  <div class="news_box_item_title">\
 			  ' + obj.name_news + '\
 			  </div>\
-			  '	+ obj.descr + 
-			  '</div>\
+			  <span class="prev_text_news">'	+ obj.descr +  '</span>\
+			  </div><span class="source">' + obj.source_addr + '</span>\
 			  <div style="clear:both"></div>\
 			  </div>';
 
@@ -826,7 +827,7 @@ function saveAndShow(){
 		var d = new Date(lastNewsQuery);
 		var currDate = new Date();
 
-		if(currDate - d > 1500000){
+		if(currDate - d > 15000000){
 			var lastId = htmlArtCode.match(/idnews="(\d*)?"/)[1];
 			myajax(true, 'POST', 'oracle/database_news.php', {type: $('.current_item').attr('newstype'), first_article: lastId}, false, newsAppend, true, undefined, true);
 		} else {
@@ -845,7 +846,10 @@ function newsAppend(obj){
 
 	if(obj == undefined){
 		clBl();
-		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20).waterfall();
+		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20);
+
+		activateWaterfall();
+
 		return false;
 	}
 
@@ -859,12 +863,23 @@ function newsAppend(obj){
 		$newsblock.html('').css('display', 'none');
 		var htmlNewsCode = resHtml + getValue('news_' + $('.current_item').attr('newstype'));
 		saveValue('news_' + $('.current_item').attr('newstype'), htmlNewsCode);
-		$newsblock.append(htmlNewsCode).fadeIn(20).waterfall();
+		$newsblock.append(htmlNewsCode).fadeIn(20);
 	} else {
 		$newsblock.html('').css('display', 'none');
-		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20).waterfall();
+		$newsblock.html(getValue('news_' + $('.current_item').attr('newstype'))).fadeIn(20);
 	}	
 
+	activateWaterfall();
+
+}
+
+function activateWaterfall(){
+	if(window.innerWidth > 600){
+		$('.news_box').css('width', '94%');
+		$newsblock.waterfall();		
+	} else {
+		$('.news_box').css('width', '100%');
+	}
 }
 
 function clearCurrSidebarItem(){
@@ -964,6 +979,8 @@ function setUserSettings() {
 
 	$('.select_subgroup').val(getValue("subgroup"));
 
+	$('.formular_num_inp').val(getValue("formular"));
+
 	var default_query = getValue("default_query");
 
 	if(default_query != null && default_query != "null"){
@@ -990,7 +1007,7 @@ function createHtmlSettings() {
 						</div></div>'
 	}
 
-	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать расписание по запросу<br> <input class="default_query_inp" default_query="" value="" type="text" placeholder="Введите запрос для поиска расписания..." /></div></div>'
+	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Искать расписание по запросу<br> <input class="default_query_inp" default_query="" value="" type="text" placeholder="Введите запрос для поиска расписания..." /></div></div>';
 	
 	htmlSettings += '<div class="settings_box_inputs">\
 							<div class="settings_box_inputs_item">\
@@ -1004,6 +1021,8 @@ function createHtmlSettings() {
 								</select><div style="clear: both;"></div>\
 						</div>\
 					</div>';
+
+	htmlSettings += '<div class="settings_box_inputs"><div class="settings_box_inputs_item">Номер читательского билета (изображен под штрих кодом)<br> <input class="formular_num_inp" value="" type="text" placeholder="Введите номер читательского билета" /></div></div>';				
 
 	$('.settings_box_inputs').html(htmlSettings);
 
@@ -1105,4 +1124,89 @@ function closeTmtbBox(){
 function clearText(){
 	$textarea = $('.modalForm_fm_textarea');
 	if ($textarea.html() == 'Введите текст сообщения...') $textarea.html("");
+}
+
+function loadFormularInfo(){
+
+	var second_name = (getJSON('auth_inf').FIO).split(" ")[0];
+	var code = getValue("formular");
+
+	if(code == undefined || code == "") {
+		showTooltip("Необходимо заполнить поле \"Номер читательского билета\" в настройках.", 3500);
+	} else {
+		myajax(true, "POST", "lib/parse_lib.php",  {FFIO: second_name, id_bibl: code}, false, showLibInfo, true);
+	}
+	
+}
+
+function showLibInfo(obj){
+
+	if(obj == undefined){
+		view.$lib_box.html("У вас нет долгов по библиотеке.");
+	} else {
+
+		if(obj.err != undefined){
+			showTooltip(obj.err, 3500);
+		} else {
+
+			var htmlBooks = "";
+			var cnt = 1;
+			for(var key in obj){
+				htmlBooks += "<div class='rate_box contr_shadow'>";
+				htmlBooks += parseBookInfo(obj[key], cnt++);
+				htmlBooks += "</div>";
+			}	
+
+			view.$lib_box.html(htmlBooks);
+		}		
+	} 
+}
+
+function parseBookInfo(info, cnt){
+	
+	var regStrFr = /Выдан (\d{2}.\d{2}.\d{4})/,
+		regStrTo = /вернуть до (\d{2}.\d{2}.\d{4})/,
+		codeStr = /Шифр: ([\d\.-а-яА-Я]*)/,
+		num = /Инв\.№ ([\d\.-а-яА-Я]*)/,
+		bookInfo = {
+			fullText : info,
+			dateStart : "",
+			dateEnd : "",
+			bookCode : "",
+			bookNum : "",
+			aboutBook: "",
+			errFlag : false,
+			count : cnt,
+			generateHTML : function(){
+
+				var date_arr = this.dateEnd.split('.'),
+					rdate = new Date(date_arr[1] + "." + date_arr[0] + "." + date_arr[2]),
+					flag = rdate < new Date() ? "redStyle" : "";
+
+
+
+				return "<div class='rate_box_head " + flag + "' style='padding:5px 10px;'><b>" + this.count + ": Выдан</b> " + this.dateStart + "   <b>требуется вернуть:</b> " + this.dateEnd + "</div>\
+						<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>" + this.aboutBook + "</div>\
+						<div class='rate_footer' style='color: #4E4E4E; padding:5px 10px;'><b>Шифр</b> " + this.codeStr + "   <b>Инв.№</b> " + this.bookNum + "</div>";
+			},
+			toString : function(){
+				if(this.errFlag) return this.fullText;
+				return this.generateHTML();
+			}	
+		};
+
+    bookInfo.dateStart = info.match(regStrFr)[1];
+    bookInfo.dateEnd = info.match(regStrTo)[1];
+    bookInfo.codeStr = info.match(codeStr)[1];
+    bookInfo.bookNum = info.match(num)[1];
+    bookInfo.aboutBook = info.split(num)[2];
+    
+    for(var key in bookInfo){
+    	if(bookInfo[key] == null){
+    		bookInfo.errFlag = true;
+    		break;
+    	}
+    }
+
+	return bookInfo;
 }

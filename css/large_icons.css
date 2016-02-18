@@ -127,6 +127,11 @@
 		background-size: 64px 64px;
 	}
 
+	.main_lib_icon {
+		background: url('../img/lib_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
 	.main_group_icon {
 		background: url('../img/students_group_icon@2x.png') no-repeat center center;
 		background-size: 64px 64px;

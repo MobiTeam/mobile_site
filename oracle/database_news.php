@@ -40,7 +40,8 @@
 									"id" => ociresult($s,'ID'), 
 									"name_news" => ociresult($s,'NAME_NEWS'), 
 									"date" => ociresult($s,'DATE_NEWS'), 
-									"text" => ociresult($s,'TEXT_NEWS').ociresult($s,'TEXT_NEWS2').ociresult($s,'TEXT_NEWS3').ociresult($s,'TEXT_NEWS4')
+									"text" => ociresult($s,'TEXT_NEWS').ociresult($s,'TEXT_NEWS2').ociresult($s,'TEXT_NEWS3').ociresult($s,'TEXT_NEWS4'),
+									"source_addr" => ociresult($s,'SOURCE_ADDR')
 							  ));
 		
 		}
@@ -99,7 +100,8 @@
 									"date" => ociresult($s,'DATE_NEWS'), 
 									"descr" => ociresult($s,'DESCRIPTION'),
 									"type" => ociresult($s,'SOURCE_NEWS'),
-									"img" => ociresult($s,'PREV_IMG_NEWS')
+									"img" => ociresult($s,'PREV_IMG_NEWS'),
+									"source_addr" => ociresult($s,'SOURCE_ADDR')
 								);
 			$count ++;
 		
