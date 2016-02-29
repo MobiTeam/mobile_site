@@ -1,12 +1,12 @@
 <?php 
    
    require_once('database_connect.php');
-   
+   modifyPost();
    $login = $clearLogin;
    $pass = md5($_POST['password']);
    $num_group = $data_user['is_student'] == '1' ? 1 : 2;   
 	
-   $sql = "merge into USERS using dual on (LOGIN = '".$login."' and PASS='".$pass."')
+   $sql = "merge into T_USERS using dual on (LOGIN = '".$login."' and PASS='".$pass."')
 					when not matched then
 					INSERT (login,pass,id_usergroup,last_access,count,full_name) 
 					                      values ('".$login."','".$pass."','".$num_group."',SYSDATE,1,'".$data_user['FIO']."')
@@ -18,7 +18,7 @@
 	OCIExecute($s, OCI_DEFAULT);
 	OCICommit($c); 
 
-	$sql = "select ID from USERS where LOGIN = '" . $login . "'";
+	$sql = "select ID from T_USERS where LOGIN = '" . $login . "'";
 	$s = OCIParse($c,$sql);
 	OCIExecute($s, OCI_DEFAULT);
 	

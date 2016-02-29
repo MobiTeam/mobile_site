@@ -2,7 +2,7 @@
 
 	require_once('../auth/ad_functions.php');
 	require_once('database_connect.php');
-
+	modifyPost();
 	$FFIO=$_POST['FIO'];
 	$EMAIL=$_POST['E-mail'];
 	$COMMENT = $_POST['Message_text'];

@@ -35,6 +35,11 @@
 		background-size: 40px 40px;
 	}
 
+	.person_info_box_menu_holiday:before{
+		background: url("../img/holidays_icon@2x.png") no-repeat center center;
+		background-size: 40px 40px;
+	}
+
 	.fin_info_box_menu_mans:before{
 		background: url('../img/mans@2x.png') no-repeat center center;
 		background-size: 40px 40px;
@@ -129,6 +134,11 @@
 
 	.main_lib_icon {
 		background: url('../img/lib_icon@2x.png') no-repeat center center;
+		background-size: 64px 64px;
+	}
+
+	.main_file_icon {
+		background: url('../img/files-res@2x.png') no-repeat center center;
 		background-size: 64px 64px;
 	}
 

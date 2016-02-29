@@ -217,8 +217,8 @@
 					<div class="person_box_menu_app hiddenInfBlock">Загрузка..</div>
 					<div class="fin_info_box_menu_item person_info_box_menu_loaditem unselected notStud" onclick="toogleShowBlock('person_box_menu_load', 'loadstat');">Нагрузка<br><span class='fin_info_box_menu_item_stat loadstat'>развернуть</span></div>
 					<div class="person_box_menu_load hiddenInfBlock">Загрузка..</div>
-<!-- 				<div class="fin_info_box_menu_item  person_info_box_menu_holiday unselected notStud" onclick="toogleShowBlock('person_box_menu_hol','hol_stat');">Запланированный отпуск<br><span class="fin_info_box_menu_item_stat hol_stat">развернуть</span></div>
-					<div class="person_box_menu_hol hiddenInfBlock">Загрузка...</div> -->	
+					<div class="fin_info_box_menu_item  person_info_box_menu_holiday unselected notStud" onclick="toogleShowBlock('person_box_menu_hol','hol_stat');">Запланированный отпуск<br><span class="fin_info_box_menu_item_stat hol_stat">развернуть</span></div>
+					<div class="person_box_menu_hol hiddenInfBlock">Загрузка...</div>	
 					<div class="fin_info_box_menu_item person_info_box_menu_alsitem unselected forStud" onclick="toogleShowBlock('person_box_menu_als', 'income_stat');">Зачетная книжка<br><span class='fin_info_box_menu_item_stat income_stat'>развернуть</span></div>
 					<div class="person_box_menu_als hiddenInfBlock">Загрузка..</div>
 					<div class="fin_info_box_menu_item person_info_box_menu_session unselected forStud" onclick="toogleShowBlock('person_box_menu_ses', 'curr_session');">Текущая сессия<br><span class='fin_info_box_menu_item_stat curr_session'>развернуть</span></div>
@@ -237,6 +237,10 @@
 				</div>
 
 				<div class="lib_info_box">
+					
+				</div>
+
+				<div class="file_info_box">
 					
 				</div>
 
@@ -365,6 +369,15 @@
 							</div>
 						</div>
  
+ 						<div class="content_box_menuitem contr_shadow" hashtag="file_info">
+							
+							<div class="main_file_icon main_icon_block"></div>
+							<!-- <img src="img/group_new.png" /> -->
+						   
+							<div class="content_box_name_item file_content">	
+							  Эл. ресурсы преп.
+							</div>
+						</div>
 						
 						<div class="content_box_menuitem contr_shadow authblock only_stud" hashtag="group_info">
 							

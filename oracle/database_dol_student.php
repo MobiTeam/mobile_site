@@ -1,8 +1,8 @@
 <?php
 
  require_once('database_connect.php');
- 	require_once('../auth/ad_functions.php');
- 
+ require_once('../auth/ad_functions.php');
+ modifyPost();
     $FFIO=$_POST[''];
 
  

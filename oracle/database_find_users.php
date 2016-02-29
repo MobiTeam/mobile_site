@@ -2,11 +2,11 @@
    
    require_once('database_connect.php');
    
-   $login = $clearLogin;
+   $login = replaceQuotesOracle($clearLogin);
    $pass = md5($_POST['password']);
 
    $sql = "select count(*) AS NUM 
-             from USERS 
+             from T_USERS 
 			 where login = '".$login."'
 			   and pass = '".$pass."'";
 	
@@ -21,7 +21,7 @@
 		$serverRequest = $err_message;
 	} else {		
 		$sql = "select FULL_NAME, ID_USERGROUP 
-             from USERS 
+             from T_USERS 
 			 where login = '".$login."'
 			   and pass = '".$pass."'";
 		

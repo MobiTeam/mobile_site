@@ -2,7 +2,10 @@
 	
 	session_start();
 	require_once('../auth/ad_functions.php');
+	modifyPost();
 	userAutentificate();
+		
+	
 	require_once('database_connect.php');
 
     if(isset($_SESSION['FIO'])){

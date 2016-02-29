@@ -154,6 +154,7 @@ function loadTeachInformation(hash, FIO){
 	
 	var teachInfoApp = getJSON('teachInfo_app');
 	var teachInfoLoad = getJSON('teachInfo_load');
+	var teachHolidayInfo = getJSON('teachHolidayInfo');
 
 	if(teachInfoApp == undefined){
 		myajax(true, "POST", "oracle/database_full_appoint_teac.php",  {hash : hash, FIO : FIO}, false, showTeachAppoint, false, "teachInfo_app");
@@ -166,6 +167,15 @@ function loadTeachInformation(hash, FIO){
 	} else {
 		showTeachLoad();
 	}
+
+	if(teachHolidayInfo == undefined){
+		myajax(true, "POST", "oracle/database_holiday_teach.php",  {hash : hash, FIO : FIO}, false, showTeachHoliday, false, "teachHolidayInfo");
+	} else {
+		showTeachHoliday();
+	}
+
+
+
 }
 
 
@@ -221,6 +231,27 @@ function showTeachLoad(){
 	var htmlCode = "<div style='margin-bottom: 10px;'><b style='color:grey;margin: 5px;'>Семестр:</b><select style='padding: 3px; border: 1px solid #BDBDBD;' onchange='getTeachLoadbySem()' class='selected_load_sem'><option val='Осень' selected>Осень</option><option val='Зима'>Зима</option></select></div>";
 	$('.person_box_menu_load').html(htmlCode + "<div class='teach_load_sem'></div>");
 	getTeachLoadbySem();
+
+}
+
+function showTeachHoliday(){
+
+	var holidays = getJSON('teachHolidayInfo');
+	var htmlCode = "";
+
+	//$('.person_box_menu_hol').html(JSON.stringify(holidays));
+
+	for(var i = 0; i < holidays.length; i++){
+		htmlCode += "<div class='rate_box contr_shadow' style='margin-top:10px'>";
+		htmlCode += "<div class='rate_box_head'><b>Должность:</b> " + holidays[i].dol + "</div>";
+		htmlCode += "<div class='rate_box_middle' style='width:100%; float:none;box-sizing: border-box; padding: 10px; margin-top: 0px;'>\
+		<b>Отдел:</b> " + holidays[i].podr + "<br><b>Дата начала:</b> " + holidays[i].date_beg + "<br><b>Дата окончания:</b> " + holidays[i].date_end + "<br></div>";
+		
+		if(holidays[i].ligot == "1") htmlCode += "<div style='clear:both'></div><div class='rate_footer' style='color:#4E4E4E;'><b>Сумма возврата:</b> " + holidays[i].summa + " <b>Количество иждевенцев:</b> " + holidays[i].child + "</div>";
+		htmlCode += "</div>";
+	}
+
+	$('.person_box_menu_hol').html(htmlCode);
 
 }
 
@@ -1141,8 +1172,8 @@ function loadFormularInfo(){
 
 function showLibInfo(obj){
 
-	if(obj == undefined){
-		view.$lib_box.html("У вас нет долгов по библиотеке.");
+	if(obj.no_books != undefined){
+		view.$lib_box.html(obj.no_books);
 	} else {
 
 		if(obj.err != undefined){
@@ -1209,4 +1240,14 @@ function parseBookInfo(info, cnt){
     }
 
 	return bookInfo;
+}
+
+
+function loadFileIframe(){
+	view.$file_box.html('<iframe id="fileFrame" style="width:100%;height:' + document.body.clientHeight + "px" + ';" />');
+    $('#fileFrame').attr('src', 'http://lir.ugrasu.ru/index_short.php');
+    $('#fileFrame').load(function()
+    {
+      clBl();
+    });
 }

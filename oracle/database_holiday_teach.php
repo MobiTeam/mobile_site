@@ -2,6 +2,7 @@
 
   	session_start(); 
 	require_once('../auth/ad_functions.php');
+	modifyPost();
 	userAutentificate();
 	if(isset($_SESSION['FIO'])){
 		$FFIO = $_SESSION['FIO'];
@@ -9,9 +10,9 @@
 		$FFIO = $_POST['FIO'];
 	}
 	
-	require_once('database_connect.php');
 
-$FFIO='Татаринцев Ярослав';
+
+	require_once('database_connect.php');
 
 	$sql="Select  FFIO,DOL,PODR,DATE_BEG,AMOUNT_DAY,DATE_END,LIGOT,SUMMA,CHILD from MV_TEACH_HOLIDAY
 		where instr(

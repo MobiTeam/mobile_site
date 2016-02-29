@@ -1,6 +1,7 @@
 <?php
 	session_start(); 
 	require_once('../auth/ad_functions.php');
+	modifyPost();
    userAutentificate();
 
    if(isset($_SESSION['FIO'])){

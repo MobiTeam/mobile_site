@@ -1,12 +1,12 @@
 ﻿<?php 
    
-   require_once('database_connect.php');
    session_start();
-   
+   require_once('database_connect.php');
+      
    switch($data_user["is_student"]) {
 	   case "0":
 	   $sql = "select FIO
-			  from MV_TEACH_APPOINT
+			  from teach_appoint_clone
 			 where instr(upper(replace(replace(FIO,'.',''),' ','')),
 				upper(replace(replace('".$data_user['FIO']."','.',''),' ','')),
 					1)=1";
@@ -19,7 +19,7 @@
 
 	   case "1":
 	   $sql = "select FFIO, GRUP
-			  from MV_STUD_APPOINT
+			  from stud_appoint_clone
 			 where instr(upper(replace(replace(FFIO,'.',''),' ','')),
 				upper(replace(replace('".$data_user['FIO']."','.',''),' ','')),
 					1)=1";

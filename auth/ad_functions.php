@@ -92,9 +92,23 @@ function jsonRemoveUnicodeSequences($struct){
     return $str2;
 		}
 
-    function valParametr($str){
+    function replaceQuotesOracle($str){
+       return str_replace("'", "''", $str);
+    }
 
-    if($str == "") return false;
+	function modifyPost(){
+		foreach($_POST as $key => $value){
+			$_POST[$key] = replaceQuotesOracle($_POST[$key]);
+		}	
+	}
+	
+	function modifyGet(){
+		foreach($_GET as $key => $value){
+			$_GET[$key] = replaceQuotesOracle($_GET[$key]);
+		}	
+	}
+
+    function valParametr($str){
 
       $check_arr = array("#", "$", "{", "}", "[", "]", "../", "chr", "access", "default", "index",
           "dual", "add", "delete", "initial",

@@ -1,7 +1,8 @@
 <?php
 
-   session_start(); 
+    session_start(); 
 	require_once('../auth/ad_functions.php');
+	modifyPost();
 	userAutentificate();
 	if(isset($_SESSION['FIO'])){
 		$FFIO = $_SESSION['FIO'];

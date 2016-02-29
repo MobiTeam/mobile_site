@@ -2,7 +2,7 @@
 	
 	require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
-	
+	modifyGet();
 	$query = mb_strtolower(trim(strval($_GET['term'])), 'UTF-8');
 	
 	$s = OCIParse($c, 'select * from v_info_directory

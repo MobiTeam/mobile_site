@@ -3,6 +3,8 @@
     require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
 	
+	modifyPost();
+	
       $FFIO=$_POST['FIO'];	
 	
 	  $sql="Select * from mv_teac_contact

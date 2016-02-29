@@ -21,8 +21,19 @@ Select * from dol
 
 
 
+grant select on galreport.Addressn to mobile;
+/
+grant select on galreport.Catalogs to mobile;
+/
+grant select on galreport.V$DerevoFilials to mobile;
+/
+grant select on galreport.StaffStruct to mobile;
+/
+grant select on galreport.u_curriculum to mobile;
+/
+grant select on galreport.StaffStruct to mobile;
 
-
+catalogs
 
 
 

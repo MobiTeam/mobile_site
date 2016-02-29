@@ -2,7 +2,7 @@
 
  	require_once('database_connect.php');
  	require_once('../auth/ad_functions.php');
-		
+	modifyPost();
 	$query = $_POST['timetable_query']; 
 	/* $query = 'Владимиров Н.М.'; */
 	if(preg_match('/\d/', $query) == 1){

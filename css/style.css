@@ -478,6 +478,10 @@ b, strong {
 	background: #9575CD;
 }
 
+.file_content {
+	background: #91dc5b;
+}
+
 .pers_content {
 	background: #5eae49;
 }
@@ -524,6 +528,10 @@ b, strong {
 
 .content_box_menuitem:active .lib_content {
 	background-color: #7E57C2!important;
+}
+
+.content_box_menuitem:active .file_content {
+	background-color: #8bd852!important;
 }
 
 .content_box_menuitem:active .news_content {
@@ -1307,6 +1315,16 @@ b, strong {
 	height: 40px;
 }
 
+.person_info_box_menu_holiday:before{
+	content: "";
+	display: block;
+	margin: 0px 15px 0px 5px;
+	background: url("../img/holidays_icon.png");
+	float: left;
+	width: 40px;
+	height: 40px;
+}
+
 .person_info_box_menu_appitem:before{
 	content: "";
 	display: block;
@@ -1507,6 +1525,11 @@ b, strong {
 
 .main_lib_icon {
 	background: url('../img/lib_icon.png') no-repeat center center;
+}
+
+
+.main_file_icon {
+	background: url('../img/files-res.png') no-repeat center center;
 }
 
 .main_group_icon {

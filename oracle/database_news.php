@@ -2,6 +2,11 @@
 
     require_once('database_connect.php');
 	require_once('../auth/ad_functions.php');
+	
+	foreach($_POST as $key => $value){
+		if(!valParametr($value)) die('Wrong Data!');
+		$_POST[$key] = intval($_POST[$key]);
+	}
 
 	if(isset($_POST['type'])){
 		$type = $_POST['type'];

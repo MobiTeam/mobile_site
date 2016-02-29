@@ -1,6 +1,7 @@
 ﻿<?
 
 require_once('../auth/ad_functions.php');
+modifyPost();
 
 function login($url,$login,$pass){
       $ch = curl_init();
@@ -28,12 +29,6 @@ function login($url,$login,$pass){
       return $result;
 }
 
-//echo(login("http://irbis.ugrasu.ru/cgi-bin/irbis64r_13/cgiirbis_64.exe", "Петроченко", "281474976747857"));
-//echo(login("http://irbis.ugrasu.ru/cgi-bin/irbis64r_13/cgiirbis_64.exe", "Цимахович", "281474976747778"));
-
-// $_POST["FFIO"] = "Якимчук";
-// $_POST['id_bibl'] = "281474976747866";
-
 if(valParametr($_POST["FFIO"]) && valParametr($_POST["id_bibl"])){
 
    $info_page = (login("http://irbis.ugrasu.ru/cgi-bin/irbis64r_13/cgiirbis_64.exe", $_POST["FFIO"], $_POST['id_bibl']));
@@ -49,7 +44,10 @@ if(valParametr($_POST["FFIO"]) && valParametr($_POST["id_bibl"])){
    $arr_lib = explode("<br><br>", $clear_chunk);
    $arr_unique_lib = array();
 
-   if(strpos($info_page, "LOGIN.submit()")){
+   
+   preg_match('/<table class=advanced>[\\s\\S]*?([\\s\\S]*?)[\\s\\S]*?<\/table>/', $info_page, $real_fio);
+
+   if(strpos($info_page, "LOGIN.submit()") || !strpos($real_fio[0], $_POST["FFIO"])){
       $err = array("err" => "Ошибка загрузки данных. Пользователя с данным номером читательского билета не существует.");
       die(json_encode_cyr($err));
    }
@@ -63,9 +61,11 @@ if(valParametr($_POST["FFIO"]) && valParametr($_POST["id_bibl"])){
 
    if(count($arr_unique_lib) > 0){
       print_r(json_encode_cyr($arr_unique_lib));
+   } else {
+      $err = array("no_books" => "На вашем формуляре нет книг.");
+      print_r(json_encode_cyr($err));
    }
-   
-
+ 
 } else {
    $err = array("err" => "Ошибка загрузки данных. Вы ввели недопустимый номер читательского билета.");
    die(json_encode_cyr($err));

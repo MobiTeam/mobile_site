@@ -31,6 +31,7 @@ var view = {
 	$shopping_box: $('.shopping_box'),
 	$hidden_inf_block: $('.hiddenInfBlock'),
 	$lib_box: $('.lib_info_box'),
+	$file_box: $('.file_info_box'),
 	
 	correctHeight: function(){
 		this.$heightBlock.css('height', this.$cont_header.css('height'));
@@ -74,6 +75,7 @@ var view = {
 		this.$dateline.fadeOut(0);
 		this.$settings_box.fadeOut(0);
 		this.$helper.fadeOut(0);
+		this.$file_box.fadeOut(0);
 		this.$title.css('display', 'block');
 		this.$form.css('display', 'none');
 		closeInput();
@@ -123,9 +125,9 @@ var view = {
 				    loadNewsBlock();
 				break;
 						
-				case '#messages':
+				// case '#messages':
 				
-				break;
+				// break;
 				
 				case '#timetable':
 					loadTimetable();
@@ -157,6 +159,10 @@ var view = {
 
 				case '#lib_info':
 					showLibBox();
+				break;
+
+				case '#file_info':
+					loadFileBlock();
 				break;
 
 				default:
@@ -198,6 +204,10 @@ var view = {
 
 					case '#coffe_block':
 						showCoffeBox();
+					break;
+
+					case '#file_info':
+						loadFileBlock();
 					break;
 
 					default:
@@ -358,6 +368,14 @@ function showLibBox(){
 	loadFormularInfo();
 }
 
+function loadFileBlock(){
+	view.displayMenuIcon();
+	view.$file_box.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[14]);
+	opBl();
+	loadFileIframe();
+}
+
 function showCoffeBox(){
 	view.displayMenuIcon();
 	view.$coffe_info_box.stop().fadeTo(250, 1);
@@ -455,8 +473,3 @@ function showFullNews(obj){
 				</div>').fadeTo(150, 1).scrollTop(0);
 	}
 }		
-			
-	
-				
-
-
