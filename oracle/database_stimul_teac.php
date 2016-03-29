@@ -16,53 +16,53 @@
 		$count=0;
 // //Стимулирующие ППС
 
-// 	 $sql="Select * from v_teac_stimul
-// 		where instr(
-// 	    upper(replace(replace(FIO,'.',''),' ','')),
-// 	    upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+	 $sql="Select * from v_teac_stimul
+		where instr(
+	    upper(replace(replace(FIO,'.',''),' ','')),
+	    upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 		
-//    $s = OCIParse($c,$sql);
-// 	OCIExecute($s, OCI_DEFAULT);
+   $s = OCIParse($c,$sql);
+	OCIExecute($s, OCI_DEFAULT);
 	
 
 				
-// 		while(OCIFetch($s)){
+		while(OCIFetch($s)){
 			
-// 			$stimul_teac_json[$count] = array(
-// 									"name"=> 'Надбавки ППС',
-// 									"ball" =>(double) str_replace(',','.',ociresult($s,'BALL')),//Балл
-// 									"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
-// 									"type"=> '1'
-// 								);
-// 			$count++;
+			$stimul_teac_json[$count] = array(
+									"name"=> 'Надбавки ППС',
+									"ball" =>(double) str_replace(',','.',ociresult($s,'BALL')),//Балл
+									"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
+									"type"=> '1'
+								);
+			$count++;
 	
 			
-// 		} 
+		} 
 		
 
 //Стимулирующие прочего персонала
 
-	// $sql="Select * from v_teac_stimulpr
-	// 	where instr(
- //        upper(replace(replace(FFIO,'.',''),' ','')),
- //        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+	$sql="Select * from v_teac_stimulpr
+		where instr(
+        upper(replace(replace(FFIO,'.',''),' ','')),
+        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
 
- //   $s = OCIParse($c,$sql);
-	// OCIExecute($s, OCI_DEFAULT);
+   $s = OCIParse($c,$sql);
+	OCIExecute($s, OCI_DEFAULT);
 	
 
 				
-	// 	while(OCIFetch($s)){
+		while(OCIFetch($s)){
 			
-	// 		$stimul_teac_json[$count] = array(
-	// 								"name"=> 'Стимулирующие выплаты',
-	// 								"ball" => 100,//Баллы
-	// 								"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
-	// 								"type"=> '2'
-	// 							);
-	// 		$count++;	
+			$stimul_teac_json[$count] = array(
+									"name"=> 'Стимулирующие выплаты',
+									"ball" => 100,//Баллы
+									"summa" =>(double) str_replace(',','.',ociresult($s,'SUMMA')),
+									"type"=> '2'
+								);
+			$count++;	
 			
-	// 	} 
+		} 
 
 		//Ставка и оклад сотрудников
 	$sql="Select INITCAP(FIO),RATE,TARIF,POST from V_TEACH_APPOINT_ALL

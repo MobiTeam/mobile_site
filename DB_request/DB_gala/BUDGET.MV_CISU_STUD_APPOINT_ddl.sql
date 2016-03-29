@@ -1,61 +1,94 @@
--- Start of DDL Script for Materialized View BUDGET.MV_CISU_STUD_APPOINT
--- Generated 26.02.2016 17:29:48 from BUDGET@GALASERV
+Select * from bg_pps_tarif
 
-CREATE MATERIALIZED VIEW mv_cisu_stud_appoint
-  PCTFREE     10
-  MAXTRANS    255
-  TABLESPACE  users
-  STORAGE   (
-    INITIAL     65536
-    NEXT        1048576
-    MINEXTENTS  1
-    MAXEXTENTS  2147483645
-  )
-LOGGING
-NOPARALLEL
-BUILD IMMEDIATE 
-REFRESH COMPLETE START WITH TO_DATE('27-02-2016 02:31 PM','DD-MM-YYYY HH12:MI PM') NEXT SYSDATE + 24/24
-AS
-select P.fNrec fPersons, P.fFio, P.fStrTabN fTabNmb, P.fSex, A.fVacation||' курс' fCourse,
-       to_oradate(P.fBornDate) fBornDate, to_oradate(P.fAppDate) zach, 
-       F.fName fak, C.fName||' ('||C.fCode||')' spec, 
-       G.fName grup, decode(K.fCode, 'Целевой', 'Целевой', substr(K.fCode,1,4)) bud  
-from Persons P inner join Appointments     A on A.fPerson      = P.fNrec
-               inner join U_StudGroup      G on A.fcCat1       = G.fNrec 
-               inner join StaffStruct      S on A.fStaffStr    = S.fNrec
-               inner join Catalogs         F on S.fPrivPension = F.fNrec -- Факультет
-               inner join u_curriculum      cur on s.fcstr    = cur.fNrec
-               inner join U_Specialization C on cur.FCSPECIALIZATION = C.fNrec
- 
-               inner join Catalogs         Q on S.fcInf1       = Q.fNrec -- Квалификация
-               inner join SpKau            K on S.fcNewSpr1    = K.fNrec -- Бюджет
-          left outer join (select distinct V.fAppoint, 
-                                  'с '||to_char(to_oradate(V.fFactYearBeg),'DD.MM.YYYY')||' по '||to_char(to_oradate(V.fFactYearEnd),'DD.MM.YYYY') AO_Otpusk,
-                                  'Приказ №'||V.fFoundation||' от '||to_char(to_oradate(V.fDocDate),'DD.MM.YYYY') AO_Prikaz
-                             from Vacations V, (select V1.fAppoint, max(V1.fFactYearEnd) fFactYearEnd  
-                                                from Vacations V1
-                                                where V1.fVacType = '8001000000000011'
-                                                  and to_oradate(V1.fFactYearBeg)<= sysdate
-                                                group by V1.fAppoint) M
-                            where V.fVacType     = '8001000000000011'
-                              and M.fAppoint     = V.fAppoint
-                              and M.fFactYearEnd = V.fFactYearEnd) AO on AO.fAppoint = A.fNrec
-             left outer join (select L.fcPersons, L.fcAddr, A.fsAddress1 Stud_Living, A.fsBlock, A.fsFlat
-                             from U_Living L, Addressn A
-                            where L.fcAddr    = A.fNrec
-                              and A.fObjType  = '11'
-                              and L.fcPersons = A.fcPerson) UL on UL.fcPersons = P.fNrec
-where P.fIsemployee  = 'Ю'
-  and A.fLprizn      = 0
-  and (A.fDisMissDate = 0 or trunc(to_oradate(A.fDisMissDate)) >= trunc(sysdate))
-  and (A.fAppointDate = 0 or trunc(to_oradate(A.fAppointDate)) <= trunc(sysdate))
-
-
+Create sequence AUTO_BG_PPS_TARIF start with 12
 /
+Create trigger TR_BG_PPS_TARIF
+  before insert on bg_pps_tarif
+  for each row
+begin
+  select AUTO_BG_PPS_TARIF.nextval into :NEW.FNREC from dual;
+end;
 
--- Grants for Materialized View
-GRANT SELECT ON mv_cisu_stud_appoint TO mobile
+
+Select * from bg_shedules
 /
+drop sequence AUTO_bg_shedules
+/
+Create sequence AUTO_bg_shedules
+/
+drop trigger TR_bg_shedules
+/
+Create trigger TR_bg_shedules
+  before insert on bg_shedules
+  for each row
+begin
+  select AUTO_bg_shedules.nextval into :NEW.FNREC from dual;
+end;
 
--- End of DDL Script for Materialized View BUDGET.MV_CISU_STUD_APPOINT
+
+Select * from bg_shedules_detail
+/
+drop sequence AUTO_bg_shedules_detail
+/
+Create sequence AUTO_bg_shedules_detail
+/
+drop trigger TR_bg_shedules_detail
+/
+Create trigger TR_bg_shedules_detail
+  before insert on bg_shedules_detail
+  for each row
+begin
+  select AUTO_bg_shedules_detail.nextval into :NEW.FNREC from dual;
+end;
+
+
+select SIGN_FIO from V_SP_VPRIKAZ_PRINT group by SIGN_FIO order by SIGN_FIO
+
+create table SP_SIGNATURE(
+POST VARCHAR2(512),
+FIO VARCHAR2(512)
+)
+
+Select * from mv_select_person
+
+
+select * from bg_shedules_app
+/
+drop sequence AUTO_bg_shedules_app
+/
+Create sequence AUTO_bg_shedules_app
+/
+drop trigger TR_bg_shedules_app
+/
+Create trigger TR_bg_shedules_app
+  before insert on bg_shedules_app
+  for each row
+begin
+  select AUTO_bg_shedules_app.nextval into :NEW.FNREC from dual;
+end;
+
+Select * from bg_shedules_persons
+
+Create sequence AUTO_bg_shedules_persons
+/
+create trigger tr_bg_shedules_persons
+    before insert on bg_shedules_persons
+    for each row
+begin
+    Select  AUTO_bg_shedules_persons.nextval into :NEW.FNREC from dual;
+end;        
+
+
+
+
+Select * from mv_select_person
+
+select * from V_FHD_RESULT
+
+select PODR, PODR_GL_NREC, LV from MV_SP_RUKOVODITELI
+
+
+Select NAME_KRIT from v_krit_name_all where lower(NAME_KRIT) like ('%Сложность%')
+
+
 

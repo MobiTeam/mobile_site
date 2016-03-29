@@ -119,3 +119,6 @@ Select * from mv_sp_rukovoditeli
 
 
 select * from v_sp_krit_appoinments
+
+
+
