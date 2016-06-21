@@ -122,7 +122,9 @@ function myajax(async, type, url, data, notResponse, functionCallBack, issetArgs
 				if(functionCallBack != undefined) {
 					
 					if(issetArgs == undefined || !issetArgs){
-						setJSON(savePlace, jsonObj);
+						if(responseTxt.length > 5) {
+							setJSON(savePlace, jsonObj);
+						}
 						functionCallBack();
 					} else {
 						functionCallBack(jsonObj);
@@ -210,6 +212,7 @@ function showTeachAppoint(){
 	var appoint = getJSON('teachInfo_app');
 	var htmlCode = "";
 
+	if(!appoint) return;
 	//$('.person_box_menu_app').html(JSON.stringify(appoint));
 
 	for(var i = 0; i < appoint.length; i++){
@@ -238,7 +241,7 @@ function showTeachHoliday(){
 
 	var holidays = getJSON('teachHolidayInfo');
 	var htmlCode = "";
-
+	if(!holidays) return;
 	//$('.person_box_menu_hol').html(JSON.stringify(holidays));
 
 	for(var i = 0; i < holidays.length; i++){
@@ -260,7 +263,7 @@ function getTeachLoadbySem(){
 	var loadJS = getJSON('teachInfo_load');
 	var htmlCode = "";
 	var currSem = $('.selected_load_sem').val();
-
+    if(!loadJS) return;
 	for(var i = 0; i < loadJS.length; i++){
 
 		if(loadJS[i].Sezon === currSem){
@@ -282,7 +285,7 @@ function getTeachLoadbySem(){
 function showStudLoad(){
 	var load = getJSON('studInfo_load');
 	var htmlCode = "";
-
+    if(!load) return;
 	for(var i = 0; i < load.length; i++){
 
 			htmlCode += "<div class='rate_box contr_shadow'>";
@@ -303,7 +306,7 @@ function showStudMarks(){
 
 	var userInfo = getJSON('auth_inf')['groups'];
 	var groupsOptions = "";
-
+    if(!userInfo) return;
 	for(var i = 0; i < userInfo.length; i++){
 		groupsOptions += "<option value='" + userInfo[i] + "'>" + userInfo[i] + "</option>";
 	}
@@ -341,7 +344,7 @@ function createHTMLMarks(){
 	
 	var htmlCode = "";
 	var marks = getJSON('studInfo_marks');
-	
+	if(!marks) return;
 	var currSem = $('.selected_load_mks_sem').val();
 	var currGroup = $('.selected_load_mks_gr').val();
 
@@ -367,7 +370,7 @@ function createHTMLMarks(){
 function showStudAppoint(){
 	var appoint = getJSON('studInfo_app');
 	var htmlCode = "";
-	
+	if(!appoint) return;
 	for(var i = 0; i < appoint.length; i++){
 		htmlCode += "<div class='rate_box contr_shadow'>";
 		htmlCode += "<div class='rate_box_head'><b>Номер зачетной книжки: " + appoint[i].Tabnmb + "</b></div>";
@@ -396,6 +399,7 @@ var loadCoffeInfo = function(){
 
 function showCookCalc(obj){
 	
+	if(!obj) return;
 	//setJSON('cook_info', obj);
 	var htmlCoffeBlock = "<div class='shopping_box'></div><span class='menu_title_coffe'>Меню столовой «Большая перемена»:</span><table class='calc_coffe_table contr_shadow unselected'>";
 	for(var i = 0; i < obj.length; i++){
@@ -480,7 +484,7 @@ var loadRateData = function(){
 
 	var allInf = getJSON('auth_inf');
 	var rateInf = getJSON('user_rate_info');
-	
+	if(!rateInf) return;
 	if(rateInf == undefined){
 		myajax(true, "POST", "oracle/database_dol.php",  {hash : allInf.hash, FIO : allInf.FIO}, false, genRateHtml, true, "user_rate_info");
 	} else {
@@ -492,7 +496,7 @@ var loadRateData = function(){
 var loadIncomeData = function(){
 
 	var allInf = getJSON('auth_inf');
-
+    if(!allInf) return;
 	if(allInf.is_student == "1"){
 		var studIncInf = getJSON('student_income_inf');
 		if(studIncInf == undefined){
@@ -538,7 +542,7 @@ var createHtmlAvard = function(obj){
 	if(obj == undefined){
 		obj = getJSON('student_income_inf');
 	} 
-
+	if(!obj) return;
 	var selYearObj = obj[$('.selected_aw_year').val()];
 	var incomeHTML = "";
 
@@ -930,6 +934,10 @@ function loadGroupInfo(){
 	var allInf = getJSON('auth_inf');
 	var groupsArr = allInf.groups;
 	
+	if(allInf.is_student != "1") {
+		location.hash = "menu";
+	}
+
 	if(getValue("groups_students") == undefined){
 		myajax(true, "POST", "oracle/database_group_student.php", {groups: groupsArr, hash : allInf.hash, FIO : allInf.FIO}, false, showGroupInfo, false, "groups_students");
 	} else {
@@ -942,7 +950,7 @@ function showGroupInfo(){
 	
 	var groupsStud = getJSON('groups_students');
 	var htmlCode = "";
-
+	if(!groupsStud) return;
 	for(var key in groupsStud){
 		var group = groupsStud[key];
 		htmlCode += "<span class='group_name_header'>Группа: " + group.number + "</span>";
@@ -955,6 +963,42 @@ function showGroupInfo(){
 	view.$group_block.html(htmlCode);
 	
 }
+
+
+function loadCollegueInfo(){
+
+	var allInf = getJSON('auth_inf');
+
+	if(allInf.is_student != "0") {
+		location.hash = "menu";
+	}
+		
+	if(getValue("collegue_info") == "undefined" || getValue("collegue_info") == undefined){
+	 	myajax(true, "POST", "oracle/database_teach_onekafedra.php", {hash : allInf.hash, FIO : allInf.FIO}, false, showCollegueInfo, false, "collegue_info");
+	} else {
+		showCollegueInfo();
+	}
+	
+}
+
+function showCollegueInfo() {
+
+	var groupsStud = getJSON('collegue_info');
+	var htmlCode = "";
+	if(!groupsStud) return;
+
+	for(var key in groupsStud){
+		var group = groupsStud[key];
+		htmlCode += "<span class='group_name_header'>" + group.cafidra + "</span>";
+		for (var i = 0; i < group.fio.length; i++) {
+			htmlCode += "<div class='group_student_line'>" + (i + 1) + ") " + group.fio[i] + " - <b>" +  group.dol[i] + "</b></div>";
+		};	
+	}
+
+	view.$group_block.html(htmlCode);
+	
+}
+
 
 function issetNumbersInQuery(query){
 	return !!query.match(/\d/g);

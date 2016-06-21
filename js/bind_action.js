@@ -32,6 +32,10 @@ $(document).ready(function(){
 		}
 	})
 
+	$('.timetable_query').click(function(){
+		$('.ui-autocomplete').css('display', 'block');
+	});
+
 	var bisy = false;
 	$(window).on('resize', function(){
 
@@ -144,7 +148,7 @@ $(document).ready(function(){
 				
 		if(validateForm()){
 			
-			tryAutorisate($(this).serialize());
+			tryAutorisate($(this).serialize() + "&time_send_query=" + new Date().getTime());
 		
 		}  
 		
@@ -292,6 +296,7 @@ $(document).ready(function(){
 		saveValue("subgroup", $('.select_subgroup').val());
 		saveValue("default_query", default_query);
 		saveValue("formular", formular);
+		saveValue('timetable', "undefined");
 
 		myajax(true, 'POST', 'oracle/database_set_settings.php', {formular_id: formular, code: getValue("settingsCode"), subgrp: $('.select_subgroup').val() , id_user: id, def_query: default_query}, true); 
 		

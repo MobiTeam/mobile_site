@@ -229,7 +229,9 @@ var displayTimetable = function(date){
 			
 			$('.timetable_lessons').html(weekHTMLtimetable).css('display','none').fadeIn(250);
 			
-			setTimeout(clickByActualDate(), 100);
+			setTimeout(function(){
+				clickByActualDate()
+			}, 100);
 			
 		} else {
 			$('.timetable_lessons').html(createTimetableHTML(date, timetable)).css('display','none').fadeIn(250);

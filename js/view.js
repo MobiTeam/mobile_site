@@ -81,6 +81,7 @@ var view = {
 		closeInput();
 		this.$cal_button.fadeOut(0);
 		clearCurrSidebarItem();
+		$('.previous_info_group').html('');
 	},
 	
 	changePage:function(hash){
@@ -97,7 +98,7 @@ var view = {
 	loadPage:function(){
 		
 		this.closeAll();
-			
+		
 		if(isAuth()){
 			
 			$('.auth_only').css('display', 'block');
@@ -105,6 +106,8 @@ var view = {
 			var infBlock = getJSON('auth_inf');
 			if(infBlock.is_student == "0"){
 				$('.only_stud').fadeOut(0);
+			} else {
+				$('.only_personal').fadeOut(0);
 			}
 			
 			switch(location.hash){
@@ -113,9 +116,9 @@ var view = {
 					loadMainMenu();
 				break;
 
-				case '#finance_inf':
-					loadFinInfo();
-				break;
+				// case '#finance_inf':
+				// 	loadFinInfo();
+				// break;
 						
 				case '#auth':
 					loadAuth();
@@ -139,6 +142,10 @@ var view = {
 				
 				case '#group_info':
 					loadGroupBlock();
+				break;
+
+				case '#colleague_info':
+					loadCollegueBlock();
 				break;
 
 				case '#settings':
@@ -223,6 +230,13 @@ var view = {
 		this.correctHeight();	
 		document.documentElement.scrollTop = 0;
 		document.body.scrollTop = 0;
+
+
+
+		//ie fix
+		// if(location.hash != '#timetable'){
+		// 	$('.ui-autocomplete').click();
+		// } 
 	}
 		
 }	
@@ -310,9 +324,11 @@ function loadTimetable(){
 		
 		var uInfo = getJSON("auth_inf");
 
-		if(!!uInfo && uInfo.default_query != null && uInfo.default_query != ""){
-			saveValue("query", uInfo.default_query);
-			loadTimetableInf(uInfo.default_query);
+		if(!!uInfo && uInfo.default_query != null && uInfo.default_query != "") {
+
+			saveValue("query", getValue('default_query') || uInfo.default_query);
+			loadTimetableInf(getValue('default_query'));
+		
 		} else if(issetUserGroup()){
 			saveValue("query", uInfo.groups[0]);
 			loadTimetableInf(uInfo.groups[0]);
@@ -386,14 +402,14 @@ function showCoffeBox(){
 	//loadIncomeData();
 }
 
-function loadFinInfo(){
-	tagMenuItem('finance_item');
-	view.displayMenuIcon();
-	view.$fin_info_box.stop().fadeTo(250, 1);
-	view.setTitle(stringNames[11]); 
-	loadRateData();
-	loadIncomeData();
-}
+// function loadFinInfo(){
+// 	tagMenuItem('finance_item');
+// 	view.displayMenuIcon();
+// 	view.$fin_info_box.stop().fadeTo(250, 1);
+// 	view.setTitle(stringNames[11]); 
+// 	loadRateData();
+// 	loadIncomeData();
+// }
 
 function loadSettingsBlock(){
 	tagMenuItem('settings');
@@ -408,6 +424,14 @@ function loadGroupBlock(){
 	view.$group_block.stop().fadeTo(250, 1);
 	view.setTitle(stringNames[8]);
 	loadGroupInfo();
+}
+
+function loadCollegueBlock(){
+	tagMenuItem('collegue_info');
+	view.displayMenuIcon();
+	view.$group_block.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[15]);
+	loadCollegueInfo();
 }
 
 function loadDirInfo(){

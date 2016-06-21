@@ -389,6 +389,14 @@
 							</div>
 						</div>
 
+						<div class="content_box_menuitem contr_shadow authblock only_personal" hashtag="colleague_info">
+							<div class="main_group_icon main_icon_block"></div>
+							
+							<div class="content_box_name_item group_content">
+							  Коллеги
+							</div>
+						</div>
+
 						<div class="content_box_menuitem contr_shadow authblock" hashtag="persinf">
 							
 							<div class="main_person_icon main_icon_block"></div>
@@ -399,15 +407,14 @@
 							</div>
 						</div>
 						
-						<div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
+						<!-- <div class="content_box_menuitem contr_shadow authblock" hashtag="finance_inf">
 							
-							<!-- <img src="img/money_rub.png" style='width:70px;' /> -->
 							<div class="main_rouble_icon main_icon_block"></div>
 						
 							<div class="content_box_name_item finance_content">	
 							  Финансовая инф.
 							</div>
-						</div>
+						</div> -->
 						
 						<!-- <div class="content_box_menuitem contr_shadow authblock" hashtag="message">
 							
