@@ -1,11 +1,15 @@
 ﻿<?php
+
+
+ //ИНФОРМАЦИЯ ПО ДОЛГАМ СОТРУДНИКОВ И СТУДЕНТОВ () ОТКЛЮЧЕНА БЕЗ PDO
+
  session_start();
- require_once('../auth/ad_functions.php');
+  require_once('../auth/ad_functions.php');
  modifyPost();
  
  userAutentificate();
  
- 
+
 
  if(isset($_SESSION['FIO'])){
 	$FFIO = $_SESSION['FIO'];
@@ -13,7 +17,7 @@
 	$FFIO = $_POST['FIO'];
  }
  
- require_once('database_connect.php');
+require('database_connect.php');
  
  // Долги за общежития студента(1)
  	$sql="Select * from MV_STUD_DOL 
@@ -137,5 +141,8 @@
 		
 
 		print_r(json_encode_cyr($Dol_json));
+
+	// Отключаемся от базы данных 
+	oci_close($c); 
 	
 ?>

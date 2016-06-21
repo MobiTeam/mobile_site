@@ -1,5 +1,7 @@
 <?php
 
+
+//ПОЛУЧЕНИЕ ИНФОРМАЦИИ ПО НАГРУЗКЕ ПРЕПОДАВАТЕЛЯ (UPDATE 16.05.2016)
    session_start();
    require_once('../auth/ad_functions.php');
    modifyPost();
@@ -11,9 +13,11 @@
 		$FFIO = $_POST['FIO'];
    }
 
+	
+
    $FFIO = preg_replace('#(.*)\s+(.).*\s+(.).*#usi', '$1 $2.$3.', $FFIO);
    
-   require_once('database_connect.php');
+   require('database_connect_PDO.php');
 
    $sql="Select FWYEARED,SEZON,UD_FNAME,SG_FNAME,FWCOURSE,FISTUDCOUNT,sum(ITOG) as ITOG from v_teac_nagruzka
 		where instr(
@@ -22,28 +26,35 @@
 		group by FWYEARED,SEZON,UD_FNAME,SG_FNAME,FWCOURSE,FISTUDCOUNT
         order by 2 desc,5";
 		
-   $s = OCIParse($c,$sql);
-	OCIExecute($s, OCI_DEFAULT);
-	
+    $query=$conn->prepare("Select FWYEARED,SEZON,UD_FNAME,SG_FNAME,FWCOURSE,FISTUDCOUNT,sum(ITOG) as ITOG from v_teac_nagruzka
+		where instr(
+        upper(replace(replace(FFIO,'.',''),' ','')),
+        upper(replace(replace(:FIO,'.',''),' ','')),1)>=1
+		group by FWYEARED,SEZON,UD_FNAME,SG_FNAME,FWCOURSE,FISTUDCOUNT
+        order by 2 desc,5");
+
+     $query->execute(array('FIO' => $FFIO));  
+
 		$nagruzka_teac_json = array();
 		$count=0;
-				
-		while(OCIFetch($s)){
+	while($row=$query->fetch()){
 			
 			$nagruzka_teac_json[$count] = array(
-									// "fio" => ociresult($s,'FFIO'), 
-									"Year" => ociresult($s,'FWYEARED'), 
-									"Sezon" => ociresult($s,'SEZON'), 
-									"Subj" => ociresult($s,'UD_FNAME'), 
-									"Group" => ociresult($s,'SG_FNAME'), 
-									"Course_gr" => ociresult($s,'FWCOURSE'), 
-									"Group_count" => ociresult($s,'FISTUDCOUNT'), 
-									"Itog" => ociresult($s,'ITOG')
+
+									"Year" => $row['FWYEARED'], 
+									"Sezon" => $row['SEZON'], 
+									"Subj" => $row['UD_FNAME'], 
+									"Group" => $row['SG_FNAME'], 
+									"Course_gr" => $row['FWCOURSE'], 
+									"Group_count" => $row['FISTUDCOUNT'], 
+									"Itog" => $row['ITOG']
 
 								);
 	
 			$count++;
 		} 
 		
-	print_r(json_encode_cyr($nagruzka_teac_json));
+	print_r(json_encode($nagruzka_teac_json,JSON_UNESCAPED_UNICODE));
+ @$conn=null;
+	
  ?>

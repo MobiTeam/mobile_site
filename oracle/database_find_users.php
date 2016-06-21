@@ -1,41 +1,38 @@
 ﻿<?php 
    
-   require_once('database_connect.php');
+//ПОИСК ПОЛЬЗОВАТЕЛЯ(UPDATE 16.05.2016)
+   // require_once('../auth/ad_functions.php');
+   require('database_connect_PDO.php');
    
    $login = replaceQuotesOracle($clearLogin);
    $pass = md5($_POST['password']);
-
-   $sql = "select count(*) AS NUM 
+	
+$query = $conn->prepare("select count(*) AS NUM 
              from T_USERS 
-			 where login = '".$login."'
-			   and pass = '".$pass."'";
-	
-	$s = OCIParse($c,$sql);
-	OCIExecute($s, OCI_DEFAULT);
-	
-	while(OCIFetch($s)){
-		$num = ociresult($s,'NUM');		
+			 where login = :login
+			   and pass =  :pass ");
+$query->execute(array('login' => $login,'pass' => $pass));
+
+		while($row=$query->fetch()){
+		$num = $row['NUM'];		
 	}
 		
 	if($num < 1){
 		$serverRequest = $err_message;
-	} else {		
-		$sql = "select FULL_NAME, ID_USERGROUP 
+	} else {	
+
+		$query = $conn->prepare("select FULL_NAME, ID_USERGROUP 
              from T_USERS 
 			 where login = '".$login."'
-			   and pass = '".$pass."'";
+			   and pass = '".$pass."'");
+
 		
-		$s = OCIParse($c,$sql);
-	    OCIExecute($s, OCI_DEFAULT);
-		
-		while(OCIFetch($s)){
-			$data_user['FIO'] = ociresult($s,'FULL_NAME');
-			ociresult($s,'ID_USERGROUP') == 1 ? $data_user['is_student'] = '1' : $data_user['is_student'] = '0';		
+	while($row=$query->fetch()){
+			$data_user['FIO'] = $row['FULL_NAME'];
+			$row['ID_USERGROUP'] == 1 ? $data_user['is_student'] = '1' : $data_user['is_student'] = '0';		
 		}
 		$data_user['serverRequest'] = $succ_message;
-		
 	}
-			
-	OCICommit($c);  		
-  
+	
+   // @$conn=null;
 ?>

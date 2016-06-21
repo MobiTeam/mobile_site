@@ -1,4 +1,7 @@
 ﻿<?php
+
+//ПОЛУЧЕНИЕ ГРУППЫ СТУДЕНТА (UPDATE 16.05.2016)
+
 	session_start(); 
 	require_once('../auth/ad_functions.php');
 	modifyPost();
@@ -9,27 +12,33 @@
 		$GRUP = $_POST['groups'];
 	}
 	
-	require_once('database_connect.php');
- 	
+	require('database_connect_PDO.php');
+
 	$group_json = array();
 	for ($i=0; $i < count($GRUP); $i++) { 
  		
 		 //Студенты в группе
-	 	$sql = "Select * from mv_stud_group
-		where FSDEPCODE like '%".$GRUP[$i]."%'
-		order by FFIO";
-		
-		$s = OCIParse($c,$sql);
-		OCIExecute($s, OCI_DEFAULT);
-			
+
+		$GRUP[$i]="%$GRUP[$i]%";	
+
+		$query=$conn->prepare("Select 
+							  cast(FFIO AS VARCHAR2(100)) as FFIO,
+							  cast(FSEX AS VARCHAR2(5)) as FSEX ,
+							  cast(FSDEPCODE AS VARCHAR(100)) as FSDEPCODE 
+							  from mv_stud_group
+		where FSDEPCODE LIKE :GRUP
+		order by FFIO");
+		$query->execute(array('GRUP' => $GRUP[$i]));
+
 		$count = 0;
  		$group = array();
  		$sex=array();
- 		while(OCIFetch($s)){
- 			$group[$count]=ociresult($s,'FFIO');
- 			$sex[$count]=ociresult($s,'FSEX');
- 			$number_group=ociresult($s,'FSDEPCODE');
-			$count ++;
+
+	while($row=$query->fetch()){
+ 			$group[$count]=$row['FFIO'];
+ 			$number_group=$row['FSDEPCODE'];
+ 			$sex[$count]=$row['FSEX'];
+			$count++;
 		} 
 
 		$group_json[$i] = array(
@@ -39,5 +48,7 @@
 		);
 
 	}			
-		print_r(json_encode_cyr($group_json));
+		print_r(json_encode($group_json,JSON_UNESCAPED_UNICODE));
+
+	 @$conn=null;	
 ?>

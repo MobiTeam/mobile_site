@@ -1,6 +1,8 @@
 ﻿<?php
 
-    require_once('database_connect.php');
+// НОВОСТИ (UPDATE 17.05.2016)
+
+    require('database_connect_PDO.php');
 	require_once('../auth/ad_functions.php');
 	
 	foreach($_POST as $key => $value){
@@ -29,25 +31,33 @@
 		break;
 	}
 
-	
 	if(isset($_POST['news_id'])){
 		
-		$sql="select * from " . $table . " where id = ".$_POST['news_id']."";
-		
-		$s = OCIParse($c,$sql);
-		OCIExecute($s, OCI_DEFAULT);
+
+		$stmt=$conn->prepare("select 
+				ID,
+				cast(NAME_NEWS AS VARCHAR2(4000)) as NAME_NEWS,
+				DATE_NEWS,
+				cast(TEXT_NEWS AS VARCHAR2(3995)) as TEXT_NEWS,
+				cast(TEXT_NEWS2 AS VARCHAR2(4000)) as TEXT_NEWS2,
+				cast(TEXT_NEWS3 AS VARCHAR2(4000)) as TEXT_NEWS3,
+				cast(TEXT_NEWS4 AS VARCHAR2(4000)) as TEXT_NEWS4,
+				cast(SOURCE_ADDR AS VARCHAR2(512)) as SOURCE_ADDR
+		 from ". $table ." where id = :news_id ");
+
+		$stmt->execute(array('news_id' => $_POST['news_id']));
 		
 		$news_json = '';
-		
-		while(OCIFetch($s)){
+
+		while(@$row=$stmt->fetch()){
 			
-			$news_json = json_encode_cyr(array(
-									"id" => ociresult($s,'ID'), 
-									"name_news" => ociresult($s,'NAME_NEWS'), 
-									"date" => ociresult($s,'DATE_NEWS'), 
-									"text" => ociresult($s,'TEXT_NEWS').ociresult($s,'TEXT_NEWS2').ociresult($s,'TEXT_NEWS3').ociresult($s,'TEXT_NEWS4'),
-									"source_addr" => ociresult($s,'SOURCE_ADDR')
-							  ));
+			$news_json = json_encode(array(
+									"id" => $row['ID'], 
+									"name_news" => $row['NAME_NEWS'], 
+									"date" => $row['DATE_NEWS'], 
+									"text" => $row['TEXT_NEWS'].$row['TEXT_NEWS2'].$row['TEXT_NEWS3'].$row['TEXT_NEWS4'],
+									"source_addr" => $row['SOURCE_ADDR']
+							 	    ),JSON_UNESCAPED_UNICODE);
 		
 		}
 
@@ -59,7 +69,9 @@
 
 			$id = $_POST['first_article'];
 
-			$sql = "select * from " . $table . " where id > ". $id . " order by ID desc";
+			$stmt=$conn->prepare("select * from " . $table . " where id > :id order by ID desc");
+			$stmt->execute(array('id' => $id));	
+
  
 		} else {
 
@@ -70,51 +82,44 @@
 			
 			} else {
 
-				$sql = "select MAX(id) AS NUM from " . $table . "";
-			
-				$s = OCIParse($c,$sql);
-				OCIExecute($s, OCI_DEFAULT); 
-				
-				while(OCIFetch($s)){
-					$num = ociresult($s,'NUM');		
+		
+				$stmt=$conn->prepare("select MAX(id) AS NUM from ".$table."");
+				$stmt->execute();	
+
+				while($row=$stmt->fetch()){
+					$num = $row['NUM'];		
 				}
-
-				OCICommit($c);
-
 				$id_num = $num - 10;
 				
 			}
-		
-				
-			$sql="select * from " . $table . " where id > ". $id_num . " and id <= " . $num . " order by ID desc";			
+
+			$stmt=$conn->prepare("select * from " . $table . " where id > :id_num and id <=:num order by ID desc");
+			$stmt->execute(array('id_num' => $id_num,'num' => $num));				
 
 		}
 		
 	
-		$s = OCIParse($c,$sql);
-		OCIExecute($s, OCI_DEFAULT);
 		
 	    $news_json = array();
 		$count = 0;
 				
-		while(OCIFetch($s)){
+
+		while(@$row=$stmt->fetch()){
 			
 			$news_json[$count] = array(
-									"id" => ociresult($s,'ID'), 
-									"name_news" => ociresult($s,'NAME_NEWS'), 
-									"date" => ociresult($s,'DATE_NEWS'), 
-									"descr" => ociresult($s,'DESCRIPTION'),
-									"type" => ociresult($s,'SOURCE_NEWS'),
-									"img" => ociresult($s,'PREV_IMG_NEWS'),
-									"source_addr" => ociresult($s,'SOURCE_ADDR')
+									"id" => 			$row['ID'], 
+									"name_news" => 		$row['NAME_NEWS'], 
+									"date" => 			$row['DATE_NEWS'], 
+									"descr" => 			$row['DESCRIPTION'],
+									"type" => 			$row['SOURCE_NEWS'],
+									"img" => 			$row['PREV_IMG_NEWS'],
+									"source_addr" => 	$row['SOURCE_ADDR']
 								);
 			$count ++;
 		
 		} 
-		
-		print_r(json_encode_cyr($news_json));	
-		
+		print_r(json_encode($news_json,JSON_UNESCAPED_UNICODE));	
 	} 
-			
+	 @$conn=null;
 	
 ?>

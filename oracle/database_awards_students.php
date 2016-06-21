@@ -1,12 +1,14 @@
 <?php
 	
+//СТИПЕНДИЯ СТУДЕНТА (UPDATE 16.05.2016) ОТКЛЮЧЕНА
+
 	session_start();
 	require_once('../auth/ad_functions.php');
 	modifyPost();
 	userAutentificate();
 		
 	
-	require_once('database_connect.php');
+	require('database_connect_PDO.php');
 
     if(isset($_SESSION['FIO'])){
 		$FFIO = $_SESSION['FIO'];
@@ -14,25 +16,23 @@
 		$FFIO = $_POST['FIO'];
 	}
  	
-	
-	 //Стипендия студента
-	 $sql = "Select * from MV_STUD_AWARDS
+	 $query=$conn->prepare("Select * from MV_STUD_AWARDS
 		    where
 		     instr(
         upper(replace(replace(FFIO,'.',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1 order by YEAR_AWARDS";
-		
-	$s = OCIParse($c,$sql);
-	OCIExecute($s, OCI_DEFAULT);
+        upper(replace(replace(:FFIO,'.',''),' ','')),1)>=1 order by YEAR_AWARDS");
+
+	$query->execute(array('FFIO' => $FFIO));
+
 
 	$awards_json = array();
 	$Year='';
 	
-	while(OCIFetch($s)){
+	while($row=$query->fetch()){
 
 
-		if($Year != ociresult($s,'YEAR_AWARDS')){
-			$Year = ociresult($s,'YEAR_AWARDS');
+		if($Year != $row['YEAR_AWARDS']){
+			$Year = $row['YEAR_AWARDS'];
 			$awards_json[$Year] = array();
 			
 		}
@@ -44,14 +44,14 @@
 				$awards_json[$Year][$i] = array("summ" => array(), "names" => array());
 			}
 			
-			if(ociresult($s,"M".$i."") != "0"){
-				array_push($awards_json[$Year][$i]["summ"], ociresult($s,"M".$i.""));
-				array_push($awards_json[$Year][$i]["names"], ociresult($s,"FNVIDOPL"));
+			if($row['M'.$i.''] != "0"){
+				array_push($awards_json[$Year][$i]["summ"],  $row['M'.$i.'']);
+				array_push($awards_json[$Year][$i]["names"], $row['FNVIDOPL']);
 			}			
 	
 		}
 	}
 
-print_r(json_encode_cyr($awards_json));
-	
+	print_r(json_encode($awards_json,JSON_UNESCAPED_UNICODE));
+	 @$conn=null;
 ?>

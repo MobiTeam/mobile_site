@@ -1,5 +1,7 @@
 <?php
 
+
+//ПОЛУЧЕНИЕ ИНФОРМАЦИИ ПО ДОХОДАМ СОТРУДНИКА УНИВЕРСИТЕТА () ОТКЛЮЧЕНО
     session_start(); 
 	require_once('../auth/ad_functions.php');
 	modifyPost();
@@ -10,7 +12,7 @@
 		$FFIO = $_POST['FIO'];
 	}
 
-   require_once('database_connect.php');
+   require('database_connect.php');
    
   		$stimul_teac_json = array();
 		$count=0;
@@ -65,7 +67,7 @@
 		} 
 
 		//Ставка и оклад сотрудников
-	$sql="Select INITCAP(FIO),RATE,TARIF,POST from V_TEACH_APPOINT_ALL
+	$sql="Select INITCAP(FIO),RATE,TARIF,POST from MV_TEACH_APPOINT_ALL
         where instr(
         upper(replace(replace(FIO,'.',''),' ','')),
         upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
@@ -91,6 +93,7 @@
 		
 	print_r(json_encode_cyr($stimul_teac_json));
 
-
+// Отключаемся от базы данных 
+oci_close($c); 
 
  ?>

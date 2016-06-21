@@ -1,5 +1,7 @@
 <?php
 
+//ПОЛНОЕ НАЗНАЧЕНИ СТУДЕНТА (UPDATE 16.05.2016)
+
   session_start(); 
   require_once('../auth/ad_functions.php');
   modifyPost();	
@@ -10,45 +12,49 @@
 		$FFIO = $_POST['FIO'];
 	}
 	
-	require_once('database_connect.php');
+	require('database_connect_PDO.php');
    
-   //$FFIO=$_POST[''];
-   // $GRUP=$_POST['']; // не используем, по необходимости подключить ниже к запросу и передавать
-
-	//$FFIO = "Ермак Александр";
 
    //Полное назначение студента
-	$sql="Select * from v_stud_appoint_all ap  
-where instr(
+$query=$conn->prepare("Select 
+		cast(FTABNMB AS VARCHAR2(100)) as FTABNMB,
+		cast(FSEX AS VARCHAR2(100)) as FSEX,
+		cast(FCOURSE AS VARCHAR2(100)) as FCOURSE,
+		ZACH,
+		cast(FAK AS VARCHAR2(255)) as FAK,
+		cast(SPEC AS VARCHAR2(255)) as SPEC,
+		cast(FSPOST AS VARCHAR2(255)) as FSPOST,
+		cast(GRUP AS VARCHAR2(200)) as GRUP,
+		cast(FSFINSOURCENAME AS VARCHAR2(255)) as FSFINSOURCENAME,
+		cast(BUD AS VARCHAR2(255)) as BUD,
+		cast(FSDEGREE AS VARCHAR2(255)) as FSDEGREE
+	 from MV_STUD_APPOINT_ALL ap  
+	where instr(
         upper(replace(replace(ap.FFIO,'.',''),' ','')),
-        upper(replace(replace('".$FFIO."','.',''),' ','')),1)>=1";
+        upper(replace(replace(:FFIO,'.',''),' ','')),1)>=1");
 
-    //	and ap.grup like '%\'".$GRUP."\'%' ";
-	
-	$s = OCIParse($c,$sql);
-	OCIExecute($s, OCI_DEFAULT);
-	
+$query->execute(array('FFIO' => $FFIO));
+
 		$appoint_json = array();
 		$count = 0;
-				
-		while(OCIFetch($s)){
+	while($row=$query->fetch()){
 			
 			$appoint_json[$count] = array(
-									"Tabnmb" => ociresult($s,'FTABNMB'), 
-									"Sex" => ociresult($s,'FSEX'), 
-									"course" => ociresult($s,'FCOURSE'), 
-									"date_zach" => ociresult($s,'ZACH'), 
-									"Faculty" => ociresult($s,'FAK'), 
-									"Spec" => ociresult($s,'SPEC'), 
-									"Post" => ociresult($s,'FSPOST'), 
-									"Grup" => ociresult($s,'GRUP'), 
-									"Bud_name" => ociresult($s,'FSFINSOURCENAME'), 
-									"Bud" => ociresult($s,'BUD'), 
-									"Degree" => ociresult($s,'FSDEGREE')
+									"Tabnmb" => 	$row['FTABNMB'], 
+									"Sex" => 		$row['FSEX'], 
+									"course"    => 	$row['FCOURSE'], 
+									"date_zach" => 	$row['ZACH'], 
+									"Faculty" => 	$row['FAK'], 
+									"Spec" => 		$row['SPEC'], 
+									"Post" => 		$row['FSPOST'], 
+									"Grup" => 		$row['GRUP'], 
+									"Bud_name" => 	$row['FSFINSOURCENAME'], 
+									"Bud" =>		$row['BUD'], 
+									"Degree" => 	$row['FSDEGREE']
 								);
 			$count++;	
-			
 		} 
 		
-	print_r(json_encode_cyr($appoint_json));
+	print_r(json_encode($appoint_json,JSON_UNESCAPED_UNICODE));
+ @$conn=null;
 ?>
