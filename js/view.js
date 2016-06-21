@@ -23,6 +23,7 @@ var view = {
 	$cont_header: $('.header_line__content'),
 	$cal_button: $('.header_line_content_calendar'),
 	$group_block: $('.group_info_box'),
+	$abit_block: $('.abit_info_box'),
 	$dir_info_block: $('.dir_info_box'),
 	$about_block: $('.about_info_box'),
 	$fin_info_box: $('.fin_info_box'),
@@ -67,6 +68,7 @@ var view = {
 		this.$auth.fadeOut(0);
 		this.$menu.fadeOut(0);
 		this.$news.fadeOut(0);
+		this.$abit_block.fadeOut(0);
 		this.$second_menu.fadeOut(0);
 		this.$full_art.fadeOut(0);
 		this.$timetable.fadeOut(0);
@@ -115,6 +117,10 @@ var view = {
 				case '#menu':
 					loadMainMenu();
 				break;
+
+				case '#abit':
+		    		loadAbitInfo();
+		    	break;
 
 				// case '#finance_inf':
 				// 	loadFinInfo();
@@ -184,7 +190,12 @@ var view = {
 				saveValue("subgroup", "0");
 			
 			
-			    switch(location.hash){
+			    switch(location.hash) {
+
+			    	case '#abit':
+			    		loadAbitInfo();
+			    	break;
+
 					case '#guest':
 						loadGuestMenu();
 					break;
@@ -410,6 +421,12 @@ function showCoffeBox(){
 // 	loadRateData();
 // 	loadIncomeData();
 // }
+
+function loadAbitInfo() {
+	view.displayMenuIcon();
+	view.$abit_block.stop().fadeTo(250, 1);
+	view.setTitle(stringNames[16]);
+}
 
 function loadSettingsBlock(){
 	tagMenuItem('settings');

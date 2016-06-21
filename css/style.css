@@ -506,12 +506,20 @@ b, strong {
 	background: #d97fd3;
 }
 
+.abit_content {
+	background: #a35bcd;
+}
+
 .content_box_menuitem:active .coffe_content {
 	background: #ba68c8;
 }
 
+.content_box_menuitem:active .abit_content {
+	background: #933ec5!important;
+}
+
 .content_box_menuitem:active .app_info {
-	background: #d32f2f;
+	background-color: #d32f2f!important;
 }
 
 .content_box_menuitem:active .contacts_content {
@@ -1048,7 +1056,7 @@ b, strong {
  	display: none;
  }
 
- .search_form_block {
+ .search_form_block, .abit_form_block {
  	background: white;
  	box-sizing: border-box;
  	z-index: 500;
@@ -1058,7 +1066,7 @@ b, strong {
  	width: 100%;
  }
 
- .search_form_block_span {
+ .search_form_block_span, .abit_form_block_span {
  	display: block;
  	color: grey;
  	border-bottom: 1px dashed grey;
@@ -1115,7 +1123,7 @@ b, strong {
 	margin-bottom: 10px;
 }
 
-.guide_item_text {
+.guide_item_text, .abit_item_text {
 	border: 1px solid grey;
 	margin: 5px 2px 5px 0px;
 	width: 98%;
@@ -1129,7 +1137,7 @@ b, strong {
 	padding: 12px;
 }
 
-.search_form_block_descr {
+.search_form_block_descr, .abit_form_block_descr {
 	background: #FFFFE7;
 	border-radius: 3px;
 	display: block;
@@ -1519,6 +1527,10 @@ b, strong {
 	background: url('../img/schedule_icon.png') no-repeat center center;
 }
 
+.main_abit_icon {
+	background: url('../img/abitur.png') no-repeat center center;
+}
+
 .main_news_icon {
 	background: url('../img/newspaper_icon.png') no-repeat center center;
 }
@@ -1798,4 +1810,8 @@ b, strong {
 
 .redStyle {
 	background: #FFE6E6;
+}
+
+.abit_results {
+	padding: 0px 15px;
 }

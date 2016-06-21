@@ -236,6 +236,20 @@
 				
 				</div>
 
+				<div class="abit_info_box">
+					<div class="abit_form_block contr_shadow">
+						<span class="abit_form_block_span">Форма поиска:</span>				              
+						<input class="abit_item_text" type="text" value="" placeholder="Иванов Иван...">
+						<br>
+						<span class="abit_form_block_descr">
+							Чтобы найти себя в списке абитуриентов начни вводить фамилию, а затем выбери подходящий вариант из выпадающего списка :)
+						</span>
+					</div>
+					<div class="abit_results">
+						
+					</div>
+				</div>
+
 				<div class="lib_info_box">
 					
 				</div>
@@ -305,7 +319,7 @@
 						
 						<br>
 						<input class="authorisation_box_submit contr_shadow" type="submit" value="Войти" >
-					    <input class="authorisation_box_button contr_shadow" type="button" value="Пропустить" >
+					    <input class="authorisation_box_button contr_shadow" type="button" value="Я абитуриент" >
 					</form> 
 				
 				</div>
@@ -329,6 +343,16 @@
 				
 				    <div class="content_box_itemwrapper unselected" unselectable="on" onselectstart="return false;">
 						
+				    <div class="content_box_menuitem contr_shadow" hashtag="abit">
+							
+							<div class="main_abit_icon main_icon_block"></div>
+							
+							<div class="content_box_name_item abit_content">	
+							  Рейтинг абитуриентов
+							</div>
+						</div>
+
+
 						<div class="content_box_menuitem contr_shadow" hashtag="timetable">
 							
 							<div class="main_calendar_icon main_icon_block"></div>

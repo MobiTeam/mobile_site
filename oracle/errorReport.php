@@ -8,13 +8,12 @@
 	
 	require('database_connect_PDO.php');
 
-$FFIO=$_POST['who'];
-$ERROR = $_POST['e'];
+	$ERROR = $_GET['e'];
 
 	$query = $conn->prepare("Insert into errors_logs
 					(FIO,ERROR,DATE_ERR)
 					values(:FIO,:ERROR,sysdate)");
 
-	$query->execute(array('FIO' => $FFIO,'ERROR' => $ERROR));
+	$query->execute(array('FIO' => 'тест','ERROR' => $ERROR));
 	@$conn=null;	
 ?>

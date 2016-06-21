@@ -18,6 +18,27 @@ window.onload = function() {
 
 $(document).ready(function(){
 
+	// abit ui
+
+	// $('.timetable_box_input').autocomplete({	
+	// 	source:"oracle/database_get_timetable_info.php",
+	// 	minLength:2
+	// });
+
+	// $('.timetable_box_input').on('autocompleteselect',function(event, ui){
+
+ //        saveValue('timetable',"undefined");
+ //        saveValue('query', ui.item.value);
+        
+ //        $('.timetable_lessons').html('')
+ //        loadTimetableInf(ui.item.value);	
+	// 	displayTimetable();
+	// 	closeInput();		
+   
+ //   });	
+
+
+
 	window.addEventListener('hashchange', function(event){
 		view.loadPage();
 	});
@@ -26,20 +47,66 @@ $(document).ready(function(){
 //  GUI расписания [18.01.2016]
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-	$('body').click(function(event){
+	$('body').click(function(event) {
 	    if (event.target.className != 'timetable_box_input' && location.hash == '#timetable') {
 		   closeInput();
 		}
 	})
 
-	$('.timetable_query').click(function(){
+	$('.abit_item_text').autocomplete({
+    	minLength: 1,
+     	source: function(request, response, url) {
+
+	        var searchParam  = {term: (request.term.toLowerCase()).replace(/ё/ig, 'е')};
+
+
+    		$.ajax({
+	            url: 'oracle/database_get_abiturient_autoinfo.php',
+	            data : searchParam,
+	            dataType: "json",
+	            type: "GET",
+           		success: function (data) {
+
+                    response($.map(data, function(item) {
+
+                    	var loadedObj = item;
+                    		loadedObj.label = item.FIO;
+                    		loadedObj.value = item.FIO;
+
+                    	return loadedObj;
+
+                    }));
+                }
+            });
+        },
+	        select: function(event, ui) {
+
+	        	//ui.item
+	        	$('.abit_results').html(JSON.stringify(ui)).css('padding-top', ($('.abit_form_block').height() + 30)+ "px");
+	        	// console.log(ui);
+	        	return true;
+	        	        		
+	        }
+	    })
+
+	$('.timetable_query').click(function() {
 		$('.ui-autocomplete').css('display', 'block');
 	});
 
-	var bisy = false;
-	$(window).on('resize', function(){
+	window.onerror = function (errorMsg, url, lineNumber) {
 
-		if(location.hash == "#news" && !bisy){
+	  var errorMsg = 'Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber;
+
+	  new Image().src = "oracle/errorReport.php?e=" + encodeURIComponent(errorMsg);
+   	  showTooltip('Произошла непредвиденная ошибка. Возможно потребуется перезагрузка сервиса.', 4000);
+   	  clBl();
+
+   	}
+
+	var bisy = false;
+	$(window).on('resize', function() {
+
+		if(location.hash == "#news" && !bisy) {
 			bisy = true;
 			setTimeout(function(){
 				activateWaterfall();
@@ -47,12 +114,14 @@ $(document).ready(function(){
 			}, 500);
 		}
 
-		
+		if(location.hash == "#abit") {
+			$('.abit_results').css('padding-top', ($('.abit_form_block').height() + 30) + "px");
+		}		
 
 	});
 
 
-	$('.timetable_box_form').on("submit", function(event){
+	$('.timetable_box_form').on("submit", function(event) {
 		event.preventDefault();
 	}); 
 
